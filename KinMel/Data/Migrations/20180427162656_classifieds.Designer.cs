@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System;
 
 namespace KinMel.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180427162656_classifieds")]
+    partial class classifieds
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,8 +99,7 @@ namespace KinMel.Data.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
+                    b.Property<string>("Discriminator");
 
                     b.Property<bool>("IsActive");
 
@@ -123,8 +122,6 @@ namespace KinMel.Data.Migrations
                     b.HasIndex("SubCategoryId");
 
                     b.ToTable("ClassifiedAd");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("ClassifiedAd");
                 });
 
             modelBuilder.Entity("KinMel.Models.SubCategory", b =>
@@ -249,66 +246,6 @@ namespace KinMel.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("KinMel.Models.Car", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-                    b.Property<string>("Brand");
-
-                    b.Property<string>("Color");
-
-                    b.Property<int>("DoorsNo");
-
-                    b.Property<string>("Features");
-
-                    b.Property<string>("FuelType");
-
-                    b.Property<string>("ModelNo");
-
-                    b.Property<int>("ModelYear");
-
-                    b.Property<int>("TotalKm");
-
-                    b.Property<string>("Type");
-
-                    b.ToTable("Car");
-
-                    b.HasDiscriminator().HasValue("Car");
-                });
-
-            modelBuilder.Entity("KinMel.Models.Mobile", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-                    b.Property<string>("BackCamera");
-
-                    b.Property<string>("Brand")
-                        .HasColumnName("Mobile_Brand");
-
-                    b.Property<string>("Color")
-                        .HasColumnName("Mobile_Color");
-
-                    b.Property<string>("Features")
-                        .HasColumnName("Mobile_Features");
-
-                    b.Property<string>("FrontCamera");
-
-                    b.Property<string>("ModelNo")
-                        .HasColumnName("Mobile_ModelNo");
-
-                    b.Property<string>("PhoneOs");
-
-                    b.Property<string>("Ram");
-
-                    b.Property<string>("ScreenSize");
-
-                    b.Property<string>("Storage");
-
-                    b.ToTable("Mobile");
-
-                    b.HasDiscriminator().HasValue("Mobile");
                 });
 
             modelBuilder.Entity("KinMel.Models.ClassifiedAd", b =>

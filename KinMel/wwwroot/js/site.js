@@ -6,4 +6,6 @@ $(document).ready(function () {
 
     $('.dropdown-trigger').dropdown();
     //console.log(1);
+    $('select').formSelect();
+
 });
