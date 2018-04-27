@@ -80,7 +80,7 @@ namespace KinMel.Controllers
                 await _context.SaveChangesAsync();
 
                 string forSlug = mobile.Id + " " + String.Join(" ", mobile.Title.Split().Take(4));
-                string slug = Slug.GenerateSlug(forSlug);
+                string slug = forSlug.GenerateSlug();
 
                 mobile.Slug = slug;
 

@@ -80,4 +80,9 @@ namespace KinMel.Models
         public List<String> FeatureList { get; set; }
         public string Features { get; set; }
     }
+
+    public class ClassifiedAdCreateViewModel
+    {
+        public string CategoryName { get; set; }
+    }
 }

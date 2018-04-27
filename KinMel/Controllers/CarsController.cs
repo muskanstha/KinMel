@@ -81,7 +81,7 @@ namespace KinMel.Controllers
                 await _context.SaveChangesAsync();
 
                 string forSlug = car.Id + " " + String.Join(" ", car.Title.Split().Take(4));
-                string slug = Slug.GenerateSlug(forSlug) ;
+                string slug = forSlug.GenerateSlug() ;
 
                 car.Slug = slug;
                 await _context.SaveChangesAsync();
