@@ -12,9 +12,10 @@ using System;
 namespace KinMel.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180427162747_classifiedsv2")]
+    partial class classifiedsv2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -276,39 +277,6 @@ namespace KinMel.Data.Migrations
                     b.ToTable("Car");
 
                     b.HasDiscriminator().HasValue("Car");
-                });
-
-            modelBuilder.Entity("KinMel.Models.Mobile", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-                    b.Property<string>("BackCamera");
-
-                    b.Property<string>("Brand")
-                        .HasColumnName("Mobile_Brand");
-
-                    b.Property<string>("Color")
-                        .HasColumnName("Mobile_Color");
-
-                    b.Property<string>("Features")
-                        .HasColumnName("Mobile_Features");
-
-                    b.Property<string>("FrontCamera");
-
-                    b.Property<string>("ModelNo")
-                        .HasColumnName("Mobile_ModelNo");
-
-                    b.Property<string>("PhoneOs");
-
-                    b.Property<string>("Ram");
-
-                    b.Property<string>("ScreenSize");
-
-                    b.Property<string>("Storage");
-
-                    b.ToTable("Mobile");
-
-                    b.HasDiscriminator().HasValue("Mobile");
                 });
 
             modelBuilder.Entity("KinMel.Models.ClassifiedAd", b =>
