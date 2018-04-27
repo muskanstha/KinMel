@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Inflector;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
 using KinMel.Models;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace KinMel.Controllers
 {
@@ -85,6 +87,30 @@ namespace KinMel.Controllers
                 default:
                     return View("Error");
             }
+        }
+
+
+        // GET: ClassifiedAds/Create
+        public IActionResult Create()
+        {
+            ViewData["CategoryName"] = new SelectList(_context.Set<Category>(), "Name", "Name");
+            return View();
+        }
+
+        // POST: ClassifiedAds/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("CategoryName")] ClassifiedAdCreateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Create", model.CategoryName.Pluralize());
+            }
+            ViewData["CategoryName"] = new SelectList(_context.Set<Category>(), "Name", "Name", model.CategoryName);
+
+            return View(model);
         }
 
         //// GET: ClassifiedAds/Create
