@@ -63,7 +63,8 @@ namespace KinMel.Controllers
             }
 
             var classifiedAd = await _context.ClassifiedAd
-                .Include(c => c.SubCategory)
+                .Include(c => c.SubCategory).
+                Include(c=> c.SubCategory.Category)
                 .SingleOrDefaultAsync(m => m.Slug == id);
             if (classifiedAd == null)
             {
