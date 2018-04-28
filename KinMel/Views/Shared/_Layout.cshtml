@@ -6,15 +6,13 @@
     <title>@ViewData["Title"] - ChartHub</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/materialize/css/materialize.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/home.css" />
     </environment>
     <environment exclude="Development">
-        @*<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-            asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-            asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />*@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"
               asp-fallback-href="~/lib/materialize/css/materialize.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
@@ -31,12 +29,10 @@
             @await Html.PartialAsync("_LoginPartial")
 
             <ul class="right hide-on-med-and-down">
-                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                 <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Classifed Ads</a></li>
             </ul>
 
             <ul id="nav-mobile" class="sidenav">
-                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                 <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Classifed Ads</a></li>
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -47,39 +43,41 @@
         @RenderBody()
         <hr />
 
-        <footer class="page-footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col l6 s12">
-                        <h5 class="white-text">Footer Content</h5>
-                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+        <footer id="footer" class="footer">
+            <div class="footer-wrapper">
+                <div class="footer-block-wrapper">
+                    <div class="footer-logo footer-block">
+                        <a class="brand-logo" href="@Url.Action("Index", "Home")">KinMel</a>
                     </div>
-                    <div class="col l4 offset-l2 s12">
-                        <h5 class="white-text">Links</h5>
-                        <ul>
-                            <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                            <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                        </ul>
+                    <div class="footer-block-inner-wrapper">
+                        <div class="footer-block">
+                            <ul>
+                                <li><a asp-controller="Home" asp-action="About">About us</a></li>
+                                <li><a asp-controller="Home" asp-action="Contact">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-block">
+                            <h6><a href="#">support@vattujan.com</a></h6>
+                            <h6><b>Kathmandu, NP</b></h6>
+                        </div>
+                        <div class="footer-block">
+                            <a href="https://www.facebook.com" class="fab fa-facebook-square fa-3x"></a>
+                            <a href="https://plus.google.com" class="fab fa-google-plus-square fa-3x"></a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="footer-copyright">
-                <div class="container">
-                    <p>&copy; 2018 - KinMel</p>
-                    @*<a class="grey-text text-lighten-4 right" href="#!">More Links</a>*@
+                <div class="footer-copyright">
+                    <div class="container">
+                        <p>&copy; 2018 - KinMel</p>
+                    </div>
                 </div>
             </div>
         </footer>
-
     </div>
-
 
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
-        @*<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>*@
 
         <script src="~/lib/materialize/js/materialize.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
@@ -88,13 +86,6 @@
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js">
         </script>
-
-        @*<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                    crossorigin="anonymous"
-                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-            </script>*@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"
                 asp-fallback-src="~/lib/materialize/js/materialize.min.js">
