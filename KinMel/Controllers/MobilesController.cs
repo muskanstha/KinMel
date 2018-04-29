@@ -84,7 +84,6 @@ namespace KinMel.Controllers
 
                 mobile.Slug = slug;
 
-                await _context.SaveChangesAsync();
                 return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
             }
             ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Mobile")), "Id", "Name");
