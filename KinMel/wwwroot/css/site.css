@@ -1,29 +1,46 @@
-﻿body {
-    /*padding-top: 50px;
-    padding-bottom: 20px;*/
+﻿
+html {
+    height: 100%;
 }
 
-footer a {
-    color: #ffffff;
+body {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 34rem;
 }
 
-footer a:hover {
-    color: #dddddd;
+@media (min-width: 1024px) {
+    body {
+        padding-bottom: 20.48rem;
+    }
 }
 
-footer ul {
-    margin: 0px;
+@media (min-width: 768px) and (max-width: 1024px) {
+    body {
+        padding-bottom: 22.99rem;
+    }
+}
+
+.page-container {
+    height: 100%;
+    vertical-align: middle;
 }
 
 nav a:hover {
     color: #dddddd;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.card-panel {
+    max-width: 500px;
+    margin: 30px auto;
+}
+
+.m0 {
+    margin: 0px !important;
+}
+
+.p0 {
+    padding: 0px !important;
 }
 
 /****************FOOTER*****************/
@@ -31,8 +48,23 @@ nav a:hover {
 .footer {
     background: black;
     color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
+footer a {
+    color: #ffffff;
+}
+
+    footer a:hover {
+        color: #dddddd;
+    }
+
+footer ul {
+    margin: 0px;
+}
 footer .brand-logo {
     font-size: 2.1rem;
 }
