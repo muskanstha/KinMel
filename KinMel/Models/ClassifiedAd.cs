@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace KinMel.Models
@@ -18,10 +19,27 @@ namespace KinMel.Models
         public string CreatedByUserId { get; set;}
         public virtual ApplicationUser CreatedByUser { get; set; }
 
+        [Required]
         public string Title { get; set; }
 
         public string Description { get; set; }
 
+        private string _imageUrls;
+
+        public string ImageUrls
+        {
+            get => _imageUrls;
+            set => _imageUrls = value;
+        }
+
+        public List<string> ImageUrlList
+        {
+            get
+            {
+                string theUrls = string.IsNullOrWhiteSpace(this._imageUrls) ? "" : this._imageUrls;
+                return JsonConvert.DeserializeObject<List<string>>(theUrls);
+            }
+        }
         public string Condition { get; set; }
 
         //public string AdditionalFields { get; set; }
