@@ -1,38 +1,119 @@
-﻿body {
-    /*padding-top: 50px;
-    padding-bottom: 20px;*/
-}
-
-footer a {
-    color: #ffffff;
-}
-
-footer a:hover {
-    color: #dddddd;
-}
-
-footer ul {
+﻿
+p {
     margin: 0px;
+    line-height: 1rem;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 34rem;
+}
+
+@media (min-width: 1024px) {
+    body {
+        padding-bottom: 20.48rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    body {
+        padding-bottom: 22.99rem;
+    }
+}
+
+.page-container {
+    height: 100%;
+    vertical-align: middle;
 }
 
 nav a:hover {
     color: #dddddd;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.card-panel-small {
+    max-width: 400px;
+    margin: 30px auto;
 }
+
+.card-panel-large {
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+/*************Custom Classes***************/
+.m0 {
+    margin: 0px !important;
+}
+
+.p0 {
+    padding: 0px !important;
+}
+
+.align-middle {
+    vertical-align: middle;
+}
+/******************END********************/
+
+/****************Content*****************/
+.content-title {
+    font-size: 16px;
+    color: #00a5bb;
+    font-weight: bold;
+}
+
+.content-description {
+    font-size: 14px;
+}
+
+.content-username {
+    font-size: 12px;
+    color: #00a5bb;
+}
+
+.content-datecreated {
+    font-size: 14px;
+    color: grey;
+}
+
+.content-price {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.content-condition {
+    font-size: 14px;
+    color: grey;
+}
+/******************End*******************/
+
 
 /****************FOOTER*****************/
 
 .footer {
     background: black;
     color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
+footer a {
+    color: #ffffff;
+}
+
+    footer a:hover {
+        color: #dddddd;
+    }
+
+footer ul {
+    margin: 0px;
+}
 footer .brand-logo {
     font-size: 2.1rem;
 }

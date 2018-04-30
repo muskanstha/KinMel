@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ChartHub</title>
+    <title>@ViewData["Title"] - Kinmel</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
@@ -21,27 +21,30 @@
     </environment>
 </head>
 
-<body>
+<body class="cyan">
     <nav class="black" role="navigation">
         <div class="nav-wrapper container">
             <a id="logo-container" asp-area="" asp-controller="Home" asp-action="Index" class="brand-logo">KinMel</a>
-
+            <div class="fixed-action-btn">
+                <a asp-controller="ClassifiedAds" asp-action="Create" alt="Create Ads" class="btn-floating btn-large waves-effect waves-light  pink accent-2">
+                    <i class="material-icons">add</i>
+                </a>
+            </div>
+            
             @await Html.PartialAsync("_LoginPartial")
 
             <ul class="right hide-on-med-and-down">
-                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Classifed Ads</a></li>
+                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
             </ul>
 
             <ul id="nav-mobile" class="sidenav">
-                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Classifed Ads</a></li>
+                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
             </ul>
             <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>
     </nav>
 
-    <div class="container body-content">
         @RenderBody()
-        <hr />
 
         <footer id="footer" class="footer">
             <div class="footer-wrapper">
@@ -73,7 +76,6 @@
                 </div>
             </div>
         </footer>
-    </div>
 
 
     <environment include="Development">
