@@ -1,9 +1,14 @@
-﻿@using KinMel.Controllers
-@model IEnumerable<KinMel.Models.ClassifiedAd>
+﻿@model IEnumerable<KinMel.Models.ClassifiedAd>
 
 @{
     ViewData["Title"] = "Classified Ads";
 }
+<!--Page-loader-->
+<div id="loader-wrapper">
+    <div id="loader"></div>        
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
 
 <!--Breadcrumbs-->
 <div class="page-container grey lighten-3">
