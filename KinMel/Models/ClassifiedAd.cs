@@ -36,8 +36,11 @@ namespace KinMel.Models
         {
             get
             {
-                string theUrls = string.IsNullOrWhiteSpace(this._imageUrls) ? "" : this._imageUrls;
-                return JsonConvert.DeserializeObject<List<string>>(theUrls);
+                if (this._imageUrls == null)
+                {
+                    return new List<string>(){"/images/NoImage.svg"};
+                }
+                return JsonConvert.DeserializeObject<List<string>>(this._imageUrls);
             }
         }
         public string Condition { get; set; }

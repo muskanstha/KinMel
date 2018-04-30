@@ -24,9 +24,16 @@
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="row">
+                    <div class="switch">
+                        <label asp-for="RememberMe">
+                            Off
+                            <input asp-for="RememberMe" type="checkbox" />
+                            <span class="lever"></span>
+                            On
+                        </label>
+                    </div>
                     <div class="checkbox">
-                        <input asp-for="RememberMe" type="checkbox" />
-                        <label asp-for="RememberMe"></label>
+                       
                     </div>
                 </div>
                 <div class="input-field">

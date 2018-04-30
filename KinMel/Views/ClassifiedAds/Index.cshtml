@@ -17,9 +17,13 @@
                 <hr />
                 @foreach (var item in Model)
                 {
+                   
                     <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
                     <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
                     <div class="row">
+                        <div class="col s6 m6 center">
+                            <img src="@item.ImageUrlList.FirstOrDefault()" style="max-width:100px"/>
+                        </div>
                         <div class="col s12 m8 l8 p0">
                             <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
                             <p class="material-icons align-middle">person_outline</p>

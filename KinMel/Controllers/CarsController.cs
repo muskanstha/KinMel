@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
 using KinMel.Models;
+using KinMel.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace KinMel.Controllers
@@ -69,25 +71,35 @@ namespace KinMel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Type,Brand,ModelNo,ModelYear,Color,TotalKm,FuelType,Features,DoorsNo,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive")] Car car)
+        public async Task<IActionResult> Create([Bind("Type,Brand,ModelNo,ModelYear,Color,TotalKm,FuelType,Features,DoorsNo,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive")] Car car, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
-                var currentUserID = _userManager.GetUserId(this.User);
-                car.CreatedByUserId = currentUserID;
-               
-                car.DateCreated = DateTime.Now;
-                _context.Add(car);
-                await _context.SaveChangesAsync();
+                long size = imageFiles.Sum(f => f.Length);
+                if (size > 0)
+                {
+                    var currentUserId = _userManager.GetUserId(this.User);
+                    car.CreatedByUserId = currentUserId;
 
-                string forSlug = car.Id + " " + String.Join(" ", car.Title.Split().Take(4));
-                string slug = forSlug.GenerateSlug() ;
+                    car.DateCreated = DateTime.Now;
+                    _context.Add(car);
+                    await _context.SaveChangesAsync();
 
-                car.Slug = slug;
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Details","ClassifiedAds", new {id = slug});
+                    string forSlug = car.Id + " " + String.Join(" ", car.Title.Split().Take(4));
+                    string slug = forSlug.GenerateSlug();
+
+                    car.Slug = slug;
+
+                    await BlobStorageHelper.UploadBlob(slug, imageFiles);
+
+                    car.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
+                }
+
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc=> sc.Category.Name.Equals("Car")), "Id", "Name", car.SubCategoryId);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Car")), "Id", "Name", car.SubCategoryId);
             return View(car);
         }
 
