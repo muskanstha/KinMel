@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
 using KinMel.Models;
+using KinMel.Services;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace KinMel.Controllers
@@ -24,6 +25,10 @@ namespace KinMel.Controllers
         // GET: ClassifiedAds
         public async Task<IActionResult> Index()
         {
+            //BlobStorageHelper.UploadBlob();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+
+
             var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             return View(await applicationDbContext.ToListAsync());
         }
