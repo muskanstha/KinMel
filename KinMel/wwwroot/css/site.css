@@ -45,7 +45,61 @@ nav a:hover {
     margin: 30px auto;
 }
 
+/*************Responsive-content**************/
+@media (max-width: 768px) {
+    .card-panel-large {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 450px) {
+    .card-panel-large {
+        padding: 5px;
+    }
+
+    .content-image {
+        max-width: 80px !important;
+    }
+
+    .content-title {
+        font-size: 14px !important;
+    }
+
+    .content-description {
+        font-size: 13px !important;
+        padding-right: 0px !important;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    .content-username {
+        font-size: 11px !important;
+    }
+
+    .content-datecreated {
+        font-size: 11px !important;
+    }
+
+    .content-price {
+        font-size: 14px !important;
+    }
+
+    .content-condition {
+        font-size: 12px !important;
+    }
+
+    .material-icons {
+        font-size: 16px;
+    }
+}
+/*********************END*********************/
+
 /*************Custom Classes***************/
+.m-5 {
+    margin: -5px;
+}
 .m0 {
     margin: 0px !important;
 }
@@ -54,12 +108,44 @@ nav a:hover {
     padding: 0px !important;
 }
 
+.p5 {
+    padding: 5px;
+}
+
 .align-middle {
     vertical-align: middle;
 }
+
+.display-flex {
+    display: flex;
+}
+
+.breadcrumb {
+    color: black;
+    font-size: 14px;
+}
+
+.breadcrumb:before {
+    vertical-align: middle;
+    color: black;
+    font-size: 14px;
+}
+
+.breadcrumb:last-child {
+    color: black;
+    font-size: 14px;
+}
+
+    .breadcrumb:hover {
+        color: #00bcd4;
+    }
 /******************END********************/
 
 /****************Content*****************/
+.content-image {
+    max-width: 100px;
+}
+
 .content-title {
     font-size: 16px;
     color: #00a5bb;
@@ -68,6 +154,7 @@ nav a:hover {
 
 .content-description {
     font-size: 14px;
+    padding-right: 10px;
 }
 
 .content-username {
@@ -88,6 +175,17 @@ nav a:hover {
 .content-condition {
     font-size: 14px;
     color: grey;
+}
+/******************End*******************/
+
+/****************Details*****************/
+.details-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.details-description {
+    font-size: 16px;
 }
 /******************End*******************/
 

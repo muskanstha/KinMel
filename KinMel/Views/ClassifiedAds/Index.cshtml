@@ -1,11 +1,19 @@
-﻿@model IEnumerable<KinMel.Models.ClassifiedAd>
+﻿@using KinMel.Controllers
+@model IEnumerable<KinMel.Models.ClassifiedAd>
 
 @{
     ViewData["Title"] = "Classified Ads";
 }
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+<!--Breadcrumbs-->
+<div class="page-container grey lighten-3">
+    <div class="container grey lighten-3">
+        <a asp-controller="Home" asp-action="Index" class="breadcrumb">Home</a>
+        <a asp-controller="ClassifiedAds" asp-action="Index" class="breadcrumb">Browse Ads</a>
+    </div>
+</div>
+
+<!--Main-Content-->
 <div class="page-container">
     <div class="row">
         <div class="table-striped card-panel card-panel-large z-depth-4">
@@ -17,24 +25,29 @@
                 <hr />
                 @foreach (var item in Model)
                 {
-                   
-                    <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
-                    <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
-                    <div class="row">
-                        <div class="col s6 m6 center">
-                            <img src="@item.ImageUrlList.FirstOrDefault()" style="max-width:100px"/>
+                    <div class="display-flex">
+                        <div>
+                            <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">                            
+                                <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()"/>
+                            </a>
                         </div>
-                        <div class="col s12 m8 l8 p0">
-                            <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
-                            <p class="material-icons align-middle">person_outline</p>
-                            <a asp-route-id="@item.Id" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.Id)</a>
-                        </div>
-                        <div class="row col s12 m4 l4 m0">
-                            <div class="col s6 m6">
-                                <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
-                            </div>
-                            <div class="col s6 m6 center">
-                                <p class="content-price">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
+                        <div class="col s12">
+                            <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
+                            <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
+                            <div>
+                                <div class="col s12 m8 l8 p0">
+                                    <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
+                                    <p class="material-icons align-middle m-5">person_outline</p>
+                                    <a asp-route-id="@item.Id" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.Id)</a>
+                                </div>
+                                <div class="col s12 m4 l4 p0">
+                                    <div class="col s6 m6 p0">
+                                        <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                                    </div>
+                                    <div class="col s6 m6 p0 center">
+                                        <p class="content-price">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
