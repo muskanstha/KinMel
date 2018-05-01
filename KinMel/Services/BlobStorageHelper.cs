@@ -49,15 +49,16 @@ namespace KinMel.Services
             foreach (IFormFile imageFile in imageFiles)
 
             {
-                //string[] imageTypes = imageFiles[i].ContentType.Split('/');
+                string[] imageTypes = imageFile.ContentType.Split('/');
 
                 // Get a reference to a blob named "myblob".
-                //CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/"+ slug + "/" + i + "." + imageTypes[1]);
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + imageFile.FileName);
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + slug + "-" + imageFiles.IndexOf(imageFile) + "." + imageTypes[1]);
+                //CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + imageFile.FileName);
 
                 // Create or overwrite the "myblob" blob with the contents of a local file
                 // named "myfile".
 
+                blockBlob.Properties.ContentType = imageFile.ContentType;
 
                 //await blockBlob.UploadFromStreamAsync(imageFile.OpenReadStream());
 
@@ -69,7 +70,7 @@ namespace KinMel.Services
 
             }
 
-            return "ok";
+            return "Ok";
 
         }
 
