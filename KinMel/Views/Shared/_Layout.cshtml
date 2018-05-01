@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Kinmel</title>
+    @Html.Partial("_Favicons")
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
@@ -30,7 +31,7 @@
                     <i class="material-icons">add</i>
                 </a>
             </div>
-            
+
             @await Html.PartialAsync("_LoginPartial")
 
             <ul class="right hide-on-med-and-down">
@@ -44,38 +45,38 @@
         </div>
     </nav>
 
-        @RenderBody()
+    @RenderBody()
 
-        <footer id="footer" class="footer">
-            <div class="footer-wrapper">
-                <div class="footer-block-wrapper">
-                    <div class="footer-logo footer-block">
-                        <a class="brand-logo" href="@Url.Action("Index", "Home")">KinMel</a>
-                    </div>
-                    <div class="footer-block-inner-wrapper">
-                        <div class="footer-block">
-                            <ul>
-                                <li><a asp-controller="Home" asp-action="About">About us</a></li>
-                                <li><a asp-controller="Home" asp-action="Contact">Contact Us</a></li>
-                            </ul>
-                        </div>
-                        <div class="footer-block">
-                            <h6><a href="#">support@vattujan.com</a></h6>
-                            <h6><b>Kathmandu, NP</b></h6>
-                        </div>
-                        <div class="footer-block">
-                            <a href="https://www.facebook.com" class="fab fa-facebook-square fa-3x"></a>
-                            <a href="https://plus.google.com" class="fab fa-google-plus-square fa-3x"></a>
-                        </div>
-                    </div>
+    <footer id="footer" class="footer">
+        <div class="footer-wrapper">
+            <div class="footer-block-wrapper">
+                <div class="footer-logo footer-block">
+                    <a class="brand-logo" href="@Url.Action("Index", "Home")">KinMel</a>
                 </div>
-                <div class="footer-copyright">
-                    <div class="container">
-                        <p>&copy; 2018 - KinMel</p>
+                <div class="footer-block-inner-wrapper">
+                    <div class="footer-block">
+                        <ul>
+                            <li><a asp-controller="Home" asp-action="About">About us</a></li>
+                            <li><a asp-controller="Home" asp-action="Contact">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-block">
+                        <h6><a href="#">support@vattujan.com</a></h6>
+                        <h6><b>Kathmandu, NP</b></h6>
+                    </div>
+                    <div class="footer-block">
+                        <a href="https://www.facebook.com" class="fab fa-facebook-square fa-3x"></a>
+                        <a href="https://plus.google.com" class="fab fa-google-plus-square fa-3x"></a>
                     </div>
                 </div>
             </div>
-        </footer>
+            <div class="footer-copyright">
+                <div class="container">
+                    <p>&copy; 2018 - KinMel</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 
     <environment include="Development">
