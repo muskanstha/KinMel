@@ -25,7 +25,7 @@ namespace KinMel.Controllers
         // GET: ClassifiedAds
         public async Task<IActionResult> Index()
         {
-            //BlobStorageHelper.UploadBlob();
+            //BlobStorageHelper.UploadBlobs();
             //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
 
 

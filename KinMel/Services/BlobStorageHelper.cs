@@ -26,7 +26,7 @@ namespace KinMel.Services
         //private static CloudBlobContainer container = blobClient.GetContainerReference("kinmel");
 
 
-        public static async Task<string> UploadBlob(string slug, List<IFormFile> imageFiles)
+        public static async Task<string> UploadBlobs(string slug, List<IFormFile> imageFiles)
         {
             CloudStorageAccount storageAccount = new CloudStorageAccount(
               new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
@@ -58,17 +58,56 @@ namespace KinMel.Services
                 // Create or overwrite the "myblob" blob with the contents of a local file
                 // named "myfile".
 
-                blockBlob.Properties.ContentType = imageFile.ContentType;
 
                 //await blockBlob.UploadFromStreamAsync(imageFile.OpenReadStream());
 
                 using (var fileStream = imageFile.OpenReadStream())
                 {
+                    blockBlob.Properties.ContentType = imageFile.ContentType;
+
                     await blockBlob.UploadFromStreamAsync(fileStream);
                 }
 
 
             }
+
+            return "Ok";
+
+        }
+
+        public static async Task<string> UploadBlob(string slug, IFormFile imageFile)
+        {
+            CloudStorageAccount storageAccount = new CloudStorageAccount(
+                new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
+                    "kinmelstorage",
+                    "oP0l/YwDAH3A3vK7A91MunMomfX574OuqvHWc5KMevPmIOgHSVMxQqlp5RmJaTXTnvBhgfD6NPnFO9fzOxzSXw=="), true);
+
+            // Create a blob client.
+            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+
+            // Get a reference to a container named "mycontainer."
+            CloudBlobContainer container = blobClient.GetContainerReference("kinmel");
+
+
+                string[] imageTypes = imageFile.ContentType.Split('/');
+
+                // Get a reference to a blob named "myblob".
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + slug + "-main." + imageTypes[1]);
+                //CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + imageFile.FileName);
+
+                // Create or overwrite the "myblob" blob with the contents of a local file
+                // named "myfile".
+
+
+                //await blockBlob.UploadFromStreamAsync(imageFile.OpenReadStream());
+
+                using (var fileStream = imageFile.OpenReadStream())
+                {
+                    blockBlob.Properties.ContentType = imageFile.ContentType;
+
+                    await blockBlob.UploadFromStreamAsync(fileStream);
+                }
+
 
             return "Ok";
 
