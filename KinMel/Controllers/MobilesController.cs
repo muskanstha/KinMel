@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
 using KinMel.Models;
+using KinMel.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
 namespace KinMel.Controllers
@@ -59,7 +61,7 @@ namespace KinMel.Controllers
         // GET: Mobiles/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc=>sc.Category.Name.Equals("Mobile")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Mobile")), "Id", "Name");
             return View();
         }
 
@@ -68,24 +70,36 @@ namespace KinMel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Brand,ModelNo,Color,Storage,Ram,FrontCamera,BackCamera,PhoneOs,ScreenSize,Features,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive")] Mobile mobile)
+        public async Task<IActionResult> Create([Bind("Brand,ModelNo,Color,Storage,Ram,FrontCamera,BackCamera,PhoneOs,ScreenSize,Features,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive")] Mobile mobile, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
-                var currentUserID = _userManager.GetUserId(this.User);
-                mobile.CreatedByUserId = currentUserID;
+                long size = imageFiles.Sum(f => f.Length);
+                if (size > 0)
+                {
+                    var currentUserID = _userManager.GetUserId(this.User);
+                    mobile.CreatedByUserId = currentUserID;
 
-                mobile.DateCreated = DateTime.Now;
-                _context.Add(mobile);
-                await _context.SaveChangesAsync();
+                    mobile.DateCreated = DateTime.Now;
+                    _context.Add(mobile);
+                    await _context.SaveChangesAsync();
 
-                string forSlug = mobile.Id + " " + String.Join(" ", mobile.Title.Split().Take(4));
-                string slug = forSlug.GenerateSlug();
+                    string forSlug = mobile.Id + " " + String.Join(" ", mobile.Title.Split().Take(4));
+                    string slug = forSlug.GenerateSlug();
 
-                mobile.Slug = slug;
+                    mobile.Slug = slug;
 
-                return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
+
+                    await BlobStorageHelper.UploadBlob(slug, imageFiles);
+
+                    mobile.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+
+
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
+                }
             }
+
             ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Mobile")), "Id", "Name");
             return View(mobile);
         }
