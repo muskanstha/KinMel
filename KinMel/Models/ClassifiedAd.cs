@@ -105,7 +105,7 @@ namespace KinMel.Models
         public string ModelNo { get; set; }
         public string Color { get; set; }
 
-        //public string Storage { get; set; }//internal storage
+        public string Storage { get; set; }//internal storage
         public string Ram { get; set; }
         public string FrontCamera { get; set; }
         public string BackCamera { get; set; }

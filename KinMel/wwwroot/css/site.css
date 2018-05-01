@@ -143,7 +143,10 @@ nav a:hover {
 
 /****************Content*****************/
 .content-image {
-    max-width: 100px;
+    width: 100px;
+    height: 100px;
+    -webkit-object-fit: scale-down;
+    object-fit: scale-down;
 }
 
 .content-title {
