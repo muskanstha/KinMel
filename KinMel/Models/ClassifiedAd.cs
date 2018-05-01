@@ -42,7 +42,8 @@ namespace KinMel.Models
         public string Slug { get; set; }
 
         public string Discriminator { get; set; }
-    }
+        public string Type { get; set; }
+  }
 
     public class Car : ClassifiedAd
     {
@@ -82,8 +83,45 @@ namespace KinMel.Models
         public List<String> FeatureList { get; set; }
         public string Features { get; set; }
     }
+  public class MotorCycle : ClassifiedAd
+  {
+    public string Brand { get; set; }
+    public string ModelNo { get; set; }
+    public string Color { get; set; }
+    public float Engine { get; set; }
+    public int  Mileage { get; set; }
+    public string TotalKm { get; set; }
+    public DateTime MakeYear { get; set; }
+    
+    [NotMapped]
+    public List<String> FeatureList { get; set; }
+    public string Features { get; set; }
+  }
+  public class RealState: ClassifiedAd
+  {
+    public string Location { get; set; }
+    public int Size { get; set; }
+    public int Floors { get; set; }
+    public int TotalRooms { get; set; }
+    public Boolean Furnishing { get; set; }
 
-    public class ClassifiedAdCreateViewModel
+    [NotMapped]
+    public List<String> FeatureList { get; set; }
+    public string Features { get; set; }
+
+  }
+  public class Computer:ClassifiedAd
+  {
+    public string Processor { get; set; }
+    public string ProcessorGeneration { get; set; }
+    public int Ram { get; set; }
+    public int VideoCard { get; set; }
+    public int HDD { get; set; }
+
+  }
+
+
+  public class ClassifiedAdCreateViewModel
     {
         public string CategoryName { get; set; }
     }
