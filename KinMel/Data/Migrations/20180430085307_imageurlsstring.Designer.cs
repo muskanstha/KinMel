@@ -12,9 +12,10 @@ using System;
 namespace KinMel.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180430085307_imageurlsstring")]
+    partial class imageurlsstring
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -312,36 +313,6 @@ namespace KinMel.Data.Migrations
                     b.ToTable("Mobile");
 
                     b.HasDiscriminator().HasValue("Mobile");
-                });
-
-            modelBuilder.Entity("KinMel.Models.Motorcycle", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-                    b.Property<string>("Brand")
-                        .HasColumnName("Motorcycle_Brand");
-
-                    b.Property<string>("Color")
-                        .HasColumnName("Motorcycle_Color");
-
-                    b.Property<int>("Engine");
-
-                    b.Property<string>("Features")
-                        .HasColumnName("Motorcycle_Features");
-
-                    b.Property<DateTime>("MadeYear");
-
-                    b.Property<int>("Mileage");
-
-                    b.Property<string>("ModelNo")
-                        .HasColumnName("Motorcycle_ModelNo");
-
-                    b.Property<string>("TotalKm")
-                        .HasColumnName("Motorcycle_TotalKm");
-
-                    b.ToTable("Motorcycle");
-
-                    b.HasDiscriminator().HasValue("Motorcycle");
                 });
 
             modelBuilder.Entity("KinMel.Models.ClassifiedAd", b =>

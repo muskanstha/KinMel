@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
 using KinMel.Models;
+using KinMel.Services;
 using Microsoft.EntityFrameworkCore.Design;
 
 namespace KinMel.Controllers
@@ -24,6 +25,10 @@ namespace KinMel.Controllers
         // GET: ClassifiedAds
         public async Task<IActionResult> Index()
         {
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+
+
             var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -85,6 +90,12 @@ namespace KinMel.Controllers
                         .Include(c => c.SubCategory)
                         .SingleOrDefaultAsync(m => m.Slug == id);
                     return View("~/Views/Mobiles/Details.cshtml", mobile);
+                case "Motorcycle":
+                    var motorcycle = await _context.Motorcycle
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/Motorcycles/Details.cshtml", motorcycle);
                 default:
                     return View("Error");
             }

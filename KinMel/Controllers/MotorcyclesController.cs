@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,13 +16,12 @@ namespace KinMel.Controllers
 {
     [Authorize]
 
-    public class CarsController : Controller
+    public class MotorcyclesController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-
-        public CarsController(ApplicationDbContext context,
+        public MotorcyclesController(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager)
         {
             _context = context;
@@ -31,16 +29,18 @@ namespace KinMel.Controllers
 
         }
 
-        // GET: Cars
+        // GET: Motorcycles
         [AllowAnonymous]
+
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Car.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            var applicationDbContext = _context.Motorcycle.Include(m => m.CreatedByUser).Include(m => m.SubCategory);
             return View(await applicationDbContext.ToListAsync());
         }
 
+        // GET: Motorcycles/Details/5
         [AllowAnonymous]
-        // GET: Cars/Details/5
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,30 +48,36 @@ namespace KinMel.Controllers
                 return NotFound();
             }
 
-            var car = await _context.Car
-                .Include(c => c.CreatedByUser)
-                .Include(c => c.SubCategory)
+            var motorcycle = await _context.Motorcycle
+                .Include(m => m.CreatedByUser)
+                .Include(m => m.SubCategory)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (car == null)
+            if (motorcycle == null)
             {
                 return NotFound();
             }
 
-            return View(car);
+            return View(motorcycle);
         }
-        // GET: Cars/Create
+
+        // GET: Motorcycles/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Car")), "Id", "Name");
+            ViewData["SubCategoryId"] =
+                new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Motorcycle")), "Id",
+                    "Name");
             return View();
         }
 
-        // POST: Cars/Create
+        // POST: Motorcycles/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Type,Brand,ModelNo,ModelYear,Color,TotalKm,FuelType,Features,DoorsNo,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive")] Car car, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create(
+            [Bind(
+                "Brand,ModelNo,Color,Engine,Mileage,TotalKm,MadeYear,Features,Id,SubCategoryId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive")]
+            Motorcycle motorcycle, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -79,32 +85,33 @@ namespace KinMel.Controllers
                 if (size > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
-                    car.CreatedByUserId = currentUserId;
+                    motorcycle.CreatedByUserId = currentUserId;
 
-                    car.DateCreated = DateTime.Now;
-                    _context.Add(car);
+                    motorcycle.DateCreated = DateTime.Now;
+                    _context.Add(motorcycle);
                     await _context.SaveChangesAsync();
 
-                    string forSlug = car.Id + " " + String.Join(" ", car.Title.Split().Take(4));
+                    string forSlug = motorcycle.Id + " " + String.Join(" ", motorcycle.Title.Split().Take(4));
                     string slug = forSlug.GenerateSlug();
 
-                    car.Slug = slug;
+                    motorcycle.Slug = slug;
 
                     await BlobStorageHelper.UploadBlobs(slug, imageFiles);
 
-                    car.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+                    motorcycle.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
-
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Car")), "Id", "Name", car.SubCategoryId);
-            return View(car);
+
+            ViewData["SubCategoryId"] =
+                    new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Motorcycle")), "Id",
+                        "Name");
+            return View(motorcycle);
         }
 
-        //// GET: Cars/Edit/5
-
+        //// GET: Motorcycles/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{
         //    if (id == null)
@@ -112,24 +119,24 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var car = await _context.Car.SingleOrDefaultAsync(m => m.Id == id);
-        //    if (car == null)
+        //    var motorcycle = await _context.Motorcycle.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (motorcycle == null)
         //    {
         //        return NotFound();
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", car.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", car.SubCategoryId);
-        //    return View(car);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", motorcycle.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", motorcycle.SubCategoryId);
+        //    return View(motorcycle);
         //}
 
-        //// POST: Cars/Edit/5
+        //// POST: Motorcycles/Edit/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Type,Brand,ModelNo,ModelYear,Color,TotalKm,FuelType,Features,DoorsNo,Id,SubCategoryId,CreatedByUserId,Title,Description,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] Car car)
+        //public async Task<IActionResult> Edit(int id, [Bind("Brand,ModelNo,Color,Engine,Mileage,TotalKm,MadeYear,Features,Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] Motorcycle motorcycle)
         //{
-        //    if (id != car.Id)
+        //    if (id != motorcycle.Id)
         //    {
         //        return NotFound();
         //    }
@@ -138,12 +145,12 @@ namespace KinMel.Controllers
         //    {
         //        try
         //        {
-        //            _context.Update(car);
+        //            _context.Update(motorcycle);
         //            await _context.SaveChangesAsync();
         //        }
         //        catch (DbUpdateConcurrencyException)
         //        {
-        //            if (!CarExists(car.Id))
+        //            if (!MotorcycleExists(motorcycle.Id))
         //            {
         //                return NotFound();
         //            }
@@ -154,12 +161,12 @@ namespace KinMel.Controllers
         //        }
         //        return RedirectToAction(nameof(Index));
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", car.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", car.SubCategoryId);
-        //    return View(car);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", motorcycle.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", motorcycle.SubCategoryId);
+        //    return View(motorcycle);
         //}
 
-        //// GET: Cars/Delete/5
+        //// GET: Motorcycles/Delete/5
         //public async Task<IActionResult> Delete(int? id)
         //{
         //    if (id == null)
@@ -167,33 +174,32 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var car = await _context.Car
-        //        .Include(c => c.CreatedByUser)
-        //        .Include(c => c.SubCategory)
+        //    var motorcycle = await _context.Motorcycle
+        //        .Include(m => m.CreatedByUser)
+        //        .Include(m => m.SubCategory)
         //        .SingleOrDefaultAsync(m => m.Id == id);
-        //    if (car == null)
+        //    if (motorcycle == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    return View(car);
+        //    return View(motorcycle);
         //}
 
-        //// POST: Cars/Delete/5
-        //[Authorize]
+        //// POST: Motorcycles/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> DeleteConfirmed(int id)
         //{
-        //    var car = await _context.Car.SingleOrDefaultAsync(m => m.Id == id);
-        //    _context.Car.Remove(car);
+        //    var motorcycle = await _context.Motorcycle.SingleOrDefaultAsync(m => m.Id == id);
+        //    _context.Motorcycle.Remove(motorcycle);
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool CarExists(int id)
+        //private bool MotorcycleExists(int id)
         //{
-        //    return _context.Car.Any(e => e.Id == id);
+        //    return _context.Motorcycle.Any(e => e.Id == id);
         //}
     }
 }
