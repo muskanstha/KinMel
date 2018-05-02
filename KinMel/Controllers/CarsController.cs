@@ -90,7 +90,7 @@ namespace KinMel.Controllers
 
                     car.Slug = slug;
 
-                    await BlobStorageHelper.UploadBlob(slug, imageFiles);
+                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
 
                     car.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
 
