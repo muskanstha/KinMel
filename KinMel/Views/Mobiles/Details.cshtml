@@ -26,6 +26,14 @@
                     @Html.DisplayNameFor(model => model.Description)
                     <div>@Html.DisplayFor(model => model.Description)</div>
                 </div>
+                <div>
+                    @foreach (var item in Model.ImageUrlList)
+                    {
+                        <div>
+                            <img style="max-width:250px" src="@item" />
+                        </div>
+                    }
+                </div>
                 @Html.DisplayNameFor(model => model.Brand)
                 @Html.DisplayFor(model => model.Brand)
                 @Html.DisplayNameFor(model => model.ModelNo)
