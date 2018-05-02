@@ -112,100 +112,95 @@ namespace KinMel.Models
         public string PhoneOs { get; set; }
         public string ScreenSize { get;set; }
 
-        [NotMapped]
-        public List<String> FeatureList { get; set; }
         public string Features { get; set; }
     }
-  //public class Motorcycle : ClassifiedAd
-  //{
-  //  public string Brand { get; set; }
-  //  public string ModelNo { get; set; }
-  //  public string Color { get; set; }
-  //  public int Engine { get; set; }//Engine(CC)
-  //  public int  Mileage { get; set; }//Mileage(km/l)
-  //  public string TotalKm { get; set; }//travelledKm
-  //  public DateTime MadeYear { get; set; }
-    
-  //  [NotMapped]
-  //  public List<String> FeatureList { get; set; }
-  //  public string Features { get; set; }
-  //}
-  //public class RealState: ClassifiedAd
-  //{
-  //  public string PropertyType { get; set; }//dropdown
-  //  public string LandSize { get; set; }//(aana/dhur/m2)
-  //  public int Floors { get; set; }
-  //  public int TotalRooms { get; set; }
-  //  public string Furnishing { get; set; }//dropdown-full semi none
 
-  //  [NotMapped]
-  //  public List<String> FeatureList { get; set; }
-  //  public string Features { get; set; }
+    public class Motorcycle : ClassifiedAd
+    {
+        public string Brand { get; set; }
+        public string ModelNo { get; set; }
+        public string Color { get; set; }
+        public int Engine { get; set; }//Engine(CC)
+        public int Mileage { get; set; }//Mileage(km/l)
+        public string TotalKm { get; set; }//travelledKm
+        public DateTime MadeYear { get; set; }
 
-  //}
-  //public class Computer:ClassifiedAd
-  //{
-  //  public string Type { get; set; }//dropdown(desktop, laptop,2in1)
-  //  public string Processor { get; set; }
-  //  public string ProcessorGeneration { get; set; }
-  //  public int Ram { get; set; }
-  //  public int VideoCard { get; set; }
-  //  public int HDD { get; set; }
-  //  public int SSD { get; set; }
-  //  public string ScreenType { get; set; }
-  //  public int ScreenSize { get; set; }
-  //  public double Battery { get; set; }
+        public string Features { get; set; }
+    }
+    //public class RealState : ClassifiedAd
+    //{
+    //    public string PropertyType { get; set; }//dropdown
+    //    public string LandSize { get; set; }//(aana/dhur/m2)
+    //    public int Floors { get; set; }
+    //    public int TotalRooms { get; set; }
+    //    public string Furnishing { get; set; }//dropdown-full semi none
 
-  //  [NotMapped]
-  //  public List<String> FeatureList { get; set; }
-  //  public string Features { get; set; }
-  //}
+    //    public string Features { get; set; }
 
-  //public class Jobs
-  //{
-  //  public int Salary { get; set; }
-  //  public int WorkingDays { get; set; }
-  //  public int ContractFor { get; set; }
-  //}
+    //}
+    //public class Computer:ClassifiedAd
+    //{
+    //  public string Type { get; set; }//dropdown(desktop, laptop,2in1)
+    //  public string Processor { get; set; }
+    //  public string ProcessorGeneration { get; set; }
+    //  public int Ram { get; set; }
+    //  public int VideoCard { get; set; }
+    //  public int HDD { get; set; }
+    //  public int SSD { get; set; }
+    //  public string ScreenType { get; set; }
+    //  public int ScreenSize { get; set; }
+    //  public double Battery { get; set; }
 
-  //public class BeautyAndHealth{}
+    //  [NotMapped]
+    //  public List<String> FeatureList { get; set; }
+    //  public string Features { get; set; }
+    //}
 
-  //public class BooksAndLearing
-  //{
-  //  public string Author { get; set; }
-  //  public int ISBN { get; set; }
-   
-  //}
-  //public class Electronics{}
+    //public class Jobs
+    //{
+    //  public int Salary { get; set; }
+    //  public int WorkingDays { get; set; }
+    //  public int ContractFor { get; set; }
+    //}
 
-  //public class Furnitures{}
+    //public class BeautyAndHealth{}
 
-  //public class Camera{}
+    //public class BooksAndLearing
+    //{
+    //  public string Author { get; set; }
+    //  public int ISBN { get; set; }
 
-  //public class MusicInstruments{}
+    //}
+    //public class Electronics{}
 
-  //public class PetsAndPetCare{}
+    //public class Furnitures{}
 
-  //public class SportsAndFitness{}
+    //public class Camera{}
 
-  //public class TabletsAndIPads:Mobile{//esto garda hunxa?
-  //}
+    //public class MusicInstruments{}
 
-  //public class ToysAndGames{}
+    //public class PetsAndPetCare{}
 
-  //public class TravelAndTours{}
+    //public class SportsAndFitness{}
 
-  //public class Services{}
+    //public class TabletsAndIPads:Mobile{//esto garda hunxa?
+    //}
 
-  //public class MobileAccessories{}
+    //public class ToysAndGames{}
 
-  //public class ComputerParts{}
+    //public class TravelAndTours{}
 
-  //public class ApparelsAndAccessories{}
+    //public class Services{}
 
-  //public class VehiclesParts{}
-    
-  public class ClassifiedAdCreateViewModel
+    //public class MobileAccessories{}
+
+    //public class ComputerParts{}
+
+    //public class ApparelsAndAccessories{}
+
+    //public class VehiclesParts{}
+
+    public class ClassifiedAdCreateViewModel
     {
         public string CategoryName { get; set; }
     }

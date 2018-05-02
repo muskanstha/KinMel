@@ -90,6 +90,12 @@ namespace KinMel.Controllers
                         .Include(c => c.SubCategory)
                         .SingleOrDefaultAsync(m => m.Slug == id);
                     return View("~/Views/Mobiles/Details.cshtml", mobile);
+                case "Motorcycle":
+                    var motorcycle = await _context.Motorcycle
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/Motorcycles/Details.cshtml", motorcycle);
                 default:
                     return View("Error");
             }

@@ -28,5 +28,7 @@ namespace KinMel.Data
         public DbSet<KinMel.Models.Car> Car { get; set; }
 
         public DbSet<KinMel.Models.Mobile> Mobile { get; set; }
+
+        public DbSet<KinMel.Models.Motorcycle> Motorcycle { get; set; }
     }
 }
