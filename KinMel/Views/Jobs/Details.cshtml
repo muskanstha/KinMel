@@ -9,6 +9,12 @@
 <div>
     <h4>Jobs</h4>
     <hr />
+    <div>
+        @foreach (var item in Model.ImageUrlList)
+        {
+            <img src="@item" />
+        }
+    </div>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Salary)
