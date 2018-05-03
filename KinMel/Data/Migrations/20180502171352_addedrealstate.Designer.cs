@@ -12,9 +12,10 @@ using System;
 namespace KinMel.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180502171352_addedrealstate")]
+    partial class addedrealstate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,49 +255,6 @@ namespace KinMel.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("KinMel.Models.ApparelsAndAccessories", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("ApparelsAndAccessories");
-
-                    b.HasDiscriminator().HasValue("ApparelsAndAccessories");
-                });
-
-            modelBuilder.Entity("KinMel.Models.BeautyAndHealth", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("BeautyAndHealth");
-
-                    b.HasDiscriminator().HasValue("BeautyAndHealth");
-                });
-
-            modelBuilder.Entity("KinMel.Models.BooksAndLearning", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-                    b.Property<string>("Author");
-
-                    b.Property<int>("ISBN");
-
-                    b.ToTable("BooksAndLearning");
-
-                    b.HasDiscriminator().HasValue("BooksAndLearning");
-                });
-
-            modelBuilder.Entity("KinMel.Models.Camera", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("Camera");
-
-                    b.HasDiscriminator().HasValue("Camera");
-                });
-
             modelBuilder.Entity("KinMel.Models.Car", b =>
                 {
                     b.HasBaseType("KinMel.Models.ClassifiedAd");
@@ -324,94 +282,6 @@ namespace KinMel.Data.Migrations
                     b.HasDiscriminator().HasValue("Car");
                 });
 
-            modelBuilder.Entity("KinMel.Models.Computer", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-                    b.Property<double>("Battery");
-
-                    b.Property<string>("Features")
-                        .HasColumnName("Computer_Features");
-
-                    b.Property<int>("HDD");
-
-                    b.Property<string>("Processor");
-
-                    b.Property<string>("ProcessorGeneration");
-
-                    b.Property<int>("Ram");
-
-                    b.Property<int>("SSD");
-
-                    b.Property<int>("ScreenSize");
-
-                    b.Property<string>("ScreenType");
-
-                    b.Property<string>("Type")
-                        .HasColumnName("Computer_Type");
-
-                    b.Property<int>("VideoCard");
-
-                    b.ToTable("Computer");
-
-                    b.HasDiscriminator().HasValue("Computer");
-                });
-
-            modelBuilder.Entity("KinMel.Models.ComputerParts", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("ComputerParts");
-
-                    b.HasDiscriminator().HasValue("ComputerParts");
-                });
-
-            modelBuilder.Entity("KinMel.Models.Electronics", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("Electronics");
-
-                    b.HasDiscriminator().HasValue("Electronics");
-                });
-
-            modelBuilder.Entity("KinMel.Models.Furnitures", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("Furnitures");
-
-                    b.HasDiscriminator().HasValue("Furnitures");
-                });
-
-            modelBuilder.Entity("KinMel.Models.HelpAndServices", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("HelpAndServices");
-
-                    b.HasDiscriminator().HasValue("HelpAndServices");
-                });
-
-            modelBuilder.Entity("KinMel.Models.Jobs", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-                    b.Property<int>("ContractFor");
-
-                    b.Property<int>("Salary");
-
-                    b.Property<int>("WorkingDays");
-
-                    b.ToTable("Jobs");
-
-                    b.HasDiscriminator().HasValue("Jobs");
-                });
-
             modelBuilder.Entity("KinMel.Models.Mobile", b =>
                 {
                     b.HasBaseType("KinMel.Models.ClassifiedAd");
@@ -434,27 +304,15 @@ namespace KinMel.Data.Migrations
 
                     b.Property<string>("PhoneOs");
 
-                    b.Property<string>("Ram")
-                        .HasColumnName("Mobile_Ram");
+                    b.Property<string>("Ram");
 
-                    b.Property<string>("ScreenSize")
-                        .HasColumnName("Mobile_ScreenSize");
+                    b.Property<string>("ScreenSize");
 
                     b.Property<string>("Storage");
 
                     b.ToTable("Mobile");
 
                     b.HasDiscriminator().HasValue("Mobile");
-                });
-
-            modelBuilder.Entity("KinMel.Models.MobileAccessories", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("MobileAccessories");
-
-                    b.HasDiscriminator().HasValue("MobileAccessories");
                 });
 
             modelBuilder.Entity("KinMel.Models.Motorcycle", b =>
@@ -487,26 +345,6 @@ namespace KinMel.Data.Migrations
                     b.HasDiscriminator().HasValue("Motorcycle");
                 });
 
-            modelBuilder.Entity("KinMel.Models.MusicInstruments", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("MusicInstruments");
-
-                    b.HasDiscriminator().HasValue("MusicInstruments");
-                });
-
-            modelBuilder.Entity("KinMel.Models.PetsAndPetCare", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("PetsAndPetCare");
-
-                    b.HasDiscriminator().HasValue("PetsAndPetCare");
-                });
-
             modelBuilder.Entity("KinMel.Models.RealState", b =>
                 {
                     b.HasBaseType("KinMel.Models.ClassifiedAd");
@@ -527,56 +365,6 @@ namespace KinMel.Data.Migrations
                     b.ToTable("RealState");
 
                     b.HasDiscriminator().HasValue("RealState");
-                });
-
-            modelBuilder.Entity("KinMel.Models.SportsAndFitness", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("SportsAndFitness");
-
-                    b.HasDiscriminator().HasValue("SportsAndFitness");
-                });
-
-            modelBuilder.Entity("KinMel.Models.ToysAndGames", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("ToysAndGames");
-
-                    b.HasDiscriminator().HasValue("ToysAndGames");
-                });
-
-            modelBuilder.Entity("KinMel.Models.TravelAndTours", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("TravelAndTours");
-
-                    b.HasDiscriminator().HasValue("TravelAndTours");
-                });
-
-            modelBuilder.Entity("KinMel.Models.VehiclesParts", b =>
-                {
-                    b.HasBaseType("KinMel.Models.ClassifiedAd");
-
-
-                    b.ToTable("VehiclesParts");
-
-                    b.HasDiscriminator().HasValue("VehiclesParts");
-                });
-
-            modelBuilder.Entity("KinMel.Models.TabletsAndIPads", b =>
-                {
-                    b.HasBaseType("KinMel.Models.Mobile");
-
-
-                    b.ToTable("TabletsAndIPads");
-
-                    b.HasDiscriminator().HasValue("TabletsAndIPads");
                 });
 
             modelBuilder.Entity("KinMel.Models.ClassifiedAd", b =>

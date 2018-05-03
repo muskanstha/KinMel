@@ -96,6 +96,120 @@ namespace KinMel.Controllers
                         .Include(c => c.SubCategory)
                         .SingleOrDefaultAsync(m => m.Slug == id);
                     return View("~/Views/Motorcycles/Details.cshtml", motorcycle);
+                case "Realstate":
+                    var realState = await _context.RealState
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/RealStates/Details.cshtml", realState);
+                case "Computer":
+                    var computer = await _context.Computer
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/Computers/Details.cshtml", computer);
+                case "Jobs":
+                    var jobs = await _context.Jobs
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/Jobs/Details.cshtml", jobs);
+                case "BeautyAndHealth":
+                    var beautyandhealth = await _context.BeautyAndHealth
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/BeautyAndHealths/Details.cshtml", beautyandhealth);
+                case "BooksAndLearning":
+                    var booksAndLearning = await _context.BooksAndLearning
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/BooksAndLearnings/Details.cshtml", booksAndLearning);
+                case "Electronics":
+                    var electronics = await _context.Electronics
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/Electronics/Details.cshtml", electronics);
+                case "Furnitures":
+                    var furnitures = await _context.Furnitures
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/Furnitures/Details.cshtml", furnitures);
+                case "Camera":
+                    var camera = await _context.Camera
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/Cameras/Details.cshtml", camera);
+                case "MusicInstruments":
+                    var musicInstruments = await _context.MusicInstruments
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/MusicInstruments/Details.cshtml", musicInstruments);
+                case "PetsAndPetCare":
+                    var petsAndPetCare = await _context.PetsAndPetCare
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/PetsAndPetCares/Details.cshtml", petsAndPetCare);
+                case "SportsAndFitness":
+                    var sportsAndFitness = await _context.SportsAndFitness
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/SportsAndFitnesses/Details.cshtml", sportsAndFitness);
+                case "TabletsAndIPads":
+                    var tabletsAndIPads = await _context.TabletsAndIPads
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/TabletsAndIPads/Details.cshtml", tabletsAndIPads);
+                case "ToysAndGames":
+                    var toysAndGames = await _context.ToysAndGames
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/ToysAndGames/Details.cshtml", toysAndGames);
+                case "TravelAndTours":
+                    var travelAndTours = await _context.TravelAndTours
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/TravelAndTours/Details.cshtml", travelAndTours);
+                case "HelpAndServices":
+                    var helpAndServices = await _context.HelpAndServices
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/HelpAndServices/Details.cshtml", helpAndServices);
+                case "MobileAccessories":
+                    var mobileAccessories = await _context.MobileAccessories
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/MobileAccessories/Details.cshtml", mobileAccessories);
+                case "ComputerParts":
+                    var computerParts = await _context.ComputerParts
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/ComputerParts/Details.cshtml", computerParts);
+                case "ApparelsAndAccessories":
+                    var apparelsAndAccessories = await _context.ApparelsAndAccessories
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/ApparelsAndAccessories/Details.cshtml", apparelsAndAccessories);
+                case "VehiclesParts":
+                    var vehiclesParts = await _context.VehiclesParts
+                        .Include(c => c.CreatedByUser)
+                        .Include(c => c.SubCategory)
+                        .SingleOrDefaultAsync(m => m.Slug == id);
+                    return View("~/Views/VehiclesParts/Details.cshtml", vehiclesParts);
                 default:
                     return View("Error");
             }
@@ -114,7 +228,7 @@ namespace KinMel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CategoryName")] ClassifiedAdCreateViewModel model)
+        public IActionResult Create([Bind("CategoryName")] ClassifiedAdCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
