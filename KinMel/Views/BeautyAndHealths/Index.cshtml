@@ -15,39 +15,7 @@
 <section class="page-container section">
     <div class="row browse-width">
         <!--Side-Content-->
-        <div class="page-container col s3 pl0">
-            <div class="table-striped card p0 m0">
-                <div class="card-header black-text darken-3">
-                    Categories
-                </div>
-                <div class="card-content">
-                    <ul class="m0">
-                        <li><a asp-controller="ApparelsAndAccessories" asp-action="Index"><i class="material-icons align-middle p5">store</i>Apparels & Accessories</a></li>
-                        <li><a asp-controller="BeautyAndHealths" asp-action="Index" class="category-select"><i class="material-icons align-middle p5">local_florist</i>Beauty & Health</a></li>
-                        <li><a asp-controller="BooksAndLearnings" asp-action="Index"><i class="material-icons align-middle p5">book</i>Books & Learning</a></li>
-                        <li><a asp-controller="Cameras" asp-action="Index"><i class="material-icons align-middle p5">photo_camera</i>Cameras</a></li>
-                        <li><a asp-controller="Cars" asp-action="Index"><i class="material-icons align-middle p5">directions_car</i>Cars</a></li>
-                        <li><a asp-controller="Computers" asp-action="Index"><i class="material-icons align-middle p5">computer</i>Computers</a></li>
-                        <li><a asp-controller="ComputerParts" asp-action="Index"><i class="material-icons align-middle p5">developer_board</i>Computer Parts</a></li>
-                        <li><a asp-controller="Electronics" asp-action="Index"><i class="material-icons align-middle p5">scanner</i>Electronics</a></li>
-                        <li><a asp-controller="Furnitures" asp-action="Index"><i class="material-icons align-middle p5">weekend</i>Furnitures</a></li>
-                        <li><a asp-controller="HelpAndServices" asp-action="Index"><i class="material-icons align-middle p5">build</i>Help & Services</a></li>
-                        <li><a asp-controller="Jobs" asp-action="Index"><i class="material-icons align-middle p5">work</i>Jobs</a></li>
-                        <li><a asp-controller="Mobiles" asp-action="Index"><i class="material-icons align-middle p5">smartphone</i>Mobiles</a></li>
-                        <li><a asp-controller="MobileAccessories" asp-action="Index"><i class="material-icons align-middle p5">headset</i>Mobile Accessories</a></li>
-                        <li><a asp-controller="Motorcycles" asp-action="Index"><i class="material-icons align-middle p5">motorcycle</i>Motorcycles</a></li>
-                        <li><a asp-controller="MusicInstruments" asp-action="Index"><i class="material-icons align-middle p5">music_note</i>Musical Instruments</a></li>
-                        <li><a asp-controller="PetsAndPetCares" asp-action="Index"><i class="material-icons align-middle p5">pets</i>Pets & Petcare</a></li>
-                        <li><a asp-controller="RealStates" asp-action="Index"><i class="material-icons align-middle p5">account_balance</i>RealState</a></li>
-                        <li><a asp-controller="SportsAndFitnesses" asp-action="Index"><i class="material-icons align-middle p5">fitness_center</i>Sports & Fitness</a></li>
-                        <li><a asp-controller="TabletsAndIPads" asp-action="Index"><i class="material-icons align-middle p5">tablet_mac</i>Tablets & iPads</a></li>
-                        <li><a asp-controller="ToysAndGames" asp-action="Index"><i class="material-icons align-middle p5">toys</i>Toys & Games</a></li>
-                        <li><a asp-controller="TravelAndTours" asp-action="Index"><i class="material-icons align-middle p5">flight</i>Travel & Tours</a></li>
-                        <li><a asp-controller="VehiclesParts" asp-action="Index"><i class="material-icons align-middle p5">settings</i>Vehicle Parts</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        @await Html.PartialAsync("_categoriesSideMenu")
 
         <!--Main-Content-->
         <div class="page-container col s9 p0">
