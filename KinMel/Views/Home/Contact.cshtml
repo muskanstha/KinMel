@@ -1,17 +1,59 @@
-﻿@{
-    ViewData["Title"] = "Contact";
-}
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+﻿@*@{
+        ViewData["Title"] = "Contact";
+    }
+    <h2>@ViewData["Title"]</h2>
+    <h3>@ViewData["Message"]</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+    <address>
+        One Microsoft Way<br />
+        Redmond, WA 98052-6399<br />
+        <abbr title="Phone">P:</abbr>
+        425.555.0100
+    </address>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <address>
+        <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
+        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    </address>*@
+<div class = "row">
+    <div class = "input-field col s6">
+        <i class = "material-icons prefix">account_circle</i>
+        <input placeholder = "FullName"  id = "name"
+               type = "text" class = "active validate" required />
+        <label for = "name">FullName</label>
+    </div>
+               
+    <div class = "input-field col s6">      
+        <label for = "phone">Phone</label>
+        <input id = "phone" type = "number" placeholder = "Phone Number"
+               class = "validate" required />          
+    </div>
+</div>
+<div class = "row">
+    <div class = "input-field col s12">
+        <input placeholder = "Email" id = "email" type = "email"
+               class = "validate">
+        <label for = "email">Email</label>
+    </div>
+</div>
+            
+<div class = "row">
+    <div class = "input-field col s12">
+        <i class = "material-icons prefix">mode_edit</i>
+        <textarea id = "subject" class = "materialize-textarea"></textarea>
+        <label for = "subject">Subject</label>
+    </div>
+</div>
+
+<script language="javascript" type="text/javascript"></script>
+<script type="text/javascript" src="https://cdn.ckeditor.com/4.8.0/standard-all/ckeditor.js"></script>
+<textarea id="editor1" name="editor1">
+</textarea>
+
+<script type="text/javascript">CKEDITOR.replace('editor1');</script>
+<div class = "card-panel">
+    <button class = "btn waves-effect waves-light red" type = "submit">Send
+        <i class = "material-icons right">send</i></button>
+    
+</div>
+
