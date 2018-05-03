@@ -3,171 +3,98 @@
 @{
     ViewData["Title"] = "Index";
 }
+<!--Page-loader-->
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
 
-<h2>Index</h2>
+<!--Breadcrumbs-->
+<div class="page-container grey lighten-3">
+    <div class="container grey lighten-3">
+        <a asp-controller="Home" asp-action="Index" class="breadcrumb">Home</a>
+        <a asp-controller="ClassifiedAds" asp-action="Index" class="breadcrumb">Tablets & iPads</a>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Brand)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Model)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Color)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Storage)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Ram)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FrontCamera)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BackCamera)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PhoneOs)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ScreenSize)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Features)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ImageUrls)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Condition)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PriceNegotiable)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Delivery)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DateCreated)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsSold)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IsActive)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Slug)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Discriminator)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedByUser)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SubCategory)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brand)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Model)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Color)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Storage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ram)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FrontCamera)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BackCamera)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneOs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ScreenSize)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Features)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrls)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Condition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PriceNegotiable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Delivery)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsSold)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Slug)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discriminator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedByUser.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubCategory.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<section class="page-container section">
+    <div class="row browse-width">
+        <!--Side-Content-->
+        <div class="page-container col s3 pl0">
+            <div class="table-striped card p0 m0">
+                <div class="card-header black-text darken-3">
+                    Categories
+                </div>
+                <div class="card-content">
+                    <ul class="m0">
+                        <li><a asp-controller="ApparelsAndAccessories" asp-action="Index"><i class="material-icons align-middle p5">store</i>Apparels & Accessories</a></li>
+                        <li><a asp-controller="BeautyAndHealths" asp-action="Index"><i class="material-icons align-middle p5">local_florist</i>Beauty & Health</a></li>
+                        <li><a asp-controller="BooksAndLearnings" asp-action="Index"><i class="material-icons align-middle p5">book</i>Books & Learning</a></li>
+                        <li><a asp-controller="Cameras" asp-action="Index"><i class="material-icons align-middle p5">photo_camera</i>Cameras</a></li>
+                        <li><a asp-controller="Cars" asp-action="Index"><i class="material-icons align-middle p5">directions_car</i>Cars</a></li>
+                        <li><a asp-controller="Computers" asp-action="Index"><i class="material-icons align-middle p5">computer</i>Computers</a></li>
+                        <li><a asp-controller="ComputerParts" asp-action="Index"><i class="material-icons align-middle p5">developer_board</i>Computer Parts</a></li>
+                        <li><a asp-controller="Electronics" asp-action="Index"><i class="material-icons align-middle p5">scanner</i>Electronics</a></li>
+                        <li><a asp-controller="Furnitures" asp-action="Index"><i class="material-icons align-middle p5">weekend</i>Furnitures</a></li>
+                        <li><a asp-controller="HelpAndServices" asp-action="Index"><i class="material-icons align-middle p5">build</i>Help & Services</a></li>
+                        <li><a asp-controller="Jobs" asp-action="Index"><i class="material-icons align-middle p5">work</i>Jobs</a></li>
+                        <li><a asp-controller="Mobiles" asp-action="Index"><i class="material-icons align-middle p5">smartphone</i>Mobiles</a></li>
+                        <li><a asp-controller="MobileAccessories" asp-action="Index"><i class="material-icons align-middle p5">headset</i>Mobile Accessories</a></li>
+                        <li><a asp-controller="Motorcycles" asp-action="Index"><i class="material-icons align-middle p5">motorcycle</i>Motorcycles</a></li>
+                        <li><a asp-controller="MusicInstruments" asp-action="Index"><i class="material-icons align-middle p5">music_note</i>Musical Instruments</a></li>
+                        <li><a asp-controller="PetsAndPetCares" asp-action="Index"><i class="material-icons align-middle p5">pets</i>Pets & Petcare</a></li>
+                        <li><a asp-controller="RealStates" asp-action="Index"><i class="material-icons align-middle p5">account_balance</i>RealState</a></li>
+                        <li><a asp-controller="SportsAndFitnesses" asp-action="Index"><i class="material-icons align-middle p5">fitness_center</i>Sports & Fitness</a></li>
+                        <li><a asp-controller="TabletsAndIPads" asp-action="Index" class="category-select"><i class="material-icons align-middle p5">tablet_mac</i>Tablets & iPads</a></li>
+                        <li><a asp-controller="ToysAndGames" asp-action="Index"><i class="material-icons align-middle p5">toys</i>Toys & Games</a></li>
+                        <li><a asp-controller="TravelAndTours" asp-action="Index"><i class="material-icons align-middle p5">flight</i>Travel & Tours</a></li>
+                        <li><a asp-controller="VehiclesParts" asp-action="Index"><i class="material-icons align-middle p5">settings</i>Vehicle Parts</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--Main-Content-->
+        <div class="page-container col s9 p0">
+            <div class="table-striped p0">
+                <div class="card-header">
+                    <div class="row m0">
+                        <div class="col s6 m10"><strong>Ad</strong></div>
+                        <div class="col s6 m2 center"><strong>Price</strong></div>
+                    </div>
+                    @foreach (var item in Model)
+                    {
+                        <div class="display-flex">
+                            <div>
+                                <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">
+                                    <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()" />
+                                </a>
+                            </div>
+                            <div class="col s12">
+                                <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
+                                <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
+                                <div>
+                                    <div class="col s12 m8 l8 p0">
+                                        <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
+                                        <p class="material-icons align-middle m-5">person_outline</p>
+                                        <a asp-route-id="@item.Id" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.Id)</a>
+                                    </div>
+                                    <div class="col s12 m4 l4 p0">
+                                        <div class="col s6 m6 p0">
+                                            <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                                        </div>
+                                        <div class="col s6 m6 p0 center">
+                                            <p class="content-price">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
