@@ -67,9 +67,9 @@ namespace KinMel.Models
         public string WarrantyPeriod { get; set; }
         public string WarrantyIncludes { get; set; }
 
-        //[NotMapped]
-        //private List<string> FeaturesList { get; set; }
-        //public string Features { get; set; }
+        [NotMapped]
+        private List<string> FeaturesList { get; set; }
+        public string Features { get; set; }
 
     }
 
