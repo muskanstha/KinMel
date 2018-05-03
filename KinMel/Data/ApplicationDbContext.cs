@@ -30,5 +30,43 @@ namespace KinMel.Data
         public DbSet<KinMel.Models.Mobile> Mobile { get; set; }
 
         public DbSet<KinMel.Models.Motorcycle> Motorcycle { get; set; }
+
+        public DbSet<KinMel.Models.RealState> RealState { get; set; }
+
+        public DbSet<KinMel.Models.Computer> Computer { get; set; }
+
+        public DbSet<KinMel.Models.Jobs> Jobs { get; set; }
+
+        public DbSet<KinMel.Models.BooksAndLearning> BooksAndLearning { get; set; }
+
+        public DbSet<KinMel.Models.BeautyAndHealth> BeautyAndHealth { get; set; }
+
+        public DbSet<KinMel.Models.Electronics> Electronics { get; set; }
+
+        public DbSet<KinMel.Models.Furnitures> Furnitures { get; set; }
+
+        public DbSet<KinMel.Models.Camera> Camera { get; set; }
+
+        public DbSet<KinMel.Models.MusicInstruments> MusicInstruments { get; set; }
+
+        public DbSet<KinMel.Models.PetsAndPetCare> PetsAndPetCare { get; set; }
+
+        public DbSet<KinMel.Models.SportsAndFitness> SportsAndFitness { get; set; }
+
+        public DbSet<KinMel.Models.TabletsAndIPads> TabletsAndIPads { get; set; }
+
+        public DbSet<KinMel.Models.ToysAndGames> ToysAndGames { get; set; }
+
+        public DbSet<KinMel.Models.TravelAndTours> TravelAndTours { get; set; }
+
+        public DbSet<KinMel.Models.HelpAndServices> HelpAndServices { get; set; }
+
+        public DbSet<KinMel.Models.MobileAccessories> MobileAccessories { get; set; }
+
+        public DbSet<KinMel.Models.ComputerParts> ComputerParts { get; set; }
+
+        public DbSet<KinMel.Models.ApparelsAndAccessories> ApparelsAndAccessories { get; set; }
+
+        public DbSet<KinMel.Models.VehiclesParts> VehiclesParts { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,27 +15,31 @@ using Microsoft.AspNetCore.Identity;
 namespace KinMel.Controllers
 {
     [Authorize]
-    public class CarsController : Controller
+
+    public class CamerasController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public CarsController(ApplicationDbContext context,
+
+        public CamerasController(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        // GET: Cars
+        // GET: Cameras
         [AllowAnonymous]
+
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Car.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            var applicationDbContext = _context.Camera.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             return View(await applicationDbContext.ToListAsync());
         }
 
+        // GET: Cameras/Details/5
         [AllowAnonymous]
-        // GET: Cars/Details/5
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,30 +47,31 @@ namespace KinMel.Controllers
                 return NotFound();
             }
 
-            var car = await _context.Car
+            var camera = await _context.Camera
                 .Include(c => c.CreatedByUser)
                 .Include(c => c.SubCategory)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (car == null)
+            if (camera == null)
             {
                 return NotFound();
             }
 
-            return View(car);
+            return View(camera);
         }
-        // GET: Cars/Create
+
+        // GET: Cameras/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Car")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Camera")), "Id", "Name");
             return View();
         }
 
-        // POST: Cars/Create
+        // POST: Cameras/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Type,Brand,ModelNo,ModelYear,Color,TotalKm,FuelType,Features,DoorsNo,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive")] Car car, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive")] Camera camera, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -75,32 +79,31 @@ namespace KinMel.Controllers
                 if (size > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
-                    car.CreatedByUserId = currentUserId;
+                    camera.CreatedByUserId = currentUserId;
 
-                    car.DateCreated = DateTime.Now;
-                    _context.Add(car);
+                    camera.DateCreated = DateTime.Now;
+                    _context.Add(camera);
                     await _context.SaveChangesAsync();
 
-                    string forSlug = car.Id + " " + String.Join(" ", car.Title.Split().Take(4));
+                    string forSlug = camera.Id + " " + String.Join(" ", camera.Title.Split().Take(4));
                     string slug = forSlug.GenerateSlug();
 
-                    car.Slug = slug;
+                    camera.Slug = slug;
 
                     await BlobStorageHelper.UploadBlobs(slug, imageFiles);
 
-                    car.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+                    camera.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Car")), "Id", "Name", car.SubCategoryId);
-            return View(car);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Camera")), "Id", "Name", camera.SubCategoryId);
+            return View(camera);
         }
 
-        //// GET: Cars/Edit/5
-
+        //// GET: Cameras/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{
         //    if (id == null)
@@ -108,24 +111,24 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var car = await _context.Car.SingleOrDefaultAsync(m => m.Id == id);
-        //    if (car == null)
+        //    var camera = await _context.Camera.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (camera == null)
         //    {
         //        return NotFound();
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", car.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", car.SubCategoryId);
-        //    return View(car);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", camera.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", camera.SubCategoryId);
+        //    return View(camera);
         //}
 
-        //// POST: Cars/Edit/5
+        //// POST: Cameras/Edit/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Type,Brand,ModelNo,ModelYear,Color,TotalKm,FuelType,Features,DoorsNo,Id,SubCategoryId,CreatedByUserId,Title,Description,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] Car car)
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] Camera camera)
         //{
-        //    if (id != car.Id)
+        //    if (id != camera.Id)
         //    {
         //        return NotFound();
         //    }
@@ -134,12 +137,12 @@ namespace KinMel.Controllers
         //    {
         //        try
         //        {
-        //            _context.Update(car);
+        //            _context.Update(camera);
         //            await _context.SaveChangesAsync();
         //        }
         //        catch (DbUpdateConcurrencyException)
         //        {
-        //            if (!CarExists(car.Id))
+        //            if (!CameraExists(camera.Id))
         //            {
         //                return NotFound();
         //            }
@@ -150,12 +153,12 @@ namespace KinMel.Controllers
         //        }
         //        return RedirectToAction(nameof(Index));
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", car.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", car.SubCategoryId);
-        //    return View(car);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", camera.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", camera.SubCategoryId);
+        //    return View(camera);
         //}
 
-        //// GET: Cars/Delete/5
+        //// GET: Cameras/Delete/5
         //public async Task<IActionResult> Delete(int? id)
         //{
         //    if (id == null)
@@ -163,33 +166,32 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var car = await _context.Car
+        //    var camera = await _context.Camera
         //        .Include(c => c.CreatedByUser)
         //        .Include(c => c.SubCategory)
         //        .SingleOrDefaultAsync(m => m.Id == id);
-        //    if (car == null)
+        //    if (camera == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    return View(car);
+        //    return View(camera);
         //}
 
-        //// POST: Cars/Delete/5
-        //[Authorize]
+        //// POST: Cameras/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> DeleteConfirmed(int id)
         //{
-        //    var car = await _context.Car.SingleOrDefaultAsync(m => m.Id == id);
-        //    _context.Car.Remove(car);
+        //    var camera = await _context.Camera.SingleOrDefaultAsync(m => m.Id == id);
+        //    _context.Camera.Remove(camera);
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool CarExists(int id)
+        //private bool CameraExists(int id)
         //{
-        //    return _context.Car.Any(e => e.Id == id);
+        //    return _context.Camera.Any(e => e.Id == id);
         //}
     }
 }
