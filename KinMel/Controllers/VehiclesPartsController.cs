@@ -58,7 +58,7 @@ namespace KinMel.Controllers
         // GET: VehiclesParts/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Car")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("VehiclesParts")), "Id", "Name");
             return View();
         }
 
@@ -95,7 +95,7 @@ namespace KinMel.Controllers
                 }
 
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Car")), "Id", "Name", vehiclesParts.SubCategoryId);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("VehiclesParts")), "Id", "Name", vehiclesParts.SubCategoryId);
             return View(vehiclesParts);
         }
 
