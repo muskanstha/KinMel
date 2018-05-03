@@ -76,7 +76,7 @@ namespace KinMel.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
             [Bind(
-                "Brand,ModelNo,Color,Engine,Mileage,TotalKm,MadeYear,Features,Id,SubCategoryId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive")]
+                "Brand,Model,Color,Engine,Mileage,TotalKm,Features,Id,SubCategoryId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes,Type,ModelYear,RegisteredDistrict,LotNo")]
             Motorcycle motorcycle, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
@@ -134,7 +134,7 @@ namespace KinMel.Controllers
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Brand,ModelNo,Color,Engine,Mileage,TotalKm,MadeYear,Features,Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] Motorcycle motorcycle)
+        //public async Task<IActionResult> Edit(int id, [Bind("Brand,Model,Color,Engine,Mileage,TotalKm,MadeYear,Features,Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] Motorcycle motorcycle)
         //{
         //    if (id != motorcycle.Id)
         //    {

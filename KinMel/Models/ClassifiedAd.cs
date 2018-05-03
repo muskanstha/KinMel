@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,13 +13,17 @@ namespace KinMel.Models
     public class ClassifiedAd
     {
         public int Id { get; set; }
+
         public int SubCategoryId { get; set; }
         public virtual SubCategory SubCategory { get; set; }
-        public string CreatedByUserId { get; set;}
+
+        public string CreatedByUserId { get; set; }
         public virtual ApplicationUser CreatedByUser { get; set; }
+
         [Required]
         public string Title { get; set; }
         public string Description { get; set; }
+
         private string _imageUrls;
         public string ImageUrls
         {
@@ -31,7 +36,7 @@ namespace KinMel.Models
             {
                 if (this._imageUrls == null)
                 {
-                    return new List<string>(){"/images/NoImage.svg"};
+                    return new List<string>() { "/images/NoImage.svg" };
                 }
                 return JsonConvert.DeserializeObject<List<string>>(this._imageUrls);
             }
@@ -40,38 +45,67 @@ namespace KinMel.Models
         public double Price { get; set; }
         public Boolean PriceNegotiable { get; set; }
         public Boolean Delivery { get; set; }
+
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
         public bool IsSold { get; set; }
         public bool IsActive { get; set; }
         public string Slug { get; set; }
         public string Discriminator { get; set; }
-      //Deepak sir adds
-        //public string AdDuration { get; set; }
-        //public string Location { get; set; }
-        //public string UsedFor { get; set; }
-        //public double DeliveryCharges { get; set; }
-        //public string WarrantyType { get; set; }
-        //public int WarrentyPeriod { get; set; }
-        //public string WarrantyIncludes { get; set; }
-        
-}
+
+        [DisplayName("Run ad for following days")]
+        public int AdDuration { get; set; }
+
+        public string City { get; set; }
+        public string Address { get; set; }
+
+        public string UsedFor { get; set; }
+
+        public double DeliveryCharges { get; set; }
+
+        public string WarrantyType { get; set; }
+        public string WarrantyPeriod { get; set; }
+        public string WarrantyIncludes { get; set; }
+
+        [NotMapped]
+        private List<string> FeaturesList { get; set; }
+        public string Features { get; set; }
+
+    }
 
     public class Car : ClassifiedAd
     {
         public string Type { get; set; }
         public string Brand { get; set; }
-        public string ModelNo { get; set; }//khasai use hudaina jasto lagxa
+        public string Model { get; set; }//khasai use hudaina jasto lagxa
         public int ModelYear { get; set; }//MadeYear
         public string Color { get; set; }
         public int TotalKm { get; set; }//TravelledKm
         public string FuelType { get; set; }
-        public string Features { get; set; }
         public int DoorsNo { get; set; }
-       // public string RegisteredDistrict { get; set; }//string dropdown
-       // public string LotNo { get; set; } //number or numbertext?
-       // public int Engine { get; set; }//Engine(CC)number
-       //public string Transmission { get; set; }//Gear System dropdown
+
+        public int Engine { get; set; }//Engine(CC)number
+        public int Mileage { get; set; }//Mileage(km/l)
+
+        public string Transmission { get; set; }//Gear System dropdown
+        public string RegisteredDistrict { get; set; }//string dropdown
+        public string LotNo { get; set; } //number or numbertext?
+
+    }
+    public class Motorcycle : ClassifiedAd
+    {
+        public string Type { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
+        public int ModelYear { get; set; }
+        public string Color { get; set; }
+        public int TotalKm { get; set; }//travelledKm
+
+        public int Engine { get; set; }//Engine(CC)
+        public int Mileage { get; set; }//Mileage(km/l)
+
+        public string RegisteredDistrict { get; set; }//string dropdown
+        public string LotNo { get; set; } //number or numbertext?
     }
 
     public class Mobile : ClassifiedAd
@@ -79,25 +113,40 @@ namespace KinMel.Models
         public string Brand { get; set; }
         public string ModelNo { get; set; }
         public string Color { get; set; }
-        public string Storage { get; set; }//internal storage
-        public string Ram { get; set; }
-        public string FrontCamera { get; set; }
-        public string BackCamera { get; set; }
+        public double Storage { get; set; }//internal storage
+        public int Ram { get; set; }
+        public double FrontCamera { get; set; }
+        public double BackCamera { get; set; }
         public string PhoneOs { get; set; }
-        public string ScreenSize { get;set; }
-        public string Features { get; set; }
+        public double ScreenSize { get; set; }
     }
 
-    public class Motorcycle : ClassifiedAd
+    public class TabletsAndIPads : ClassifiedAd
     {
         public string Brand { get; set; }
         public string ModelNo { get; set; }
         public string Color { get; set; }
-        public int Engine { get; set; }//Engine(CC)
-        public int Mileage { get; set; }//Mileage(km/l)
-        public string TotalKm { get; set; }//travelledKm
-        public DateTime MadeYear { get; set; }
-        public string Features { get; set; }
+        public double Storage { get; set; }//internal storage
+        public double Ram { get; set; }
+        public double FrontCamera { get; set; }
+        public double BackCamera { get; set; }
+        public string PhoneOs { get; set; }
+        public string ScreenSize { get; set; }
+    }
+
+
+    public class Computer : ClassifiedAd
+    {
+        public string Type { get; set; }//dropdown(desktop, laptop,2in1)
+        public string Processor { get; set; }
+        public string ProcessorGeneration { get; set; }
+        public double Ram { get; set; }
+        public double GraphicsCard { get; set; }
+        public double HDD { get; set; }
+        public double SSD { get; set; }
+        public string ScreenType { get; set; }
+        public double ScreenSize { get; set; }
+        public double Battery { get; set; }
     }
 
     public class RealState : ClassifiedAd
@@ -107,29 +156,13 @@ namespace KinMel.Models
         public int Floors { get; set; }
         public int TotalRooms { get; set; }
         public string Furnishing { get; set; }//dropdown-full semi none
-        public string Features { get; set; }
-    }
-
-    public class Computer : ClassifiedAd
-    {
-        public string Type { get; set; }//dropdown(desktop, laptop,2in1)
-        public string Processor { get; set; }
-        public string ProcessorGeneration { get; set; }
-        public int Ram { get; set; }
-        public int VideoCard { get; set; }
-        public int HDD { get; set; }
-        public int SSD { get; set; }
-        public string ScreenType { get; set; }
-        public int ScreenSize { get; set; }
-        public double Battery { get; set; }
-        public string Features { get; set; }
     }
 
     public class Jobs : ClassifiedAd
     {
-        public int Salary { get; set; }
-        public int WorkingDays { get; set; }
-        public int ContractFor { get; set; }
+        public double Salary { get; set; }
+        public string WorkingDays { get; set; }
+        public string ContractFor { get; set; }
     }
 
     public class BeautyAndHealth : ClassifiedAd { }
@@ -137,7 +170,7 @@ namespace KinMel.Models
     public class BooksAndLearning : ClassifiedAd
     {
         public string Author { get; set; }
-        public int ISBN { get; set; }
+        public string Isbn { get; set; }
 
     }
 
@@ -153,7 +186,6 @@ namespace KinMel.Models
 
     public class SportsAndFitness : ClassifiedAd { }
 
-    public class TabletsAndIPads : Mobile{ }
 
     public class ToysAndGames : ClassifiedAd { }
 
@@ -168,6 +200,8 @@ namespace KinMel.Models
     public class ApparelsAndAccessories : ClassifiedAd { }
 
     public class VehiclesParts : ClassifiedAd { }
+
+
 
     public class ClassifiedAdCreateViewModel
     {
