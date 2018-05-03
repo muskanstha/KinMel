@@ -40,6 +40,18 @@ nav .sidenav-trigger {
     margin: 0px;
 }
 
+.card-content li a {
+    color: #333333;
+    font-weight: 500;
+}
+
+.card-content li a:hover {
+    color: #00bcd4;
+}
+
+.category-select {
+    color: #00bcd4 !important;
+}
 /*************Responsive-content**************/
 @media (max-width: 768px) {
     .card-panel-large {

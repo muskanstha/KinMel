@@ -18,85 +18,51 @@
     </div>
 </div>
 
-
 <section class="page-container section">
     <div class="row browse-width">
         <!--Side-Content-->
-        <div class="page-container col s3 pl0">
-            <div class="table-striped card p0 m0">
-                <div class="card-header">
-                    Categories
-                </div>
-                <div class="card-content">
-                    <ul class="m0">
-                        <li><a asp-controller="ApparelsAndAccessories" asp-action="Index">Apparels & Accessories</a></li>
-                        <li><a asp-controller="BeautyAndHealths" asp-action="Index">Beauty & Health</a></li>
-                        <li><a asp-controller="BooksAndLearnings" asp-action="Index">Books & Learning</a></li>
-                        <li><a asp-controller="Cameras" asp-action="Index">Cameras</a></li>
-                        <li><a asp-controller="Cars" asp-action="Index">Cars</a></li>
-                        <li><a asp-controller="Computers" asp-action="Index">Computers</a></li>
-                        <li><a asp-controller="ComputerParts" asp-action="Index">Computer Parts</a></li>
-                        <li><a asp-controller="Electronics" asp-action="Index">Electronics</a></li>
-                        <li><a asp-controller="Furnitures" asp-action="Index">Furnitures</a></li>
-                        <li><a asp-controller="HelpAndServices" asp-action="Index">Help & Services</a></li>
-                        <li><a asp-controller="Jobs" asp-action="Index">Jobs</a></li>
-                        <li><a asp-controller="Mobiles" asp-action="Index">Mobiles</a></li>
-                        <li><a asp-controller="MobileAccessories" asp-action="Index">Mobile Accessories</a></li>
-                        <li><a asp-controller="Motorcycles" asp-action="Index">Motorcycles</a></li>
-                        <li><a asp-controller="MusicInstruments" asp-action="Index">Musical Instruments</a></li>
-                        <li><a asp-controller="PetsAndPetCares" asp-action="Index">Pets & Petcare</a></li>
-                        <li><a asp-controller="RealStates" asp-action="Index">RealState</a></li>
-                        <li><a asp-controller="SportsAndFitnesses" asp-action="Index">Sports & Fitness</a></li>
-                        <li><a asp-controller="TabletsAndIPads" asp-action="Index">Tablets & iPads</a></li>
-                        <li><a asp-controller="ToysAndGames" asp-action="Index">Toys & Games</a></li>
-                        <li><a asp-controller="TravelAndTours" asp-action="Index">Travel & Tours</a></li>
-                        <li><a asp-controller="VehiclesParts" asp-action="Index">Vehicle Parts</a></li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
+        @await Html.PartialAsync("_categoriesSideMenu")
 
         <!--Main-Content-->
         <div class="page-container col s9 p0">
-                <div class="table-striped p0">
-                    <div class="card-header">
-                        <div class="row m0">
-                            <div class="col s6 m10"><strong>Ad</strong></div>
-                            <div class="col s6 m2 center"><strong>Price</strong></div>
+            <div class="table-striped p0">
+                <div class="card-header">
+                    <div class="row m0">
+                        <div class="col s6 m10"><strong>Ad</strong></div>
+                        <div class="col s6 m2 center"><strong>Price</strong></div>
+                    </div>
+                </div>
+                @foreach (var item in Model)
+                {
+                    <div class="display-flex">
+                        <div>
+                            <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">
+                                <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()" />
+                            </a>
                         </div>
-                        @foreach (var item in Model)
-                        {
-                            <div class="display-flex">
-                                <div>
-                                    <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">
-                                        <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()" />
-                                    </a>
+                        <div class="col s12">
+                            <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
+                            <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
+                            <div>
+                                <div class="col s12 m8 l8 p0">
+                                    <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
+                                    <p class="material-icons align-middle m-5">person_outline</p>
+                                    <a asp-route-id="@item.Id" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.Id)</a>
                                 </div>
-                                <div class="col s12">
-                                    <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
-                                    <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
-                                    <div>
-                                        <div class="col s12 m8 l8 p0">
-                                            <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
-                                            <p class="material-icons align-middle m-5">person_outline</p>
-                                            <a asp-route-id="@item.Id" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.Id)</a>
-                                        </div>
-                                        <div class="col s12 m4 l4 p0">
-                                            <div class="col s6 m6 p0">
-                                                <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
-                                            </div>
-                                            <div class="col s6 m6 p0 center">
-                                                <p class="content-price">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
-                                            </div>
-                                        </div>
+                                <div class="col s12 m4 l4 p0">
+                                    <div class="col s6 m6 p0">
+                                        <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                                    </div>
+                                    <div class="col s6 m6 p0 center">
+                                        <p class="content-price">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
                                     </div>
                                 </div>
                             </div>
-                            <hr />
-                        }
+                        </div>
                     </div>
-                </div>
+                    <hr />
+                }
             </div>
         </div>
-    </section>
+    </div>
+</section>
