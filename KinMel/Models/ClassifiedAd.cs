@@ -67,9 +67,9 @@ namespace KinMel.Models
         public string WarrantyPeriod { get; set; }
         public string WarrantyIncludes { get; set; }
 
-        [NotMapped]
-        private List<string> FeaturesList { get; set; }
-        public string Features { get; set; }
+        //[NotMapped]
+        //private List<string> FeaturesList { get; set; }
+        //public string Features { get; set; }
 
     }
 
@@ -111,7 +111,7 @@ namespace KinMel.Models
     public class Mobile : ClassifiedAd
     {
         public string Brand { get; set; }
-        public string ModelNo { get; set; }
+        public string Model { get; set; }
         public string Color { get; set; }
         public double Storage { get; set; }//internal storage
         public int Ram { get; set; }
@@ -124,7 +124,7 @@ namespace KinMel.Models
     public class TabletsAndIPads : ClassifiedAd
     {
         public string Brand { get; set; }
-        public string ModelNo { get; set; }
+        public string Model { get; set; }
         public string Color { get; set; }
         public double Storage { get; set; }//internal storage
         public double Ram { get; set; }
