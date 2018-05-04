@@ -67,7 +67,7 @@ namespace KinMel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Salary,WorkingDays,ContractFor,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsActive")] Jobs jobs, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Salary,WorkingDays,ContractFor,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] Jobs jobs, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {

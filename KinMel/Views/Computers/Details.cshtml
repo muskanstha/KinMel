@@ -9,6 +9,12 @@
 <div>
     <h4>Computer</h4>
     <hr />
+    <div>
+        @foreach (var item in Model.ImageUrlList)
+        {
+            <img src="@item" />
+        }
+    </div>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Type)
@@ -35,10 +41,10 @@
             @Html.DisplayFor(model => model.Ram)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.VideoCard)
+            @Html.DisplayNameFor(model => model.GraphicsCard)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.VideoCard)
+            @Html.DisplayFor(model => model.GraphicsCard)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.HDD)

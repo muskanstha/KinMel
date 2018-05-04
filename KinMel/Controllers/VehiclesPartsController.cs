@@ -58,7 +58,7 @@ namespace KinMel.Controllers
         // GET: VehiclesParts/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Car")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("VehiclesParts")), "Id", "Name");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace KinMel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive")] VehiclesParts vehiclesParts, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] VehiclesParts vehiclesParts, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace KinMel.Controllers
                 }
 
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Car")), "Id", "Name", vehiclesParts.SubCategoryId);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("VehiclesParts")), "Id", "Name", vehiclesParts.SubCategoryId);
             return View(vehiclesParts);
         }
 

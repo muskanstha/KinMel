@@ -7,8 +7,8 @@
 <div class="page-container grey lighten-3">
     <div class="container grey lighten-3">
         <a asp-controller="Home" asp-action="Index" class="breadcrumb">Home</a>
-        <a asp-controller="ClassifiedAds" asp-action="Index" class="breadcrumb">Browse Ads</a>
         <a asp-controller="Mobiles" asp-action="Index" class="breadcrumb">Mobiles</a>
+        <a asp-controller="Mobiles" asp-action="Details" asp-route-id="@Model.Id" class="breadcrumb">@Html.DisplayFor(model => model.Title)</a>
     </div>
 </div>
 
@@ -36,8 +36,8 @@
                 </div>
                 @Html.DisplayNameFor(model => model.Brand)
                 @Html.DisplayFor(model => model.Brand)
-                @Html.DisplayNameFor(model => model.ModelNo)
-                @Html.DisplayFor(model => model.ModelNo)
+                @Html.DisplayNameFor(model => model.Model)
+                @Html.DisplayFor(model => model.Model)
                 @Html.DisplayNameFor(model => model.Color)
                 @Html.DisplayFor(model => model.Color)
                 @Html.DisplayNameFor(model => model.Storage)

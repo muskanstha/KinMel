@@ -67,7 +67,7 @@ namespace KinMel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Type,Processor,ProcessorGeneration,Ram,VideoCard,HDD,SSD,ScreenType,ScreenSize,Battery,Features,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive")] Computer computer, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Type,Processor,ProcessorGeneration,Ram,GraphicsCard,HDD,SSD,ScreenType,ScreenSize,Battery,Features,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] Computer computer, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -122,7 +122,7 @@ namespace KinMel.Controllers
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Type,Processor,ProcessorGeneration,Ram,VideoCard,HDD,SSD,ScreenType,ScreenSize,Battery,Features,Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] Computer computer)
+        //public async Task<IActionResult> Edit(int id, [Bind("Type,Processor,ProcessorGeneration,Ram,GraphicsCard,HDD,SSD,ScreenType,ScreenSize,Battery,Features,Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] Computer computer)
         //{
         //    if (id != computer.Id)
         //    {

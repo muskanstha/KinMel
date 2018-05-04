@@ -67,7 +67,7 @@ namespace KinMel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Author,ISBN,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive")] BooksAndLearning booksAndLearning, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Author,Isbn,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] BooksAndLearning booksAndLearning, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -122,7 +122,7 @@ namespace KinMel.Controllers
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Author,ISBN,Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] BooksAndLearning booksAndLearning)
+        //public async Task<IActionResult> Edit(int id, [Bind("Author,Isbn,Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] BooksAndLearning booksAndLearning)
         //{
         //    if (id != booksAndLearning.Id)
         //    {

@@ -9,6 +9,12 @@
 <div>
     <h4>BooksAndLearning</h4>
     <hr />
+    <div>
+        @foreach (var item in Model.ImageUrlList)
+        {
+            <img src="@item" />
+        }
+    </div>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Author)
@@ -17,10 +23,10 @@
             @Html.DisplayFor(model => model.Author)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ISBN)
+            @Html.DisplayNameFor(model => model.Isbn)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ISBN)
+            @Html.DisplayFor(model => model.Isbn)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Title)

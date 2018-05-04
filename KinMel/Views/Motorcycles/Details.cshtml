@@ -9,6 +9,12 @@
 <div>
     <h4>Motorcycle</h4>
     <hr />
+    <div>
+        @foreach (var item in Model.ImageUrlList)
+        {
+            <img src="@item" />
+        }
+    </div>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Brand)
@@ -17,10 +23,10 @@
             @Html.DisplayFor(model => model.Brand)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ModelNo)
+            @Html.DisplayNameFor(model => model.Model)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ModelNo)
+            @Html.DisplayFor(model => model.Model)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Color)
@@ -46,12 +52,7 @@
         <dd>
             @Html.DisplayFor(model => model.TotalKm)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MadeYear)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.MadeYear)
-        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Features)
         </dt>

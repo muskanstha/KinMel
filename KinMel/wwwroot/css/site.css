@@ -28,6 +28,7 @@ body {
 
 .page-container {
     height: 100%;
+    width:100%;
     vertical-align: middle;
 }
 
@@ -35,16 +36,22 @@ nav a:hover {
     color: #dddddd;
 }
 
-.card-panel-small {
-    max-width: 400px;
-    margin: 30px auto;
+nav .sidenav-trigger {
+    margin: 0px;
 }
 
-.card-panel-large {
-    max-width: 800px;
-    margin: 30px auto;
+.card-content li a {
+    color: #333333;
+    font-weight: 500;
 }
 
+.card-content li a:hover {
+    color: #00bcd4;
+}
+
+.category-select {
+    color: #00bcd4 !important;
+}
 /*************Responsive-content**************/
 @media (max-width: 768px) {
     .card-panel-large {
@@ -94,6 +101,12 @@ nav a:hover {
         font-size: 16px;
     }
 }
+
+@media (max-width: 1280px) {
+    .nav-wrapper {
+        padding-left: 10px;
+    }
+}
 /*********************END*********************/
 
 /*************Custom Classes***************/
@@ -106,6 +119,10 @@ nav a:hover {
 
 .p0 {
     padding: 0px !important;
+}
+
+.pl0 {
+    padding-left: 0px !important;
 }
 
 .p5 {
@@ -139,6 +156,31 @@ nav a:hover {
     .breadcrumb:hover {
         color: #00bcd4;
     }
+
+.card-panel-small {
+    max-width: 400px;
+    margin: 30px auto;
+}
+
+.card-panel-large {
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.card-header {
+    background-color: #edefed;
+    color: #484848;
+    font-size: 16px;
+    padding: 12px 20px 12px 20px;
+    border-bottom: 1px solid #dce0e0;
+    position: relative;
+    margin: 0;
+    border-top: none;
+}
+
+.browse-width {
+    max-width: 1280px;
+}
 /******************END********************/
 
 /****************Content*****************/
