@@ -28,10 +28,34 @@ namespace KinMel.Controllers
 
         // GET: RealStates
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.RealState.Include(r => r.CreatedByUser).Include(r => r.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var realState = from c in _context.RealState select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    realState = realState.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    realState = realState.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    realState = realState.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    realState = realState.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    realState = realState.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await realState.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: RealStates/Details/5

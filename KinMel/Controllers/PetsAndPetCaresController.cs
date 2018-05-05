@@ -31,10 +31,34 @@ namespace KinMel.Controllers
         // GET: PetsAndPetCares
         [AllowAnonymous]
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.PetsAndPetCare.Include(p => p.CreatedByUser).Include(p => p.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var petsAndPetCare = from c in _context.PetsAndPetCare select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    petsAndPetCare = petsAndPetCare.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    petsAndPetCare = petsAndPetCare.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    petsAndPetCare = petsAndPetCare.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    petsAndPetCare = petsAndPetCare.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    petsAndPetCare = petsAndPetCare.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await petsAndPetCare.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: PetsAndPetCares/Details/5

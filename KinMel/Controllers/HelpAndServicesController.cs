@@ -27,10 +27,34 @@ namespace KinMel.Controllers
 
         // GET: HelpAndServices
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.HelpAndServices.Include(h => h.CreatedByUser).Include(h => h.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var helpAndServices = from c in _context.HelpAndServices select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    helpAndServices = helpAndServices.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    helpAndServices = helpAndServices.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    helpAndServices = helpAndServices.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    helpAndServices = helpAndServices.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    helpAndServices = helpAndServices.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await helpAndServices.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: HelpAndServices/Details/5
