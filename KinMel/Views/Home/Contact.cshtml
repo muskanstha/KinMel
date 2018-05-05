@@ -15,47 +15,52 @@
         <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
         <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
     </address>*@
-<div class = "row">
-    <div class = "input-field col s6">
-        <i class = "material-icons prefix">account_circle</i>
-        <input placeholder = "FullName"  id = "name"
-               type = "text" class = "active validate" required />
-        <label for = "name">FullName</label>
-    </div>
-               
-    <div class = "input-field col s6">      
-        <label for = "phone">Phone</label>
-        <input id = "phone" type = "number" placeholder = "Phone Number"
-               class = "validate" required />          
-    </div>
-</div>
-<div class = "row">
-    <div class = "input-field col s12">
-        <input placeholder = "Email" id = "email" type = "email"
-               class = "validate">
-        <label for = "email">Email</label>
-    </div>
-</div>
-            
-<div class = "row">
-    <div class = "input-field col s12">
-        <i class = "material-icons prefix">mode_edit</i>
-        <textarea id = "subject" class = "materialize-textarea"></textarea>
-        <label for = "subject">Subject</label>
-    </div>
-</div>
 
-@*<script language="javascript" type="text/javascript"></script>
-<script type="text/javascript" src="https://cdn.ckeditor.com/4.8.0/standard-all/ckeditor.js"></script>
-<textarea id="editor1" name="editor1">
-</textarea>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<div class="card-panel card-panel-large z-depth-4">
+    <div class="row">
+        <div class="input-field col s6">
+            <i class="material-icons prefix">account_circle</i>
+            <input id="name"  type="text" class="active validate" required />
+            <label for="name">Full Name</label>
+        </div>
 
-<script type="text/javascript">CKEDITOR.replace('editor1');</script>*@
-<textarea name="description" cols="50" rows="40" style="margin: 30px; width: 1000px; height: 300px;"
-          placeholder="Write your Message here"></textarea>
-<div class = "card-panel">
-    <button class = "btn waves-effect waves-light red" type = "submit">Send
-        <i class = "material-icons right">send</i></button>
+        <div class="input-field col s6">
+            <input id="phone" type="number" class="validate" required />
+            <label for="phone">Phone Number</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <input id="email" type="text" class="validate" required>
+            <label for="email">Email</label>
+        </div>
+    </div>
     
+
+    <div class="row">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">mode_edit</i>
+            <textarea id="subject" class="materialize-textarea"></textarea>
+            <label for="subject">Subject</label>
+        </div>
+    </div>
+
+    @*<script language="javascript" type="text/javascript"></script>
+        <script type="text/javascript" src="https://cdn.ckeditor.com/4.8.0/standard-all/ckeditor.js"></script>
+        <textarea id="editor1" name="editor1">
+        </textarea>
+
+        <script type="text/javascript">CKEDITOR.replace('editor1');</script>*@
+<textarea name="description" cols="50" rows="40" style="margin: 30px; width: 700px; height: 300px;"
+          placeholder="Write your Message here"></textarea>
+    <div class="card-panel">
+        <button class="btn waves-effect waves-light red" type="submit">
+            Send
+            <i class="material-icons right">send</i>
+        </button>
+
+    </div>
 </div>
 
+</html>
