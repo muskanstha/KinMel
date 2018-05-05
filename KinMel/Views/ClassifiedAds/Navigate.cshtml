@@ -6,6 +6,12 @@
 }
 
 <h2>Search</h2>
-<br/><br/>
+<br /><br />
 
 
+@using (Html.BeginForm("Search","ClassifiedAds"))
+{
+
+    <input id="Text1" type="text" name="txtOne"/>
+    <input id="Button1" type="submit" value="button" />
+}
