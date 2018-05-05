@@ -90,9 +90,9 @@ namespace KinMel.Controllers
 
                     petsAndPetCare.Slug = slug;
 
-                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
+                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    petsAndPetCare.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+                    petsAndPetCare.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

@@ -86,9 +86,9 @@ namespace KinMel.Controllers
 
                     apparelsAndAccessories.Slug = slug;
 
-                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
+                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    apparelsAndAccessories.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+                    apparelsAndAccessories.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

@@ -25,11 +25,8 @@ namespace KinMel.Controllers
         // GET: ClassifiedAds
         public async Task<IActionResult> Index()
         {
-            //BlobStorageHelper.UploadBlobs();
-            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
-
-
             var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //var applicationDbContext = _context.ClassifiedAd.Where(c => c.IsActive && !c.IsSold).Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -219,7 +216,7 @@ namespace KinMel.Controllers
         // GET: ClassifiedAds/Create
         public IActionResult Create()
         {
-            ViewData["CategoryName"] = new SelectList(_context.Set<Category>(), "Name", "Name");
+            ViewData["CategoryName"] = new SelectList(_context.Set<Category>().OrderBy(c => c.Name), "Name", "Name");
             return View();
         }
 
@@ -234,7 +231,7 @@ namespace KinMel.Controllers
             {
                 return RedirectToAction("Create", model.CategoryName.Pluralize());
             }
-            ViewData["CategoryName"] = new SelectList(_context.Set<Category>(), "Name", "Name", model.CategoryName);
+            ViewData["CategoryName"] = new SelectList(_context.Set<Category>().OrderBy(c => c.Name), "Name", "Name", model.CategoryName);
 
             return View(model);
         }
