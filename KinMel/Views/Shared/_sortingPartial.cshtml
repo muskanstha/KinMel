@@ -8,8 +8,8 @@
         @{
             var sortList = new SelectList(new List<SelectListItem>
             {
-                new SelectListItem { Value = "date_desc", Text = "Latest Ads" },
-                new SelectListItem { Value = "Date", Text = "Older Ads First" },
+                new SelectListItem { Value = "Date", Text = "Latest Ads" },
+                new SelectListItem { Value = "date_desc", Text = "Older Ads First" },
                 new SelectListItem { Value = "Price", Text = "Price: Low to High"  },
                 new SelectListItem { Value = "price_desc", Text = "Price: High to Low"  },
             }, "Value", "Text", Context.Request.Query["sortOrder"]);
