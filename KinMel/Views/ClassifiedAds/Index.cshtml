@@ -28,8 +28,13 @@
             <div class="table-striped p0">
                 <div class="card-header">
                     <div class="row m0">
-                        <div class="col s6 m10"><strong>Ad</strong></div>
-                        <div class="col s6 m2 center"><strong>Price</strong></div>
+                        <div class="col s8"><strong>Ad</strong></div>
+                        <select asp-action="Index" asp-route="sortOrder" onchange="window.location.href=this.options[this.selectedIndex]">
+                            <option asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.DateCreated)</option>
+                            <option asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.Price)</option>
+                        </select>
+                        <div class="col s2 center"><a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.DateCreated)</a></div>
+                        <div class="col s2 center"><a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.Price)</a></div>
                     </div>
                 </div>
                 @foreach (var item in Model)

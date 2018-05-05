@@ -75,10 +75,6 @@ nav .sidenav-trigger {
     .content-description {
         font-size: 13px !important;
         padding-right: 0px !important;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
     }
 
     .content-username {
@@ -200,6 +196,10 @@ nav .sidenav-trigger {
 .content-description {
     font-size: 14px;
     padding-right: 10px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .content-username {
