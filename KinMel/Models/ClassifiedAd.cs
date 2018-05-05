@@ -24,6 +24,8 @@ namespace KinMel.Models
         public string Title { get; set; }
         public string Description { get; set; }
 
+        public string PrimaryImageUrl { get; set; }
+
         private string _imageUrls;
         public string ImageUrls
         {
@@ -67,9 +69,9 @@ namespace KinMel.Models
         public string WarrantyPeriod { get; set; }
         public string WarrantyIncludes { get; set; }
 
-        //[NotMapped]
-        //private List<string> FeaturesList { get; set; }
-        //public string Features { get; set; }
+        [NotMapped]
+        private List<string> FeaturesList { get; set; }
+        public string Features { get; set; }
 
     }
 

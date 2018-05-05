@@ -26,7 +26,13 @@ namespace KinMel.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("AcceptedTerms");
+
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("City");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -35,6 +41,12 @@ namespace KinMel.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<DateTime>("JoinDate");
+
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -51,6 +63,8 @@ namespace KinMel.Data.Migrations
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("ProfilePictureUrl");
 
                     b.Property<string>("SecurityStamp");
 
@@ -110,6 +124,8 @@ namespace KinMel.Data.Migrations
                     b.Property<string>("Discriminator")
                         .IsRequired();
 
+                    b.Property<string>("Features");
+
                     b.Property<string>("ImageUrls");
 
                     b.Property<bool>("IsActive");
@@ -119,6 +135,8 @@ namespace KinMel.Data.Migrations
                     b.Property<double>("Price");
 
                     b.Property<bool>("PriceNegotiable");
+
+                    b.Property<string>("PrimaryImageUrl");
 
                     b.Property<string>("Slug");
 
@@ -144,6 +162,28 @@ namespace KinMel.Data.Migrations
                     b.ToTable("ClassifiedAd");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("ClassifiedAd");
+                });
+
+            modelBuilder.Entity("KinMel.Models.Rating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("RateByFirstName");
+
+                    b.Property<string>("RatedById");
+
+                    b.Property<string>("RatedForId");
+
+                    b.Property<string>("Review");
+
+                    b.Property<int>("Stars");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RatedForId");
+
+                    b.ToTable("Rating");
                 });
 
             modelBuilder.Entity("KinMel.Models.SubCategory", b =>
@@ -632,13 +672,20 @@ namespace KinMel.Data.Migrations
             modelBuilder.Entity("KinMel.Models.ClassifiedAd", b =>
                 {
                     b.HasOne("KinMel.Models.ApplicationUser", "CreatedByUser")
-                        .WithMany()
+                        .WithMany("ClassifiedAds")
                         .HasForeignKey("CreatedByUserId");
 
                     b.HasOne("KinMel.Models.SubCategory", "SubCategory")
                         .WithMany()
                         .HasForeignKey("SubCategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("KinMel.Models.Rating", b =>
+                {
+                    b.HasOne("KinMel.Models.ApplicationUser", "RatedFor")
+                        .WithMany("Ratings")
+                        .HasForeignKey("RatedForId");
                 });
 
             modelBuilder.Entity("KinMel.Models.SubCategory", b =>

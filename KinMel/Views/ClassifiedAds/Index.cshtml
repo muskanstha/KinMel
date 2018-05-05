@@ -18,255 +18,51 @@
     </div>
 </div>
 
+<section class="page-container section">
+    <div class="row browse-width">
+        <!--Side-Content-->
+        @await Html.PartialAsync("_categoriesSideMenu")
 
-<!--mero chagnes ayo aba sararara-->
-<div class="row">
-    <div class="col s2 m2">
-        <div class="card white lighten-4">
-            <div class="card-content black-text">
-                <span class="card-title"><b>FILTER YOUR SEARCH</b></span>
-            </div>
-            <div class="container">
-
-                @*<div class="row">
-                <input id="location" class="materialize-textarea" style="margin-top: 30px; margin-left: 2px;" name="location" type="text" placeholder="Enter City">
-            </div>*@
-                <div class="input-field col s12">
-                    @*<textarea id="city" class="materialize-textarea"></textarea>
-                <label for="city">City</label>*@
-
-                    <i class="material-icons prefix">location_on</i>
-                    <input id="icon_location" type="text" class="validate">
-                    <label for="icon_location">Enter City</label>
+        <!--Main-Content-->
+        <div class="page-container col s9 p0">
+            <div class="table-striped p0">
+                <div class="card-header">
+                    <div class="row m0">
+                        <div class="col s6 m10"><strong>Ad</strong></div>
+                        <div class="col s6 m2 center"><strong>Price</strong></div>
+                    </div>
                 </div>
-
-                <!--categories-->
-                <div>
-                    <h6>Enter Categories</h6>
-                </div>
-                @*<div class="row">
-                <input id="cat" class="materialize-textarea" style="margin-top: 30px; margin-left: 2px;" name="location" type="text" /> <label for="cat">Categories</label>>
-            </div>*@
-                <div class="input-field col s12">
-                    @*<textarea id="cat" class="materialize-textarea"></textarea>
-                <label for="cat">Categories</label>*@
-
-                    <i class="material-icons prefix">dvr</i>
-                    <input id="icon_dvr" type="text" class="validate">
-                    <label for="icon_dvr">Categories</label>
-                </div>
-
-
-                <!--price-->
-                <div>
-                    <h6>Select Price</h6>
-                </div>
-
-                <p class="range-field">
-                    <input type="range" id="test5" min="0" max="100" />
-                </p>
-
-
-                <!--multiple range sider-->
-                <div id="range_03"></div>
-                <script>
-                    //var slider = document.getElementById('test5');
-                    //noUiSlider.create(slider, {
-                    //    start: [20, 80],
-                    //    connect: true,
-                    //    step: 1,
-                    //    range: {
-                    //        'min': 0,
-                    //        'max': 100
-                    //    },
-                    //    format: wNumb({
-                    //        decimals: 0
-                    //    })
-                    //});
-
-                    //$("#range_03").ionRangeSlider({
-                    //    type: "double",
-                    //    grid: true,
-                    //    min: 0,
-                    //    max: 1000,
-                    //    from: 200,
-                    //    to: 800,
-                    //    prefix: "$"
-                    //});
-
-
-                </script>
-            </div>
-
-            <button class="btn waves-effect waves-light btn-small" type="submit" onclick="location.href='@Url.Action("index", "ClassifiedAds")'">
-                Search
-                <i class="material-icons right">send</i>
-            </button>
-
-            @*<button type="button" onclick="location.href='@Url.Action("index", "ClassifiedAds")'" />*@
-
-            <div class="card-action">
-                <a href="#">This is a link</a>
-                <a href="#">This is a link</a>
-            </div>
-        </div>
-    </div>
-
-
-
-    <!--Main-Content-->
-    <div class="col s10 m10">
-        <div class="page-container">
-            <div class="row">
-                <div class="table-striped card-panel card-panel-large z-depth-4">
-                    <div>
-                        <div class="row">
-                            <div class="col s6 m10"><strong>Ad</strong></div>
-                            <div class="col s6 m2 center"><strong>Price</strong></div>
+                @foreach (var item in Model)
+                {
+                    <div class="display-flex">
+                        <div>
+                            <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">
+                                <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()" />
+                            </a>
                         </div>
-                        <hr />
-                        @foreach (var item in Model)
-                        {
-                            <div class="display-flex">
-                                <div>
-                                    <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">
-                                        <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()" />
-                                    </a>
+                        <div class="col s12">
+                            <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
+                            <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
+                            <div>
+                                <div class="col s12 m8 l8 p0">
+                                    <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
+                                    <p class="material-icons align-middle m-5">person_outline</p>
+                                    <a asp-route-id="@item.Id" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.Id)</a>
                                 </div>
-                                <div class="col s12">
-                                    <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
-                                    <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
-                                    <div>
-                                        <div class="col s12 m8 l8 p0">
-                                            <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
-                                            <p class="material-icons align-middle m-5">person_outline</p>
-                                            <a asp-route-id="@item.Id" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.Id)</a>
-                                        </div>
-                                        <div class="col s12 m4 l4 p0">
-                                            <div class="col s6 m6 p0">
-                                                <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
-                                            </div>
-                                            <div class="col s6 m6 p0 center">
-                                                <p class="content-price">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
-                                            </div>
-                                        </div>
+                                <div class="col s12 m4 l4 p0">
+                                    <div class="col s6 m6 p0">
+                                        <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                                    </div>
+                                    <div class="col s6 m6 p0 center">
+                                        <p class="content-price">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
                                     </div>
                                 </div>
                             </div>
-                            <hr />
-                        }
+                        </div>
                     </div>
-                </div>
+                    <hr />
+                }
             </div>
         </div>
     </div>
-</div>
-
-<!--investigation-->
-<section div="test">
-    <div class="test">
-        <div>
-            <p>
-                <form action="ClassifiedAdsController/Search" method="POST">
-                    <input type="text" name="city">
-                    <input type="text" name="subcat">
-                    <input type="submit" value="View Report">
-                </form>
-
-            </p>
-        </div>
-    </div>
 </section>
-
-
-<!--test-->
-<h2>Search</h2>
-<br/><br/>
-
-@using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Get))
-{
-    @Html.TextBox("searchModel")<input type ="submit" value="Search"/>
-
-}
-
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>City</th>
-        <th>SUbcategory</th>
-    </tr>
-    </thead>
-    <tbody>
-    @if (Model.Count() == 0)
-    {
-        <tr>
-            <td colspan ="3" style="color:red">
-                No match found
-            </td>
-        </tr>
-    }
-    else
-    {
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.City</td>
-                <td>@item.SubCategory</td>
-            </tr>
-        }
-    }
-    </tbody>
-</table>
-
-
-
-
-<script>
-    function readySearch() {
-        console.log("yaha aipugyo");
-        var input = document.querySelectorAll('city, cat, test5');
-        //values = input.value;
-        console.log("what are values?" + " " + input);
-        if (values) {
-            console.log("what is location?" + " " + input);
-            var loc = input.toString();
-            filterSubmit(loc);
-        }
-        else {
-            alert('Please enter JPT');
-            //input.focus();
-        }
-    }
-
-    //var slider = document.getElementById('test5');
-    //noUiSlider.create(slider, {
-    //    start: [20, 80],
-    //    connect: true,
-    //    step: 1,
-    //    range: {
-    //        'min': 0,
-    //        'max': 100
-    //    },
-    //    format: wNumb({
-    //        decimals: 0
-    //    })
-    //});
-
-    //$("#range_03").ionRangeSlider({
-    //    type: "double",
-    //    grid: true,
-    //    min: 0,
-    //    max: 1000,
-    //    from: 200,
-    //    to: 800,
-    //    prefix: "$"
-    //});
-
-
-</script>
-
-<script>
-    function filterSubmit(loc) {
-
-    }
-</script>
