@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="2.6.375" />
     <PackageReference Include="Inflector" Version="1.0.0" />
+    <PackageReference Include="ion.rangeSlider.TypeScript.DefinitelyTyped" Version="0.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" PrivateAssets="All" />

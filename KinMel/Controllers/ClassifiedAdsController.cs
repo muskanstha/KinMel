@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Inflector;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,8 @@ namespace KinMel.Controllers
 {
     public class ClassifiedAdsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        public readonly ApplicationDbContext _context;
+       
 
         public ClassifiedAdsController(ApplicationDbContext context)
         {
@@ -31,6 +33,15 @@ namespace KinMel.Controllers
 
             var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             return View(await applicationDbContext.ToListAsync());
+        }
+
+        //filter
+        public ActionResult Search(ClassifiedAdSearchModel searchModel)
+        {
+            var filter = new ClassifiedAdLogic(_context);
+            var model = filter.GetProducts(searchModel);
+            return View(model);
+
         }
 
         // GET: ClassifiedAds/Details/5
