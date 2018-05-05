@@ -28,10 +28,34 @@ namespace KinMel.Controllers
 
         // GET: BooksAndLearnings
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.BooksAndLearning.Include(b => b.CreatedByUser).Include(b => b.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var booksAndLearning = from c in _context.BooksAndLearning select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    booksAndLearning = booksAndLearning.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    booksAndLearning = booksAndLearning.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    booksAndLearning = booksAndLearning.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    booksAndLearning = booksAndLearning.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    booksAndLearning = booksAndLearning.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await booksAndLearning.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: BooksAndLearnings/Details/5

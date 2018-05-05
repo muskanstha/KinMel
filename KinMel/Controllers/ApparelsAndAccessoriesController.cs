@@ -28,10 +28,34 @@ namespace KinMel.Controllers
 
         // GET: ApparelsAndAccessories
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.ApparelsAndAccessories.Include(a => a.CreatedByUser).Include(a => a.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var apparelsAndAccessories = from c in _context.ApparelsAndAccessories select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    apparelsAndAccessories = apparelsAndAccessories.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    apparelsAndAccessories = apparelsAndAccessories.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    apparelsAndAccessories = apparelsAndAccessories.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    apparelsAndAccessories = apparelsAndAccessories.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    apparelsAndAccessories = apparelsAndAccessories.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await apparelsAndAccessories.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: ApparelsAndAccessories/Details/5

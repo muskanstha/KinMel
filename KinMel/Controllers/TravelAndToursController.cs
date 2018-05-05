@@ -29,10 +29,34 @@ namespace KinMel.Controllers
 
         // GET: TravelAndTours
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.TravelAndTours.Include(t => t.CreatedByUser).Include(t => t.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var travelAndTours = from c in _context.TravelAndTours select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    travelAndTours = travelAndTours.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    travelAndTours = travelAndTours.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    travelAndTours = travelAndTours.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    travelAndTours = travelAndTours.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    travelAndTours = travelAndTours.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await travelAndTours.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: TravelAndTours/Details/5
