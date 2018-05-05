@@ -45,7 +45,7 @@
                         <div class="col s12 m8 l8 p0">
                             <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
                             <p class="material-icons align-middle m-5">person_outline</p>
-                            <a  asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.Id)</a>
+                            <a  asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
                         </div>
                         <div class="col s12 m4 l4 p0">
                             <div class="col s6 m6 p0">

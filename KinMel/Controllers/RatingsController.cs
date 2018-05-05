@@ -7,22 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
 using KinMel.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace KinMel.Controllers
 {
     public class RatingsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public RatingsController(ApplicationDbContext context)
+        public RatingsController(ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Ratings
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Rating.Include(r => r.RatedFor);
+            var currentUserId = _userManager.GetUserId(this.User);
+
+            var applicationDbContext = _context.Rating.Where(r=> r.RatedForId.Equals(currentUserId)).Include(r => r.RatedFor);
             return View(await applicationDbContext.ToListAsync());
         }
 
