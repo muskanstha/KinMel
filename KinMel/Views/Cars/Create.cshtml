@@ -18,6 +18,11 @@
                 @*<span asp-validation-for="" class="text-danger"></span>*@
             </div>
             <div class="form-group">
+                <p>Upload one file using this form:</p>
+                <input type="file" accept=".png,.jpg,.jpeg,.gif,.tif" name="primaryImage" />
+                @*<span asp-validation-for="" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
                 <label asp-for="AdDuration" class="control-label"></label>
                 <input asp-for="AdDuration" class="form-control" />
                 <span asp-validation-for="AdDuration" class="text-danger"></span>

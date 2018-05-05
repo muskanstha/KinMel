@@ -90,9 +90,9 @@ namespace KinMel.Controllers
                     mobile.Slug = slug;
 
 
-                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
+                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    mobile.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+                    mobile.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
 
                     await _context.SaveChangesAsync();

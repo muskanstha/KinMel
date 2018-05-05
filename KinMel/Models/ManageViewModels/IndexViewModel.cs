@@ -21,5 +21,23 @@ namespace KinMel.Models.ManageViewModels
         public string PhoneNumber { get; set; }
 
         public string StatusMessage { get; set; }
+
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+
+        [Required]
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Display(Name = "City")]
+        [Required]
+        public string City { get; set; }
+
     }
 }

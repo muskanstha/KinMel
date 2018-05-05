@@ -1,0 +1,125 @@
+﻿@model KinMel.Models.AccountDTO
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4></h4>
+    <hr />
+    @if (!string.IsNullOrWhiteSpace(@Model.ProfilePictureUrl))
+    {
+        <img src="@Model.ProfilePictureUrl" />
+    }
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumberConfirmed)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AverageStars)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AverageStars)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JoinDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.JoinDate)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    @if (Model.Ratings != null)
+    {
+        if (Model.Ratings.Any())
+        {
+            foreach (Rating rating in Model.Ratings)
+            {
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(r => rating.RatedById)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(r => rating.RatedById)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(r => rating.Stars)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(r => rating.Stars)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(r => rating.Review)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(r => rating.Review)
+                    </dd>
+                </dl>
+            }
+        }
+    }
+</div>
+
+<div>
+    @if (Model.ClassifiedAds != null)
+    {
+        if (Model.ClassifiedAds.Any())
+        {
+            foreach (ClassifiedAd classifiedAd in Model.ClassifiedAds)
+            {
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(c => classifiedAd.Title)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(c => classifiedAd.Title)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(c => classifiedAd.Price)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(c => classifiedAd.Price)
+                    </dd>
+                </dl>
+            }
+        }
+    }
+</div>

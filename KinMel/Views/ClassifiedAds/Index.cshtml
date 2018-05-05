@@ -3,9 +3,16 @@
 @{
     ViewData["Title"] = "Classified Ads";
 }
+<!--Page-loader-->
+<div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+</div>
+
 <!--Breadcrumbs-->
 <div class="page-container grey lighten-3">
-    <div class="browse-width row grey lighten-3 mb0">
+    <div class="container grey lighten-3">
         <a asp-controller="Home" asp-action="Index" class="breadcrumb">Home</a>
         <a asp-controller="ClassifiedAds" asp-action="Index" class="breadcrumb">Browse Ads</a>
     </div>
@@ -19,25 +26,28 @@
         <!--Main-Content-->
         <div class="page-container col s9 p0">
             <div class="table-striped p0">
-                <!--sorting-->
-                @await Html.PartialAsync("_sortingPartial")        
-
+                <div class="card-header">
+                    <div class="row m0">
+                        <div class="col s6 m10"><strong>Ad</strong></div>
+                        <div class="col s6 m2 center"><strong>Price</strong></div>
+                    </div>
+                </div>
                 @foreach (var item in Model)
                 {
                     <div class="display-flex">
                         <div>
-                            <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">
-                                <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()"/>
+                            <a asp-action="Details"  asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">
+                                <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()" />
                             </a>
                         </div>
                         <div class="col s12">
-                            <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
+                            <a asp-action="Details"  asp-controller="ClassifiedAds"  asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
                             <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
                             <div>
                                 <div class="col s12 m8 l8 p0">
                                     <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
                                     <p class="material-icons align-middle m-5">person_outline</p>
-                                    <a asp-route-id="@item.Id" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.Id)</a>
+                                    <a  asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.Id)</a>
                                 </div>
                                 <div class="col s12 m4 l4 p0">
                                     <div class="col s6 m6 p0">
@@ -50,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr/>
+                    <hr />
                 }
             </div>
         </div>
