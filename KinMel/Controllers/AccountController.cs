@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using KinMel.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Options;
 using KinMel.Models;
 using KinMel.Models.AccountViewModels;
 using KinMel.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace KinMel.Controllers
 {
@@ -20,6 +22,9 @@ namespace KinMel.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -29,12 +34,15 @@ namespace KinMel.Controllers
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _context = context;
+
         }
 
         [TempData]
@@ -220,7 +228,15 @@ namespace KinMel.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    AcceptedTerms = model.AcceptedTerms,
+                    JoinDate = DateTime.Now
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -436,6 +452,57 @@ namespace KinMel.Controllers
         {
             return View();
         }
+
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Index()
+        //{
+        //    var user = await _userManager.FindByIdAsync("92f91e52-f4fd-47d7-af89-18b335b7d729");
+        //    var accountDTO = new AccountDTO()
+        //    {
+        //        Id = user.Id,
+        //        FullName = user.FullName,
+        //        Email = user.Email,
+        //        PhoneNumber = user.PhoneNumber,
+        //        PhoneNumberConfirmed = user.PhoneNumberConfirmed,
+        //        ProfilePictureUrl = user.ProfilePictureUrl,
+        //        Address = user.Address,
+        //        City = user.City,
+        //        ClassifiedAds = user.ClassifiedAds,
+        //        Ratings = user.Ratings,
+        //        AverageStars = user.AverageStars,
+        //        JoinDate = user.JoinDate
+        //    };
+        //    return View("Index",accountDTO);
+        //}
+
+        [AllowAnonymous]
+        // GET: Account/Index/5
+        [HttpGet("/UserProfile/{id}")]
+        public async Task<IActionResult> UserProfile(string id)
+        {
+            ApplicationUser user = await _userManager.FindByIdAsync(id);
+            user.Ratings = await _context.Rating.Where(r => r.RatedForId.Equals(user.Id)).ToListAsync();
+            user.ClassifiedAds = await _context.ClassifiedAd.Where(a => a.CreatedByUserId.Equals(user.Id)).ToListAsync();
+            
+            var accountDTO = new AccountDTO()
+            {
+                Id = user.Id,
+                FullName = user.FullName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                PhoneNumberConfirmed = user.PhoneNumberConfirmed,
+                ProfilePictureUrl = user.ProfilePictureUrl,
+                Address = user.Address,
+                City = user.City,
+                ClassifiedAds = user.ClassifiedAds,
+                Ratings = user.Ratings,
+                AverageStars = user.AverageStars,
+                JoinDate = user.JoinDate
+            };
+            return View(accountDTO);
+        }
+
 
         #region Helpers
 
