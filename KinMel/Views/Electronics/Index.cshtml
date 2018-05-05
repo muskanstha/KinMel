@@ -20,13 +20,8 @@
         <!--Main-Content-->
         <div class="page-container col s9 p0">
             <div class="table-striped p0">
-                <div class="card-header">
-                    <div class="row m0">
-                        <div class="col s6 m10"><strong>Ad</strong></div>
-                        <div class="col s6 m2 center"><strong>Price</strong></div>
-                    </div>
-                </div>
-
+                <!--sorting-->
+                @await Html.PartialAsync("_sortingPartial")
                 @foreach (var item in Model)
     {
             <div class="display-flex">
