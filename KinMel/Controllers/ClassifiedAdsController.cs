@@ -32,6 +32,12 @@ namespace KinMel.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        public ActionResult Navigate()
+        {
+            return View();
+
+        }
+
         //filter
         public ActionResult Search(ClassifiedAdSearchModel searchModel)
         {
