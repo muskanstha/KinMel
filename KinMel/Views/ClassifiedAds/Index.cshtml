@@ -3,16 +3,9 @@
 @{
     ViewData["Title"] = "Classified Ads";
 }
-<!--Page-loader-->
-<div id="loader-wrapper">
-    <div id="loader"></div>
-    <div class="loader-section section-left"></div>
-    <div class="loader-section section-right"></div>
-</div>
-
 <!--Breadcrumbs-->
 <div class="page-container grey lighten-3">
-    <div class="container grey lighten-3">
+    <div class="browse-width row grey lighten-3 mb0">
         <a asp-controller="Home" asp-action="Index" class="breadcrumb">Home</a>
         <a asp-controller="ClassifiedAds" asp-action="Index" class="breadcrumb">Browse Ads</a>
     </div>
@@ -26,23 +19,15 @@
         <!--Main-Content-->
         <div class="page-container col s9 p0">
             <div class="table-striped p0">
-                <div class="card-header">
-                    <div class="row m0">
-                        <div class="col s8"><strong>Ad</strong></div>
-                        <select asp-action="Index" asp-route="sortOrder" onchange="window.location.href=this.options[this.selectedIndex]">
-                            <option asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.DateCreated)</option>
-                            <option asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.Price)</option>
-                        </select>
-                        <div class="col s2 center"><a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.DateCreated)</a></div>
-                        <div class="col s2 center"><a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.Price)</a></div>
-                    </div>
-                </div>
+                <!--sorting-->
+                @await Html.PartialAsync("_sortingPartial")        
+
                 @foreach (var item in Model)
                 {
                     <div class="display-flex">
                         <div>
                             <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">
-                                <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()" />
+                                <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()"/>
                             </a>
                         </div>
                         <div class="col s12">
@@ -65,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr />
+                    <hr/>
                 }
             </div>
         </div>

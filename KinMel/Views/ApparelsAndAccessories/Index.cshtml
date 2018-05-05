@@ -20,43 +20,39 @@
         <!--Main-Content-->
         <div class="page-container col s9 p0">
             <div class="table-striped p0">
-                <div class="card-header">
-                    <div class="row m0">
-                        <div class="col s6 m10"><strong>Ad</strong></div>
-                        <div class="col s6 m2 center"><strong>Price</strong></div>
-                    </div>
-                </div>
+                <!--sorting-->
+                @await Html.PartialAsync("_sortingPartial")
 
                 @foreach (var item in Model)
-            {
-                <div class="display-flex">
-                    <div>
-                        <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">
-                            <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()" />
-                        </a>
-                    </div>
-                    <div class="col s12">
-                        <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
-                        <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
+                {
+                    <div class="display-flex">
                         <div>
-                            <div class="col s12 m8 l8 p0">
-                                <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
-                                <p class="material-icons align-middle m-5">person_outline</p>
-                                <a asp-route-id="@item.Id" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.Id)</a>
-                            </div>
-                            <div class="col s12 m4 l4 p0">
-                                <div class="col s6 m6 p0">
-                                    <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                            <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">
+                                <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()"/>
+                            </a>
+                        </div>
+                        <div class="col s12">
+                            <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
+                            <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
+                            <div>
+                                <div class="col s12 m8 l8 p0">
+                                    <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
+                                    <p class="material-icons align-middle m-5">person_outline</p>
+                                    <a asp-route-id="@item.Id" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.Id)</a>
                                 </div>
-                                <div class="col s6 m6 p0 center">
-                                    <p class="content-price">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
+                                <div class="col s12 m4 l4 p0">
+                                    <div class="col s6 m6 p0">
+                                        <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                                    </div>
+                                    <div class="col s6 m6 p0 center">
+                                        <p class="content-price">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <hr />
-        }
+                    <hr/>
+                }
             </div>
         </div>
     </div>
