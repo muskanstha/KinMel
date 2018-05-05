@@ -25,11 +25,8 @@ namespace KinMel.Controllers
         // GET: ClassifiedAds
         public async Task<IActionResult> Index()
         {
-            //BlobStorageHelper.UploadBlobs();
-            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
-
-
             var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //var applicationDbContext = _context.ClassifiedAd.Where(c => c.IsActive && !c.IsSold).Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             return View(await applicationDbContext.ToListAsync());
         }
 

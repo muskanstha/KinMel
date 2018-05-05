@@ -24,6 +24,8 @@ namespace KinMel.Models
         public string Title { get; set; }
         public string Description { get; set; }
 
+        public string PrimaryImageUrl { get; set; }
+
         private string _imageUrls;
         public string ImageUrls
         {

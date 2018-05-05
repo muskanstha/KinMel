@@ -67,12 +67,13 @@ namespace KinMel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Type,Brand,Model,ModelYear,Color,TotalKm,FuelType,Features,DoorsNo,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,Engine,Mileage,Transmission,RegisteredDistrict,LotNo,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] Car car, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Type,Brand,Model,ModelYear,Color,TotalKm,FuelType,Features,DoorsNo,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,Engine,Mileage,Transmission,RegisteredDistrict,LotNo,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] Car car, List<IFormFile> imageFiles, IFormFile primaryImage)
         {
             if (ModelState.IsValid)
             {
                 long size = imageFiles.Sum(f => f.Length);
-                if (size > 0)
+                long size2 = primaryImage.Length;
+                if (size > 0 && size2 > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     car.CreatedByUserId = currentUserId;
@@ -86,10 +87,10 @@ namespace KinMel.Controllers
 
                     car.Slug = slug;
 
-                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
+                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    car.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
-
+                    car.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    car.PrimaryImageUrl = await BlobStorageUploader.UploadMainBlob(slug, primaryImage);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }

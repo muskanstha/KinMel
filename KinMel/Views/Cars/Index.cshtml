@@ -31,8 +31,16 @@
     {
             <div class="display-flex">
                 <div>
-                    <a asp-action="Details" asp-route-id="@item.Slug" class="content-title">
-                        <img class="content-image" src="@item.ImageUrlList.FirstOrDefault()" />
+                    <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">
+                        @if (String.IsNullOrWhiteSpace(@item.PrimaryImageUrl))
+                        {
+                            <img class="content-image" src="~/images/NoImage.svg"/>
+
+                        }
+                        else
+                        {
+                            <img class="content-image" src="@item.PrimaryImageUrl"/>
+                            }
                     </a>
                 </div>
                 <div class="col s12">

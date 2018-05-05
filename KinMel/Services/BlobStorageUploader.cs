@@ -12,7 +12,7 @@ using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace KinMel.Services
 {
-    public class BlobStorageHelper
+    public class BlobStorageUploader
     {
         //private static CloudStorageAccount storageAccount = new CloudStorageAccount(
         //    new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
@@ -75,7 +75,7 @@ namespace KinMel.Services
 
         }
 
-        public static async Task<string> UploadBlob(string slug, IFormFile imageFile)
+        public static async Task<string> UploadMainBlob(string slug, IFormFile imageFile)
         {
             CloudStorageAccount storageAccount = new CloudStorageAccount(
                 new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
@@ -109,7 +109,7 @@ namespace KinMel.Services
                 }
 
 
-            return "Ok";
+            return blockBlob.Uri.ToString();
 
         }
 
