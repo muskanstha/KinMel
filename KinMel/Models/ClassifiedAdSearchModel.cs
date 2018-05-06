@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Reflection;
 using Newtonsoft.Json;
 
 namespace KinMel.Models
@@ -8,6 +9,7 @@ namespace KinMel.Models
     public class ClassifiedAdSearchModel
     {
         public int? Id { get; set; }
+
         public double Price { get; set; }
         public int? PriceFrom { get; set; }
         public int? PriceTo { get; set; }
@@ -53,5 +55,22 @@ namespace KinMel.Models
 
         public string WarrantyType { get; set; }
         public string WarrantyPeriod { get; set; }
+        public string Title { get; set; }
+
+        //this is our collection of search results
+        public List<ClassifiedAd> PropertyResults { get; set; }
+
+        public ClassifiedAdSearchModel()
+        {
+            //constructor sets up default search parameters for the properties
+            //so that they don't need to be specified unless we're
+            //performing a filtered search from the user.
+
+            Title = "";      
+            City = "";
+            Description = "";
+            PropertyResults = new List<ClassifiedAd>();   //an empty list by default
+
+        }
     }
 }

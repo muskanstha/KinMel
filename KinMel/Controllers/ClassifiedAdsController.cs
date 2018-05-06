@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Inflector;
@@ -63,12 +64,63 @@ namespace KinMel.Controllers
         }
 
         //filter
-        public ActionResult Search(ClassifiedAdSearchModel searchModel)
-        {
-            var filter = new ClassifiedAdLogic(_context);
-            var model = filter.GetProducts(searchModel);
-            return View(model);
+        //[HttpGet]
+        //public ActionResult Search(ClassifiedAdSearchModel searchModel)
+        //{
+        //    var filter = new ClassifiedAdLogic(_context);
+        //    var model = filter.GetProducts(searchModel);
+        //    return View(model);
 
+        //}
+
+        [HttpGet()]
+        public ActionResult Search()
+        {
+           //setup connection to the property data
+           ClassifiedAdLogic repo = new ClassifiedAdLogic(_context);
+
+            //create our model which will set up our constructor for search parameter
+            ClassifiedAdSearchModel m = new ClassifiedAdSearchModel();
+
+            //place all properties into the model
+            m.PropertyResults = repo.GetAll();
+            return View(m);
+
+        }
+
+        [HttpPost()]
+        public ActionResult Search(ClassifiedAdSearchModel m)
+        {
+
+            if (ModelState.IsValid)
+            {
+                //1) set up connection to the property data
+                ClassifiedAdLogic rep = new ClassifiedAdLogic(_context);
+                
+                //2) Get all the properties from our data access layer
+                var properties = rep.GetAll();
+
+                //3) Filter the results based on the model that has been passed from the form
+                if (m.Price > 0)
+                {
+                    properties = properties.Where(k => k.Price == m.Price).ToList();
+
+                }
+
+                properties = properties.Where(k => k.City == m.City).ToList();
+
+                if (!string.IsNullOrEmpty(m.City))
+                {
+                    properties = properties.Where(k => k.City.ToLower().Contains(m.City.ToLower())).ToList();
+
+                }
+
+                //4) pass the filtered results innto the model
+                m.PropertyResults = properties;
+
+            }
+            //5) throw the model at the view
+            return View(m);
         }
 
         // GET: ClassifiedAds/Details/5

@@ -1,5 +1,8 @@
 ﻿
-@model IEnumerable<KinMel.Models.ClassifiedAd>
+@model IEnumerable<KinMel.Models.ClassifiedAdSearchModel>
+@*@using KinMel.Models
+    @model KinMel.Models.ClassifiedAdSearchModel*@
+
 
 @{
     ViewData["Title"] = "Search";
@@ -9,9 +12,85 @@
 <br /><br />
 
 
-@using (Html.BeginForm("Search","ClassifiedAds"))
-{
+@*@using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Get, new { City = "Kathmandu" }))*@
+@using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Get))
 
-    <input id="Text1" type="text" name="txtOne"/>
+{
+    <br /> <span>please input : </span> <br />
+    <label>City</label>
+    <input id="searchModel" type="text" name="m" placeholder="City" />
+
     <input id="Button1" type="submit" value="button" />
 }
+
+
+@*<div class="row">
+
+        <div class="col-md-4">
+            <h2>Filter</h2>
+            <form action="~Search" method="post">
+                <fieldset>
+                    @Html.LabelFor(m => m.City)
+                    @Html.TextBoxFor(m => m.City)
+
+                </fieldset>
+
+                <fieldset>
+                    @Html.LabelFor(m => m.Title)
+                    @Html.TextBoxFor(m => m.Title)
+
+                </fieldset>
+
+                <fieldset>
+                    @Html.LabelFor(m => m.Description)
+                    @Html.TextBoxFor(m => m.Description)
+
+                </fieldset>
+
+                <fieldset>
+                    @Html.LabelFor(m => m.Price)
+                    @Html.TextBoxFor(m => m.Price)
+
+                </fieldset>
+                <input type="submit" value="Filter" />
+            </form>
+        </div>
+
+
+        <div class="col-md-8">
+            @{
+                if (Model.PropertyResults.Count() > 0)
+                {
+                    <h2>Found<strong>@Model.PropertyResults.Count()</strong>Properties</h2>
+                    @Html.Raw("<ul class='properties'")
+                    ;
+                    foreach (ClassifiedAd p in Model.PropertyResults)
+                    {
+                        @Html.Raw("<li>")
+                        ;
+                        @Html.Raw("<strong>" + p.Title + "</strong><br/>")
+                        ;
+                        @Html.Raw("Bedrooms: " + p.City + "<br/>")
+                        ;
+                        @Html.Raw("Price: &pound; " + p.Description + "<br/>")
+                        ;
+
+                        @Html.Raw("</li>")
+                        ;
+
+                    }
+                    @Html.Raw("</ul>")
+                    ;
+                }
+                else
+                {
+                    <h2>Sorry !</h2>
+                    <p>No Properties could be found :( </p>
+                }
+            }
+
+
+        </div>
+    </div>*@
+
+

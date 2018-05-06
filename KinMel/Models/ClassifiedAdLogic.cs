@@ -19,26 +19,30 @@ namespace KinMel.Models
             _context = context;
         }
         
-        public IQueryable<ClassifiedAd> GetProducts(ClassifiedAdSearchModel searchModel)
-        {
-            var result = _context.ClassifiedAd.AsQueryable();
-            if (searchModel != null)
-            {
-                if (searchModel.Id.HasValue)
-                    result = result.Where(x => x.Id == searchModel.Id);
-                if (!string.IsNullOrEmpty(searchModel.Address))
-                    result = result.Where(x => x.Address.Contains(searchModel.Address));
-                if (searchModel.PriceFrom.HasValue)
-                    result = result.Where(x => x.Price >= searchModel.PriceFrom);
-                if (searchModel.PriceTo.HasValue)
-                    result = result.Where(x => x.Price <= searchModel.PriceTo);
-                if (searchModel.Price !=null)
-                    result = result.Where(x => x.Price <= searchModel.Price);
-            }
+        //public IQueryable<ClassifiedAd> GetProducts(ClassifiedAdSearchModel searchModel)
+        //{
+        //    var result = _context.ClassifiedAd.AsQueryable();
+        //    if (searchModel != null)
+        //    {
+        //        if (searchModel.Id.HasValue)
+        //            result = result.Where(x => x.Id == searchModel.Id);
+        //        if (!string.IsNullOrEmpty(searchModel.City))
+        //            result = result.Where(x => x.Address.Contains(searchModel.Address));
+        //        if (searchModel.PriceFrom.HasValue)
+        //            result = result.Where(x => x.Price >= searchModel.PriceFrom);
+        //        if (searchModel.PriceTo.HasValue)
+        //            result = result.Where(x => x.Price <= searchModel.PriceTo);
+        //        if (searchModel.Price !=null)
+        //            result = result.Where(x => x.Price <= searchModel.Price);
+        //    }
            
-            return result;
-        }
+        //    return result;
+        //}
 
+        public List<ClassifiedAd> GetAll()
+        {
+            return _context.ClassifiedAd.ToList();
+        }
         
        
     }
