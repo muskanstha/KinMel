@@ -30,10 +30,34 @@ namespace KinMel.Controllers
 
         // GET: Furnitures
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.Furnitures.Include(f => f.CreatedByUser).Include(f => f.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var furnitures = from c in _context.Furnitures select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    furnitures = furnitures.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    furnitures = furnitures.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    furnitures = furnitures.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    furnitures = furnitures.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    furnitures = furnitures.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await furnitures.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Furnitures/Details/5

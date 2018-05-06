@@ -28,10 +28,34 @@ namespace KinMel.Controllers
 
         // GET: MobileAccessories
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.MobileAccessories.Include(m => m.CreatedByUser).Include(m => m.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var mobileAccessories = from c in _context.MobileAccessories select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    mobileAccessories = mobileAccessories.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    mobileAccessories = mobileAccessories.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    mobileAccessories = mobileAccessories.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    mobileAccessories = mobileAccessories.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    mobileAccessories = mobileAccessories.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await mobileAccessories.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: MobileAccessories/Details/5
