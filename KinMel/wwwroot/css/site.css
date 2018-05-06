@@ -53,6 +53,13 @@ nav .sidenav-trigger {
     color: #00bcd4 !important;
 }
 
+.tab {
+    cursor: pointer;
+}
+
+.material-icons-large {
+    font-size: 24px !important;
+}
 /*************SORT**************/
 .sort-text {
     width: fit-content;
@@ -73,7 +80,7 @@ nav .sidenav-trigger {
         padding: 5px;
     }
 
-    .content-image {
+    /*.content-image {
         max-width: 80px !important;
     }
 
@@ -100,7 +107,7 @@ nav .sidenav-trigger {
 
     .content-condition {
         font-size: 12px !important;
-    }
+    }*/
 
     .material-icons {
         font-size: 16px;
@@ -116,7 +123,7 @@ nav .sidenav-trigger {
 
 /*************Custom Classes***************/
 .m-5 {
-    margin: -5px;
+    margin: -5px !important;
 }
 .m0 {
     margin: 0px !important;
@@ -193,7 +200,13 @@ nav .sidenav-trigger {
 /******************END********************/
 
 /****************Content*****************/
-.content-image {
+.content-image-grid {
+    height: 230px;
+    -webkit-object-fit: scale-down;
+    object-fit: scale-down;
+}
+
+.content-image-list {
     width: 100px;
     height: 100px;
     -webkit-object-fit: scale-down;
@@ -231,9 +244,23 @@ nav .sidenav-trigger {
 }
 
 .content-condition {
+    position: absolute;
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 40px;
+    font-size: 12px;
+    top: 210px;
+    right: 10px;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    padding: 0;
+}
+
+.content-condion-list {
     font-size: 14px;
     color: grey;
 }
+
 /******************End*******************/
 
 /****************Details*****************/

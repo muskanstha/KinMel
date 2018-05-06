@@ -43,6 +43,7 @@ namespace KinMel.Models
                 return JsonConvert.DeserializeObject<List<string>>(this._imageUrls);
             }
         }
+        [Required]
         public string Condition { get; set; }
         public double Price { get; set; }
         public Boolean PriceNegotiable { get; set; }
