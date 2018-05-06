@@ -29,10 +29,34 @@ namespace KinMel.Controllers
 
         // GET: ComputerParts
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.ComputerParts.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var computerParts = from c in _context.ComputerParts select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    computerParts = computerParts.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    computerParts = computerParts.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    computerParts = computerParts.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    computerParts = computerParts.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    computerParts = computerParts.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await computerParts.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: ComputerParts/Details/5
@@ -87,9 +111,9 @@ namespace KinMel.Controllers
 
                     computerParts.Slug = slug;
 
-                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
+                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    computerParts.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+                    computerParts.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

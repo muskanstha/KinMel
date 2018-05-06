@@ -30,10 +30,34 @@ namespace KinMel.Controllers
 
         // GET: TabletsAndIPads
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.TabletsAndIPads.Include(t => t.CreatedByUser).Include(t => t.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var tabletsAndIPads = from c in _context.TabletsAndIPads select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    tabletsAndIPads = tabletsAndIPads.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    tabletsAndIPads = tabletsAndIPads.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    tabletsAndIPads = tabletsAndIPads.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    tabletsAndIPads = tabletsAndIPads.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    tabletsAndIPads = tabletsAndIPads.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await tabletsAndIPads.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: TabletsAndIPads/Details/5
@@ -88,9 +112,9 @@ namespace KinMel.Controllers
 
                     tabletsAndIPads.Slug = slug;
 
-                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
+                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    tabletsAndIPads.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+                    tabletsAndIPads.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

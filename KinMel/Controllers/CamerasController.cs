@@ -31,10 +31,34 @@ namespace KinMel.Controllers
         // GET: Cameras
         [AllowAnonymous]
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.Camera.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var camera = from c in _context.Camera select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    camera = camera.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    camera = camera.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    camera = camera.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    camera = camera.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    camera = camera.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await camera.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Cameras/Details/5
@@ -90,9 +114,9 @@ namespace KinMel.Controllers
 
                     camera.Slug = slug;
 
-                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
+                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    camera.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+                    camera.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

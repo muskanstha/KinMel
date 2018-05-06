@@ -29,10 +29,34 @@ namespace KinMel.Controllers
 
         // GET: Cars
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.Car.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var car = from c in _context.Car select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    car = car.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    car = car.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    car = car.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    car = car.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    car = car.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await car.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         [AllowAnonymous]
@@ -67,12 +91,13 @@ namespace KinMel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Type,Brand,Model,ModelYear,Color,TotalKm,FuelType,Features,DoorsNo,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,Engine,Mileage,Transmission,RegisteredDistrict,LotNo,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] Car car, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Type,Brand,Model,ModelYear,Color,TotalKm,FuelType,Features,DoorsNo,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,Engine,Mileage,Transmission,RegisteredDistrict,LotNo,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] Car car, List<IFormFile> imageFiles, IFormFile primaryImage)
         {
             if (ModelState.IsValid)
             {
                 long size = imageFiles.Sum(f => f.Length);
-                if (size > 0)
+                long size2 = primaryImage.Length;
+                if (size > 0 && size2 > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     car.CreatedByUserId = currentUserId;
@@ -86,10 +111,10 @@ namespace KinMel.Controllers
 
                     car.Slug = slug;
 
-                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
+                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    car.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
-
+                    car.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    car.PrimaryImageUrl = await BlobStorageUploader.UploadMainBlob(slug, primaryImage);
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }

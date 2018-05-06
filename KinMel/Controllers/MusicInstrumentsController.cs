@@ -31,10 +31,34 @@ namespace KinMel.Controllers
 
         // GET: MusicInstruments
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.MusicInstruments.Include(m => m.CreatedByUser).Include(m => m.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var musicInstruments = from c in _context.MusicInstruments select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    musicInstruments = musicInstruments.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    musicInstruments = musicInstruments.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    musicInstruments = musicInstruments.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    musicInstruments = musicInstruments.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    musicInstruments = musicInstruments.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await musicInstruments.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: MusicInstruments/Details/5
@@ -89,9 +113,9 @@ namespace KinMel.Controllers
 
                     musicInstruments.Slug = slug;
 
-                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
+                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    musicInstruments.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+                    musicInstruments.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

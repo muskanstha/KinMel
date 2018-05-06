@@ -28,10 +28,34 @@ namespace KinMel.Controllers
 
         // GET: BeautyAndHealths
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.BeautyAndHealth.Include(b => b.CreatedByUser).Include(b => b.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var beautyAndHealth = from c in _context.BeautyAndHealth select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    beautyAndHealth = beautyAndHealth.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    beautyAndHealth = beautyAndHealth.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    beautyAndHealth = beautyAndHealth.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    beautyAndHealth = beautyAndHealth.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    beautyAndHealth = beautyAndHealth.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await beautyAndHealth.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: BeautyAndHealths/Details/5
@@ -86,9 +110,9 @@ namespace KinMel.Controllers
 
                     beautyAndHealth.Slug = slug;
 
-                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
+                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    beautyAndHealth.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+                    beautyAndHealth.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

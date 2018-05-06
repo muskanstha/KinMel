@@ -32,10 +32,34 @@ namespace KinMel.Controllers
         // GET: Motorcycles
         [AllowAnonymous]
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.Motorcycle.Include(m => m.CreatedByUser).Include(m => m.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var motorcycle = from c in _context.Motorcycle select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    motorcycle = motorcycle.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    motorcycle = motorcycle.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    motorcycle = motorcycle.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    motorcycle = motorcycle.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    motorcycle = motorcycle.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await motorcycle.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Motorcycles/Details/5
@@ -96,9 +120,9 @@ namespace KinMel.Controllers
 
                     motorcycle.Slug = slug;
 
-                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
+                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    motorcycle.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+                    motorcycle.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

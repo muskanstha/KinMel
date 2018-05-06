@@ -28,10 +28,34 @@ namespace KinMel.Controllers
 
         // GET: Computers
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.Computer.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var computer = from c in _context.Computer select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    computer = computer.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    computer = computer.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    computer = computer.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    computer = computer.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    computer = computer.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await computer.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Computers/Details/5
@@ -86,9 +110,9 @@ namespace KinMel.Controllers
 
                     computer.Slug = slug;
 
-                    await BlobStorageHelper.UploadBlobs(slug, imageFiles);
+                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    computer.ImageUrls = await BlobStorageHelper.ListBlobsFolder(slug);
+                    computer.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
