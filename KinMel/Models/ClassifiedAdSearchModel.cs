@@ -13,7 +13,7 @@ namespace KinMel.Models
         public double? Price { get; set; }
         public int? PriceFrom { get; set; }
         public int? PriceTo { get; set; }
-        public string FirstName { get; set; }
+        //public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Description { get; set; }
        
