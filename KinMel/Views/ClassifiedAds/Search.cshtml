@@ -86,10 +86,10 @@
                 </fieldset>
 
                 @*<fieldset>
-                    @Html.LabelFor(m => m.Description)
-                    @Html.TextBoxFor(m => m.Description)
+                        @Html.LabelFor(m => m.Description)
+                        @Html.TextBoxFor(m => m.Description)
 
-                </fieldset>*@
+                    </fieldset>*@
 
                 <fieldset>
                     @Html.LabelFor(m => m.Price)
@@ -113,21 +113,21 @@
                         {
                             @Html.Raw("<li>")
                             ;
-                            @Html.Raw("<strong>" + p.Title + "</strong><br/>")
+                            @Html.Raw("<strong>Title: " + p.Title + "</strong><br/>")
                             ;
-                            @Html.Raw("City: " + p.City + "<br/>")
+                            @Html.Raw("<strong>City:</strong> " + p.City + "<br/>")
                             ;
-                            @Html.Raw("Description: " + p.Description + "<br/>")
+                            @Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")
                             ;
-                            @Html.Raw("Price: &pound; " + p.Price + "<br/>")
+                            @Html.Raw("<strong>Price: &pound;</strong> " + p.Price + "<br/>")
                             ;
                             ;
-                            @Html.Raw("Condition: " + p.Condition + "<br/>")
+                            @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
                             ;
 
                             @Html.Raw("</li>")
                             ;
-
+                            <br />
                         }
                         @Html.Raw("</ul>")
                         ;
