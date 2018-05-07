@@ -13,26 +13,10 @@ namespace KinMel.Models
         public double? Price { get; set; }
         public int? PriceFrom { get; set; }
         public int? PriceTo { get; set; }
-        public virtual ApplicationUser CreatedByUser { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Description { get; set; }
-        private string _imageUrls;
-        public string ImageUrls
-        {
-            get => _imageUrls;
-            set => _imageUrls = value;
-        }
-        public List<string> ImageUrlList
-        {
-            get
-            {
-                if (this._imageUrls == null)
-                {
-                    return new List<string>() { "/images/NoImage.svg" };
-                }
-                return JsonConvert.DeserializeObject<List<string>>(this._imageUrls);
-            }
-        }
-
+       
         public string Condition { get; set; }
 
         public Boolean PriceNegotiable { get; set; }
@@ -40,9 +24,7 @@ namespace KinMel.Models
         public DateTime DateCreated { get; set; }
         public bool IsSold { get; set; }
         public bool IsActive { get; set; }
-        public string Slug { get; set; }
-        public string Discriminator { get; set; }
-
+       
         [DisplayName("Run ad for following days")]
         public int AdDuration { get; set; }
 
@@ -71,7 +53,7 @@ namespace KinMel.Models
             City = "";
             //Description = "";
             Price = 0;
-            CreatedByUser = new ApplicationUser();
+            //FirstName = "";
             PropertyResults = new List<ClassifiedAd>();   //an empty list by default
 
         }
