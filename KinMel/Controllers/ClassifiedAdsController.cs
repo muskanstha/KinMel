@@ -128,7 +128,7 @@ namespace KinMel.Controllers
                     //price range xa
                     if (m.PriceFrom != null && m.PriceTo !=null && m.City == null && m.Condition == null)
                     {
-                        properties = properties.Where(k => k.Condition == m.Condition & k.City ==m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
+                        properties = properties.Where(k => k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
                         m.PropertyResults = properties;
                         //return View(m);
                     }
@@ -136,7 +136,7 @@ namespace KinMel.Controllers
                     //sabai xa
                     if (m.Condition != null && m.City !=null && m.PriceFrom !=null && m.PriceTo !=null)
                     {
-                        properties = properties.Where(k => k.Condition == m.Condition & k.Price == m.Price & k.City ==m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo) .ToList();
+                        properties = properties.Where(k => k.Condition == m.Condition & k.City ==m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo) .ToList();
                         m.PropertyResults = properties;
                        // return View(m);
                     }
@@ -144,7 +144,7 @@ namespace KinMel.Controllers
                     //city ra price range
                     if (m.City != null && m.PriceFrom != null && m.PriceTo != null)
                     {
-                        properties = properties.Where(k => k.Condition == m.Condition & k.Price == m.Price & k.City == m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
+                        properties = properties.Where(k => k.Price >= m.PriceFrom & k.Price <= m.PriceTo & k.City == m.City).ToList();
                         m.PropertyResults = properties;
                         // return View(m);
                     }

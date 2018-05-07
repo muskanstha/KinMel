@@ -18,7 +18,7 @@ namespace KinMel.Models
         public int? PriceFrom { get; set; }
 
         [Required(ErrorMessage = "Please Enter Maximum Price")]
-        [Range(1, 100000000, ErrorMessage = "Price Must Be Between above 1")]
+        [Range(1, 100000000, ErrorMessage = "Price Must Be Between 1 and 10 crore")]
         public int? PriceTo { get; set; }
         //public string FirstName { get; set; }
         public string LastName { get; set; }
