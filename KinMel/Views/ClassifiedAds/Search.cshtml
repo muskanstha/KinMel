@@ -76,13 +76,14 @@
                 <fieldset>
                     @Html.LabelFor(m => m.City)
                     @Html.TextBoxFor(m => m.City)
+                  
 
                 </fieldset>
 
                 <fieldset>
                     @Html.LabelFor(m => m.Condition)
                     @Html.TextBoxFor(m => m.Condition)
-
+                   
                 </fieldset>
 
                 @*<fieldset>
@@ -94,12 +95,14 @@
                 <fieldset>
                     @Html.LabelFor(m => m.PriceFrom)
                     @Html.TextBoxFor(m => m.PriceFrom)
+                    @Html.ValidationMessageFor(m =>m.PriceFrom)
 
                 </fieldset>
 
                 <fieldset>
                     @Html.LabelFor(m => m.PriceTo)
                     @Html.TextBoxFor(m => m.PriceTo)
+                    @Html.ValidationMessageFor(m =>m.PriceTo)
 
                 </fieldset>
 

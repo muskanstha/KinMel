@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using Newtonsoft.Json;
 
@@ -11,7 +12,13 @@ namespace KinMel.Models
         public int? Id { get; set; }
 
         public double? Price { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Minimum Price")]
+        [Range(1,1,ErrorMessage = "Price Must Be Minimum 1")]
         public int? PriceFrom { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Maximum Price")]
+        [Range(10000000, 100000000, ErrorMessage = "Price Must Be Between above 1")]
         public int? PriceTo { get; set; }
         //public string FirstName { get; set; }
         public string LastName { get; set; }
