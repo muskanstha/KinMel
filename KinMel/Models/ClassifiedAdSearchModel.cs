@@ -14,7 +14,7 @@ namespace KinMel.Models
         public double? Price { get; set; }
 
         [Required(ErrorMessage = "Please Enter Minimum Price")]
-        [Range(1,1,ErrorMessage = "Price Must Be Minimum 1")]
+        [Range(1,10000000,ErrorMessage = "Price Must Be Minimum 1")]
         public int? PriceFrom { get; set; }
 
         [Required(ErrorMessage = "Please Enter Maximum Price")]

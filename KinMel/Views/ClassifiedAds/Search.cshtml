@@ -15,27 +15,10 @@
     ViewData["Title"] = "Search";
 }
 
-<h2>Search</h2>
-
-
-
-@*@using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Get, new { City = "Kathmandu" }))*@
-
-
-@*@using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Get))
-
-    {
-        <br /> <span>please input : </span> <br />
-        <label>City</label>
-        <input id="searchModel" type="text" name="m" placeholder="City" />
-
-        <input id="Button1" type="submit" value="button" />
-    }*@
-
 <div class="container">
     <div class="row">
 
-        <div class="col-md-4">
+        <div class="col s4">
             <h2>Filter</h2>
            
             <!-- Your form that posts to the Create event that is annotated with [HttpPost] -->
@@ -74,7 +57,7 @@
                 </p>
             }
 
-            <div class="col-md-8">
+            <div class="col s8">
                 @{
                     if (Model.PropertyResults.Count() > 0)
                     {
