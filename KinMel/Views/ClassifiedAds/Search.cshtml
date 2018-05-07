@@ -1,12 +1,6 @@
-﻿@*@using KinMel.Models
-    @model KinMel.Models.ClassifiedAdSearchModel
-
-    @{
-        ViewBag.Title = "Search";
-    }*@
-
+﻿
 <!--again tested-->
-@*@model IEnumerable<KinMel.Models.ClassifiedAdSearchModel>*@
+
 @using KinMel.Models
 @model KinMel.Models.ClassifiedAdSearchModel
 
@@ -31,7 +25,7 @@
         <div class="col s2">
             <h2>Filter</h2>
 
-            <!-- Your form that posts to the Create event that is annotated with [HttpPost] -->
+          
             @using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Post))
             {
                 @*@Html.AntiForgeryToken()
