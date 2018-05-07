@@ -22,7 +22,7 @@ namespace KinMel.Models
         public int? PriceTo { get; set; }
         //public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Description { get; set; }
+      
        
         public string Condition { get; set; }
 
@@ -32,14 +32,8 @@ namespace KinMel.Models
         public bool IsSold { get; set; }
         public bool IsActive { get; set; }
        
-        [DisplayName("Run ad for following days")]
-        public int AdDuration { get; set; }
-
         public string City { get; set; }
-        public string Address { get; set; }
-
-        public string UsedFor { get; set; }
-
+     
         public double DeliveryCharges { get; set; }
 
         public string WarrantyType { get; set; }
@@ -55,15 +49,13 @@ namespace KinMel.Models
             //so that they don't need to be specified unless we're
             //performing a filtered search from the user.
 
-            //Title = "";   
+         
             Condition = "";
-            City = "";
-            //Description = "";
+            City = "";   
             Price = null;
             PriceFrom = null;
             PriceTo = null;
-            //FirstName = "";
-            PropertyResults = new List<ClassifiedAd>();   //an empty list by default
+            PropertyResults = new List<ClassifiedAd>(); 
 
         }
     }
