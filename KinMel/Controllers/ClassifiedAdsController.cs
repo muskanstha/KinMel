@@ -101,58 +101,39 @@ namespace KinMel.Controllers
                 var properties = rep.GetAll();
                 if (m != null)
                 {
-                    if (m.Price != null && m.City ==null && m.Condition ==null)
-                    {
-                        properties = properties.Where(k => k.Price == m.Price).ToList();
-                        m.PropertyResults = properties;
-                        
-                        //return View(m);
-                    }
-
-                    if (m.City != null && m.Price == null && m.Condition == null)
+                    
+                    //city xa
+                    if (m.City != null && m.PriceFrom == null && m.PriceTo == null && m.Condition == null && m.PriceFrom == null && m.PriceTo == null)
                     {
                         properties = properties.Where(k => k.City == m.City).ToList();
                         m.PropertyResults = properties;
                         //return View(m);
                     }
-
-                    if (m.Condition != null && m.City == null && m.Price == null)
+                    //condition xa
+                    if (m.Condition != null && m.City == null && m.PriceFrom == null && m.PriceTo == null)
                     {
                         properties = properties.Where(k => k.Condition == m.Condition).ToList();
                         m.PropertyResults = properties;
                         //return View(m);
                     }
 
-                    if (m.Condition != null && m.Price !=null && m.City !=null)
+                    //price range xa
+                    if (m.PriceFrom != null && m.PriceTo !=null && m.City == null && m.PriceFrom == null && m.PriceTo == null)
                     {
-                        properties = properties.Where(k => k.Condition == m.Condition & k.Price == m.Price & k.City ==m.City) .ToList();
-                        m.PropertyResults = properties;
-                       // return View(m);
-                    }
-
-                    if (m.Condition != null && m.Price != null && m.City == null)
-                    {
-                        properties = properties.Where(k => k.Condition == m.Condition & k.Price == m.Price).ToList();
-                        m.PropertyResults = properties;
-                       // return View(m);
-                    }
-
-                    if (m.Condition != null && m.Price == null && m.City != null)
-                    {
-                        properties = properties.Where(k => k.Condition == m.Condition & k.City == m.City).ToList();
+                        properties = properties.Where(k => k.Condition == m.Condition & k.City ==m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
                         m.PropertyResults = properties;
                         //return View(m);
                     }
 
-                    if (m.Condition == null && m.Price != null && m.City != null)
+                    //sabai xa
+                    if (m.Condition != null && m.City !=null && m.PriceFrom !=null && m.PriceTo !=null)
                     {
-                        properties = properties.Where(k => k.Price == m.Price & k.City == m.City).ToList();
+                        properties = properties.Where(k => k.Condition == m.Condition & k.Price == m.Price & k.City ==m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo) .ToList();
                         m.PropertyResults = properties;
                        // return View(m);
                     }
 
-
-
+               
                     //properties = properties.Where(k => k.City == m.City).ToList();
                     //properties = properties.Where(k => k.Condition == m.Condition).ToList();
 

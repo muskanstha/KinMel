@@ -53,6 +53,8 @@ namespace KinMel.Models
             City = "";
             //Description = "";
             Price = null;
+            PriceFrom = null;
+            PriceTo = null;
             //FirstName = "";
             PropertyResults = new List<ClassifiedAd>();   //an empty list by default
 

@@ -92,8 +92,14 @@
                     </fieldset>*@
 
                 <fieldset>
-                    @Html.LabelFor(m => m.Price)
-                    @Html.TextBoxFor(m => m.Price)
+                    @Html.LabelFor(m => m.PriceFrom)
+                    @Html.TextBoxFor(m => m.PriceFrom)
+
+                </fieldset>
+
+                <fieldset>
+                    @Html.LabelFor(m => m.PriceTo)
+                    @Html.TextBoxFor(m => m.PriceTo)
 
                 </fieldset>
 
@@ -106,7 +112,7 @@
                 @{
                     if (Model.PropertyResults.Count() > 0)
                     {
-                        <h2>Found<strong>@Model.PropertyResults.Count()</strong>Properties</h2>
+                        <h2>Found<strong>@Model.PropertyResults.Count()</strong>Ads</h2>
                         @Html.Raw("<ul class='properties'")
                         ;
                         foreach (ClassifiedAd p in Model.PropertyResults)
@@ -137,7 +143,7 @@
                     else
                     {
                         <h2>Sorry !</h2>
-                        <p>No Properties could be found :( </p>
+                        <p>No Properties could be found :( consider checking the input field. Thank You !!</p>
                     }
                 }
 
