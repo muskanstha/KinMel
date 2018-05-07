@@ -52,7 +52,7 @@ namespace KinMel.Models
             Condition = "";
             City = "";
             //Description = "";
-            Price = 0;
+            Price = null;
             //FirstName = "";
             PropertyResults = new List<ClassifiedAd>();   //an empty list by default
 
