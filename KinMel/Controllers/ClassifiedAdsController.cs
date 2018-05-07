@@ -91,7 +91,7 @@ namespace KinMel.Controllers
         [HttpPost()]
         public ActionResult Search(ClassifiedAdSearchModel m)
         {
-
+            
             if (ModelState.IsValid)
             {
                 //1) set up connection to the property data
@@ -99,6 +99,14 @@ namespace KinMel.Controllers
                 
                 //2) Get all the properties from our data access layer to comapre from it
                 var properties = rep.GetAll();
+
+                ////paxi thapeko
+                //if (m.PriceFrom != null && m.PriceTo == null && m.PriceTo != null && m.PriceFrom == null)
+                //{
+                //    ViewBag.MyMessageToUsers = "please input both range";
+                //    return View();
+                //}
+
                 if (m != null)
                 {
                     
@@ -118,7 +126,7 @@ namespace KinMel.Controllers
                     }
 
                     //price range xa
-                    if (m.PriceFrom != null && m.PriceTo !=null && m.City == null && m.PriceFrom == null && m.PriceTo == null)
+                    if (m.PriceFrom != null && m.PriceTo !=null && m.City == null && m.Condition == null)
                     {
                         properties = properties.Where(k => k.Condition == m.Condition & k.City ==m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
                         m.PropertyResults = properties;
@@ -133,41 +141,42 @@ namespace KinMel.Controllers
                        // return View(m);
                     }
 
-               
-                    //properties = properties.Where(k => k.City == m.City).ToList();
-                    //properties = properties.Where(k => k.Condition == m.Condition).ToList();
+                    //city ra price range
+                    if (m.City != null && m.PriceFrom != null && m.PriceTo != null)
+                    {
+                        properties = properties.Where(k => k.Condition == m.Condition & k.Price == m.Price & k.City == m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
+                        m.PropertyResults = properties;
+                        // return View(m);
+                    }
 
-                    //if (!string.IsNullOrEmpty(m.City))
-                    //{
-                    //    properties = properties.Where(k => k.City.ToLower().Contains(m.City.ToLower())).ToList();
+                    //city ra condition
+                    if (m.City != null && m.Condition != null && m.PriceFrom == null && m.PriceTo == null)
+                    {
+                        properties = properties.Where(k => k.Condition == m.Condition & k.City == m.City).ToList();
+                        m.PropertyResults = properties;
+                        // return View(m);
+                    }
 
-                    //}
+                    //price ra condition
+                    if (m.PriceFrom != null && m.PriceTo != null && m.Condition != null)
+                    {
+                        properties = properties.Where(k => k.Condition == m.Condition & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
+                        m.PropertyResults = properties;
+                        // return View(m);
+                    }
+
+                    //price range condtion
 
                     //4) pass the filtered results innto the model
                     m.PropertyResults = properties;
                 }
-                //3) Filter the results based on the model that has been passed from the form
-                //if (m.Price.hasValue)
-                //{
-                //    properties = properties.Where(k => k.Price == m.Price).ToList();
 
-                //}
-
-                //properties = properties.Where(k => k.City == m.City).ToList();
-                //properties = properties.Where(k => k.Condition == m.Condition).ToList();
-
-                //if (!string.IsNullOrEmpty(m.City))
-                //{
-                //    properties = properties.Where(k => k.City.ToLower().Contains(m.City.ToLower())).ToList();
-
-                //}
-
-                ////4) pass the filtered results innto the model
-                //m.PropertyResults = properties;
-
+              
             }
+
             //5) throw the model at the view
             return View(m);
+
         }
 
         // GET: ClassifiedAds/Details/5
