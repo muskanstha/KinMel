@@ -97,26 +97,48 @@ namespace KinMel.Controllers
                 //1) set up connection to the property data
                 ClassifiedAdLogic rep = new ClassifiedAdLogic(_context);
                 
-                //2) Get all the properties from our data access layer
+                //2) Get all the properties from our data access layer to comapre from it
                 var properties = rep.GetAll();
+                if (m != null)
+                {
+                    if (m.Price != null)
+                    {
+                        //properties = properties.Where(k => k.Price == m.Price).ToList();
 
+                        //properties = properties.Where(k => k.Price == m.Price).Include(c => m.Condition).Include(c => m.City).ToList();
+
+                    }
+
+                    properties = properties.Where(k => k.City == m.City).ToList();
+                    properties = properties.Where(k => k.Condition == m.Condition).ToList();
+
+                    if (!string.IsNullOrEmpty(m.City))
+                    {
+                        properties = properties.Where(k => k.City.ToLower().Contains(m.City.ToLower())).ToList();
+
+                    }
+
+                    //4) pass the filtered results innto the model
+                    m.PropertyResults = properties;
+                }
                 //3) Filter the results based on the model that has been passed from the form
-                if (m.Price > 0)
-                {
-                    properties = properties.Where(k => k.Price == m.Price).ToList();
+                //if (m.Price.hasValue)
+                //{
+                //    properties = properties.Where(k => k.Price == m.Price).ToList();
 
-                }
+                //}
 
-                properties = properties.Where(k => k.City == m.City).ToList();
+                //properties = properties.Where(k => k.City == m.City).ToList();
+                //properties = properties.Where(k => k.Condition == m.Condition).ToList();
 
-                if (!string.IsNullOrEmpty(m.City))
-                {
-                    properties = properties.Where(k => k.City.ToLower().Contains(m.City.ToLower())).ToList();
+                //if (!string.IsNullOrEmpty(m.City))
+                //{
+                //    properties = properties.Where(k => k.City.ToLower().Contains(m.City.ToLower())).ToList();
 
-                }
+                //}
 
-                //4) pass the filtered results innto the model
-                m.PropertyResults = properties;
+                ////4) pass the filtered results innto the model
+                //m.PropertyResults = properties;
 
             }
             //5) throw the model at the view

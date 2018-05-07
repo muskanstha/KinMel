@@ -10,7 +10,7 @@ namespace KinMel.Models
     {
         public int? Id { get; set; }
 
-        public double Price { get; set; }
+        public double? Price { get; set; }
         public int? PriceFrom { get; set; }
         public int? PriceTo { get; set; }
         public string Name { get; set; }
@@ -34,7 +34,7 @@ namespace KinMel.Models
         }
 
         public string Condition { get; set; }
-      
+
         public Boolean PriceNegotiable { get; set; }
         public Boolean Delivery { get; set; }
         public DateTime DateCreated { get; set; }
@@ -66,7 +66,8 @@ namespace KinMel.Models
             //so that they don't need to be specified unless we're
             //performing a filtered search from the user.
 
-            Title = "";      
+            //Title = "";   
+            Condition = "";
             City = "";
             //Description = "";
             Price = 0;
