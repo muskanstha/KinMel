@@ -103,10 +103,24 @@ namespace KinMel.Controllers
                 {
                     if (m.Price != null)
                     {
-                        //properties = properties.Where(k => k.Price == m.Price).ToList();
+                        properties = properties.Where(k => k.Price == m.Price).ToList();
+                        m.PropertyResults = properties;
+                        
+                        return View(m);
+                    }
 
-                        //properties = properties.Where(k => k.Price == m.Price).Include(c => m.Condition).Include(c => m.City).ToList();
+                    if (m.City != null)
+                    {
+                        properties = properties.Where(k => k.City == m.City).ToList();
+                        m.PropertyResults = properties;
+                        return View(m);
+                    }
 
+                    if (m.Condition != null)
+                    {
+                        properties = properties.Where(k => k.Condition == m.Condition).ToList();
+                        m.PropertyResults = properties;
+                        return View(m);
                     }
 
                     properties = properties.Where(k => k.City == m.City).ToList();

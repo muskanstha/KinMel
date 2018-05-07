@@ -13,7 +13,7 @@ namespace KinMel.Models
         public double? Price { get; set; }
         public int? PriceFrom { get; set; }
         public int? PriceTo { get; set; }
-        public string Name { get; set; }
+        public virtual ApplicationUser CreatedByUser { get; set; }
         public string Description { get; set; }
         private string _imageUrls;
         public string ImageUrls
@@ -71,6 +71,7 @@ namespace KinMel.Models
             City = "";
             //Description = "";
             Price = 0;
+            CreatedByUser = new ApplicationUser();
             PropertyResults = new List<ClassifiedAd>();   //an empty list by default
 
         }
