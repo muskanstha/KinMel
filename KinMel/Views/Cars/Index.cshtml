@@ -23,43 +23,43 @@
                 <!--sorting-->
                 @await Html.PartialAsync("_sortingPartial")
                 @foreach (var item in Model)
-    {
-            <div class="display-flex">
-                <div>
-                    <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">
-                        @if (String.IsNullOrWhiteSpace(@item.PrimaryImageUrl))
-                        {
-                            <img class="content-image" src="~/images/NoImage.svg"/>
+                {
+                    <div class="display-flex">
+                        <div>
+                            <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">
+                                @if (String.IsNullOrWhiteSpace(@item.PrimaryImageUrl))
+                                {
+                                    <img style="max-width: 200px;" class="content-image" src="~/images/NoImage.svg" />
 
-                        }
-                        else
-                        {
-                            <img class="content-image" src="@item.PrimaryImageUrl"/>
-                            }
-                    </a>
-                </div>
-                <div class="col s12">
-                    <a asp-action="Details"  asp-controller="ClassifiedAds"  asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
-                    <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
-                    <div>
-                        <div class="col s12 m8 l8 p0">
-                            <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
-                            <p class="material-icons align-middle m-5">person_outline</p>
-                            <a  asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
+                                }
+                                else
+                                {
+                                    <img style="max-width: 200px;" class="content-image" src="@item.PrimaryImageUrl" />
+                                }
+                            </a>
                         </div>
-                        <div class="col s12 m4 l4 p0">
-                            <div class="col s6 m6 p0">
-                                <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
-                            </div>
-                            <div class="col s6 m6 p0 center">
-                                <p class="content-price">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
+                        <div class="col s12">
+                            <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
+                            <a class="content-condition">(@Html.DisplayFor(modelItem => item.Condition))</a>
+                            <div>
+                                <div class="col s12 m8 l8 p0">
+                                    <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
+                                    <p class="material-icons align-middle m-5">person_outline</p>
+                                    <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
+                                </div>
+                                <div class="col s12 m4 l4 p0">
+                                    <div class="col s6 m6 p0">
+                                        <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                                    </div>
+                                    <div class="col s6 m6 p0 center">
+                                        <p class="content-price">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <hr />
-}
+                    <hr />
+                }
             </div>
         </div>
     </div>
