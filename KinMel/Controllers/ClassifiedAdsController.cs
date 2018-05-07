@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Inflector;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +17,8 @@ namespace KinMel.Controllers
 {
     public class ClassifiedAdsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        public readonly ApplicationDbContext _context;
+       
 
         public ClassifiedAdsController(ApplicationDbContext context)
         {
@@ -52,6 +55,128 @@ namespace KinMel.Controllers
             return View(await classifiedAd.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
             //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             //return View(await applicationDbContext.ToListAsync());
+        }
+
+        public ActionResult Navigate()
+        {
+            return View();
+
+        }
+
+        //filter
+        //[HttpGet]
+        //public ActionResult Search(ClassifiedAdSearchModel searchModel)
+        //{
+        //    var filter = new ClassifiedAdLogic(_context);
+        //    var model = filter.GetProducts(searchModel);
+        //    return View(model);
+
+        //}
+
+        [HttpGet()]
+        public ActionResult Search()
+        {
+           //setup connection to the property data
+           ClassifiedAdLogic repo = new ClassifiedAdLogic(_context);
+
+            //create our model which will set up our constructor for search parameter
+            ClassifiedAdSearchModel m = new ClassifiedAdSearchModel();
+
+            //place all properties into the model
+            m.PropertyResults = repo.GetAll();
+            return View(m);
+
+        }
+
+        [HttpPost()]
+        public ActionResult Search(ClassifiedAdSearchModel m)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                //1) set up connection to the property data
+                ClassifiedAdLogic rep = new ClassifiedAdLogic(_context);
+                
+                //2) Get all the properties from our data access layer to comapre from it
+                var properties = rep.GetAll();
+
+                ////paxi thapeko
+                //if (m.PriceFrom != null && m.PriceTo == null && m.PriceTo != null && m.PriceFrom == null)
+                //{
+                //    ViewBag.MyMessageToUsers = "please input both range";
+                //    return View();
+                //}
+
+                if (m != null)
+                {
+                    
+                    //city xa
+                    if (m.City != null && m.PriceFrom == null && m.PriceTo == null && m.Condition == null && m.PriceFrom == null && m.PriceTo == null)
+                    {
+                        properties = properties.Where(k => k.City == m.City).ToList();
+                        m.PropertyResults = properties;
+                        //return View(m);
+                    }
+                    //condition xa
+                    if (m.Condition != null && m.City == null && m.PriceFrom == null && m.PriceTo == null)
+                    {
+                        properties = properties.Where(k => k.Condition == m.Condition).ToList();
+                        m.PropertyResults = properties;
+                        //return View(m);
+                    }
+
+                    //price range xa
+                    if (m.PriceFrom != null && m.PriceTo !=null && m.City == null && m.Condition == null)
+                    {
+                        properties = properties.Where(k => k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
+                        m.PropertyResults = properties;
+                        //return View(m);
+                    }
+
+                    //sabai xa
+                    if (m.Condition != null && m.City !=null && m.PriceFrom !=null && m.PriceTo !=null)
+                    {
+                        properties = properties.Where(k => k.Condition == m.Condition & k.City ==m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo) .ToList();
+                        m.PropertyResults = properties;
+                       // return View(m);
+                    }
+
+                    //city ra price range
+                    if (m.City != null && m.PriceFrom != null && m.PriceTo != null)
+                    {
+                        properties = properties.Where(k => k.Price >= m.PriceFrom & k.Price <= m.PriceTo & k.City == m.City).ToList();
+                        m.PropertyResults = properties;
+                        // return View(m);
+                    }
+
+                    //city ra condition
+                    if (m.City != null && m.Condition != null && m.PriceFrom == null && m.PriceTo == null)
+                    {
+                        properties = properties.Where(k => k.Condition == m.Condition & k.City == m.City).ToList();
+                        m.PropertyResults = properties;
+                        // return View(m);
+                    }
+
+                    //price ra condition
+                    if (m.PriceFrom != null && m.PriceTo != null && m.Condition != null)
+                    {
+                        properties = properties.Where(k => k.Condition == m.Condition & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
+                        m.PropertyResults = properties;
+                        // return View(m);
+                    }
+
+                    //price range condtion
+
+                    //4) pass the filtered results innto the model
+                    m.PropertyResults = properties;
+                }
+
+              
+            }
+
+            //5) throw the model at the view
+            return View(m);
+
         }
 
         // GET: ClassifiedAds/Details/5

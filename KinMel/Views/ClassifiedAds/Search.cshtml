@@ -1,0 +1,126 @@
+﻿@*@using KinMel.Models
+    @model KinMel.Models.ClassifiedAdSearchModel
+
+    @{
+        ViewBag.Title = "Search";
+    }*@
+
+<!--again tested-->
+@*@model IEnumerable<KinMel.Models.ClassifiedAdSearchModel>*@
+@using KinMel.Models
+@model KinMel.Models.ClassifiedAdSearchModel
+
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+
+<!--Breadcrumbs-->
+<div class="page-container grey lighten-3">
+    <div class="browse-width row grey lighten-3 mb0">
+        <a asp-controller="Home" asp-action="Index" class="breadcrumb">Home</a>
+        <a asp-controller="ClassifiedAds" asp-action="Index" class="breadcrumb">Browse Ads</a>
+
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col s2">
+            <h2>Filter</h2>
+
+            <!-- Your form that posts to the Create event that is annotated with [HttpPost] -->
+            @using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Post))
+            {
+                @*@Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)*@
+                <fieldset>
+                    @Html.LabelFor(m => m.City)
+                    @Html.TextBoxFor(m => m.City)
+
+                </fieldset>
+
+                <fieldset>
+                    @Html.LabelFor(m => m.Condition)
+                    @Html.TextBoxFor(m => m.Condition)
+
+                </fieldset>
+
+                <fieldset>
+                    @Html.LabelFor(m => m.PriceFrom)
+                    @Html.TextBoxFor(m => m.PriceFrom)
+                    @Html.ValidationMessageFor(m => m.PriceFrom)
+
+                </fieldset>
+
+                <fieldset>
+                    @Html.LabelFor(m => m.PriceTo)
+                    @Html.TextBoxFor(m => m.PriceTo)
+                    @Html.ValidationMessageFor(m => m.PriceTo)
+
+                </fieldset>
+
+                <p>
+                    <input type="submit" value="Filter" />
+                </p>
+            }
+        </div>
+        @*<div class="col s9"></div>*@
+        <div class="col s10">
+           
+                <div class="row">
+                    @{
+                        if (Model.PropertyResults.Count() > 0)
+                        {
+                            <h2>Found<strong>@Model.PropertyResults.Count()</strong>Ads</h2>
+                            @Html.Raw("<ul class='properties'")
+                            ;
+                            foreach (ClassifiedAd p in Model.PropertyResults)
+                               
+                            {
+                                <div class="col s3">
+                                    <div class="card">
+                                        @Html.Raw("<li>")
+
+                                        @Html.Raw("<strong>Title: " + p.Title + "</strong><br/>")
+
+                                        @*@Html.Raw("<strong>Posted By: </strong>" + p.FirstName + "<br/>")
+                                    ;*@
+                                        @Html.Raw("<strong>City:</strong> " + p.City + "<br/>")
+
+                                        @Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")
+
+                                        @Html.Raw("<strong>Price: &pound;</strong> " + p.Price + "<br/>")
+
+
+                                        @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
+
+
+                                        @Html.Raw("</li>")
+
+                                        <br/>
+                                    </div>
+                                   
+                                </div>
+                               
+                            }
+                            @Html.Raw("</ul>")
+                            ;
+                        }
+                        else
+                        {
+                            <h2>Sorry !</h2>
+                            <p>No Properties could be found :( consider checking the input field. Thank You !!</p>
+                        }
+                    }
+
+                </div>
+       
+
+
+        </div>
+    </div>
+</div>
+
