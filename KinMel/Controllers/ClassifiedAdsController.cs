@@ -42,14 +42,14 @@ namespace KinMel.Controllers
                 case "price_desc":
                     classifiedAd = classifiedAd.OrderByDescending(c => c.Price);
                     break;
-                case "Date":
+                case "date_desc":
                     classifiedAd = classifiedAd.OrderBy(c => c.DateCreated);
                     break;
-                case "date_desc":
+                case "Date":
                     classifiedAd = classifiedAd.OrderByDescending(c => c.DateCreated);
                     break;
                 default:
-                    classifiedAd = classifiedAd.OrderBy(c => c.DateCreated);
+                    classifiedAd = classifiedAd.OrderByDescending(c => c.DateCreated);
                     break;
             }
             return View(await classifiedAd.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());

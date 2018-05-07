@@ -30,10 +30,34 @@ namespace KinMel.Controllers
 
         // GET: Electronics
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.Electronics.Include(e => e.CreatedByUser).Include(e => e.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var electronics = from c in _context.Electronics select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    electronics = electronics.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    electronics = electronics.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    electronics = electronics.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    electronics = electronics.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    electronics = electronics.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await electronics.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Electronics/Details/5

@@ -28,10 +28,34 @@ namespace KinMel.Controllers
 
         // GET: ToysAndGames
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.ToysAndGames.Include(t => t.CreatedByUser).Include(t => t.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var toysAndGames = from c in _context.ToysAndGames select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    toysAndGames = toysAndGames.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    toysAndGames = toysAndGames.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    toysAndGames = toysAndGames.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    toysAndGames = toysAndGames.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    toysAndGames = toysAndGames.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await toysAndGames.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: ToysAndGames/Details/5

@@ -28,10 +28,34 @@ namespace KinMel.Controllers
 
         // GET: VehiclesParts
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var applicationDbContext = _context.VehiclesParts.Include(v => v.CreatedByUser).Include(v => v.SubCategory);
-            return View(await applicationDbContext.ToListAsync());
+            //BlobStorageHelper.UploadBlobs();
+            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var vehiclesParts = from c in _context.VehiclesParts select c;
+            switch (sortOrder)
+            {
+                case "Price":
+                    vehiclesParts = vehiclesParts.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    vehiclesParts = vehiclesParts.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    vehiclesParts = vehiclesParts.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    vehiclesParts = vehiclesParts.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    vehiclesParts = vehiclesParts.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return View(await vehiclesParts.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
+            //return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: VehiclesParts/Details/5
