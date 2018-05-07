@@ -123,8 +123,8 @@ namespace KinMel.Controllers
                         return View(m);
                     }
 
-                    properties = properties.Where(k => k.City == m.City).ToList();
-                    properties = properties.Where(k => k.Condition == m.Condition).ToList();
+                    //properties = properties.Where(k => k.City == m.City).ToList();
+                    //properties = properties.Where(k => k.Condition == m.Condition).ToList();
 
                     if (!string.IsNullOrEmpty(m.City))
                     {
