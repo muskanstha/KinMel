@@ -57,13 +57,6 @@ namespace KinMel.Controllers
             //return View(await applicationDbContext.ToListAsync());
         }
 
-        public ActionResult Navigate()
-        {
-            return View();
-
-        }
-
-       
         [HttpGet()]
         public ActionResult Search()
         {
