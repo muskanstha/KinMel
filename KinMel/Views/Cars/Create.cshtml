@@ -151,7 +151,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Condition"></label>
-                <input asp-for="Condition" />
+                @{
+                    var conditionlist = new SelectList(new List<SelectListItem>
+                        {
+                            new SelectListItem { Value = "NEW", Text = "NEW" },
+                            new SelectListItem { Value = "USED", Text = "USED" },
+                        }, "Value", "Text", Context.Request.Query["conditionlist"]);
+                }
+                <select asp-for="Condition" asp-items="@conditionlist"></select>
                 <span asp-validation-for="Condition" class="text-danger"></span>
             </div>
             <div class="form-group">

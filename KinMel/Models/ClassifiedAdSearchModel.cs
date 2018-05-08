@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
+using Newtonsoft.Json;
+
+namespace KinMel.Models
+{
+    public class ClassifiedAdSearchModel
+    {
+        public int? Id { get; set; }
+
+        public double? Price { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Minimum Price")]
+        [Range(1,10000000,ErrorMessage = "Price Must Be Minimum 1")]
+        public int? PriceFrom { get; set; }
+
+        [Required(ErrorMessage = "Please Enter Maximum Price")]
+        [Range(1, 100000000, ErrorMessage = "Price Must Be Between 1 and 10 crore")]
+        public int? PriceTo { get; set; }
+        //public string FirstName { get; set; }
+        public string LastName { get; set; }
+      
+       
+        public string Condition { get; set; }
+
+        public Boolean PriceNegotiable { get; set; }
+        public Boolean Delivery { get; set; }
+        public DateTime DateCreated { get; set; }
+        public bool IsSold { get; set; }
+        public bool IsActive { get; set; }
+       
+        public string City { get; set; }
+     
+        public double DeliveryCharges { get; set; }
+
+        public string WarrantyType { get; set; }
+        public string WarrantyPeriod { get; set; }
+        public string Title { get; set; }
+
+        //this is our collection of search results
+        public List<ClassifiedAd> PropertyResults { get; set; }
+
+        public ClassifiedAdSearchModel()
+        {
+            //constructor sets up default search parameters for the properties
+            //so that they don't need to be specified unless we're
+            //performing a filtered search from the user.
+
+         
+            Condition = "";
+            City = "";   
+            Price = null;
+            PriceFrom = null;
+            PriceTo = null;
+            PropertyResults = new List<ClassifiedAd>(); 
+
+        }
+    }
+}
