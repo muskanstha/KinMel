@@ -16,22 +16,25 @@
         <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
     </address>*@
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport"  />
 <div class="card-panel card-panel-large z-depth-4">
     <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">account_circle</i>
             <input id="name"  type="text" class="active validate" required />
             <label for="name">Full Name</label>
         </div>
 
-        <div class="input-field col s6">
-            <input id="phone" type="number" class="validate" required />
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">phone_iphone</i>
+
+      <input id="phone" type="number" class="validate" required/>
             <label for="phone">Phone Number</label>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s12">
+            <i class="material-icons prefix">email</i>
             <input id="email" type="text" class="validate" required>
             <label for="email">Email</label>
         </div>
@@ -46,21 +49,15 @@
         </div>
     </div>
 
-    @*<script language="javascript" type="text/javascript"></script>
-        <script type="text/javascript" src="https://cdn.ckeditor.com/4.8.0/standard-all/ckeditor.js"></script>
-        <textarea id="editor1" name="editor1">
-        </textarea>
-
-        <script type="text/javascript">CKEDITOR.replace('editor1');</script>*@
-<textarea name="description" cols="50" rows="40" style="margin: 30px; width: 700px; height: 300px;"
-          placeholder="Write your Message here"></textarea>
+    
+    
+<textarea  id="messagebox" name="description"  placeholder="Write your Message here"></textarea>
     <div class="card-panel">
         <button class="btn waves-effect waves-light red" type="submit">
             Send
             <i class="material-icons right">send</i>
         </button>
-
+    
     </div>
 </div>
 
-</html>

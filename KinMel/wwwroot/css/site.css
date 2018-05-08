@@ -565,4 +565,10 @@ footer .brand-logo {
         text-align: right;
     }
 }
+textarea {
+    width: 100%;
+    height: 7rem;
+    background-color: transparent;
+    
+}
 /***************END****************/
