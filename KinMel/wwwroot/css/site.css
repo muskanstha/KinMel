@@ -104,6 +104,17 @@ nav .sidenav-trigger {
     border: 1px solid #00bcd4 !important;
 }
 
+/**************GRID**************/
+.page-container-grid {
+    display: grid;
+    grid-template-columns: 220px 80%;
+    grid-template-areas:
+                       "sideMenu main";
+    grid-gap: 1em;
+}
+/*************!GRID**************/
+
+
 /*************SORT**************/
 .sort-text {
     margin: auto;
@@ -250,6 +261,7 @@ nav .sidenav-trigger {
 /******************END********************/
 
 /****************Content*****************/
+
 .content-image-grid {
     height: 230px;
     -webkit-object-fit: scale-down;

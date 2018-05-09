@@ -12,14 +12,14 @@
     </div>
 </div>
 
-<section class="page-container section">
-    <div class="row browse-width">
+
+<section class="page-container-grid section">
         <!--Side-Content-->
         @await Html.PartialAsync("_categoriesSideMenu")
 
         <!--Main-Content-->
         <div class="page-container col s9 p0">
-            <div class="table-striped p0">
+            <div class="p0">
                 <!--sorting-->
                 @await Html.PartialAsync("_sortingPartial")
                 @foreach (var item in Model)
@@ -29,12 +29,12 @@
                     <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">
                         @if (String.IsNullOrWhiteSpace(@item.PrimaryImageUrl))
                         {
-                            <img class="content-image" src="~/images/NoImage.svg"/>
-
+                            <img class="content-image-list" src="~/images/NoImage.svg"/>
+                            
                         }
                         else
                         {
-                            <img class="content-image" src="@item.PrimaryImageUrl"/>
+                            <img class="content-image-list" src="@item.PrimaryImageUrl"/>
                             }
                     </a>
                 </div>
@@ -62,5 +62,4 @@
 }
             </div>
         </div>
-    </div>
 </section>
