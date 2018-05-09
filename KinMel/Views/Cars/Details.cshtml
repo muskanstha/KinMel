@@ -10,9 +10,11 @@
     <h4>Car</h4>
     <hr />
     <div>
+        <img style="max-width: 200px;" src="@Model.PrimaryImageUrl" />
+
         @foreach (var item in Model.ImageUrlList)
         {
-            <img src="@item" />
+            <img style="max-width: 200px;" src="@item"/>
         }
     </div>
     <dl class="dl-horizontal">
