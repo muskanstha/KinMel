@@ -85,7 +85,7 @@
 
                                     @Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")
 
-                                    @Html.Raw("<strong>Price: &pound;</strong> " + p.Price + "<br/>")
+                                    @Html.Raw("<strong>Price: &#8360;</strong> " + p.Price + "<br/>")
 
 
                                     @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
@@ -236,69 +236,6 @@
 
                     }
 
-                    function Filter(amt) {
-
-                        console.log(amt);
-                        var a = amt[0];
-                        var a2 = a["salary"];
-
-                        console.log("converted to int" + " " + a2);
-                        if (a2 === '0' || a2.trim() === '') {
-                            alert("Please enter price");
-                        }
-
-                        $.ajax({
-                            url: '/tasks/getwithprice',
-                            type: 'GET',
-                            dataType: 'json',
-                            cache: false,
-                            data: { amt: a2 },
-                            traditional: true,
-                            contentType: 'application/json; charset=utf-8',
-                            success: function (response) {
-                                var i, item;
-                                console.log("response" + " " + response);
-
-                                if (response === '0' || response === null) {
-                                    alert("Job Not Found");
-                                }
-
-                                for (i = 0; i < response.length; i++) {
-                                    if (response === [] || response === '') {
-                                        alert("Job Not Found");
-                                    }
-
-                                    else {
-
-                                        console.log("Just lattitude" + " " + response[i].GeoLat);
-                                        data.push({
-                                            "Id": response[i].Id,
-                                            "PlaceName": response[i].PlaceName,
-                                            "Street": response[i].Street,
-                                            "ZIP": response[i].ZIP,
-                                            "Price": response[i].Price,
-                                            "Title": response[i].Title,
-                                            "GeoLong": response[i].GeoLong,
-                                            "GeoLat": response[i].GeoLat
-
-                                        });
-                                    }
-
-                                }
-
-                                Map();
-                            },
-
-                            error: function (xhr, ajaxOptions, thrownError) {
-                                alert("Job Not Found");
-                                alert(thrownError);
-                            }
-
-                        });
-
-
-                    }
-
 
                     //for place filter you can do it within one method but alxi lagyo so tai gar paxi
                     function filterLocation(loc) {
@@ -348,55 +285,7 @@
                         });
                     }
 
-
-                    function filterCategory(cate) {
-
-                        console.log(cate);
-
-                        // var a = cate.toString();
-                        var a = cate;
-
-                        console.log("stringified location" + " " + a);
-
-                        $.ajax({
-                            url: '/tasks/getwithcategory',
-                            type: 'GET',
-                            dataType: 'json',
-                            cache: false,
-                            data: { cat: a },
-                            traditional: true,
-                            contentType: 'application/json; charset=utf-8',
-                            success: function (response) {
-
-                                var i, item;
-                                for (i = 0; i < response.length; i++) {
-                                    console.log("Just lattitude" + " " + response[i].GeoLat);
-                                    data.push({
-                                        "Id": response[i].Id,
-                                        "PlaceName": response[i].PlaceName,
-                                        "Street": response[i].Street,
-                                        "ZIP": response[i].ZIP,
-                                        "Price": response[i].Price,
-                                        "Title": response[i].Title,
-                                        "GeoLong": response[i].GeoLong,
-                                        "GeoLat": response[i].GeoLat
-
-                                    });
-
-
-                                }
-
-                                Map();
-
-                            },
-
-                            error: function (xhr, ajaxOptions, thrownError) {
-                                alert(xhr.status);
-                                alert(thrownError);
-                            }
-
-                        });
-                    }
+                    
 
 
                 </script>
