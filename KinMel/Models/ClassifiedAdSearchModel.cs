@@ -45,11 +45,7 @@ namespace KinMel.Models
 
         public ClassifiedAdSearchModel()
         {
-            //constructor sets up default search parameters for the properties
-            //so that they don't need to be specified unless we're
-            //performing a filtered search from the user.
-
-         
+            
             Condition = "";
             City = "";   
             Price = null;

@@ -8,13 +8,21 @@
         @await Html.PartialAsync("_categoriesSideMenu")
 
         <!--Main-Content-->
-        <div class="page-container col s9 p0">
+        <div class="page-container col s9 p0 hide-on-med-and-down">
+                <div class="table-striped p0">
+                    @await Component.InvokeAsync("HomePageAds", new { listType = "latest" })
+                    @await Component.InvokeAsync("HomePageAds", new { listType = "name" })
+                    @await Component.InvokeAsync("HomePageAds", new { listType = "free" })
+                    @await Component.InvokeAsync("HomePageAds", new { listType = "default" })
+                </div>
+            </div>
+        <div class="page-container p0 hide-on-large-only hide-on-extra-large-only">
             <div class="table-striped p0">
                 @await Component.InvokeAsync("HomePageAds", new { listType = "latest" })
                 @await Component.InvokeAsync("HomePageAds", new { listType = "name" })
                 @await Component.InvokeAsync("HomePageAds", new { listType = "free" })
                 @await Component.InvokeAsync("HomePageAds", new { listType = "default" })
             </div>
-            </div>
         </div>
+    </div>
 </section>
