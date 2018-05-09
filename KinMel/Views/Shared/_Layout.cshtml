@@ -51,66 +51,65 @@
         </nav>
     </div>
 
-<!--Page-loader-->
-@*<div id="loader-wrapper">
-    <div id="loader"></div>
-    <div class="loader-section section-left"></div>
-    <div class="loader-section section-right"></div>
-</div>*@
+    <!--Page-loader-->
+    @*<div id="loader-wrapper">
+            <div id="loader"></div>
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>*@
 
-@RenderBody()
+    @RenderBody()
 
-<footer id="footer" class="footer">
-    <div class="footer-wrapper">
-        <div class="footer-block-wrapper">
-            <div class="footer-logo footer-block">
-                <a class="brand-logo" href="@Url.Action("Index", "Home")">KinMel</a>
+    <footer id="footer" class="footer">
+        <div class="footer-wrapper">
+            <div class="footer-block-wrapper">
+                <div class="footer-logo footer-block">
+                    <a class="brand-logo" href="@Url.Action("Index", "Home")">KinMel</a>
+                </div>
+                <div class="footer-block-inner-wrapper">
+                    <div class="footer-block">
+                        <ul>
+                            <li><a asp-controller="Home" asp-action="About">About us</a></li>
+                            <li><a asp-controller="Home" asp-action="Contact">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-block">
+                        <h6><a href="#">support@vattujan.com</a></h6>
+                        <h6><b>Kathmandu, NP</b></h6>
+                    </div>
+                    <div class="footer-block">
+                        <a href="https://www.facebook.com" class="fab fa-facebook-square fa-3x"></a>
+                        <a href="https://plus.google.com" class="fab fa-google-plus-square fa-3x"></a>
+                    </div>
+                </div>
             </div>
-            <div class="footer-block-inner-wrapper">
-                <div class="footer-block">
-                    <ul>
-                        <li><a asp-controller="Home" asp-action="About">About us</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-block">
-                    <h6><a href="#">support@vattujan.com</a></h6>
-                    <h6><b>Kathmandu, NP</b></h6>
-                </div>
-                <div class="footer-block">
-                    <a href="https://www.facebook.com" class="fab fa-facebook-square fa-3x"></a>
-                    <a href="https://plus.google.com" class="fab fa-google-plus-square fa-3x"></a>
+            <div class="footer-copyright">
+                <div class="container">
+                    <p>&copy; 2018 - KinMel</p>
                 </div>
             </div>
         </div>
-        <div class="footer-copyright">
-            <div class="container">
-                <p>&copy; 2018 - KinMel</p>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
 
 
-<environment include="Development">
-    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
 
-    <script src="~/lib/materialize/js/materialize.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-</environment>
-<environment exclude="Development">
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-            asp-fallback-src="~/lib/jquery/dist/jquery.min.js">
-    </script>
+        <script src="~/lib/materialize/js/materialize.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js">
+        </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"
-            asp-fallback-src="~/lib/materialize/js/materialize.min.js">
-    </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"
+                asp-fallback-src="~/lib/materialize/js/materialize.min.js">
+        </script>
 
-    <script src="~/js/site.min.js" asp-append-version="true"></script>
-</environment>
-
-
-@RenderSection("Scripts", required: false)
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+<script src="//cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
