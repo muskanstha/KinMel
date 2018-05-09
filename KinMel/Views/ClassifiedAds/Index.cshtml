@@ -13,16 +13,16 @@
     </div>
 </div>
 
-<section class="page-container section">
-    <div class="row browse-width">
+<section class="row browse-width section">
+    <div class="page-container-grid">
         <!--Side-Content-->
         @await Html.PartialAsync("_categoriesSideMenu")
         <!--Main-Content-->
-        <div class="main-content col s9">
+        <div class="main-content">
             <!--sorting-->
             @await Html.PartialAsync("_sortingPartial")
             <!--grid-view-->
-            <div class="col s12 p0 hide-on-small-and-down">
+            <div class="hide-on-small-and-down">
                 @foreach (var item in Model)
                 {
                     <div class="col s12 m6 l4">
@@ -59,7 +59,7 @@
                 }
             </div>
             <!--list-view-->
-            <div class=" col s12 p0 hide-on-med-and-up">
+            <div class="hide-on-med-and-up p5">
                 @foreach (var item in Model)
                 {
                     <div class="display-flex">
