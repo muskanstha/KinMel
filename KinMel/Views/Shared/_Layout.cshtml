@@ -23,38 +23,40 @@
 </head>
 
 <body class="white">
-    <nav class="black" role="navigation">
-        <div class="nav-wrapper page-container row browse-width">
-            <a id="logo-container" asp-area="" asp-controller="Home" asp-action="Index" class="brand-logo">KinMel</a>
-            <div class="fixed-action-btn">
-                <a asp-controller="ClassifiedAds" asp-action="Create" class="btn-floating btn-large waves-effect waves-light pink tooltipped" data-tooltip="Post a new Ad" data-position="left">
-                    <i class="material-icons">add</i>
-                </a>
+    <div class="navbar-fixed">
+        <nav class="black" role="navigation">
+            <div class="nav-wrapper page-container row browse-width">
+                <a id="logo-container" asp-area="" asp-controller="Home" asp-action="Index" class="brand-logo">KinMel</a>
+                <div class="fixed-action-btn">
+                    <a asp-controller="ClassifiedAds" asp-action="Create" class="btn-floating btn-large waves-effect waves-light pink tooltipped" data-tooltip="Post a new Ad" data-position="left">
+                        <i class="material-icons">add</i>
+                    </a>
+                </div>
+
+                @await Html.PartialAsync("_LoginPartial")
+
+                <ul class="right hide-on-med-and-down">
+                    <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
+                </ul>
+
+                <ul class="right hide-on-med-and-down">
+                    <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Search">Filter Ads</a></li>
+                </ul>
+
+                <ul id="nav-mobile" class="sidenav">
+                    <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
+                </ul>
+                <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             </div>
-
-            @await Html.PartialAsync("_LoginPartial")
-
-            <ul class="right hide-on-med-and-down">
-                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
-            </ul>
-
-            <ul class="right hide-on-med-and-down">
-                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Search">Filter Ads</a></li>
-            </ul>
-
-            <ul id="nav-mobile" class="sidenav">
-                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
-            </ul>
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
     <!--Page-loader-->
-    <div id="loader-wrapper">
-        <div id="loader"></div>
-        <div class="loader-section section-left"></div>
-        <div class="loader-section section-right"></div>
-    </div>
+    @*<div id="loader-wrapper">
+            <div id="loader"></div>
+            <div class="loader-section section-left"></div>
+            <div class="loader-section section-right"></div>
+        </div>*@
 
     @RenderBody()
 
@@ -107,8 +109,7 @@
 
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
-
+<script src="//cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

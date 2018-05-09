@@ -95,9 +95,8 @@ namespace KinMel.Controllers
         {
             if (ModelState.IsValid)
             {
-                long size = imageFiles.Sum(f => f.Length);
-                long size2 = primaryImage.Length;
-                if (size > 0 && size2 > 0)
+                long? primaryImageLength = primaryImage?.Length;
+                if (primaryImageLength > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     car.CreatedByUserId = currentUserId;
@@ -111,11 +110,17 @@ namespace KinMel.Controllers
 
                     car.Slug = slug;
 
-                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
+                    long? imageFilesLength = imageFiles?.Sum(f => f.Length);
+                    if (imageFilesLength > 0)
+                    {
+                        await BlobStorageUploader.UploadBlobs(slug, imageFiles);
+                        car.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    }
 
-                    car.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
                     car.PrimaryImageUrl = await BlobStorageUploader.UploadMainBlob(slug, primaryImage);
+
                     await _context.SaveChangesAsync();
+
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 

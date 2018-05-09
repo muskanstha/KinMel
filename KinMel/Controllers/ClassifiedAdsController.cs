@@ -17,9 +17,8 @@ namespace KinMel.Controllers
 {
     public class ClassifiedAdsController : Controller
     {
-        public readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
        
-
         public ClassifiedAdsController(ApplicationDbContext context)
         {
             _context = context;
@@ -57,13 +56,6 @@ namespace KinMel.Controllers
             //return View(await applicationDbContext.ToListAsync());
         }
 
-        public ActionResult Navigate()
-        {
-            return View();
-
-        }
-
-       
         [HttpGet()]
         public ActionResult Search()
         {
