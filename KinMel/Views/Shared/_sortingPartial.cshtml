@@ -1,34 +1,15 @@
-﻿@using Microsoft.AspNetCore.Mvc.Rendering;
-@using System.Collections.Generic;
-<div class="row m0">
-    <div class="display-flex col s12">
-        <!--sorting-->
-        <b class="sort-text">Sort Ads by:</b>
-        @{
-            var sortList = new SelectList(new List<SelectListItem>
-            {
-                new SelectListItem { Value = "Date", Text = "Latest Ads" },
-                new SelectListItem { Value = "date_desc", Text = "Older Ads First" },
-                new SelectListItem { Value = "Price", Text = "Price: Low to High"  },
-                new SelectListItem { Value = "price_desc", Text = "Price: High to Low"  },
-            }, "Value", "Text", Context.Request.Query["sortOrder"]);
-        }
-        <select id="sortSelect" asp-items="@sortList" onchange="window.location.href = '/@ViewContext.RouteData.Values["Controller"]?sortOrder=' + this.options[this.selectedIndex].value"></select>
-        @*<div class="col s2 center"><a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.DateCreated)</a></div>
-            <div class="col s2 center"><a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.Price)</a></div>*@
-        <script type="text/javascript">
-            if (typeof (Storage) !== "undefined") {
-                // Store
-                localStorage.setItem("lastname", "Smith");
-                // Retrieve
-                document.getElementById("grid-content").innerHTML = localStorage.getItem("lastname");
-            } else {
-                document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-        </script>
-            
-        <ul class="tabs">
-            <li class="tab right active"><a class="material-icons material-icons-large" href="#grid-content">view_module</a></li>
-            <li class="tab right"><a class="material-icons material-icons-large" href="#list-content">view_list</a></li>
-        </ul>
-    </div>
+﻿
+
+<div class="row col s12 p0">
+    <b class="sort-text">Sort Ads by:</b>
+    @{
+        var sortList = new SelectList(new List<SelectListItem>
+    {
+        new SelectListItem { Value = "Date", Text = "Latest Ads" },
+        new SelectListItem { Value = "date_desc", Text = "Older Ads First" },
+        new SelectListItem { Value = "Price", Text = "Price: Low to High"  },
+        new SelectListItem { Value = "price_desc", Text = "Price: High to Low"  },
+    }, "Value", "Text", Context.Request.Query["sortOrder"]);
+    }
+    <select id="sortSelect" asp-items="@sortList" onchange="window.location.href = '/@ViewContext.RouteData.Values["Controller"]?sortOrder=' + this.options[this.selectedIndex].value"></select>
 </div>
