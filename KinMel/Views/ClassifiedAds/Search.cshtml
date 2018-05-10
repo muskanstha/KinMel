@@ -8,6 +8,10 @@
     ViewData["Title"] = "Search";
 }
 
+<meta name="viewport" content="width=device-width, initial-scale=1" /> <link type="text/css" rel="stylesheet" href="https://css/materialize.min.css" media="screen,projection" />
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://js/materialize.min.js"></script>
 
 <!--Breadcrumbs-->
 <div class="page-container grey lighten-3">
@@ -18,7 +22,73 @@
     </div>
 </div>
 
-<div class="container">
+
+<div class="row" style="margin-top: 5px;">
+    <div class="col s6 m3">
+        <div class="card blue-white lighten-4">
+            <div class="card-content white-text">
+                <span class="card-title" style="color: brown;">Filter Products</span>
+                @using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="input-field">
+                        @*<fieldset>*@
+                        @Html.LabelFor(m => m.City)
+                       
+                        @Html.TextBoxFor(m => m.City)
+
+                        @*</fieldset>*@
+                    </div>
+
+                    <div class="input-field">
+                        @*<fieldset>*@
+                        @Html.LabelFor(m => m.Condition)
+                        @Html.TextBoxFor(m => m.Condition)
+
+                        @*</fieldset>*@
+                    </div>
+
+
+
+                    <div class="input-field">
+                        @*<fieldset>*@
+                        @Html.LabelFor(m => m.PriceFrom)
+                        @Html.TextBoxFor(m => m.PriceFrom)
+                        @Html.ValidationMessageFor(m => m.PriceFrom)
+
+                        @*</fieldset>*@
+                    </div>
+
+
+
+                    <div class="input-field">
+                        @*<fieldset>*@
+                        @Html.LabelFor(m => m.PriceTo)
+                        @Html.TextBoxFor(m => m.PriceTo)
+                        @Html.ValidationMessageFor(m => m.PriceTo)
+
+                        @*</fieldset>*@
+                    </div>
+                    <div class="card-panel">
+
+                        <button class="btn waves-effect waves-light red" type="submit">
+                            Filter
+                            <i class="material-icons right">send</i>
+                        </button>
+                        <button class="btn waves-effect waves-light red disabled" type="submit">
+                            Clear
+                            <i class="material-icons right">cancel</i>
+                        </button>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*<div class="container">
     <div class="row">
 
         <div class="col s2">
@@ -27,8 +97,8 @@
 
             @using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Post))
             {
-                @*@Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)*@
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
                 <fieldset>
                     @Html.LabelFor(m => m.City)
                     @Html.TextBoxFor(m => m.City)
@@ -59,61 +129,76 @@
                     <input type="submit" value="Filter" />
                 </p>
             }
-        </div>
-        @*<div class="col s9"></div>*@
-        <div class="col s10">
+        </div>*@
+@*<div class="col s9"></div>*@
+<div class="col s10">
 
-            <div class="row">
-                @{
-                    if (Model.PropertyResults.Count() > 0)
-                    {
-                        <h2>Found<strong>@Model.PropertyResults.Count()</strong>Ads</h2>
-                        @Html.Raw("<ul class='properties'")
-                        ;
-                        foreach (ClassifiedAd p in Model.PropertyResults)
+    <div class="row">
+        @{
+            if (Model.PropertyResults.Count() > 0)
+            {
+                <h2>Found<strong>@Model.PropertyResults.Count()</strong>Ads</h2>
+                @Html.Raw("<ul class='properties'")
+                ;
+                foreach (ClassifiedAd p in Model.PropertyResults)
 
-                        {
-                            <div class="col s3">
-                                <div class="card">
-                                    @Html.Raw("<li>")
+                {
+                    <div class="col s3">
+                        <div class="card">
+                            @Html.Raw("<li>")
 
-                                    @Html.Raw("<strong>Title: " + p.Title + "</strong><br/>")
+                            @Html.Raw("<strong>Title: " + p.Title + "</strong><br/>")
 
-                                    @*@Html.Raw("<strong>Posted By: </strong>" + p.FirstName + "<br/>")
-                                        ;*@
-                                    @Html.Raw("<strong>City:</strong> " + p.City + "<br/>")
+                            @*@Html.Raw("<strong>Posted By: </strong>" + p.FirstName + "<br/>")
+                                ;*@
+                            @Html.Raw("<strong>City:</strong> " + p.City + "<br/>")
 
-                                    @Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")
+                            @Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")
 
-                                    @Html.Raw("<strong>Price: &#8360;</strong> " + p.Price + "<br/>")
-
-
-                                    @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
+                            @Html.Raw("<strong>Price: &#8360;.</strong> " + p.Price + "<br/>")
 
 
-                                    @Html.Raw("</li>")
+                            @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
 
-                                    <br />
-                                </div>
 
-                            </div>
+                            @Html.Raw("</li>")
 
-                        }
-                        @Html.Raw("</ul>")
-                        ;
-                    }
-                    else
-                    {
-                        <h2>Sorry !</h2>
-                        <p>No Properties could be found :( consider checking the input field. Thank You !!</p>
-                    }
+                            <br />
+                        </div>
+
+                    </div>
+
                 }
+                @Html.Raw("</ul>")
+                ;
+            }
+            else
+            {
+                <h2>Sorry !</h2>
+                <p>No Properties could be found :( consider checking the input field. Thank You !!</p>
+            }
+        }
 
-            </div>
-        </div>
     </div>
 </div>
+@*</div>
+    </div>*@
 
+
+<div class="row">
+
+    <div class="col s4">
+        <p>haha haha</p>
+    </div>
+    <div class="col s4">
+        <p>haha haha</p>
+    </div>
+    <div class="col s4">
+        <p>haha haha</p>
+    </div>
+   
+
+</div>
 
 <!--for map-->
 <div class="col-md-7 embed-responsive">
@@ -285,7 +370,7 @@
                         });
                     }
 
-                    
+
 
 
                 </script>
@@ -294,3 +379,5 @@
 
     </div>
 </div>
+
+
