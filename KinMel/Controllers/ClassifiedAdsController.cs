@@ -27,33 +27,7 @@ namespace KinMel.Controllers
         // GET: ClassifiedAds
         public async Task<IActionResult> Index(string sortOrder)
         {
-            //BlobStorageHelper.UploadBlobs();
-            //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
-            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
-            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
-            var classifiedAd = from c in _context.ClassifiedAd
-                select c;
-            switch (sortOrder)
-            {
-                case "Price":
-                    classifiedAd = classifiedAd.OrderBy(c => c.Price);
-                    break;
-                case "price_desc":
-                    classifiedAd = classifiedAd.OrderByDescending(c => c.Price);
-                    break;
-                case "date_desc":
-                    classifiedAd = classifiedAd.OrderBy(c => c.DateCreated);
-                    break;
-                case "Date":
-                    classifiedAd = classifiedAd.OrderByDescending(c => c.DateCreated);
-                    break;
-                default:
-                    classifiedAd = classifiedAd.OrderByDescending(c => c.DateCreated);
-                    break;
-            }
-            return View(await classifiedAd.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
-            //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
-            //return View(await applicationDbContext.ToListAsync());
+            return View();
         }
 
         [HttpGet()]
