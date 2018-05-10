@@ -1,6 +1,4 @@
-﻿<!--again tested-->
-
-@using KinMel.Models
+﻿@using KinMel.Models
 @model KinMel.Models.ClassifiedAdSearchModel
 
 
@@ -8,23 +6,17 @@
     ViewData["Title"] = "Search";
 }
 
-<meta name="viewport" content="width=device-width, initial-scale=1" /> <link type="text/css" rel="stylesheet" href="https://css/materialize.min.css" media="screen,projection" />
-
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="https://js/materialize.min.js"></script>
-
 <!--Breadcrumbs-->
 <div class="page-container grey lighten-3">
     <div class="browse-width row grey lighten-3 mb0">
         <a asp-controller="Home" asp-action="Index" class="breadcrumb">Home</a>
         <a asp-controller="ClassifiedAds" asp-action="Index" class="breadcrumb">Browse Ads</a>
-
     </div>
 </div>
 
 
 <div class="row" style="margin-top: 5px;">
-    <div class="col s6 m3">
+    <div class="col s12 m3 l3">
         <div class="card blue-white lighten-4">
             <div class="card-content white-text">
                 <span class="card-title" style="color: brown;">Filter Products</span>
@@ -130,40 +122,42 @@
                 </p>
             }
         </div>*@
-@*<div class="col s9"></div>*@
-<div class="col s10">
 
-    <div class="row">
+<div class="col s12">
+ 
         @{
             if (Model.PropertyResults.Count() > 0)
             {
                 <h2>Found<strong>@Model.PropertyResults.Count()</strong>Ads</h2>
+
                 @Html.Raw("<ul class='properties'")
                 ;
+                
                 foreach (ClassifiedAd p in Model.PropertyResults)
 
                 {
-                    <div class="col s3">
+                    <div class="col s12 m3 l3">
                         <div class="card">
-                            @Html.Raw("<li>")
+                            <div class="row">
+                                @Html.Raw("<li>")
 
-                            @Html.Raw("<strong>Title: " + p.Title + "</strong><br/>")
+                                @Html.Raw("<strong>Title: " + p.Title + "</strong><br/>")
 
-                            @*@Html.Raw("<strong>Posted By: </strong>" + p.FirstName + "<br/>")
+                                @*@Html.Raw("<strong>Posted By: </strong>" + p.FirstName + "<br/>")
                                 ;*@
-                            @Html.Raw("<strong>City:</strong> " + p.City + "<br/>")
+                                @Html.Raw("<strong>City:</strong> " + p.City + "<br/>")
 
-                            @Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")
+                                @Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")
 
-                            @Html.Raw("<strong>Price: &#8360;.</strong> " + p.Price + "<br/>")
-
-
-                            @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
+                                @Html.Raw("<strong>Price: &#8360;.</strong> " + p.Price + "<br/>")
 
 
-                            @Html.Raw("</li>")
+                                @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
 
-                            <br />
+
+                                @Html.Raw("</li>")
+                            </div>
+         
                         </div>
 
                     </div>
@@ -179,7 +173,7 @@
             }
         }
 
-    </div>
+   
 </div>
 @*</div>
     </div>*@
