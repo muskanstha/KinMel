@@ -70,5 +70,7 @@ namespace KinMel.Data
         public DbSet<KinMel.Models.VehiclesParts> VehiclesParts { get; set; }
 
         public DbSet<KinMel.Models.Rating> Rating { get; set; }
+
+        public DbSet<KinMel.Models.Notification> Notification { get; set; }
     }
 }
