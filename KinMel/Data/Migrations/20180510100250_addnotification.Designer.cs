@@ -4,14 +4,16 @@ using KinMel.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KinMel.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180510100250_addnotification")]
+    partial class addnotification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,6 +204,8 @@ namespace KinMel.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("RateByFirstName");
+
                     b.Property<string>("RatedById");
 
                     b.Property<string>("RatedForId");
@@ -211,8 +215,6 @@ namespace KinMel.Data.Migrations
                     b.Property<int>("Stars");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RatedById");
 
                     b.HasIndex("RatedForId");
 
@@ -730,10 +732,6 @@ namespace KinMel.Data.Migrations
 
             modelBuilder.Entity("KinMel.Models.Rating", b =>
                 {
-                    b.HasOne("KinMel.Models.ApplicationUser", "RatedBy")
-                        .WithMany()
-                        .HasForeignKey("RatedById");
-
                     b.HasOne("KinMel.Models.ApplicationUser", "RatedFor")
                         .WithMany("Ratings")
                         .HasForeignKey("RatedForId");
