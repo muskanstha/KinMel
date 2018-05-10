@@ -17,9 +17,8 @@ namespace KinMel.Controllers
 {
     public class ClassifiedAdsController : Controller
     {
-        public readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
        
-
         public ClassifiedAdsController(ApplicationDbContext context)
         {
             _context = context;
