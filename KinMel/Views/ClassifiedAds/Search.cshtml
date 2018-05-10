@@ -20,7 +20,7 @@
 
             <div class="col s12 m2 l2">
                 <div class="card blue-white lighten-4">
-                    <div class="card-content white-text">
+                    <div class="card-content black-text">
                         <span class="card-title" style="color: brown;">Filter Products</span>
                         @using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Post))
                         {
@@ -28,9 +28,7 @@
                             @Html.ValidationSummary(true)
                             <div class="input-field">
 
-                                <i class="material-icons">&nbsp;room</i>
                                 @Html.LabelFor(m => m.City)
-
                                 @Html.TextBoxFor(m => m.City)
 
                             </div>
@@ -59,16 +57,16 @@
 
                             </div>
                             @*<div class="card-panel">*@
-                                <div class="container">
-                                    <button class="btn waves-effect waves-light green btn-small" type="submit" style="margin-bottom: 5px;">
-                                        Filter
-                                        <i class="material-icons right">send</i>
-                                    </button>
-                                    <button class="btn waves-effect waves-light red btn-small" type="submit">
-                                        Clear
-                                        <i class="material-icons right">cancel</i>
-                                    </button>
-                                </div>
+                            <div class="container">
+                                <button class="btn waves-effect waves-light green btn-small" type="submit" style="margin-bottom: 5px;">
+                                    Filter
+                                    <i class="material-icons right">send</i>
+                                </button>
+                                <button class="btn waves-effect waves-light red btn-small" type="submit">
+                                    Clear
+                                    <i class="material-icons right">cancel</i>
+                                </button>
+                            </div>
                             @*</div>*@
                         }
                     </div>
@@ -81,7 +79,6 @@
                     <div class="container">
                         <span class="card-title" style="color: brown;">Found <strong>@Model.PropertyResults.Count()</strong> Products</span>
                         <div class="row">
-
                             @{
                                 if (Model.PropertyResults.Count() > 0)
                                 {
@@ -89,30 +86,34 @@
 
                                     {
                                         <div class="col s12 m6 l4">
-                                            <div class="card">
-                                                <div class="row">
-                                                    @Html.Raw("<li>")
 
-                                                    @Html.Raw("<strong>Title: " + p.Title + "</strong><br/>")
+                                            <div class="row">
+                                                <div class="card blue-white lighten-4">
+                                                    <div class="card-content black-text">
+                                                        @Html.Raw("<li>")
 
-                                                    @*@Html.Raw("<strong>Posted By: </strong>" + p.FirstName + "<br/>")
-                                                        ;*@
-                                                    @Html.Raw("<strong>City:</strong> " + p.City + "<br/>")
+                                                        @Html.Raw("<strong>Title: " + p.Title + "</strong><br/>")
 
-                                                    @Html.Raw("<strong>Price: &#8360;.</strong> " + p.Price + "<br/>")
+                                                        @*@Html.Raw("<strong>Posted By: </strong>" + p.FirstName + "<br/>")
+                                                            ;*@
+                                                        @Html.Raw("<strong>City:</strong> " + p.City + "<br/>")
 
-
-                                                    @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
-
-                                                    @*@Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")*@
+                                                        @Html.Raw("<strong>Price: &#8360;.</strong> " + p.Price + "<br/>")
 
 
-                                                    @Html.Raw("</li>")
+                                                        @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
+
+                                                        @*@Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")*@
+
+
+                                                        @Html.Raw("</li>")
+                                                    </div>
                                                 </div>
-
                                             </div>
 
-                                        </div>
+
+                                        </div> 
+
 
                                     }
                                     @Html.Raw("</ul>")
