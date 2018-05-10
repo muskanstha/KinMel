@@ -74,7 +74,7 @@ nav .sidenav-trigger {
 }
 
 .side-content {
-    width: fit-content;
+    height: fit-content;
     padding: 0px;
     margin: 0px;
     float: left;
@@ -107,9 +107,17 @@ nav .sidenav-trigger {
 /**************GRID**************/
 .page-container-grid {
     display: grid;
-    grid-template-columns: 220px 80%;
+    grid-template-columns: 223px 1fr;
     grid-template-areas:
                        "sideMenu main";
+    grid-gap: 1em;
+}
+
+.main-content {
+    display: grid;
+    grid-template-rows: 26px 1fr;
+    grid-template-areas: "sorting" 
+                         "main-content";
     grid-gap: 1em;
 }
 /*************!GRID**************/
@@ -176,8 +184,16 @@ nav .sidenav-trigger {
 }
 
 @media(max-width: 992px) {
-    .main-content {
+    /*.main-content {
         width: 100% !important;
+    }*/
+
+    .page-container-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: 70px 1fr;
+        grid-template-areas:
+                           "sideMenu" 
+                           "main";
     }
 }
 /*********************END*********************/
@@ -638,10 +654,10 @@ footer .brand-logo {
 
 .taxonomy {
     position: relative;
-    -ms-flex: 0 0 auto;
-    flex: 0 0 auto;
+    /*-ms-flex: 0 0 auto;*/
+    /*flex: 0 0 auto;*/
     overflow: hidden;
-    width: 100%;
+    /*width: 100%;*/
     background: rgba(255, 255, 255, 0.9);
     height: 70px;
     will-change: height;
@@ -658,6 +674,8 @@ footer .brand-logo {
     -webkit-overflow-scrolling: touch;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
+    display: grid;
+    grid-template-columns: repeat(22, 84px);
 }
 
 .taxonomy.expanded {
