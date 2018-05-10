@@ -2,27 +2,16 @@
     ViewData["Title"] = "Home Page";
 }
 
-<section class="page-container section">
-    <div class="row browse-width">
+<section class="row browse-width section">
+    <div class="page-container-grid">
         <!--Side-Content-->
         @await Html.PartialAsync("_categoriesSideMenu")
-
         <!--Main-Content-->
-        <div class="page-container col s9 p0 hide-on-med-and-down">
-                <div class="table-striped p0">
-                    @await Component.InvokeAsync("HomePageAds", new { listType = "latest" })
-                    @await Component.InvokeAsync("HomePageAds", new { listType = "name" })
-                    @await Component.InvokeAsync("HomePageAds", new { listType = "free" })
-                    @await Component.InvokeAsync("HomePageAds", new { listType = "default" })
-                </div>
-            </div>
-        <div class="page-container p0 hide-on-large-only hide-on-extra-large-only">
-            <div class="table-striped p0">
-                @await Component.InvokeAsync("HomePageAds", new { listType = "latest" })
-                @await Component.InvokeAsync("HomePageAds", new { listType = "name" })
-                @await Component.InvokeAsync("HomePageAds", new { listType = "free" })
-                @await Component.InvokeAsync("HomePageAds", new { listType = "default" })
-            </div>
+        <div class="index-content">
+            <div>@await Component.InvokeAsync("HomePageAds", new { listType = "Latest Ads" })</div>
+            <div>@await Component.InvokeAsync("HomePageAds", new { listType = "name" })</div>
+            <div>@await Component.InvokeAsync("HomePageAds", new { listType = "Free Ads" })</div>
+            <div>@await Component.InvokeAsync("HomePageAds", new { listType = "default" })</div>
         </div>
     </div>
 </section>

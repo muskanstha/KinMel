@@ -95,19 +95,14 @@ nav .sidenav-trigger {
 }
 
 .select-wrapper input.select-dropdown {
-    border: 1px solid #555555 !important;
     height: 1.5em;
     padding-left: 5px;
-}
-
-.select-wrapper input.select-dropdown:focus {
-    border: 1px solid #00bcd4 !important;
 }
 
 /**************GRID**************/
 .page-container-grid {
     display: grid;
-    grid-template-columns: 223px 1fr;
+    grid-template-columns: auto 1fr;
     grid-template-areas:
                        "sideMenu main";
     grid-gap: 1em;
@@ -115,9 +110,21 @@ nav .sidenav-trigger {
 
 .main-content {
     display: grid;
-    grid-template-rows: 26px 1fr;
+    grid-template-rows: auto 1fr;
     grid-template-areas: "sorting" 
                          "main-content";
+    grid-gap: 1em;
+}
+
+.index-content {
+    display: grid;
+    grid-gap: 1em;
+}
+
+.main-content-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-rows: min-content;
     grid-gap: 1em;
 }
 /*************!GRID**************/

@@ -1,16 +1,8 @@
-﻿@model IEnumerable<KinMel.Models.ApparelsAndAccessories>
+﻿@model IEnumerable<KinMel.Models.ClassifiedAd>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Default";
 }
-
-<!--Breadcrumbs-->
-<div class="page-container grey lighten-3">
-    <div class="container grey lighten-3">
-        <a asp-controller="Home" asp-action="Index" class="breadcrumb">Home</a>
-        <a asp-controller="ApparelsAndAccessories" asp-action="Index" class="breadcrumb">Apparels & Accessories</a>
-    </div>
-</div>
 
 <section class="row browse-width section">
     <div class="page-container-grid">
@@ -21,37 +13,35 @@
             <!--sorting-->
             @await Html.PartialAsync("_sortingPartial")
             <!--grid-view-->
-            <div class="hide-on-small-and-down">
+            <div class="main-content-cards hide-on-small-and-down">
                 @foreach (var item in Model)
                 {
-                    <div class="col s12 m6 l4">
-                        <div class="card">
-                            <div class="card-image waves-effect waves-block grey lighten-2 waves-light">
-                                <img class="content-image-grid activator" src="@item.ImageUrlList.FirstOrDefault()" />
-                            </div>
-                            <div class="card-content">
-                                <span class="card-title activator grey-text text-darken-4">
-                                    <a asp-action="Details" asp-controller="ApparelsAndAccessories" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
-                                </span>
-                                @if (@item.Condition == "NEW")
-                                {
-                                    <a class="content-condition btn-large red darken-1">@Html.DisplayFor(modelItem => item.Condition)</a>
-                                }
-                                else
-                                {
-                                    <a class="content-condition btn-large cyan darken-3">@Html.DisplayFor(modelItem => item.Condition)</a>
-                                }
-                                <p class="material-icons align-middle m-5">person_outline</p>
-                                <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
-                            </div>
-                            <div class="card-reveal">
-                                <span class="card-title grey-text text-darken-4">
-                                    <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
-                                    <i class="material-icons right">close</i>
-                                </span>
-                                <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
-                                <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
-                            </div>
+                    <div class="card m0">
+                        <div class="card-image waves-effect waves-block grey lighten-2 waves-light">
+                            <img class="content-image-grid activator" src="@item.ImageUrlList.FirstOrDefault()" />
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title activator grey-text text-darken-4">
+                                <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
+                            </span>
+                            @if (@item.Condition == "NEW")
+                            {
+                                <a class="content-condition btn-large red darken-1">@Html.DisplayFor(modelItem => item.Condition)</a>
+                            }
+                            else
+                            {
+                                <a class="content-condition btn-large cyan darken-3">@Html.DisplayFor(modelItem => item.Condition)</a>
+                            }
+                            <p class="material-icons align-middle m-5">person_outline</p>
+                            <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">
+                                <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
+                                <i class="material-icons right">close</i>
+                            </span>
+                            <p class="content-description">@Html.DisplayFor(modelItem => item.Description)</p>
+                            <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
                         </div>
                     </div>
                 }
