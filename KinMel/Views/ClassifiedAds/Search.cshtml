@@ -14,180 +14,121 @@
     </div>
 </div>
 
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            @*<div class="row" style="margin-top: 5px;">*@
+            <div class="col s12 m2 l2">
+                <div class="card blue-white lighten-4">
+                    <div class="card-content white-text">
+                        <span class="card-title" style="color: brown;">Filter Products</span>
+                        @using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <div class="input-field">
 
-<div class="row" style="margin-top: 5px;">
-    <div class="col s12 m2 l2">
-        <div class="card blue-white lighten-4">
-            <div class="card-content white-text">
-                <span class="card-title" style="color: brown;">Filter Products</span>
-                @using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)
-                    <div class="input-field">
-                       
-                        <i class="material-icons">
-                            room
-                        </i>
-                        @Html.LabelFor(m => m.City)
-                       
-                        @Html.TextBoxFor(m => m.City)
+                                <i class="material-icons">&nbsp;room</i>
+                                @Html.LabelFor(m => m.City)
 
+                                @Html.TextBoxFor(m => m.City)
+
+                            </div>
+
+                            <div class="input-field">
+
+                                @Html.LabelFor(m => m.Condition)
+                                @Html.TextBoxFor(m => m.Condition)
+
+
+                            </div>
+
+                            <div class="input-field">
+
+                                @Html.LabelFor(m => m.PriceFrom)
+                                @Html.TextBoxFor(m => m.PriceFrom, new { type = "number", min = "0", max = "100" })
+                                @Html.ValidationMessageFor(m => m.PriceFrom)
+
+                            </div>
+
+                            <div class="input-field">
+
+                                @Html.LabelFor(m => m.PriceTo)
+                                @Html.TextBoxFor(m => m.PriceTo, new { type = "number", min = "0", max = "100" })
+                                @Html.ValidationMessageFor(m => m.PriceTo)
+
+                            </div>
+                            <div class="card-panel">
+                                <button class="btn waves-effect waves-light green btn-small" type="submit" style="margin-bottom: 5px;">
+                                    Filter
+                                    <i class="material-icons right">send</i>
+                                </button>
+                                <button class="btn waves-effect waves-light red btn-small" type="submit">
+                                    Clear
+                                    <i class="material-icons right">cancel</i>
+                                </button>
+                            </div>
+                        }
                     </div>
 
-                    <div class="input-field">
-                    
-                        @Html.LabelFor(m => m.Condition)
-                        @Html.TextBoxFor(m => m.Condition)
-
-                      
-                    </div>
-
-                    <div class="input-field">
-                       
-                        @Html.LabelFor(m => m.PriceFrom)
-                        @Html.TextBoxFor(m => m.PriceFrom, new { type = "number", min = "0", max = "100" })
-                        @Html.ValidationMessageFor(m => m.PriceFrom)
-
-                    </div>
-
-                    <div class="input-field">
-                      
-                        @Html.LabelFor(m => m.PriceTo)
-                        @Html.TextBoxFor(m => m.PriceTo, new { type = "number", min = "0", max = "100" })
-                        @Html.ValidationMessageFor(m => m.PriceTo)
-
-                    </div>
-                    <div class="card-panel">
-
-                        <button class="btn waves-effect waves-light green btn-small" type="submit" style="margin-bottom: 5px;">
-                            Filter
-                            <i class="material-icons right">send</i>
-                        </button>
-                        <button class="btn waves-effect waves-light red btn-small" type="submit">
-                            Clear
-                            <i class="material-icons right">cancel</i>
-                        </button>
-                    </div>
-                }
+                </div>
             </div>
+            @*</div>*@
+            <div class="container">
+                <div class="products">
+                    <div class="container">
+                        <span class="card-title" style="color: brown;">Found <strong>@Model.PropertyResults.Count()</strong> Products</span>
+                        <div class="row">
 
+                            @{
+                                if (Model.PropertyResults.Count() > 0)
+                                {
+                                    foreach (ClassifiedAd p in Model.PropertyResults)
+
+                                    {
+                                        <div class="col s12 m6 l3">
+                                            <div class="card">
+                                                <div class="row">
+                                                    @Html.Raw("<li>")
+
+                                                    @Html.Raw("<strong>Title: " + p.Title + "</strong><br/>")
+
+                                                    @*@Html.Raw("<strong>Posted By: </strong>" + p.FirstName + "<br/>")
+                                                        ;*@
+                                                    @Html.Raw("<strong>City:</strong> " + p.City + "<br/>")
+
+                                                    @Html.Raw("<strong>Price: &#8360;.</strong> " + p.Price + "<br/>")
+
+
+                                                    @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
+
+                                                    @*@Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")*@
+
+
+                                                    @Html.Raw("</li>")
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    }
+                                    @Html.Raw("</ul>")
+                                    ;
+                                }
+                                else
+                                {
+                                    <h2>Sorry !</h2>
+                                    <p>No Properties could be found :( consider checking the input field. Thank You !!</p>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
-@*<div class="container">
-    <div class="row">
-
-        <div class="col s2">
-            <h2>Filter</h2>
-
-
-            @using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true)
-                <fieldset>
-                    @Html.LabelFor(m => m.City)
-                    @Html.TextBoxFor(m => m.City)
-
-                </fieldset>
-
-                <fieldset>
-                    @Html.LabelFor(m => m.Condition)
-                    @Html.TextBoxFor(m => m.Condition)
-
-                </fieldset>
-
-                <fieldset>
-                    @Html.LabelFor(m => m.PriceFrom)
-                    @Html.TextBoxFor(m => m.PriceFrom)
-                    @Html.ValidationMessageFor(m => m.PriceFrom)
-
-                </fieldset>
-
-                <fieldset>
-                    @Html.LabelFor(m => m.PriceTo)
-                    @Html.TextBoxFor(m => m.PriceTo)
-                    @Html.ValidationMessageFor(m => m.PriceTo)
-
-                </fieldset>
-
-                <p>
-                    <input type="submit" value="Filter" />
-                </p>
-            }
-        </div>*@
-
-<div class="col s12">
- 
-        @{
-            if (Model.PropertyResults.Count() > 0)
-            {
-                <h2>Found<strong>@Model.PropertyResults.Count()</strong>Ads</h2>
-
-                @Html.Raw("<ul class='properties'")
-                ;
-                
-                foreach (ClassifiedAd p in Model.PropertyResults)
-
-                {
-                    <div class="col s12 m3 l3">
-                        <div class="card">
-                            <div class="row">
-                                @Html.Raw("<li>")
-
-                                @Html.Raw("<strong>Title: " + p.Title + "</strong><br/>")
-
-                                @*@Html.Raw("<strong>Posted By: </strong>" + p.FirstName + "<br/>")
-                                ;*@
-                                @Html.Raw("<strong>City:</strong> " + p.City + "<br/>")
-
-                                @Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")
-
-                                @Html.Raw("<strong>Price: &#8360;.</strong> " + p.Price + "<br/>")
-
-
-                                @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
-
-
-                                @Html.Raw("</li>")
-                            </div>
-         
-                        </div>
-
-                    </div>
-
-                }
-                @Html.Raw("</ul>")
-                ;
-            }
-            else
-            {
-                <h2>Sorry !</h2>
-                <p>No Properties could be found :( consider checking the input field. Thank You !!</p>
-            }
-        }
-
-   
-</div>
-@*</div>
-    </div>*@
-
-
-<div class="row">
-
-    <div class="col s4">
-        <p>haha haha</p>
-    </div>
-    <div class="col s4">
-        <p>haha haha</p>
-    </div>
-    <div class="col s4">
-        <p>haha haha</p>
-    </div>
-   
-
 </div>
 
 <!--for map-->
@@ -370,4 +311,216 @@
     </div>
 </div>
 
+<!--just checking grid-->
 
+<div class="navbar">
+    <nav>
+        <div class="nav-wrapper">
+            <a class="brand-logo" href="#"> &nbsp;Events.org</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="sass.html">Map</a></li>
+                <li><a href="badges.html">Calendar</a></li>
+                <li><a href="#modal1" class="modal-trigger" data-target="modal1">Submit event</a></li>
+                <li><a href="collapsible.html">Help us!</a></li>
+                <li><a href="collapsible.html">About</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div id="container">
+    <div class="row">
+        <div class="col s12 m12 l3">
+            <nav class="search-title-filter">
+                <div class="nav-wrapper">
+                    <form>
+                        <div class="input-field">
+                            <input id="search" type="search" required>
+                            <label for="search"><i class="material-icons">search</i></label>
+                            <i class="material-icons">close</i>
+                        </div>
+                    </form>
+                </div>
+            </nav>
+            <ul class="collapsible" data-collapsible="expandable">
+                <li class="">
+                    <div class="collapsible-header active"><i class="material-icons">event_note</i>Date</div>
+                    <div class="collapsible-body filter-container" style="display: none; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
+                        <form action="#">
+                            <ul>
+                                <li>
+                                    <input class="with-gap" name="group1" type="radio" id="Today" />
+                                    <label for="Today">Today</label>
+                                </li>
+                                <li>
+                                    <input class="with-gap" name="group1" type="radio" id="week" />
+                                    <label for="week">This week</label>
+                                </li>
+                                <li>
+                                    <input class="with-gap" name="group1" type="radio" id="month" selected />
+                                    <label for="month">This month</label>
+                                </li>
+                                <li>
+                                    <input class="with-gap" name="group1" type="radio" id="year" />
+                                    <label for="year">This year</label>
+                                </li>
+                                <li>
+                                    <input class="with-gap" name="group1" type="radio" id="Custom" />
+                                    <label for="Custom">Custom date</label>
+                                </li>
+                            </ul>
+
+
+                        </form>
+                    </div>
+                </li>
+                <li class="">
+                    <div class="collapsible-header active"><i class="material-icons">local_activity</i>Styles</div>
+                    <div class="collapsible-body " style="display: none; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
+                        <p>
+                            <select multiple>
+                                <!--<option value="" disabled selected>Choose your option</option>-->
+                                <option value="1" selected>Lindy Hop</option>
+                                <option value="2" selected>Blues</option>
+                                <option value="3" selected>Balboa</option>
+                                <option value="3" selected>Jazz</option>
+                                <option value="3" selected>Shag</option>
+                                <option value="3" selected>Charleston</option>
+                                <option value="3" selected>Other</option>
+                            </select>
+                            <label>Materialize Select</label>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header active"><i class="material-icons">pin_drop</i>Country</div>
+                    <div class="collapsible-body">
+                        <p>
+                            <select id="country-select"></select>
+                            <label>Optgroups</label>
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="collapsible-header active"><i class="material-icons">label</i>Event type</div>
+                    <div class="collapsible-body filter-container">
+
+                        <ul>
+                            <li>
+                                <input type="checkbox" name="event-type-filter" class="event-type-filter filled-in" id="socials" checked="checked" value="social" />
+                                <label for="socials">Socials</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="event-type-filter" class="event-type-filter  filled-in" id="classes" checked="checked" value="class" />
+                                <label for="classes">Classes</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" name="event-type-filter" class="event-type-filter filled-in" id="festival-event" checked="checked" value="festival" />
+                                <label for="festival-event">Festivals & events</label>
+                            </li>
+                        </ul>
+
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- Cards container -->
+        <div class="col s12 m12 l9">
+
+            <h4>Swing events</h4>
+            <h5>February</h5>
+            <div id="card-container" class="row">
+                <!-- Col: Card 1 -->
+                <div class="col s12 m6 l4">
+                    <!-- Card 1 -->
+                    <div class="card">
+                        <div class="card-content white-text">
+                            <div class="card__date">
+                                <span class="card__date__day">23</span>
+                                <span class="card__date__month">Mai</span>
+                            </div>
+                            <div class="card__meta">
+                                <a href="#"><i class="small material-icons">room</i>Savoy dance club</a>
+                                <time>17th March</time>
+                            </div>
+                            <span class="card-title grey-text text-darken-4">Savoy swing up</span>
+
+                            <p class="card-subtitle grey-text text-darken-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...lacus eleifend lacinia... go!</p>
+                            <div class="row card-row">
+                                <span class="text-darken-2 card-info"><i class="small material-icons">label</i>&nbsp;lindy hop, balboa, charleston</span>
+                            </div>
+                            <div class="row card-row">
+                                <span class="text-darken-2 card-info"><i class="small material-icons">place</i>&nbsp;lindy hop, balboa, charleston</span>
+                            </div>
+                            <div class="row card-row">
+                                <span class="text-darken-2 card-info"><i class="small material-icons">event</i>&nbsp;lindy hop, balboa, charleston</span>
+                            </div>
+                            <div class="row card-row">
+                                <span class="text-darken-2 card-info"><i class="small material-icons">schedule</i>&nbsp;lindy hop, balboa, charleston</span>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <a href="#"><i class="material-icons">&nbsp;language</i>VISIT WEB</a>
+                            <a href="#" class="card-action-right"><i class="material-icons">&nbsp;share</i>SHARE</a>
+                        </div>
+                    </div>
+                    <!-- End of card -->
+                </div>
+                <!-- End of col -->
+                <!-- Col: Card 1 -->
+                <div class="col s12 m6 l4">
+                    <!-- Card 1 -->
+                    <div class="card">
+                        <div class="card-content white-text">
+                            <div class="card__date">
+                                <span class="card__date__day">23</span>
+                                <span class="card__date__month">Mai</span>
+                            </div>
+                            <div class="card__meta">
+                                <a href="#"><i class="small material-icons">room</i>Web Design</a>
+                                <time>17th March</time>
+                            </div>
+                            <span class="card-title grey-text text-darken-4">Savoy swing up</span>
+
+                            <p class="card-subtitle grey-text text-darken-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...lacus eleifend lacinia... go!</p>
+                            <span class="text-darken-2 card-info"><i class="small material-icons">label</i>&nbsp;lindy hop, balboa, charleston</span>
+                        </div>
+                        <div class="card-action">
+                            <a href="#"><i class="material-icons">&nbsp;language</i>VISIT WEB</a>
+                            <a href="#" class="card-action-right"><i class="material-icons">&nbsp;room</i>FIND</a>
+                        </div>
+                    </div>
+                    <!-- End of card -->
+                </div>
+                <!-- Col: Card 1 -->
+                <div class="col s12 m6 l4">
+                    <!-- Card 1 -->
+                    <div class="card">
+                        <div class="card-content white-text">
+                            <div class="card__date">
+                                <span class="card__date__day">23</span>
+                                <span class="card__date__month">Mai</span>
+                            </div>
+                            <div class="card__meta">
+                                <a href="#"><i class="small material-icons">room</i>Web Design</a>
+                                <time>17th March</time>
+                            </div>
+                            <span class="card-title grey-text text-darken-4">Savoy swing up</span>
+
+                            <p class="card-subtitle grey-text text-darken-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...lacus eleifend lacinia... go!</p>
+                            <span class="text-darken-2 card-info"><i class="small material-icons">label</i>&nbsp;lindy hop, balboa, charleston</span>
+                        </div>
+                        <div class="card-action">
+                            <a href="#"><i class="material-icons">&nbsp;language</i>VISIT WEB</a>
+                            <a href="#" class="card-action-right"><i class="material-icons">&nbsp;room</i>FIND</a>
+                        </div>
+                    </div>
+                    <!-- End of card -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
