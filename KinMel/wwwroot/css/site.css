@@ -85,19 +85,23 @@ nav .sidenav-trigger {
 }
 
 .select-wrapper {
-    width: fit-content;
-    height: fit-content;
-    display: inline-block;
 }
 
 .select-wrapper .caret {
     margin: 0px;
+    fill: #fff;
 }
 
 .select-wrapper input.select-dropdown {
     height: 1.5em;
     padding-left: 5px;
+    color: #fff;
+    margin: 0px;
 }
+
+    .select-wrapper input.select-dropdown:focus {
+        border-bottom: 1px solid #fff;
+    }
 
 /**************GRID**************/
 .page-container-grid {
@@ -106,6 +110,7 @@ nav .sidenav-trigger {
     grid-template-areas:
                        "sideMenu main";
     grid-gap: 1em;
+    padding: 5px;
 }
 
 .main-content {
@@ -127,14 +132,22 @@ nav .sidenav-trigger {
     grid-template-rows: min-content;
     grid-gap: 1em;
 }
+
+.sorting-grid {
+    display: grid;
+    grid-template-columns: 1fr 270px;
+}
+
+.sorting-grid > div {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-column: 2;
+}
 /*************!GRID**************/
-
-
 /*************SORT**************/
 .sort-text {
     margin: auto;
-    padding-right: 10px;
-    display: inline-block;
+    font-size: 15px;
 }
 /*******************************/
 
@@ -142,6 +155,23 @@ nav .sidenav-trigger {
 @media (max-width: 768px) {
     .card-panel-large {
         padding: 10px;
+    }
+
+    .sort-text {
+        font-size: 13px;
+    }
+
+    .select-wrapper {
+        float: right;
+        width: 150px;
+    }
+
+    .select-wrapper input.select-dropdown {
+        font-size: 14px;
+    }
+
+    .sorting-grid {
+        grid-template-columns: 1fr 230px;
     }
 }
 
@@ -181,6 +211,23 @@ nav .sidenav-trigger {
 
     .material-icons {
         font-size: 16px;
+    }
+
+    .sort-text {
+        font-size: 11px;
+        float: left;
+    }
+
+    .main-content > .card-header {
+        padding: 5px;
+    }
+
+    .browse-width > .breadcrumb {
+        font-size: 12px;
+    }
+
+    .browse-width > .breadcrumb:last-child {
+        font-size: 12px;
     }
 }
 
@@ -268,18 +315,15 @@ nav .sidenav-trigger {
 }
 
 .card-header {
-    background-color: #edefed;
-    color: #484848;
+    background-color: #00bcd4;
+    color: #fff;
     font-size: 16px;
-    padding: 12px 20px 12px 20px;
-    border-bottom: 1px solid #dce0e0;
-    position: relative;
-    margin: 0;
-    border-top: none;
+    padding: 8px 20px;
 }
 
 .browse-width {
     max-width: 1280px;
+    margin: 0 auto;
 }
 /******************END********************/
 
