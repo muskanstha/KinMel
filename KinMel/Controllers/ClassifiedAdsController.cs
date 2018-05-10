@@ -25,7 +25,7 @@ namespace KinMel.Controllers
         }
 
         // GET: ClassifiedAds
-        public async Task<IActionResult> Index(string sortOrder)
+        public IActionResult Index(string sortOrder)
         {
             return View();
         }
