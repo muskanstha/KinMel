@@ -17,7 +17,7 @@
 <div class="content">
     <div class="container-fluid">
         <div class="row">
-            @*<div class="row" style="margin-top: 5px;">*@
+
             <div class="col s12 m2 l2">
                 <div class="card blue-white lighten-4">
                     <div class="card-content white-text">
@@ -46,7 +46,7 @@
                             <div class="input-field">
 
                                 @Html.LabelFor(m => m.PriceFrom)
-                                @Html.TextBoxFor(m => m.PriceFrom, new { type = "number", min = "0", max = "100" })
+                                @Html.TextBoxFor(m => m.PriceFrom, new { type = "number", min = "1", max = "10 Thousands" })
                                 @Html.ValidationMessageFor(m => m.PriceFrom)
 
                             </div>
@@ -54,26 +54,28 @@
                             <div class="input-field">
 
                                 @Html.LabelFor(m => m.PriceTo)
-                                @Html.TextBoxFor(m => m.PriceTo, new { type = "number", min = "0", max = "100" })
+                                @Html.TextBoxFor(m => m.PriceTo, new { type = "number", min = "1", max = "10 crore" })
                                 @Html.ValidationMessageFor(m => m.PriceTo)
 
                             </div>
-                            <div class="card-panel">
-                                <button class="btn waves-effect waves-light green btn-small" type="submit" style="margin-bottom: 5px;">
-                                    Filter
-                                    <i class="material-icons right">send</i>
-                                </button>
-                                <button class="btn waves-effect waves-light red btn-small" type="submit">
-                                    Clear
-                                    <i class="material-icons right">cancel</i>
-                                </button>
-                            </div>
+                            @*<div class="card-panel">*@
+                                <div class="container">
+                                    <button class="btn waves-effect waves-light green btn-small" type="submit" style="margin-bottom: 5px;">
+                                        Filter
+                                        <i class="material-icons right">send</i>
+                                    </button>
+                                    <button class="btn waves-effect waves-light red btn-small" type="submit">
+                                        Clear
+                                        <i class="material-icons right">cancel</i>
+                                    </button>
+                                </div>
+                            @*</div>*@
                         }
                     </div>
 
                 </div>
             </div>
-            @*</div>*@
+
             <div class="container">
                 <div class="products">
                     <div class="container">
