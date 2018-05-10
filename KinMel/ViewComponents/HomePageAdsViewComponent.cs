@@ -29,11 +29,11 @@ namespace KinMel.ViewComponents
 
             switch (listType)
             {
-                case "latest":
+                case "Latest Ads":
                     return _context.ClassifiedAd.OrderByDescending(c => c.DateCreated).Take(6).ToListAsync();
                 case "name":
                     return _context.ClassifiedAd.OrderByDescending(c => c.Title).Take(6).ToListAsync();
-                case "free":
+                case "Free Ads":
                     return _context.ClassifiedAd.Where(c => c.Price.Equals(0)).OrderByDescending(c => c.DateCreated).Take(6).ToListAsync();
                 default:
                     ViewData["ComponentTitle"] = "default";
