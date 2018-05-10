@@ -14,11 +14,11 @@ namespace KinMel.Models
         public double? Price { get; set; }
 
         [Required(ErrorMessage = "Please Enter Minimum Price")]
-        [Range(1,10000000,ErrorMessage = "Price Must Be Minimum 1")]
+        [Range(0,10000000,ErrorMessage = "Maximum range 10 crore")]
         public int? PriceFrom { get; set; }
 
         [Required(ErrorMessage = "Please Enter Maximum Price")]
-        [Range(1, 100000000, ErrorMessage = "Price Must Be Between 1 and 10 crore")]
+        [Range(1, 100000000, ErrorMessage = "Price must be between 1 and 10 crore")]
         public int? PriceTo { get; set; }
         //public string FirstName { get; set; }
         public string LastName { get; set; }
