@@ -4,7 +4,7 @@
     ViewData["Title"] = "Default";
 }
 
-<section class="row browse-width section">
+<section class="browse-width">
     <div class="page-container-grid">
         <!--Side-Content-->
         @await Html.PartialAsync("_categoriesSideMenu")
@@ -47,7 +47,7 @@
                 }
             </div>
             <!--list-view-->
-            <div class="hide-on-med-and-up p5">
+            <div class="hide-on-med-and-up">
                 @foreach (var item in Model)
                 {
                     <div class="display-flex">
