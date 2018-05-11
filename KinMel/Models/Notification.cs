@@ -24,7 +24,7 @@ namespace KinMel.Models
 
         public virtual ApplicationUser NotificationFrom { get; set; }
 
-        public string NotificationFromName => this.NotificationFrom.FirstName;
+        public string NotificationFromName => this.NotificationFrom?.FirstName;
 
         public string NotificationText { get; set; }
 

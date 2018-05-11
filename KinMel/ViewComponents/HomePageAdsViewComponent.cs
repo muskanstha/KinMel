@@ -20,10 +20,10 @@ namespace KinMel.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(string listType)
         {
-            var items = await GetLatestAdsAsync(listType);
+            var items = await GetAdsAsync(listType);
             return View(items);
         }
-        private Task<List<ClassifiedAd>> GetLatestAdsAsync(string listType)
+        private Task<List<ClassifiedAd>> GetAdsAsync(string listType)
         {
             ViewData["ComponentTitle"] = listType;
 
