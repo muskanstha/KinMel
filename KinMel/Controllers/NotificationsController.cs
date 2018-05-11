@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
+using KinMel.Hubs;
 using KinMel.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
+
 
 namespace KinMel.Controllers
 {
@@ -16,12 +19,16 @@ namespace KinMel.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
+        private IHubContext<NotificationHub> _notificationHubContext;
+
+
         public NotificationsController(ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IHubContext<NotificationHub> notificationHub)
         {
             _context = context;
             _userManager = userManager;
-
+            _notificationHubContext = notificationHub;
         }
 
         // GET: Notifications
@@ -32,11 +39,11 @@ namespace KinMel.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
         // GET: NotificationsCount
-        public async Task<ActionResult> NotificationCount()
+        public async Task<JsonResult> NotificationCount()
         {
             var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
-            int notificationCount = _context.Notification.Count(n => n.NotificationToId.Equals(currentUser.Id) && !n.IsRead);
-            return new ContentResult { Content = notificationCount.ToString() };
+            int notificationCount = NotificationCount(currentUser.Id);
+            return Json(notificationCount);
         }
         // GET: Notifications/ReadNotification/5
         public async Task<ActionResult> ReadNotification(int? id)
@@ -59,6 +66,11 @@ namespace KinMel.Controllers
                 {
                     _context.Update(notification);
                     await _context.SaveChangesAsync();
+
+                    int notificationCount = NotificationCount(notification.NotificationToId);
+                    var user = _notificationHubContext.Clients.User(notification.NotificationToId);
+                    await user.SendAsync("Receivecount", notificationCount);
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -97,6 +109,11 @@ namespace KinMel.Controllers
             {
                 _context.Notification.Remove(notification);
                 await _context.SaveChangesAsync();
+
+                int notificationCount = NotificationCount(notification.NotificationToId);
+                var user = _notificationHubContext.Clients.User(notification.NotificationToId);
+                await user.SendAsync("Receivecount", notificationCount);
+
                 return RedirectToAction(nameof(Index));
 
             }
@@ -121,34 +138,40 @@ namespace KinMel.Controllers
                 return NotFound();
             }
 
+          
             return View(notification);
         }
 
-        //// GET: Notifications/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["NotificationFromId"] = new SelectList(_context.Users, "Id", "Id");
-        //    ViewData["NotificationToId"] = new SelectList(_context.Users, "Id", "Id");
-        //    return View();
-        //}
+        // GET: Notifications/Create
+        public IActionResult Create()
+        {
+            ViewData["NotificationFromId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["NotificationToId"] = new SelectList(_context.Users, "Id", "Id");
+            return View();
+        }
 
-        //// POST: Notifications/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("Id,NotificationToId,NotificationFromId,NotificationText,ActionController,Action,ActionId,IsRead,Date")] Notification notification)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(notification);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["NotificationFromId"] = new SelectList(_context.Users, "Id", "Id", notification.NotificationFromId);
-        //    ViewData["NotificationToId"] = new SelectList(_context.Users, "Id", "Id", notification.NotificationToId);
-        //    return View(notification);
-        //}
+        // POST: Notifications/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,NotificationToId,NotificationFromId,NotificationText,ActionController,Action,ActionId,IsRead,Date")] Notification notification)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(notification);
+                await _context.SaveChangesAsync();
+
+                int notificationCount = NotificationCount(notification.NotificationToId);
+                var user = _notificationHubContext.Clients.User(notification.NotificationToId);
+                await user.SendAsync("Receivecount", notificationCount);
+
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["NotificationFromId"] = new SelectList(_context.Users, "Id", "Id", notification.NotificationFromId);
+            ViewData["NotificationToId"] = new SelectList(_context.Users, "Id", "Id", notification.NotificationToId);
+            return View(notification);
+        }
 
         //// GET: Notifications/Edit/5
         //public async Task<IActionResult> Edit(int? id)
@@ -239,6 +262,10 @@ namespace KinMel.Controllers
         private bool NotificationExists(int id)
         {
             return _context.Notification.Any(e => e.Id == id);
+        }
+        private int NotificationCount(string id)
+        {
+            return _context.Notification.Count(n => n.NotificationToId.Equals(id) && !n.IsRead);
         }
     }
 }

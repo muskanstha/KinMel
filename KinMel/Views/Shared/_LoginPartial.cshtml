@@ -8,13 +8,16 @@
 {
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="right hide-on-med-and-down">
         <ul class="right hide-on-med-and-down">
+            <li><a asp-controller="Notifications" asp-action="Index">Notifications <span style="color: red;" id="notificationCount"></span></a></li>
+
             <!-- Dropdown Trigger -->
             <li>
                 <a class="dropdown-trigger" href="#!" data-target="navbardropdown">Hello @UserManager.GetUserName(User)!<i class="material-icons right">arrow_drop_down</i></a>
             </li>
+           
         </ul>
     </form>
-
+  
     <ul id="navbardropdown" class="dropdown-content">
         <li>
             <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage" style="width: 100%">Edit Profile</a>

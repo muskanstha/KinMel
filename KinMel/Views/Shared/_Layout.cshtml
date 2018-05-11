@@ -35,17 +35,18 @@
 
                 @await Html.PartialAsync("_LoginPartial")
 
-                <ul class="right hide-on-med-and-down">
-                    <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
-                </ul>
 
                 <ul class="right hide-on-med-and-down">
+                    <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
+
                     <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Search">Filter Ads</a></li>
+
                 </ul>
 
                 <ul id="nav-mobile" class="sidenav">
                     <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
                 </ul>
+                >
                 <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             </div>
         </nav>
@@ -109,7 +110,10 @@
 
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-<script src="//cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script src="//cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script src="~/lib/signalr/signalr.js"></script>
+<script src="~/js/notification.js"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
