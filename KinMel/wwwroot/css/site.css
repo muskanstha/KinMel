@@ -40,6 +40,14 @@ nav .sidenav-trigger {
     margin: 0px;
 }
 
+.navbar-fixed {
+    z-index: 997 !important;
+}
+
+    .navbar-fixed > nav {
+        background: linear-gradient(to bottom, #006064, #0097a7);
+    }
+
 .card-content {
     padding: 16px !important;
 }
@@ -49,12 +57,12 @@ nav .sidenav-trigger {
     font-weight: 500;
 }
 
-.card-content li a:hover {
-    color: #00bcd4;
-}
+    .card-content li a:hover {
+        color: #00acc1;
+    }
 
 .category-select {
-    color: #00bcd4 !important;
+    color: #00acc1 !important;
 }
 
 .tab {
@@ -69,9 +77,6 @@ nav .sidenav-trigger {
     z-index: 996 !important;
 }
 
-.navbar-fixed {
-    z-index:997 !important;
-}
 
 .side-content {
     height: fit-content;
@@ -84,18 +89,15 @@ nav .sidenav-trigger {
     background-color: lightgrey;
 }
 
-.select-wrapper {
-}
-
 .select-wrapper .caret {
     margin: 0px;
-    fill: #fff;
+    fill: #111111;
 }
 
 .select-wrapper input.select-dropdown {
     height: 1.5em;
     padding-left: 5px;
-    color: #fff;
+    color: #111111;
     margin: 0px;
 }
 
@@ -143,14 +145,32 @@ nav .sidenav-trigger {
     grid-template-columns: 1fr 2fr;
     grid-column: 2;
 }
+
+/***Profile-page***/
+.side-container-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.side-content-grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-column: 2 / 6;
+    width: 220px;
+}
+
+.main-container-grid {
+    display: grid;
+}
+
 /*************!GRID**************/
+
 /*************SORT**************/
 .sort-text {
     margin: auto;
     font-size: 15px;
 }
 /*******************************/
-
 /*************Responsive-content**************/
 @media (max-width: 768px) {
     .card-panel-large {
@@ -172,6 +192,16 @@ nav .sidenav-trigger {
 
     .sorting-grid {
         grid-template-columns: 1fr 230px;
+    }
+
+    /***floating-button***/
+    .btn-floating.btn-large {
+        width: 50px;
+        height: 50px;
+    }
+
+    .btn-floating.btn-large i {
+        line-height: 50px;
     }
 }
 
@@ -229,6 +259,16 @@ nav .sidenav-trigger {
     .browse-width > .breadcrumb:last-child {
         font-size: 12px;
     }
+
+    /***floating-button***/
+    .btn-floating.btn-large {
+        width: 42px;
+        height: 42px;
+    }
+
+        .btn-floating.btn-large i {
+            line-height: 42px;
+        }
 }
 
 @media (max-width: 1280px) {
@@ -285,23 +325,23 @@ nav .sidenav-trigger {
 }
 
 .breadcrumb {
-    color: black;
+    color: gray;
     font-size: 14px;
 }
 
 .breadcrumb:before {
     vertical-align: middle;
-    color: black;
+    color: gray;
     font-size: 14px;
 }
 
 .breadcrumb:last-child {
-    color: black;
+    color: gray;
     font-size: 14px;
 }
 
     .breadcrumb:hover {
-        color: #00bcd4;
+        color: #00acc1;
     }
 
 .card-panel-small {
@@ -315,7 +355,7 @@ nav .sidenav-trigger {
 }
 
 .card-header {
-    background-color: #00bcd4;
+    background: linear-gradient(to bottom, #0097a7, #00bcd4);
     color: #fff;
     font-size: 16px;
     padding: 8px 20px;
@@ -344,8 +384,12 @@ nav .sidenav-trigger {
 
 .content-title {
     font-size: 16px;
-    color: #00a5bb;
+    color: #00acc1;
     font-weight: bold;
+}
+
+.content-title:hover {
+    text-decoration: underline;
 }
 
 .content-description {
@@ -360,8 +404,12 @@ nav .sidenav-trigger {
 
 .content-username {
     font-size: 12px;
-    color: #00a5bb;
+    color: #00acc1;
 }
+
+    .content-username:hover {
+        text-decoration: underline;
+    }
 
 .content-datecreated {
     font-size: 14px;
@@ -523,12 +571,12 @@ nav .sidenav-trigger {
 /****************FOOTER*****************/
 
 .footer {
-    background: black;
     color: white;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
+    background: linear-gradient(to bottom, #006064, #00acc1);
 }
 
 footer a {
@@ -684,7 +732,6 @@ footer .brand-logo {
 }
 
 .footer-copyright {
-    color: #666;
     text-align: center;
 }
 

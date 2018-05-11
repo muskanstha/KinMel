@@ -4,11 +4,35 @@
     ViewData["Title"] = "User Profile";
 }
 
-<h2>Details</h2>
+<!--page-container-grid-->
+<div class="page-container-grid">
+    <!--side-container-->
+    <div class="side-container-grid">
+        <!--Side-card-->
+        <div class="card side-content-grid z-depth-4">
+            <!--profile-pic-->
+            <div>
+                <img src="https://picsum.photos/220/300/?random"/>
+            </div>
+            <!--side-about-content-->
+            <div class="card-content">
+                <p class="grey-text text-darken-3">About</p>
+                <p class="content-description grey-text text-darken-1">Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+                    Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</p>
+                <a class="pink-text">Read more<i class="material-icons align-middle">arrow_forward</i></a>
+                <hr/>
+            </div>
+        </div>
+    </div>
+    <!--Main-container-->
+    <div class="main-container-grid">
+
+    </div>
+</div>
+
 
 <div>
     <h4></h4>
-    <hr />
     @if (!string.IsNullOrWhiteSpace(@Model.ProfilePictureUrl))
     {
         <img src="@Model.ProfilePictureUrl" />
