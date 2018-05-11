@@ -32,3 +32,10 @@ $(document).ready(function () {
 
 
 });
+
+    function DeleteNotification(id) {
+        $.getJSON("notifications/Delete/" + id);
+       
+        //$.get("/Notifications/NotificationViewComponent", function (data) { container.html(data); });
+
+    };

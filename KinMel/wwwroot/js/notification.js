@@ -14,6 +14,12 @@ connection.on("Receivecount", (count) => {
     document.getElementById("notificationCount").innerHTML = count;
     M.toast({ html: count, classes: 'rounded' });
 
+    var container = $("#notificationdropdown");
+    $.get("/Notifications/NotificationViewComponent", function (data) {
+        container.empty();
+        console.log(data);
+        container.html(data);
+    });
 });
 
 

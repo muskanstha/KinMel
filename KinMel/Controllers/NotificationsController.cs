@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
 using KinMel.Hubs;
 using KinMel.Models;
+using KinMel.ViewComponents;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 
@@ -169,6 +170,10 @@ namespace KinMel.Controllers
             return View(notification);
         }
 
+        public IActionResult NotificationViewComponent()
+        {
+            return ViewComponent("Notification");
+        }
         //// GET: Notifications/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{
