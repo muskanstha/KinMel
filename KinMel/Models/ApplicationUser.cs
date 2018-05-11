@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -32,7 +33,10 @@ namespace KinMel.Models
 
         public virtual ICollection<ClassifiedAd> ClassifiedAds { get; set; }
 
+        [InverseProperty("NotificationTo")]
+        public virtual ICollection<Notification> Notifications { get; set; }
 
+        [InverseProperty("RatedFor")]
         public virtual ICollection<Rating> Ratings { get; set; }
 
         public double AverageStars

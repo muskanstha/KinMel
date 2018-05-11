@@ -1,7 +1,4 @@
-﻿
-<!--again tested-->
-
-@using KinMel.Models
+﻿@using KinMel.Models
 @model KinMel.Models.ClassifiedAdSearchModel
 
 
@@ -9,112 +6,307 @@
     ViewData["Title"] = "Search";
 }
 
-
 <!--Breadcrumbs-->
 <div class="page-container grey lighten-3">
     <div class="browse-width row grey lighten-3 mb0">
         <a asp-controller="Home" asp-action="Index" class="breadcrumb">Home</a>
         <a asp-controller="ClassifiedAds" asp-action="Index" class="breadcrumb">Browse Ads</a>
-
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
 
-        <div class="col s2">
-            <h2>Filter</h2>
-
-          
-            @using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Post))
-            {
-                @*@Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)*@
-                <fieldset>
-                    @Html.LabelFor(m => m.City)
-                    @Html.TextBoxFor(m => m.City)
-
-                </fieldset>
-
-                <fieldset>
-                    @Html.LabelFor(m => m.Condition)
-                    @Html.TextBoxFor(m => m.Condition)
-
-                </fieldset>
-
-                <fieldset>
-                    @Html.LabelFor(m => m.PriceFrom)
-                    @Html.TextBoxFor(m => m.PriceFrom)
-                    @Html.ValidationMessageFor(m => m.PriceFrom)
-
-                </fieldset>
-
-                <fieldset>
-                    @Html.LabelFor(m => m.PriceTo)
-                    @Html.TextBoxFor(m => m.PriceTo)
-                    @Html.ValidationMessageFor(m => m.PriceTo)
-
-                </fieldset>
-
-                <p>
-                    <input type="submit" value="Filter" />
-                </p>
-            }
-        </div>
-        @*<div class="col s9"></div>*@
-        <div class="col s10">
-           
-                <div class="row">
-                    @{
-                        if (Model.PropertyResults.Count() > 0)
+            <div class="col s12 m2 l2">
+                <div class="card blue-white lighten-4">
+                    <div class="card-content black-text">
+                        <span class="card-title" style="color: brown;">Search Goods</span>
+                        @using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Post))
                         {
-                            <h2>Found<strong>@Model.PropertyResults.Count()</strong>Ads</h2>
-                            @Html.Raw("<ul class='properties'")
-                            ;
-                            foreach (ClassifiedAd p in Model.PropertyResults)
-                               
-                            {
-                                <div class="col s3">
-                                    <div class="card">
-                                        @Html.Raw("<li>")
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <div class="input-field">
 
-                                        @Html.Raw("<strong>Title: " + p.Title + "</strong><br/>")
+                                @Html.LabelFor(m => m.City)
+                                @Html.TextBoxFor(m => m.City)
 
-                                        @*@Html.Raw("<strong>Posted By: </strong>" + p.FirstName + "<br/>")
-                                    ;*@
-                                        @Html.Raw("<strong>City:</strong> " + p.City + "<br/>")
+                            </div>
 
-                                        @Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")
+                            <div class="input-field">
 
-                                        @Html.Raw("<strong>Price: &pound;</strong> " + p.Price + "<br/>")
+                                @Html.LabelFor(m => m.Condition)
+                                @Html.TextBoxFor(m => m.Condition)
 
 
-                                        @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
+                            </div>
 
+                            <div class="input-field">
 
-                                        @Html.Raw("</li>")
+                                @Html.LabelFor(m => m.PriceFrom)
+                                @Html.TextBoxFor(m => m.PriceFrom, new { type = "number", min = "0", max = "10 Thousands" })
+                                @Html.ValidationMessageFor(m => m.PriceFrom)
 
-                                        <br/>
-                                    </div>
-                                   
-                                </div>
-                               
-                            }
-                            @Html.Raw("</ul>")
-                            ;
+                            </div>
+
+                            <div class="input-field">
+
+                                @Html.LabelFor(m => m.PriceTo)
+                                @Html.TextBoxFor(m => m.PriceTo, new { type = "number", min = "1", max = "10 crore" })
+                                @Html.ValidationMessageFor(m => m.PriceTo)
+
+                            </div>
+                          
+                            <div class="container">
+                                <button class="btn waves-effect waves-light green btn-small" type="submit" style="margin-bottom: 5px;">
+                                    Filter
+                                    <i class="material-icons right">send</i>
+                                </button>
+                                <button class="btn waves-effect waves-light red btn-small" type="submit">
+                                    Clear
+                                    <i class="material-icons right">cancel</i>
+                                </button>
+                            </div>
+                          
                         }
-                        else
-                        {
-                            <h2>Sorry !</h2>
-                            <p>No Properties could be found :( consider checking the input field. Thank You !!</p>
-                        }
-                    }
+                    </div>
 
                 </div>
-       
+            </div>
+
+            <div class="container">
+                <div class="products">
+                    <div class="container">
+                        <span class="card-title" style="color: brown; font-size: 30px;"><center> Products Found &nbsp;<strong>@Model.PropertyResults.Count()</strong></center> </span>
+                        <div class="row">
+                            @{
+                                if (Model.PropertyResults.Count() > 0)
+                                {
+                                    foreach (ClassifiedAd p in Model.PropertyResults)
+
+                                    {
+                                        <div class="col s12 m6 l4">
+                                            <div class="row">
+                                                <div class="card blue-white lighten-4" style="margin: 2px;">
+                                                    <div class="card-content black-text">
+                                                        @Html.Raw("<li>")
+
+                                                        @Html.Raw("<strong>Title: " + p.Title + "</strong><br/>")
+
+                                                        @*@Html.Raw("<strong>Posted By: </strong>" + p.FirstName + "<br/>")
+                                                            ;*@
+                                                        @Html.Raw("<strong>City:</strong> " + p.City + "<br/>")
+
+                                                        @Html.Raw("<strong>Price: &#8360;.</strong> " + p.Price + "<br/>")
 
 
+                                                        @Html.Raw("<strong>Condition: </strong>" + p.Condition + "<br/>")
+
+                                                        @*@Html.Raw("<strong>Description:</strong>" + p.Description + "<br/>")*@
+
+
+                                                        @Html.Raw("</li>")
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    }
+                                    @Html.Raw("</ul>")
+                                    ;
+                                }
+                                else
+                                {
+                                    <h2>Sorry !</h2>
+                                    <p>No Properties could be found :( consider checking the input field. Thank You !!</p>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+<!--for map-->
+<div class="col-md-7 embed-responsive">
+
+    <div class="map">
+        @*
+            <script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>*@
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI"></script>
+
+        <!-- This css is to ensure that the google map contols (zoom bar etc) show and size correctly. -->
+        <style>
+            #map_canvas img {
+                max-width: none,
+            }
+
+            .infoDiv {
+                height: 70px;
+                width: 110px;
+                -webkit-user-select: none;
+                background-color: white;
+            }
+        </style>
+
+
+        <!-- This is the div that will contain the Google Map -->
+        <div id="map_canvas" style="height: 600px; width: 700px;"></div>
+        <!-- Enclose the Javascript in a "section" so that it is rendered in the correct order after scripts have been loaded etc -->
+        @section scripts {
+            <section class="scripts">
+
+                <script type="text/javascript">
+
+
+                    //This code tells the browser to execute the "Initialize" method only when the complete document model has been loaded.
+                    $(document).ready(function () {
+                        //Initialize();
+                        Map();
+
+                    });
+
+                    function Map() {
+
+                        //var markers= [];
+                        google.maps.visualRefresh = true;
+                        var Copenhagen = new google.maps.LatLng(27.700769, 85.300140);
+
+                        // These are options that set initial zoom level, where the map is centered globally to start, and the type of map to show
+                        var mapOptions = {
+                            zoom: 10,
+                            center: Copenhagen,
+                            mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+
+                        };
+
+                        // This makes the div with id "map_canvas" a google map
+                        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+                        // This shows adding a simple pin "marker" - this happens to be the Center in Copenhagen!
+                        var myLatlng = new google.maps.LatLng(55.676098, 12.568337);
+
+
+                        //var marker = new google.maps.Marker({
+                        var marker = new google.maps.Marker({
+                            position: myLatlng,
+                            map: map,
+                            title: 'Kathmandu'
+                        });
+
+
+                        // You can make markers different colors...  google it up!
+                        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+
+                        // Using the JQuery "each" selector to iterate through the JSON list and drop marker pins
+
+                        $.each(data, function (i, item) {
+                            //var myLatlng = new google.maps.LatLng(item.GeoLat, item.GeoLong);
+                            myLatlng = new google.maps.LatLng(item.GeoLat, item.GeoLong);
+
+                            //var marker = new google.maps.Marker({
+                            var marker = new google.maps.Marker({
+                                position: myLatlng,
+                                map: map,
+                                title: item.TITLE
+                            });
+                            // console.log(item.PlaceName);
+
+                            // Make the marker-pin blue!
+                            marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+
+                            var content = ('<p> ' +
+                                item.PlaceName +
+                                ' <br>' +
+                                '' +
+                                item.Street + '&nbsp;' + item.ZIP +
+                                '<br>' +
+                                '' +
+                                item.Title +
+                                '</p>' +
+                                '<a href="/Tasks/Details/' + item.Id +
+                                '" style="background: #07889B; border-radius: 24px;  margin-left: 25px;  margin-right: 25px; font-size: 12px;" class="btn btn-secondary btn-sm"> Show Task </a >'
+
+                            );
+
+                            var infowindow = new google.maps.InfoWindow({
+                                content: content
+
+                            });
+                            //finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!
+                            google.maps.event.addListener(marker,
+                                'click',
+                                function () {
+                                    infowindow.open(map, marker);
+
+                                });
+                        });
+
+                        for (var i = 0; i < data.length; i++) {
+                            data[i] = [];
+                        }
+
+                    }
+
+
+                    //for place filter you can do it within one method but alxi lagyo so tai gar paxi
+                    function filterLocation(loc) {
+
+                        console.log(loc);
+
+                        var a = loc.toString();
+
+                        console.log("stringified location" + " " + a);
+
+                        $.ajax({
+                            url: '/tasks/getwithplace',
+                            type: 'GET',
+                            dataType: 'json',
+                            cache: false,
+                            data: { place: a },
+                            traditional: true,
+                            contentType: 'application/json; charset=utf-8',
+                            success: function (response) {
+
+                                var i, item;
+                                for (i = 0; i < response.length; i++) {
+                                    console.log("Just lattitude" + " " + response[i].GeoLat);
+                                    data.push({
+                                        "Id": response[i].Id,
+                                        "PlaceName": response[i].PlaceName,
+                                        "Street": response[i].Street,
+                                        "ZIP": response[i].ZIP,
+                                        "Price": response[i].Price,
+                                        "Title": response[i].Title,
+                                        "GeoLong": response[i].GeoLong,
+                                        "GeoLat": response[i].GeoLat
+
+                                    });
+
+                                }
+
+                                Map();
+
+                            },
+
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                alert(xhr.status);
+                                alert(thrownError);
+                            }
+
+                        });
+                    }
+
+
+
+
+                </script>
+            </section>
+        }
+
+    </div>
+</div>
