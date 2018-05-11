@@ -89,20 +89,18 @@ namespace KinMel.Controllers
                 new { id = notification.ActionId });
         }
 
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<string> Delete(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+               return "Ok";
             }
 
             var notification = await _context.Notification
-                .Include(n => n.NotificationFrom)
-                .Include(n => n.NotificationTo)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (notification == null)
             {
-                return NotFound();
+                return "Ok";
             }
             var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
             if (currentUser.Id.Equals(notification.NotificationToId))
@@ -114,11 +112,9 @@ namespace KinMel.Controllers
                 var user = _notificationHubContext.Clients.User(notification.NotificationToId);
                 await user.SendAsync("Receivecount", notificationCount);
 
-                return RedirectToAction(nameof(Index));
-
             }
+            return "Ok";
 
-            return View("Info");
         }
 
         // GET: Notifications/Details/5

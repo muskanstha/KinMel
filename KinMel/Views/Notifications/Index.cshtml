@@ -63,9 +63,14 @@
             <td>
                 @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <button class="btn" onclick="DeleteNotification(@item.Id)">x</button>
             </td>
         </tr>
 }
     </tbody>
 </table>
+<script type="text/javascript">
+    function DeleteNotification(id) {
+        $.getJSON("notifications/Delete/" + id);
+    };
+</script>
