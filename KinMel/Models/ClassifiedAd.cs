@@ -89,6 +89,8 @@ namespace KinMel.Models
         private List<string> FeaturesList { get; set; }
         public string Features { get; set; }
 
+        public virtual ICollection<Question> Questions { get; set; }
+
     }
 
     public class Car : ClassifiedAd

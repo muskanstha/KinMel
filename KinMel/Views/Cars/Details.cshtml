@@ -14,7 +14,7 @@
 
         @foreach (var item in Model.ImageUrlList)
         {
-            <img style="max-width: 200px;" src="@item"/>
+            <img style="max-width: 200px;" src="@item" />
         }
     </div>
     <dl class="dl-horizontal">
@@ -82,7 +82,7 @@
             @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd>
-          @Html.Raw(@Model.Description)
+            @Html.Raw(@Model.Description)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Condition)
@@ -153,6 +153,16 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    @*<a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |*@
     <a asp-action="Index">Back to List</a>
+</div>
+<div>
+    @await Component.InvokeAsync("Questions", new {id= Model.Id})
+    
+    <form asp-area="" asp-controller="Questions" asp-action="Create" method="post">
+        <input name="Text" />
+        <input name="ClassifiedAdId" hidden value="@Model.Id"/>
+          
+        <button type="submit" value="Create" class="btn" >Submit Question</button>
+    </form>
 </div>
