@@ -72,5 +72,9 @@ namespace KinMel.Data
         public DbSet<KinMel.Models.Rating> Rating { get; set; }
 
         public DbSet<KinMel.Models.Notification> Notification { get; set; }
+
+        public DbSet<KinMel.Models.Question> Question { get; set; }
+
+        public DbSet<KinMel.Models.Answer> Answer { get; set; }
     }
 }

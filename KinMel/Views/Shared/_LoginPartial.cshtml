@@ -8,10 +8,17 @@
 {
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="right hide-on-med-and-down">
         <ul class="right hide-on-med-and-down">
+
+            <!-- Notification Dropdown Trigger -->
+            <li>
+                <a class="dropdown-trigger" data-target="notificationdropdown">Notifications <span style="color: red;" id="notificationCount"></span></a>
+            </li>
+
             <!-- Dropdown Trigger -->
             <li>
                 <a class="dropdown-trigger" href="#!" data-target="navbardropdown">Hello @UserManager.GetUserName(User)!<i class="material-icons right">arrow_drop_down</i></a>
             </li>
+
         </ul>
     </form>
 
@@ -23,6 +30,10 @@
         <li>
             <button type="submit" class="waves-effect waves-light btn-large" style="width: 100%">Log out</button>
         </li>
+    </ul>
+
+    <ul id="notificationdropdown" class="dropdown-content" style="min-width: 30vw !important;">
+        @await Component.InvokeAsync("Notification")
     </ul>
 }
 else

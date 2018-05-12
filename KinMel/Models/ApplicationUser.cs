@@ -14,7 +14,22 @@ namespace KinMel.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public string ProfilePictureUrl { get; set; }
+        private string _profilePictureUrl;
+
+        public string ProfilePictureUrl
+        {
+            get
+            {
+                if (String.IsNullOrWhiteSpace(this._profilePictureUrl))
+                {
+                    return "/images/noimage.svg";
+                }
+
+                return this._profilePictureUrl;
+            }
+            set => _profilePictureUrl = value;
+        }
+
         public string Address { get; set; }
         public string City { get; set; }
 
@@ -26,7 +41,7 @@ namespace KinMel.Models
                     string.IsNullOrWhiteSpace(this.FirstName) ? "" : this.FirstName;
                 string dspLastName =
                     string.IsNullOrWhiteSpace(this.LastName) ? "" : this.LastName;
-               
+
 
                 return $"{dspFirstName} {dspLastName}";
             }
@@ -70,7 +85,7 @@ namespace KinMel.Models
         public string ProfilePictureUrl { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        
+
         public virtual ICollection<ClassifiedAd> ClassifiedAds { get; set; }
 
         public virtual ICollection<Rating> Ratings { get; set; }
