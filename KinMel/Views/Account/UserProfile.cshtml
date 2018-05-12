@@ -67,7 +67,8 @@
                     @for (var i = 1; i <= Model.AverageStars; i++)
                     {
                         <i class="material-icons pink-text">star</i>
-                        if ((Model.AverageStars - i) < 1)
+
+                        if ((Model.AverageStars - i) > 0 && (Model.AverageStars - i) < 1)
                          {
                         <i class="material-icons pink-text">star_half</i>
                          }
