@@ -1,35 +1,86 @@
-﻿@model KinMel.Models.AccountDTO
+﻿@using Microsoft.EntityFrameworkCore
+@model KinMel.Models.AccountDTO
 
 @{
     ViewData["Title"] = "User Profile";
 }
 
-<!--page-container-grid-->
-<div class="page-container-grid">
-    <!--side-container-->
-    <div class="side-container-grid">
-        <!--Side-card-->
-        <div class="card side-content-grid z-depth-4">
-            <!--profile-pic-->
-            <div>
-                <img src="https://picsum.photos/220/300/?random"/>
+<div class="browse-width">
+    <div class="profile-page-grid">
+        <div class="cover-image">
+            <img src="https://placeimg.com/768/260/arch" alt="Cover picture" />
+            <!--SideCard-->
+            <div class="side-content-grid card z-depth-4">
+                <div class="profile-picture">
+                    <img src="https://picsum.photos/400" alt="Profile picture" />
+                </div>
+                <div class="about-me grey lighten-4 card-content">
+                    <b>About me!</b>
+                    <p>
+                        Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+                        Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+                        Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+                        Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+                        Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+                    </p>
+                    <a class="pink-text text-darken-3">Read more<i class="material-icons align-middle">arrow_forward</i></a>
+                </div>
+                <ul>
+                    <li>
+                        <label asp-for="Email"></label>
+                        <p>@Html.DisplayFor(model => model.Email)</p>
+                    </li>
+                    <li>
+                        <label asp-for="PhoneNumber"></label>
+                        @if (Model.PhoneNumberConfirmed == true)
+                        {
+                            <p>@Html.DisplayFor(model => model.PhoneNumberConfirmed)<i class="material-icons cyan-text tooltipped" data-tooltip="Phone verified" data-position="left">verified_user</i></p>
+                        }
+                        else
+                        {
+                            <p>@Html.DisplayFor(model => model.PhoneNumberConfirmed)<i class="material-icons red-text tooltipped" data-tooltip="Phone not verified" data-position="left">phonelink_erase</i></p>
+                        }
+                        <p>@Html.DisplayFor(model => model.PhoneNumber)</p>
+                    </li>
+                    <li>
+                        <label asp-for="City"></label>
+                        <p>@Html.DisplayFor(model => model.City)</p>
+                    </li>
+                </ul>
+                <!--TopHeader-->
+                <div class="profile-username white-text">
+                    @Html.DisplayFor(model => model.FullName)
+                </div>
+                <!--joined Date-->
+                <div class="profile-joindate grey-text text-lighten-2">
+                    Joined on @Html.DisplayFor(model => model.JoinDate)
+                </div>
+                <div class="star-rating-empty tooltipped" data-tooltip="Average Rating: @Model.AverageStars" data-position="left">
+                    <p class="material-icons pink-text m0">star_border</p>
+                    <p class="material-icons pink-text m0">star_border</p>
+                    <p class="material-icons pink-text m0">star_border</p>
+                    <p class="material-icons pink-text m0">star_border</p>
+                    <p class="material-icons pink-text m0">star_border</p>
+                    <p class="white-text m0">| @Model.Ratings.Count |</p>
+                </div>
+                <div class="star-rating">
+                    @for (var i = 1; i <= Model.AverageStars; i++)
+                    {
+                        <i class="material-icons pink-text">star</i>
+                        if ((Model.AverageStars - i) < 1)
+                         {
+                        <i class="material-icons pink-text">star_half</i>
+                         }
+                    }
+                    
+                </div>
             </div>
-            <!--side-about-content-->
-            <div class="card-content">
-                <p class="grey-text text-darken-3">About</p>
-                <p class="content-description grey-text text-darken-1">Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
-                    Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.</p>
-                <a class="pink-text">Read more<i class="material-icons align-middle">arrow_forward</i></a>
-                <hr/>
-            </div>
+            <a asp-action="Create" asp-controller="Ratings" asp-route-id="@Model.Id" class="waves-effect waves-light btn pink tooltipped" data-tooltip="Give a rating and review to the user." data-position="left">
+                <i class="material-icons left">star</i>Rate this user
+            </a>
         </div>
     </div>
-    <!--Main-container-->
-    <div class="main-container-grid">
-
-    </div>
 </div>
-
 
 <div>
     <h4></h4>
@@ -38,25 +89,6 @@
         <img src="@Model.ProfilePictureUrl" />
     }
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FullName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FullName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
         </dt>
@@ -69,23 +101,12 @@
         <dd>
             @Html.DisplayFor(model => model.Address)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.AverageStars)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.AverageStars)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.JoinDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.JoinDate)
         </dd>
 
     </dl>
@@ -146,7 +167,4 @@
             }
         }
     }
-</div>
-<div>
-    <a asp-action="Create" asp-controller="Ratings" asp-route-id="@Model.Id">Rate This user</a>
 </div>

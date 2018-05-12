@@ -130,7 +130,7 @@ nav .sidenav-trigger {
 
 .main-content-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-template-rows: min-content;
     grid-gap: 1em;
 }
@@ -146,21 +146,108 @@ nav .sidenav-trigger {
     grid-column: 2;
 }
 
-/***Profile-page***/
-.side-container-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+/*********Profile-page*********/
+.profile-page-grid {
 }
+
+.cover-image {
+    display: grid;
+    grid-column: 1/17;
+    grid-row: 1/4;
+    background: linear-gradient(rgba(0,0,0,0) 65%, rgba(0,0,0, .53));
+    position: relative;
+}
+
+    .cover-image > img {
+        width: -webkit-fill-available;
+        height: 300px;
+        -webkit-object-fit: cover;
+        object-fit: cover;
+        z-index: -1;
+    }
 
 .side-content-grid {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-column: 2 / 6;
-    width: 220px;
+    width: 320px;
+    position: absolute;
+    top: 100px;
+    left: 50px;
 }
 
-.main-container-grid {
-    display: grid;
+.profile-picture {
+    grid-column: 1/7;
+}
+
+    .profile-picture > img {
+        width: 100%;
+        height: 100%;
+        -webkit-object-fit: cover;
+        object-fit: cover;
+        padding: 5px;
+        ;
+    }
+
+.about-me {
+}
+
+    .about-me > p {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+    }
+
+.side-content-grid > ul {
+}
+
+    .side-content-grid > ul > li {
+        padding: 10px 20px;
+        margin: 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+.side-content-grid > ul > li > p {
+    margin: 0px;
+    float: right;
+}
+
+.profile-username {
+    position: absolute;
+    font-size: 40px;
+    top: 80px;
+    left: 320px;
+    padding: 20px;
+    width: max-content;
+}
+
+.profile-joindate {
+    position: absolute;
+    font-size: 20px;
+    top: 150px;
+    left: 340px;
+    padding: 5px;
+    width: max-content;
+}
+
+.cover-image > a {
+    position: absolute;
+    top: 250px;
+    right: 20px;
+}
+
+.star-rating-empty {
+    display: flex;
+    position: absolute;
+    width: fit-content;
+    top: 80px;
+    left: 340px;
+    background-color: rgba(5, 5, 5, 0.2);
+}
+
+.star-rating {
+    display: flex;
+    position: absolute;
+    top: 80px;
+    left: 340px
 }
 
 /*************!GRID**************/
