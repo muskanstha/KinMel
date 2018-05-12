@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using KinMel.Models;
 using KinMel.Models.ManageViewModels;
 using KinMel.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace KinMel.Controllers
 {
@@ -139,6 +140,42 @@ namespace KinMel.Controllers
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ProfilePicture()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+            var model = new ProfilePictureViewModel() { StatusMessage = StatusMessage, ProfilePictureUrl = user.ProfilePictureUrl };
+
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProfilePicture(ProfilePictureViewModel model, IFormFile profilePicture)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            string profilePictureUrl =
+                await BlobStorageUploader.UploadProfilePictureBlob(user.Id, profilePicture);
+            user.ProfilePictureUrl = profilePictureUrl;
+            await _userManager.UpdateAsync(user);
+            StatusMessage = "Your profile picture has been changed.";
+
+            return RedirectToAction(nameof(ProfilePicture));
         }
 
         [HttpGet]
