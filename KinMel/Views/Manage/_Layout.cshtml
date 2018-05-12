@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,7 +9,8 @@
     <hr />
     <div class="row">
         <div class="col 3">
-            @await Html.PartialAsync("_ManageNav")
+            <partial name="_ManageNav" />
+
         </div>
         <div class="col 9">
             @RenderBody()
@@ -20,4 +21,4 @@
 @section Scripts {
     @RenderSection("Scripts", required: false)
 }
-        
+

@@ -7,11 +7,11 @@
 <section class="browse-width">
     <div class="page-container-grid">
         <!--Side-Content-->
-        @await Html.PartialAsync("_categoriesSideMenu")
+        <partial name="_categoriesSideMenu" />
         <!--Main-Content-->
         <div class="main-content">
             <!--sorting-->
-            @await Html.PartialAsync("_sortingPartial")
+            <partial name="_sortingPartial" />
             <!--grid-view-->
             <div class="main-content-cards hide-on-small-and-down">
                 @foreach (var item in Model)
