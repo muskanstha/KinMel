@@ -1,11 +1,12 @@
 ﻿@model ProfilePictureViewModel
 @{
-    ViewData["Title"] = "Set password";
+    ViewData["Title"] = "Change Profile Picture";
     ViewData.AddActivePage(ManageNavPages.ProfilePicture);
 }
 
 <h4>Change your profile picture</h4>
-@Html.Partial("_StatusMessage", Model.StatusMessage)
+<partial name="_StatusMessage" model="@Model.StatusMessage" />
+
 <p class="text-info">
     You can upload new or change your profile picture from here.
 </p>
@@ -39,5 +40,5 @@
     }
 </script>
 @section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <partial name="_ValidationScriptsPartial" />
 }

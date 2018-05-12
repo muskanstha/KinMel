@@ -162,20 +162,25 @@ namespace KinMel.Controllers
             {
                 return View(model);
             }
-
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            long? profilePictureLength = profilePicture?.Length;
+            if (profilePictureLength > 0)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                var user = await _userManager.GetUserAsync(User);
+                if (user == null)
+                {
+                    throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                }
+
+                string profilePictureUrl =
+                    await BlobStorageUploader.UploadProfilePictureBlob(user.Id, profilePicture);
+                user.ProfilePictureUrl = profilePictureUrl;
+                await _userManager.UpdateAsync(user);
+                StatusMessage = "Your profile picture has been changed.";
+
+                return RedirectToAction(nameof(ProfilePicture));
             }
+            return View(model);
 
-            string profilePictureUrl =
-                await BlobStorageUploader.UploadProfilePictureBlob(user.Id, profilePicture);
-            user.ProfilePictureUrl = profilePictureUrl;
-            await _userManager.UpdateAsync(user);
-            StatusMessage = "Your profile picture has been changed.";
-
-            return RedirectToAction(nameof(ProfilePicture));
         }
 
         [HttpGet]
