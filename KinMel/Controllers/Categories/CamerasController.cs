@@ -12,55 +12,58 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
-namespace KinMel.Controllers
+namespace KinMel.Controllers.Categories
 {
     [Authorize]
-    public class ComputerPartsController : Controller
+
+    public class CamerasController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ComputerPartsController(ApplicationDbContext context,
+        public CamerasController(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        // GET: ComputerParts
+        // GET: Cameras
         [AllowAnonymous]
+
         public async Task<IActionResult> Index(string sortOrder)
         {
             //BlobStorageHelper.UploadBlobs();
             //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
             ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
-            var computerParts = from c in _context.ComputerParts select c;
+            var camera = from c in _context.Camera select c;
             switch (sortOrder)
             {
                 case "Price":
-                    computerParts = computerParts.OrderBy(c => c.Price);
+                    camera = camera.OrderBy(c => c.Price);
                     break;
                 case "price_desc":
-                    computerParts = computerParts.OrderByDescending(c => c.Price);
+                    camera = camera.OrderByDescending(c => c.Price);
                     break;
                 case "date_desc":
-                    computerParts = computerParts.OrderBy(c => c.DateCreated);
+                    camera = camera.OrderBy(c => c.DateCreated);
                     break;
                 case "Date":
-                    computerParts = computerParts.OrderByDescending(c => c.DateCreated);
+                    camera = camera.OrderByDescending(c => c.DateCreated);
                     break;
                 default:
-                    computerParts = computerParts.OrderByDescending(c => c.DateCreated);
+                    camera = camera.OrderByDescending(c => c.DateCreated);
                     break;
             }
-            return View(await computerParts.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            return View(await camera.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
             //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             //return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: ComputerParts/Details/5
+        // GET: Cameras/Details/5
         [AllowAnonymous]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -68,31 +71,31 @@ namespace KinMel.Controllers
                 return NotFound();
             }
 
-            var computerParts = await _context.ComputerParts
+            var camera = await _context.Camera
                 .Include(c => c.CreatedByUser)
                 .Include(c => c.SubCategory)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (computerParts == null)
+            if (camera == null)
             {
                 return NotFound();
             }
 
-            return View(computerParts);
+            return View(camera);
         }
 
-        // GET: ComputerParts/Create
+        // GET: Cameras/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("ComputerParts")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Camera")), "Id", "Name");
             return View();
         }
 
-        // POST: ComputerParts/Create
+        // POST: Cameras/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] ComputerParts computerParts, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] Camera camera, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -100,31 +103,31 @@ namespace KinMel.Controllers
                 if (size > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
-                    computerParts.CreatedByUserId = currentUserId;
+                    camera.CreatedByUserId = currentUserId;
 
-                    computerParts.DateCreated = DateTime.Now;
-                    _context.Add(computerParts);
+                    camera.DateCreated = DateTime.Now;
+                    _context.Add(camera);
                     await _context.SaveChangesAsync();
 
-                    string forSlug = computerParts.Id + " " + String.Join(" ", computerParts.Title.Split().Take(4));
+                    string forSlug = camera.Id + " " + String.Join(" ", camera.Title.Split().Take(4));
                     string slug = forSlug.GenerateSlug();
 
-                    computerParts.Slug = slug;
+                    camera.Slug = slug;
 
                     await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    computerParts.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    camera.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("ComputerParts")), "Id", "Name", computerParts.SubCategoryId);
-            return View(computerParts);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Camera")), "Id", "Name", camera.SubCategoryId);
+            return View(camera);
         }
 
-        //// GET: ComputerParts/Edit/5
+        //// GET: Cameras/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{
         //    if (id == null)
@@ -132,24 +135,24 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var computerParts = await _context.ComputerParts.SingleOrDefaultAsync(m => m.Id == id);
-        //    if (computerParts == null)
+        //    var camera = await _context.Camera.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (camera == null)
         //    {
         //        return NotFound();
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", computerParts.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", computerParts.SubCategoryId);
-        //    return View(computerParts);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", camera.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", camera.SubCategoryId);
+        //    return View(camera);
         //}
 
-        //// POST: ComputerParts/Edit/5
+        //// POST: Cameras/Edit/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] ComputerParts computerParts)
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] Camera camera)
         //{
-        //    if (id != computerParts.Id)
+        //    if (id != camera.Id)
         //    {
         //        return NotFound();
         //    }
@@ -158,12 +161,12 @@ namespace KinMel.Controllers
         //    {
         //        try
         //        {
-        //            _context.Update(computerParts);
+        //            _context.Update(camera);
         //            await _context.SaveChangesAsync();
         //        }
         //        catch (DbUpdateConcurrencyException)
         //        {
-        //            if (!ComputerPartsExists(computerParts.Id))
+        //            if (!CameraExists(camera.Id))
         //            {
         //                return NotFound();
         //            }
@@ -174,12 +177,12 @@ namespace KinMel.Controllers
         //        }
         //        return RedirectToAction(nameof(Index));
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", computerParts.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", computerParts.SubCategoryId);
-        //    return View(computerParts);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", camera.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", camera.SubCategoryId);
+        //    return View(camera);
         //}
 
-        //// GET: ComputerParts/Delete/5
+        //// GET: Cameras/Delete/5
         //public async Task<IActionResult> Delete(int? id)
         //{
         //    if (id == null)
@@ -187,32 +190,32 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var computerParts = await _context.ComputerParts
+        //    var camera = await _context.Camera
         //        .Include(c => c.CreatedByUser)
         //        .Include(c => c.SubCategory)
         //        .SingleOrDefaultAsync(m => m.Id == id);
-        //    if (computerParts == null)
+        //    if (camera == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    return View(computerParts);
+        //    return View(camera);
         //}
 
-        //// POST: ComputerParts/Delete/5
+        //// POST: Cameras/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> DeleteConfirmed(int id)
         //{
-        //    var computerParts = await _context.ComputerParts.SingleOrDefaultAsync(m => m.Id == id);
-        //    _context.ComputerParts.Remove(computerParts);
+        //    var camera = await _context.Camera.SingleOrDefaultAsync(m => m.Id == id);
+        //    _context.Camera.Remove(camera);
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool ComputerPartsExists(int id)
+        //private bool CameraExists(int id)
         //{
-        //    return _context.ComputerParts.Any(e => e.Id == id);
+        //    return _context.Camera.Any(e => e.Id == id);
         //}
     }
 }

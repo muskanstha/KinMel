@@ -12,58 +12,54 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
-namespace KinMel.Controllers
+namespace KinMel.Controllers.Categories
 {
     [Authorize]
-
-    public class PetsAndPetCaresController : Controller
+    public class ApparelsAndAccessoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-
-        public PetsAndPetCaresController(ApplicationDbContext context,
+        public ApparelsAndAccessoriesController(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        // GET: PetsAndPetCares
+        // GET: ApparelsAndAccessories
         [AllowAnonymous]
-
         public async Task<IActionResult> Index(string sortOrder)
         {
             //BlobStorageHelper.UploadBlobs();
             //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
             ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
-            var petsAndPetCare = from c in _context.PetsAndPetCare select c;
+            var apparelsAndAccessories = from c in _context.ApparelsAndAccessories select c;
             switch (sortOrder)
             {
                 case "Price":
-                    petsAndPetCare = petsAndPetCare.OrderBy(c => c.Price);
+                    apparelsAndAccessories = apparelsAndAccessories.OrderBy(c => c.Price);
                     break;
                 case "price_desc":
-                    petsAndPetCare = petsAndPetCare.OrderByDescending(c => c.Price);
+                    apparelsAndAccessories = apparelsAndAccessories.OrderByDescending(c => c.Price);
                     break;
                 case "date_desc":
-                    petsAndPetCare = petsAndPetCare.OrderBy(c => c.DateCreated);
+                    apparelsAndAccessories = apparelsAndAccessories.OrderBy(c => c.DateCreated);
                     break;
                 case "Date":
-                    petsAndPetCare = petsAndPetCare.OrderByDescending(c => c.DateCreated);
+                    apparelsAndAccessories = apparelsAndAccessories.OrderByDescending(c => c.DateCreated);
                     break;
                 default:
-                    petsAndPetCare = petsAndPetCare.OrderByDescending(c => c.DateCreated);
+                    apparelsAndAccessories = apparelsAndAccessories.OrderByDescending(c => c.DateCreated);
                     break;
             }
-            return View(await petsAndPetCare.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            return View(await apparelsAndAccessories.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
             //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             //return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: PetsAndPetCares/Details/5
+        // GET: ApparelsAndAccessories/Details/5
         [AllowAnonymous]
-
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -71,31 +67,31 @@ namespace KinMel.Controllers
                 return NotFound();
             }
 
-            var petsAndPetCare = await _context.PetsAndPetCare
-                .Include(p => p.CreatedByUser)
-                .Include(p => p.SubCategory)
+            var apparelsAndAccessories = await _context.ApparelsAndAccessories
+                .Include(a => a.CreatedByUser)
+                .Include(a => a.SubCategory)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (petsAndPetCare == null)
+            if (apparelsAndAccessories == null)
             {
                 return NotFound();
             }
 
-            return View(petsAndPetCare);
+            return View(apparelsAndAccessories);
         }
 
-        // GET: PetsAndPetCares/Create
+        // GET: ApparelsAndAccessories/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("PetsAndPetCare")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("ApparelsAndAccessories")), "Id", "Name");
             return View();
         }
 
-        // POST: PetsAndPetCares/Create
+        // POST: ApparelsAndAccessories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] PetsAndPetCare petsAndPetCare, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] ApparelsAndAccessories apparelsAndAccessories, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -103,31 +99,31 @@ namespace KinMel.Controllers
                 if (size > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
-                    petsAndPetCare.CreatedByUserId = currentUserId;
+                    apparelsAndAccessories.CreatedByUserId = currentUserId;
 
-                    petsAndPetCare.DateCreated = DateTime.Now;
-                    _context.Add(petsAndPetCare);
+                    apparelsAndAccessories.DateCreated = DateTime.Now;
+                    _context.Add(apparelsAndAccessories);
                     await _context.SaveChangesAsync();
 
-                    string forSlug = petsAndPetCare.Id + " " + String.Join(" ", petsAndPetCare.Title.Split().Take(4));
+                    string forSlug = apparelsAndAccessories.Id + " " + String.Join(" ", apparelsAndAccessories.Title.Split().Take(4));
                     string slug = forSlug.GenerateSlug();
 
-                    petsAndPetCare.Slug = slug;
+                    apparelsAndAccessories.Slug = slug;
 
                     await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    petsAndPetCare.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    apparelsAndAccessories.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("PetsAndPetCare")), "Id", "Name", petsAndPetCare.SubCategoryId);
-            return View(petsAndPetCare);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("ApparelsAndAccessories")), "Id", "Name", apparelsAndAccessories.SubCategoryId);
+            return View(apparelsAndAccessories);
         }
 
-        //// GET: PetsAndPetCares/Edit/5
+        //// GET: ApparelsAndAccessories/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{
         //    if (id == null)
@@ -135,24 +131,24 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var petsAndPetCare = await _context.PetsAndPetCare.SingleOrDefaultAsync(m => m.Id == id);
-        //    if (petsAndPetCare == null)
+        //    var apparelsAndAccessories = await _context.ApparelsAndAccessories.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (apparelsAndAccessories == null)
         //    {
         //        return NotFound();
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", petsAndPetCare.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", petsAndPetCare.SubCategoryId);
-        //    return View(petsAndPetCare);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", apparelsAndAccessories.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", apparelsAndAccessories.SubCategoryId);
+        //    return View(apparelsAndAccessories);
         //}
 
-        //// POST: PetsAndPetCares/Edit/5
+        //// POST: ApparelsAndAccessories/Edit/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] PetsAndPetCare petsAndPetCare)
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] ApparelsAndAccessories apparelsAndAccessories)
         //{
-        //    if (id != petsAndPetCare.Id)
+        //    if (id != apparelsAndAccessories.Id)
         //    {
         //        return NotFound();
         //    }
@@ -161,12 +157,12 @@ namespace KinMel.Controllers
         //    {
         //        try
         //        {
-        //            _context.Update(petsAndPetCare);
+        //            _context.Update(apparelsAndAccessories);
         //            await _context.SaveChangesAsync();
         //        }
         //        catch (DbUpdateConcurrencyException)
         //        {
-        //            if (!PetsAndPetCareExists(petsAndPetCare.Id))
+        //            if (!ApparelsAndAccessoriesExists(apparelsAndAccessories.Id))
         //            {
         //                return NotFound();
         //            }
@@ -177,12 +173,12 @@ namespace KinMel.Controllers
         //        }
         //        return RedirectToAction(nameof(Index));
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", petsAndPetCare.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", petsAndPetCare.SubCategoryId);
-        //    return View(petsAndPetCare);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", apparelsAndAccessories.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", apparelsAndAccessories.SubCategoryId);
+        //    return View(apparelsAndAccessories);
         //}
 
-        //// GET: PetsAndPetCares/Delete/5
+        //// GET: ApparelsAndAccessories/Delete/5
         //public async Task<IActionResult> Delete(int? id)
         //{
         //    if (id == null)
@@ -190,32 +186,32 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var petsAndPetCare = await _context.PetsAndPetCare
-        //        .Include(p => p.CreatedByUser)
-        //        .Include(p => p.SubCategory)
+        //    var apparelsAndAccessories = await _context.ApparelsAndAccessories
+        //        .Include(a => a.CreatedByUser)
+        //        .Include(a => a.SubCategory)
         //        .SingleOrDefaultAsync(m => m.Id == id);
-        //    if (petsAndPetCare == null)
+        //    if (apparelsAndAccessories == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    return View(petsAndPetCare);
+        //    return View(apparelsAndAccessories);
         //}
 
-        //// POST: PetsAndPetCares/Delete/5
+        //// POST: ApparelsAndAccessories/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> DeleteConfirmed(int id)
         //{
-        //    var petsAndPetCare = await _context.PetsAndPetCare.SingleOrDefaultAsync(m => m.Id == id);
-        //    _context.PetsAndPetCare.Remove(petsAndPetCare);
+        //    var apparelsAndAccessories = await _context.ApparelsAndAccessories.SingleOrDefaultAsync(m => m.Id == id);
+        //    _context.ApparelsAndAccessories.Remove(apparelsAndAccessories);
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool PetsAndPetCareExists(int id)
+        //private bool ApparelsAndAccessoriesExists(int id)
         //{
-        //    return _context.PetsAndPetCare.Any(e => e.Id == id);
+        //    return _context.ApparelsAndAccessories.Any(e => e.Id == id);
         //}
     }
 }

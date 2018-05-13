@@ -12,54 +12,58 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
-namespace KinMel.Controllers
+namespace KinMel.Controllers.Categories
 {
     [Authorize]
-    public class RealStatesController : Controller
+
+    public class PetsAndPetCaresController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public RealStatesController(ApplicationDbContext context,
+
+        public PetsAndPetCaresController(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        // GET: RealStates
+        // GET: PetsAndPetCares
         [AllowAnonymous]
+
         public async Task<IActionResult> Index(string sortOrder)
         {
             //BlobStorageHelper.UploadBlobs();
             //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
             ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
-            var realState = from c in _context.RealState select c;
+            var petsAndPetCare = from c in _context.PetsAndPetCare select c;
             switch (sortOrder)
             {
                 case "Price":
-                    realState = realState.OrderBy(c => c.Price);
+                    petsAndPetCare = petsAndPetCare.OrderBy(c => c.Price);
                     break;
                 case "price_desc":
-                    realState = realState.OrderByDescending(c => c.Price);
+                    petsAndPetCare = petsAndPetCare.OrderByDescending(c => c.Price);
                     break;
                 case "date_desc":
-                    realState = realState.OrderBy(c => c.DateCreated);
+                    petsAndPetCare = petsAndPetCare.OrderBy(c => c.DateCreated);
                     break;
                 case "Date":
-                    realState = realState.OrderByDescending(c => c.DateCreated);
+                    petsAndPetCare = petsAndPetCare.OrderByDescending(c => c.DateCreated);
                     break;
                 default:
-                    realState = realState.OrderByDescending(c => c.DateCreated);
+                    petsAndPetCare = petsAndPetCare.OrderByDescending(c => c.DateCreated);
                     break;
             }
-            return View(await realState.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            return View(await petsAndPetCare.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
             //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             //return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: RealStates/Details/5
+        // GET: PetsAndPetCares/Details/5
         [AllowAnonymous]
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -67,31 +71,31 @@ namespace KinMel.Controllers
                 return NotFound();
             }
 
-            var realState = await _context.RealState
-                .Include(r => r.CreatedByUser)
-                .Include(r => r.SubCategory)
+            var petsAndPetCare = await _context.PetsAndPetCare
+                .Include(p => p.CreatedByUser)
+                .Include(p => p.SubCategory)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (realState == null)
+            if (petsAndPetCare == null)
             {
                 return NotFound();
             }
 
-            return View(realState);
+            return View(petsAndPetCare);
         }
 
-        // GET: RealStates/Create
+        // GET: PetsAndPetCares/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Realstate")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("PetsAndPetCare")), "Id", "Name");
             return View();
         }
 
-        // POST: RealStates/Create
+        // POST: PetsAndPetCares/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PropertyType,LandSize,Floors,TotalRooms,Furnishing,Features,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] RealState realState, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] PetsAndPetCare petsAndPetCare, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -99,31 +103,31 @@ namespace KinMel.Controllers
                 if (size > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
-                    realState.CreatedByUserId = currentUserId;
+                    petsAndPetCare.CreatedByUserId = currentUserId;
 
-                    realState.DateCreated = DateTime.Now;
-                    _context.Add(realState);
+                    petsAndPetCare.DateCreated = DateTime.Now;
+                    _context.Add(petsAndPetCare);
                     await _context.SaveChangesAsync();
 
-                    string forSlug = realState.Id + " " + String.Join(" ", realState.Title.Split().Take(4));
+                    string forSlug = petsAndPetCare.Id + " " + String.Join(" ", petsAndPetCare.Title.Split().Take(4));
                     string slug = forSlug.GenerateSlug();
 
-                    realState.Slug = slug;
+                    petsAndPetCare.Slug = slug;
 
                     await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    realState.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    petsAndPetCare.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Realstate")), "Id", "Name", realState.SubCategoryId);
-            return View(realState);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("PetsAndPetCare")), "Id", "Name", petsAndPetCare.SubCategoryId);
+            return View(petsAndPetCare);
         }
 
-        //// GET: RealStates/Edit/5
+        //// GET: PetsAndPetCares/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{
         //    if (id == null)
@@ -131,24 +135,24 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var realState = await _context.RealState.SingleOrDefaultAsync(m => m.Id == id);
-        //    if (realState == null)
+        //    var petsAndPetCare = await _context.PetsAndPetCare.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (petsAndPetCare == null)
         //    {
         //        return NotFound();
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", realState.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", realState.SubCategoryId);
-        //    return View(realState);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", petsAndPetCare.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", petsAndPetCare.SubCategoryId);
+        //    return View(petsAndPetCare);
         //}
 
-        //// POST: RealStates/Edit/5
+        //// POST: PetsAndPetCares/Edit/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("PropertyType,LandSize,Floors,TotalRooms,Furnishing,Features,Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] RealState realState)
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] PetsAndPetCare petsAndPetCare)
         //{
-        //    if (id != realState.Id)
+        //    if (id != petsAndPetCare.Id)
         //    {
         //        return NotFound();
         //    }
@@ -157,12 +161,12 @@ namespace KinMel.Controllers
         //    {
         //        try
         //        {
-        //            _context.Update(realState);
+        //            _context.Update(petsAndPetCare);
         //            await _context.SaveChangesAsync();
         //        }
         //        catch (DbUpdateConcurrencyException)
         //        {
-        //            if (!RealStateExists(realState.Id))
+        //            if (!PetsAndPetCareExists(petsAndPetCare.Id))
         //            {
         //                return NotFound();
         //            }
@@ -173,12 +177,12 @@ namespace KinMel.Controllers
         //        }
         //        return RedirectToAction(nameof(Index));
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", realState.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", realState.SubCategoryId);
-        //    return View(realState);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", petsAndPetCare.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", petsAndPetCare.SubCategoryId);
+        //    return View(petsAndPetCare);
         //}
 
-        //// GET: RealStates/Delete/5
+        //// GET: PetsAndPetCares/Delete/5
         //public async Task<IActionResult> Delete(int? id)
         //{
         //    if (id == null)
@@ -186,32 +190,32 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var realState = await _context.RealState
-        //        .Include(r => r.CreatedByUser)
-        //        .Include(r => r.SubCategory)
+        //    var petsAndPetCare = await _context.PetsAndPetCare
+        //        .Include(p => p.CreatedByUser)
+        //        .Include(p => p.SubCategory)
         //        .SingleOrDefaultAsync(m => m.Id == id);
-        //    if (realState == null)
+        //    if (petsAndPetCare == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    return View(realState);
+        //    return View(petsAndPetCare);
         //}
 
-        //// POST: RealStates/Delete/5
+        //// POST: PetsAndPetCares/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> DeleteConfirmed(int id)
         //{
-        //    var realState = await _context.RealState.SingleOrDefaultAsync(m => m.Id == id);
-        //    _context.RealState.Remove(realState);
+        //    var petsAndPetCare = await _context.PetsAndPetCare.SingleOrDefaultAsync(m => m.Id == id);
+        //    _context.PetsAndPetCare.Remove(petsAndPetCare);
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool RealStateExists(int id)
+        //private bool PetsAndPetCareExists(int id)
         //{
-        //    return _context.RealState.Any(e => e.Id == id);
+        //    return _context.PetsAndPetCare.Any(e => e.Id == id);
         //}
     }
 }

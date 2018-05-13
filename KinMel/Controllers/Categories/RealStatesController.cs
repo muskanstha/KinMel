@@ -12,23 +12,21 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
-namespace KinMel.Controllers
+namespace KinMel.Controllers.Categories
 {
     [Authorize]
-
-    public class ElectronicsController : Controller
+    public class RealStatesController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-
-        public ElectronicsController(ApplicationDbContext context,
+        public RealStatesController(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        // GET: Electronics
+        // GET: RealStates
         [AllowAnonymous]
         public async Task<IActionResult> Index(string sortOrder)
         {
@@ -36,31 +34,31 @@ namespace KinMel.Controllers
             //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
             ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
-            var electronics = from c in _context.Electronics select c;
+            var realState = from c in _context.RealState select c;
             switch (sortOrder)
             {
                 case "Price":
-                    electronics = electronics.OrderBy(c => c.Price);
+                    realState = realState.OrderBy(c => c.Price);
                     break;
                 case "price_desc":
-                    electronics = electronics.OrderByDescending(c => c.Price);
+                    realState = realState.OrderByDescending(c => c.Price);
                     break;
                 case "date_desc":
-                    electronics = electronics.OrderBy(c => c.DateCreated);
+                    realState = realState.OrderBy(c => c.DateCreated);
                     break;
                 case "Date":
-                    electronics = electronics.OrderByDescending(c => c.DateCreated);
+                    realState = realState.OrderByDescending(c => c.DateCreated);
                     break;
                 default:
-                    electronics = electronics.OrderByDescending(c => c.DateCreated);
+                    realState = realState.OrderByDescending(c => c.DateCreated);
                     break;
             }
-            return View(await electronics.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            return View(await realState.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
             //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             //return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Electronics/Details/5
+        // GET: RealStates/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
@@ -69,31 +67,31 @@ namespace KinMel.Controllers
                 return NotFound();
             }
 
-            var electronics = await _context.Electronics
-                .Include(e => e.CreatedByUser)
-                .Include(e => e.SubCategory)
+            var realState = await _context.RealState
+                .Include(r => r.CreatedByUser)
+                .Include(r => r.SubCategory)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (electronics == null)
+            if (realState == null)
             {
                 return NotFound();
             }
 
-            return View(electronics);
+            return View(realState);
         }
 
-        // GET: Electronics/Create
+        // GET: RealStates/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Electronics")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Realstate")), "Id", "Name");
             return View();
         }
 
-        // POST: Electronics/Create
+        // POST: RealStates/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] Electronics electronics, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("PropertyType,LandSize,Floors,TotalRooms,Furnishing,Features,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] RealState realState, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -101,31 +99,31 @@ namespace KinMel.Controllers
                 if (size > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
-                    electronics.CreatedByUserId = currentUserId;
+                    realState.CreatedByUserId = currentUserId;
 
-                    electronics.DateCreated = DateTime.Now;
-                    _context.Add(electronics);
+                    realState.DateCreated = DateTime.Now;
+                    _context.Add(realState);
                     await _context.SaveChangesAsync();
 
-                    string forSlug = electronics.Id + " " + String.Join(" ", electronics.Title.Split().Take(4));
+                    string forSlug = realState.Id + " " + String.Join(" ", realState.Title.Split().Take(4));
                     string slug = forSlug.GenerateSlug();
 
-                    electronics.Slug = slug;
+                    realState.Slug = slug;
 
                     await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    electronics.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    realState.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Electronics")), "Id", "Name", electronics.SubCategoryId);
-            return View(electronics);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Realstate")), "Id", "Name", realState.SubCategoryId);
+            return View(realState);
         }
 
-        //// GET: Electronics/Edit/5
+        //// GET: RealStates/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{
         //    if (id == null)
@@ -133,24 +131,24 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var electronics = await _context.Electronics.SingleOrDefaultAsync(m => m.Id == id);
-        //    if (electronics == null)
+        //    var realState = await _context.RealState.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (realState == null)
         //    {
         //        return NotFound();
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", electronics.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", electronics.SubCategoryId);
-        //    return View(electronics);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", realState.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", realState.SubCategoryId);
+        //    return View(realState);
         //}
 
-        //// POST: Electronics/Edit/5
+        //// POST: RealStates/Edit/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] Electronics electronics)
+        //public async Task<IActionResult> Edit(int id, [Bind("PropertyType,LandSize,Floors,TotalRooms,Furnishing,Features,Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] RealState realState)
         //{
-        //    if (id != electronics.Id)
+        //    if (id != realState.Id)
         //    {
         //        return NotFound();
         //    }
@@ -159,12 +157,12 @@ namespace KinMel.Controllers
         //    {
         //        try
         //        {
-        //            _context.Update(electronics);
+        //            _context.Update(realState);
         //            await _context.SaveChangesAsync();
         //        }
         //        catch (DbUpdateConcurrencyException)
         //        {
-        //            if (!ElectronicsExists(electronics.Id))
+        //            if (!RealStateExists(realState.Id))
         //            {
         //                return NotFound();
         //            }
@@ -175,12 +173,12 @@ namespace KinMel.Controllers
         //        }
         //        return RedirectToAction(nameof(Index));
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", electronics.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", electronics.SubCategoryId);
-        //    return View(electronics);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", realState.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", realState.SubCategoryId);
+        //    return View(realState);
         //}
 
-        //// GET: Electronics/Delete/5
+        //// GET: RealStates/Delete/5
         //public async Task<IActionResult> Delete(int? id)
         //{
         //    if (id == null)
@@ -188,32 +186,32 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var electronics = await _context.Electronics
-        //        .Include(e => e.CreatedByUser)
-        //        .Include(e => e.SubCategory)
+        //    var realState = await _context.RealState
+        //        .Include(r => r.CreatedByUser)
+        //        .Include(r => r.SubCategory)
         //        .SingleOrDefaultAsync(m => m.Id == id);
-        //    if (electronics == null)
+        //    if (realState == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    return View(electronics);
+        //    return View(realState);
         //}
 
-        //// POST: Electronics/Delete/5
+        //// POST: RealStates/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> DeleteConfirmed(int id)
         //{
-        //    var electronics = await _context.Electronics.SingleOrDefaultAsync(m => m.Id == id);
-        //    _context.Electronics.Remove(electronics);
+        //    var realState = await _context.RealState.SingleOrDefaultAsync(m => m.Id == id);
+        //    _context.RealState.Remove(realState);
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool ElectronicsExists(int id)
+        //private bool RealStateExists(int id)
         //{
-        //    return _context.Electronics.Any(e => e.Id == id);
+        //    return _context.RealState.Any(e => e.Id == id);
         //}
     }
 }

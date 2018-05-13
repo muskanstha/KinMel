@@ -12,22 +12,21 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
-namespace KinMel.Controllers
+namespace KinMel.Controllers.Categories
 {
     [Authorize]
-    public class SportsAndFitnessesController : Controller
+    public class MobileAccessoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-
-        public SportsAndFitnessesController(ApplicationDbContext context,
+        public MobileAccessoriesController(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        // GET: SportsAndFitnesses
+        // GET: MobileAccessories
         [AllowAnonymous]
         public async Task<IActionResult> Index(string sortOrder)
         {
@@ -35,31 +34,31 @@ namespace KinMel.Controllers
             //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
             ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
-            var sportsAndFitness = from c in _context.SportsAndFitness select c;
+            var mobileAccessories = from c in _context.MobileAccessories select c;
             switch (sortOrder)
             {
                 case "Price":
-                    sportsAndFitness = sportsAndFitness.OrderBy(c => c.Price);
+                    mobileAccessories = mobileAccessories.OrderBy(c => c.Price);
                     break;
                 case "price_desc":
-                    sportsAndFitness = sportsAndFitness.OrderByDescending(c => c.Price);
+                    mobileAccessories = mobileAccessories.OrderByDescending(c => c.Price);
                     break;
                 case "date_desc":
-                    sportsAndFitness = sportsAndFitness.OrderBy(c => c.DateCreated);
+                    mobileAccessories = mobileAccessories.OrderBy(c => c.DateCreated);
                     break;
                 case "Date":
-                    sportsAndFitness = sportsAndFitness.OrderByDescending(c => c.DateCreated);
+                    mobileAccessories = mobileAccessories.OrderByDescending(c => c.DateCreated);
                     break;
                 default:
-                    sportsAndFitness = sportsAndFitness.OrderByDescending(c => c.DateCreated);
+                    mobileAccessories = mobileAccessories.OrderByDescending(c => c.DateCreated);
                     break;
             }
-            return View(await sportsAndFitness.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            return View(await mobileAccessories.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
             //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             //return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: SportsAndFitnesses/Details/5
+        // GET: MobileAccessories/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
@@ -68,31 +67,31 @@ namespace KinMel.Controllers
                 return NotFound();
             }
 
-            var sportsAndFitness = await _context.SportsAndFitness
-                .Include(s => s.CreatedByUser)
-                .Include(s => s.SubCategory)
+            var mobileAccessories = await _context.MobileAccessories
+                .Include(m => m.CreatedByUser)
+                .Include(m => m.SubCategory)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (sportsAndFitness == null)
+            if (mobileAccessories == null)
             {
                 return NotFound();
             }
 
-            return View(sportsAndFitness);
+            return View(mobileAccessories);
         }
 
-        // GET: SportsAndFitnesses/Create
+        // GET: MobileAccessories/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("SportsAndFitness")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("MobileAccessories")), "Id", "Name");
             return View();
         }
 
-        // POST: SportsAndFitnesses/Create
+        // POST: MobileAccessories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] SportsAndFitness sportsAndFitness, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] MobileAccessories mobileAccessories, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -100,31 +99,31 @@ namespace KinMel.Controllers
                 if (size > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
-                    sportsAndFitness.CreatedByUserId = currentUserId;
+                    mobileAccessories.CreatedByUserId = currentUserId;
 
-                    sportsAndFitness.DateCreated = DateTime.Now;
-                    _context.Add(sportsAndFitness);
+                    mobileAccessories.DateCreated = DateTime.Now;
+                    _context.Add(mobileAccessories);
                     await _context.SaveChangesAsync();
 
-                    string forSlug = sportsAndFitness.Id + " " + String.Join(" ", sportsAndFitness.Title.Split().Take(4));
+                    string forSlug = mobileAccessories.Id + " " + String.Join(" ", mobileAccessories.Title.Split().Take(4));
                     string slug = forSlug.GenerateSlug();
 
-                    sportsAndFitness.Slug = slug;
+                    mobileAccessories.Slug = slug;
 
                     await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    sportsAndFitness.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    mobileAccessories.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("SportsAndFitness")), "Id", "Name", sportsAndFitness.SubCategoryId);
-            return View(sportsAndFitness);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("MobileAccessories")), "Id", "Name", mobileAccessories.SubCategoryId);
+            return View(mobileAccessories);
         }
 
-        //// GET: SportsAndFitnesses/Edit/5
+        //// GET: MobileAccessories/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{
         //    if (id == null)
@@ -132,24 +131,24 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var sportsAndFitness = await _context.SportsAndFitness.SingleOrDefaultAsync(m => m.Id == id);
-        //    if (sportsAndFitness == null)
+        //    var mobileAccessories = await _context.MobileAccessories.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (mobileAccessories == null)
         //    {
         //        return NotFound();
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", sportsAndFitness.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", sportsAndFitness.SubCategoryId);
-        //    return View(sportsAndFitness);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", mobileAccessories.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", mobileAccessories.SubCategoryId);
+        //    return View(mobileAccessories);
         //}
 
-        //// POST: SportsAndFitnesses/Edit/5
+        //// POST: MobileAccessories/Edit/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] SportsAndFitness sportsAndFitness)
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] MobileAccessories mobileAccessories)
         //{
-        //    if (id != sportsAndFitness.Id)
+        //    if (id != mobileAccessories.Id)
         //    {
         //        return NotFound();
         //    }
@@ -158,12 +157,12 @@ namespace KinMel.Controllers
         //    {
         //        try
         //        {
-        //            _context.Update(sportsAndFitness);
+        //            _context.Update(mobileAccessories);
         //            await _context.SaveChangesAsync();
         //        }
         //        catch (DbUpdateConcurrencyException)
         //        {
-        //            if (!SportsAndFitnessExists(sportsAndFitness.Id))
+        //            if (!MobileAccessoriesExists(mobileAccessories.Id))
         //            {
         //                return NotFound();
         //            }
@@ -174,12 +173,12 @@ namespace KinMel.Controllers
         //        }
         //        return RedirectToAction(nameof(Index));
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", sportsAndFitness.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", sportsAndFitness.SubCategoryId);
-        //    return View(sportsAndFitness);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", mobileAccessories.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", mobileAccessories.SubCategoryId);
+        //    return View(mobileAccessories);
         //}
 
-        //// GET: SportsAndFitnesses/Delete/5
+        //// GET: MobileAccessories/Delete/5
         //public async Task<IActionResult> Delete(int? id)
         //{
         //    if (id == null)
@@ -187,32 +186,32 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var sportsAndFitness = await _context.SportsAndFitness
-        //        .Include(s => s.CreatedByUser)
-        //        .Include(s => s.SubCategory)
+        //    var mobileAccessories = await _context.MobileAccessories
+        //        .Include(m => m.CreatedByUser)
+        //        .Include(m => m.SubCategory)
         //        .SingleOrDefaultAsync(m => m.Id == id);
-        //    if (sportsAndFitness == null)
+        //    if (mobileAccessories == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    return View(sportsAndFitness);
+        //    return View(mobileAccessories);
         //}
 
-        //// POST: SportsAndFitnesses/Delete/5
+        //// POST: MobileAccessories/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> DeleteConfirmed(int id)
         //{
-        //    var sportsAndFitness = await _context.SportsAndFitness.SingleOrDefaultAsync(m => m.Id == id);
-        //    _context.SportsAndFitness.Remove(sportsAndFitness);
+        //    var mobileAccessories = await _context.MobileAccessories.SingleOrDefaultAsync(m => m.Id == id);
+        //    _context.MobileAccessories.Remove(mobileAccessories);
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool SportsAndFitnessExists(int id)
+        //private bool MobileAccessoriesExists(int id)
         //{
-        //    return _context.SportsAndFitness.Any(e => e.Id == id);
+        //    return _context.MobileAccessories.Any(e => e.Id == id);
         //}
     }
 }

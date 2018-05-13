@@ -2,31 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
 using KinMel.Models;
 using KinMel.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
-namespace KinMel.Controllers
+namespace KinMel.Controllers.Categories
 {
     [Authorize]
-    public class BooksAndLearningsController : Controller
+    public class TravelAndToursController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public BooksAndLearningsController(ApplicationDbContext context,
+
+        public TravelAndToursController(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        // GET: BooksAndLearnings
+        // GET: TravelAndTours
         [AllowAnonymous]
         public async Task<IActionResult> Index(string sortOrder)
         {
@@ -34,31 +35,31 @@ namespace KinMel.Controllers
             //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
             ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
-            var booksAndLearning = from c in _context.BooksAndLearning select c;
+            var travelAndTours = from c in _context.TravelAndTours select c;
             switch (sortOrder)
             {
                 case "Price":
-                    booksAndLearning = booksAndLearning.OrderBy(c => c.Price);
+                    travelAndTours = travelAndTours.OrderBy(c => c.Price);
                     break;
                 case "price_desc":
-                    booksAndLearning = booksAndLearning.OrderByDescending(c => c.Price);
+                    travelAndTours = travelAndTours.OrderByDescending(c => c.Price);
                     break;
                 case "date_desc":
-                    booksAndLearning = booksAndLearning.OrderBy(c => c.DateCreated);
+                    travelAndTours = travelAndTours.OrderBy(c => c.DateCreated);
                     break;
                 case "Date":
-                    booksAndLearning = booksAndLearning.OrderByDescending(c => c.DateCreated);
+                    travelAndTours = travelAndTours.OrderByDescending(c => c.DateCreated);
                     break;
                 default:
-                    booksAndLearning = booksAndLearning.OrderByDescending(c => c.DateCreated);
+                    travelAndTours = travelAndTours.OrderByDescending(c => c.DateCreated);
                     break;
             }
-            return View(await booksAndLearning.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            return View(await travelAndTours.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
             //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             //return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: BooksAndLearnings/Details/5
+        // GET: TravelAndTours/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
@@ -67,31 +68,31 @@ namespace KinMel.Controllers
                 return NotFound();
             }
 
-            var booksAndLearning = await _context.BooksAndLearning
-                .Include(b => b.CreatedByUser)
-                .Include(b => b.SubCategory)
+            var travelAndTours = await _context.TravelAndTours
+                .Include(t => t.CreatedByUser)
+                .Include(t => t.SubCategory)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (booksAndLearning == null)
+            if (travelAndTours == null)
             {
                 return NotFound();
             }
 
-            return View(booksAndLearning);
+            return View(travelAndTours);
         }
 
-        // GET: BooksAndLearnings/Create
+        // GET: TravelAndTours/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("BooksAndLearning")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("TravelAndTours")), "Id", "Name");
             return View();
         }
 
-        // POST: BooksAndLearnings/Create
+        // POST: TravelAndTours/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Author,Isbn,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] BooksAndLearning booksAndLearning, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] TravelAndTours travelAndTours, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -99,31 +100,31 @@ namespace KinMel.Controllers
                 if (size > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
-                    booksAndLearning.CreatedByUserId = currentUserId;
+                    travelAndTours.CreatedByUserId = currentUserId;
 
-                    booksAndLearning.DateCreated = DateTime.Now;
-                    _context.Add(booksAndLearning);
+                    travelAndTours.DateCreated = DateTime.Now;
+                    _context.Add(travelAndTours);
                     await _context.SaveChangesAsync();
 
-                    string forSlug = booksAndLearning.Id + " " + String.Join(" ", booksAndLearning.Title.Split().Take(4));
+                    string forSlug = travelAndTours.Id + " " + String.Join(" ", travelAndTours.Title.Split().Take(4));
                     string slug = forSlug.GenerateSlug();
 
-                    booksAndLearning.Slug = slug;
+                    travelAndTours.Slug = slug;
 
                     await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    booksAndLearning.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    travelAndTours.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("BooksAndLearning")), "Id", "Name", booksAndLearning.SubCategoryId);
-            return View(booksAndLearning);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("TravelAndTours")), "Id", "Name", travelAndTours.SubCategoryId);
+            return View(travelAndTours);
         }
 
-        //// GET: BooksAndLearnings/Edit/5
+        //// GET: TravelAndTours/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{
         //    if (id == null)
@@ -131,24 +132,24 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var booksAndLearning = await _context.BooksAndLearning.SingleOrDefaultAsync(m => m.Id == id);
-        //    if (booksAndLearning == null)
+        //    var travelAndTours = await _context.TravelAndTours.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (travelAndTours == null)
         //    {
         //        return NotFound();
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", booksAndLearning.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", booksAndLearning.SubCategoryId);
-        //    return View(booksAndLearning);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", travelAndTours.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", travelAndTours.SubCategoryId);
+        //    return View(travelAndTours);
         //}
 
-        //// POST: BooksAndLearnings/Edit/5
+        //// POST: TravelAndTours/Edit/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Author,Isbn,Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] BooksAndLearning booksAndLearning)
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] TravelAndTours travelAndTours)
         //{
-        //    if (id != booksAndLearning.Id)
+        //    if (id != travelAndTours.Id)
         //    {
         //        return NotFound();
         //    }
@@ -157,12 +158,12 @@ namespace KinMel.Controllers
         //    {
         //        try
         //        {
-        //            _context.Update(booksAndLearning);
+        //            _context.Update(travelAndTours);
         //            await _context.SaveChangesAsync();
         //        }
         //        catch (DbUpdateConcurrencyException)
         //        {
-        //            if (!BooksAndLearningExists(booksAndLearning.Id))
+        //            if (!TravelAndToursExists(travelAndTours.Id))
         //            {
         //                return NotFound();
         //            }
@@ -173,12 +174,12 @@ namespace KinMel.Controllers
         //        }
         //        return RedirectToAction(nameof(Index));
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", booksAndLearning.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", booksAndLearning.SubCategoryId);
-        //    return View(booksAndLearning);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", travelAndTours.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", travelAndTours.SubCategoryId);
+        //    return View(travelAndTours);
         //}
 
-        //// GET: BooksAndLearnings/Delete/5
+        //// GET: TravelAndTours/Delete/5
         //public async Task<IActionResult> Delete(int? id)
         //{
         //    if (id == null)
@@ -186,32 +187,32 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var booksAndLearning = await _context.BooksAndLearning
-        //        .Include(b => b.CreatedByUser)
-        //        .Include(b => b.SubCategory)
+        //    var travelAndTours = await _context.TravelAndTours
+        //        .Include(t => t.CreatedByUser)
+        //        .Include(t => t.SubCategory)
         //        .SingleOrDefaultAsync(m => m.Id == id);
-        //    if (booksAndLearning == null)
+        //    if (travelAndTours == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    return View(booksAndLearning);
+        //    return View(travelAndTours);
         //}
 
-        //// POST: BooksAndLearnings/Delete/5
+        //// POST: TravelAndTours/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> DeleteConfirmed(int id)
         //{
-        //    var booksAndLearning = await _context.BooksAndLearning.SingleOrDefaultAsync(m => m.Id == id);
-        //    _context.BooksAndLearning.Remove(booksAndLearning);
+        //    var travelAndTours = await _context.TravelAndTours.SingleOrDefaultAsync(m => m.Id == id);
+        //    _context.TravelAndTours.Remove(travelAndTours);
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool BooksAndLearningExists(int id)
+        //private bool TravelAndToursExists(int id)
         //{
-        //    return _context.BooksAndLearning.Any(e => e.Id == id);
+        //    return _context.TravelAndTours.Any(e => e.Id == id);
         //}
     }
 }

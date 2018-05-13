@@ -2,31 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
 using KinMel.Models;
 using KinMel.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
-namespace KinMel.Controllers
+namespace KinMel.Controllers.Categories
 {
     [Authorize]
-    public class VehiclesPartsController : Controller
+    public class ToysAndGamesController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public VehiclesPartsController(ApplicationDbContext context,
+        public ToysAndGamesController(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        // GET: VehiclesParts
+        // GET: ToysAndGames
         [AllowAnonymous]
         public async Task<IActionResult> Index(string sortOrder)
         {
@@ -34,31 +34,31 @@ namespace KinMel.Controllers
             //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
             ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
-            var vehiclesParts = from c in _context.VehiclesParts select c;
+            var toysAndGames = from c in _context.ToysAndGames select c;
             switch (sortOrder)
             {
                 case "Price":
-                    vehiclesParts = vehiclesParts.OrderBy(c => c.Price);
+                    toysAndGames = toysAndGames.OrderBy(c => c.Price);
                     break;
                 case "price_desc":
-                    vehiclesParts = vehiclesParts.OrderByDescending(c => c.Price);
+                    toysAndGames = toysAndGames.OrderByDescending(c => c.Price);
                     break;
                 case "date_desc":
-                    vehiclesParts = vehiclesParts.OrderBy(c => c.DateCreated);
+                    toysAndGames = toysAndGames.OrderBy(c => c.DateCreated);
                     break;
                 case "Date":
-                    vehiclesParts = vehiclesParts.OrderByDescending(c => c.DateCreated);
+                    toysAndGames = toysAndGames.OrderByDescending(c => c.DateCreated);
                     break;
                 default:
-                    vehiclesParts = vehiclesParts.OrderByDescending(c => c.DateCreated);
+                    toysAndGames = toysAndGames.OrderByDescending(c => c.DateCreated);
                     break;
             }
-            return View(await vehiclesParts.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            return View(await toysAndGames.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
             //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             //return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: VehiclesParts/Details/5
+        // GET: ToysAndGames/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
@@ -67,31 +67,31 @@ namespace KinMel.Controllers
                 return NotFound();
             }
 
-            var vehiclesParts = await _context.VehiclesParts
-                .Include(v => v.CreatedByUser)
-                .Include(v => v.SubCategory)
+            var toysAndGames = await _context.ToysAndGames
+                .Include(t => t.CreatedByUser)
+                .Include(t => t.SubCategory)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (vehiclesParts == null)
+            if (toysAndGames == null)
             {
                 return NotFound();
             }
 
-            return View(vehiclesParts);
+            return View(toysAndGames);
         }
 
-        // GET: VehiclesParts/Create
+        // GET: ToysAndGames/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("VehiclesParts")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("ToysAndGames")), "Id", "Name");
             return View();
         }
 
-        // POST: VehiclesParts/Create
+        // POST: ToysAndGames/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] VehiclesParts vehiclesParts, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] ToysAndGames toysAndGames, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -99,31 +99,31 @@ namespace KinMel.Controllers
                 if (size > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
-                    vehiclesParts.CreatedByUserId = currentUserId;
+                    toysAndGames.CreatedByUserId = currentUserId;
 
-                    vehiclesParts.DateCreated = DateTime.Now;
-                    _context.Add(vehiclesParts);
+                    toysAndGames.DateCreated = DateTime.Now;
+                    _context.Add(toysAndGames);
                     await _context.SaveChangesAsync();
 
-                    string forSlug = vehiclesParts.Id + " " + String.Join(" ", vehiclesParts.Title.Split().Take(4));
+                    string forSlug = toysAndGames.Id + " " + String.Join(" ", toysAndGames.Title.Split().Take(4));
                     string slug = forSlug.GenerateSlug();
 
-                    vehiclesParts.Slug = slug;
+                    toysAndGames.Slug = slug;
 
                     await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    vehiclesParts.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    toysAndGames.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("VehiclesParts")), "Id", "Name", vehiclesParts.SubCategoryId);
-            return View(vehiclesParts);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("ToysAndGames")), "Id", "Name", toysAndGames.SubCategoryId);
+            return View(toysAndGames);
         }
 
-        //// GET: VehiclesParts/Edit/5
+        //// GET: ToysAndGames/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{
         //    if (id == null)
@@ -131,24 +131,24 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var vehiclesParts = await _context.VehiclesParts.SingleOrDefaultAsync(m => m.Id == id);
-        //    if (vehiclesParts == null)
+        //    var toysAndGames = await _context.ToysAndGames.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (toysAndGames == null)
         //    {
         //        return NotFound();
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", vehiclesParts.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", vehiclesParts.SubCategoryId);
-        //    return View(vehiclesParts);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", toysAndGames.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", toysAndGames.SubCategoryId);
+        //    return View(toysAndGames);
         //}
 
-        //// POST: VehiclesParts/Edit/5
+        //// POST: ToysAndGames/Edit/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] VehiclesParts vehiclesParts)
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] ToysAndGames toysAndGames)
         //{
-        //    if (id != vehiclesParts.Id)
+        //    if (id != toysAndGames.Id)
         //    {
         //        return NotFound();
         //    }
@@ -157,12 +157,12 @@ namespace KinMel.Controllers
         //    {
         //        try
         //        {
-        //            _context.Update(vehiclesParts);
+        //            _context.Update(toysAndGames);
         //            await _context.SaveChangesAsync();
         //        }
         //        catch (DbUpdateConcurrencyException)
         //        {
-        //            if (!VehiclesPartsExists(vehiclesParts.Id))
+        //            if (!ToysAndGamesExists(toysAndGames.Id))
         //            {
         //                return NotFound();
         //            }
@@ -173,12 +173,12 @@ namespace KinMel.Controllers
         //        }
         //        return RedirectToAction(nameof(Index));
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", vehiclesParts.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", vehiclesParts.SubCategoryId);
-        //    return View(vehiclesParts);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", toysAndGames.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", toysAndGames.SubCategoryId);
+        //    return View(toysAndGames);
         //}
 
-        //// GET: VehiclesParts/Delete/5
+        //// GET: ToysAndGames/Delete/5
         //public async Task<IActionResult> Delete(int? id)
         //{
         //    if (id == null)
@@ -186,32 +186,32 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var vehiclesParts = await _context.VehiclesParts
-        //        .Include(v => v.CreatedByUser)
-        //        .Include(v => v.SubCategory)
+        //    var toysAndGames = await _context.ToysAndGames
+        //        .Include(t => t.CreatedByUser)
+        //        .Include(t => t.SubCategory)
         //        .SingleOrDefaultAsync(m => m.Id == id);
-        //    if (vehiclesParts == null)
+        //    if (toysAndGames == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    return View(vehiclesParts);
+        //    return View(toysAndGames);
         //}
 
-        //// POST: VehiclesParts/Delete/5
+        //// POST: ToysAndGames/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> DeleteConfirmed(int id)
         //{
-        //    var vehiclesParts = await _context.VehiclesParts.SingleOrDefaultAsync(m => m.Id == id);
-        //    _context.VehiclesParts.Remove(vehiclesParts);
+        //    var toysAndGames = await _context.ToysAndGames.SingleOrDefaultAsync(m => m.Id == id);
+        //    _context.ToysAndGames.Remove(toysAndGames);
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool VehiclesPartsExists(int id)
+        //private bool ToysAndGamesExists(int id)
         //{
-        //    return _context.VehiclesParts.Any(e => e.Id == id);
+        //    return _context.ToysAndGames.Any(e => e.Id == id);
         //}
     }
 }

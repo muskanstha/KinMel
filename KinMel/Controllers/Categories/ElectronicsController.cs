@@ -12,24 +12,23 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 
-namespace KinMel.Controllers
+namespace KinMel.Controllers.Categories
 {
     [Authorize]
 
-    public class MusicInstrumentsController : Controller
+    public class ElectronicsController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public MusicInstrumentsController(ApplicationDbContext context,
+        public ElectronicsController(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
-
         }
 
-        // GET: MusicInstruments
+        // GET: Electronics
         [AllowAnonymous]
         public async Task<IActionResult> Index(string sortOrder)
         {
@@ -37,31 +36,31 @@ namespace KinMel.Controllers
             //string imageUris = await BlobStorageHelper.ListBlobsFolder("3-s8-like-for-sale");
             ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
-            var musicInstruments = from c in _context.MusicInstruments select c;
+            var electronics = from c in _context.Electronics select c;
             switch (sortOrder)
             {
                 case "Price":
-                    musicInstruments = musicInstruments.OrderBy(c => c.Price);
+                    electronics = electronics.OrderBy(c => c.Price);
                     break;
                 case "price_desc":
-                    musicInstruments = musicInstruments.OrderByDescending(c => c.Price);
+                    electronics = electronics.OrderByDescending(c => c.Price);
                     break;
                 case "date_desc":
-                    musicInstruments = musicInstruments.OrderBy(c => c.DateCreated);
+                    electronics = electronics.OrderBy(c => c.DateCreated);
                     break;
                 case "Date":
-                    musicInstruments = musicInstruments.OrderByDescending(c => c.DateCreated);
+                    electronics = electronics.OrderByDescending(c => c.DateCreated);
                     break;
                 default:
-                    musicInstruments = musicInstruments.OrderByDescending(c => c.DateCreated);
+                    electronics = electronics.OrderByDescending(c => c.DateCreated);
                     break;
             }
-            return View(await musicInstruments.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
+            return View(await electronics.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync());
             //var applicationDbContext = _context.ClassifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory);
             //return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: MusicInstruments/Details/5
+        // GET: Electronics/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
@@ -70,31 +69,31 @@ namespace KinMel.Controllers
                 return NotFound();
             }
 
-            var musicInstruments = await _context.MusicInstruments
-                .Include(m => m.CreatedByUser)
-                .Include(m => m.SubCategory)
+            var electronics = await _context.Electronics
+                .Include(e => e.CreatedByUser)
+                .Include(e => e.SubCategory)
                 .SingleOrDefaultAsync(m => m.Id == id);
-            if (musicInstruments == null)
+            if (electronics == null)
             {
                 return NotFound();
             }
 
-            return View(musicInstruments);
+            return View(electronics);
         }
 
-        // GET: MusicInstruments/Create
+        // GET: Electronics/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("MusicInstruments")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Electronics")), "Id", "Name");
             return View();
         }
 
-        // POST: MusicInstruments/Create
+        // POST: Electronics/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] MusicInstruments musicInstruments, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] Electronics electronics, List<IFormFile> imageFiles)
         {
             if (ModelState.IsValid)
             {
@@ -102,31 +101,31 @@ namespace KinMel.Controllers
                 if (size > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
-                    musicInstruments.CreatedByUserId = currentUserId;
+                    electronics.CreatedByUserId = currentUserId;
 
-                    musicInstruments.DateCreated = DateTime.Now;
-                    _context.Add(musicInstruments);
+                    electronics.DateCreated = DateTime.Now;
+                    _context.Add(electronics);
                     await _context.SaveChangesAsync();
 
-                    string forSlug = musicInstruments.Id + " " + String.Join(" ", musicInstruments.Title.Split().Take(4));
+                    string forSlug = electronics.Id + " " + String.Join(" ", electronics.Title.Split().Take(4));
                     string slug = forSlug.GenerateSlug();
 
-                    musicInstruments.Slug = slug;
+                    electronics.Slug = slug;
 
                     await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    musicInstruments.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    electronics.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("MusicInstruments")), "Id", "Name", musicInstruments.SubCategoryId);
-            return View(musicInstruments);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Electronics")), "Id", "Name", electronics.SubCategoryId);
+            return View(electronics);
         }
 
-        //// GET: MusicInstruments/Edit/5
+        //// GET: Electronics/Edit/5
         //public async Task<IActionResult> Edit(int? id)
         //{
         //    if (id == null)
@@ -134,24 +133,24 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var musicInstruments = await _context.MusicInstruments.SingleOrDefaultAsync(m => m.Id == id);
-        //    if (musicInstruments == null)
+        //    var electronics = await _context.Electronics.SingleOrDefaultAsync(m => m.Id == id);
+        //    if (electronics == null)
         //    {
         //        return NotFound();
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", musicInstruments.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", musicInstruments.SubCategoryId);
-        //    return View(musicInstruments);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", electronics.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", electronics.SubCategoryId);
+        //    return View(electronics);
         //}
 
-        //// POST: MusicInstruments/Edit/5
+        //// POST: Electronics/Edit/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] MusicInstruments musicInstruments)
+        //public async Task<IActionResult> Edit(int id, [Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,Slug,Discriminator")] Electronics electronics)
         //{
-        //    if (id != musicInstruments.Id)
+        //    if (id != electronics.Id)
         //    {
         //        return NotFound();
         //    }
@@ -160,12 +159,12 @@ namespace KinMel.Controllers
         //    {
         //        try
         //        {
-        //            _context.Update(musicInstruments);
+        //            _context.Update(electronics);
         //            await _context.SaveChangesAsync();
         //        }
         //        catch (DbUpdateConcurrencyException)
         //        {
-        //            if (!MusicInstrumentsExists(musicInstruments.Id))
+        //            if (!ElectronicsExists(electronics.Id))
         //            {
         //                return NotFound();
         //            }
@@ -176,12 +175,12 @@ namespace KinMel.Controllers
         //        }
         //        return RedirectToAction(nameof(Index));
         //    }
-        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", musicInstruments.CreatedByUserId);
-        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", musicInstruments.SubCategoryId);
-        //    return View(musicInstruments);
+        //    ViewData["CreatedByUserId"] = new SelectList(_context.Users, "Id", "Id", electronics.CreatedByUserId);
+        //    ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>(), "Id", "Id", electronics.SubCategoryId);
+        //    return View(electronics);
         //}
 
-        //// GET: MusicInstruments/Delete/5
+        //// GET: Electronics/Delete/5
         //public async Task<IActionResult> Delete(int? id)
         //{
         //    if (id == null)
@@ -189,32 +188,32 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-        //    var musicInstruments = await _context.MusicInstruments
-        //        .Include(m => m.CreatedByUser)
-        //        .Include(m => m.SubCategory)
+        //    var electronics = await _context.Electronics
+        //        .Include(e => e.CreatedByUser)
+        //        .Include(e => e.SubCategory)
         //        .SingleOrDefaultAsync(m => m.Id == id);
-        //    if (musicInstruments == null)
+        //    if (electronics == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    return View(musicInstruments);
+        //    return View(electronics);
         //}
 
-        //// POST: MusicInstruments/Delete/5
+        //// POST: Electronics/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> DeleteConfirmed(int id)
         //{
-        //    var musicInstruments = await _context.MusicInstruments.SingleOrDefaultAsync(m => m.Id == id);
-        //    _context.MusicInstruments.Remove(musicInstruments);
+        //    var electronics = await _context.Electronics.SingleOrDefaultAsync(m => m.Id == id);
+        //    _context.Electronics.Remove(electronics);
         //    await _context.SaveChangesAsync();
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool MusicInstrumentsExists(int id)
+        //private bool ElectronicsExists(int id)
         //{
-        //    return _context.MusicInstruments.Any(e => e.Id == id);
+        //    return _context.Electronics.Any(e => e.Id == id);
         //}
     }
 }
