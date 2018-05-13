@@ -146,7 +146,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <textarea id="descriptionEditor"asp-for="Description" class="form-control" >aaa</textarea>
+                <textarea id="descriptionEditor"asp-for="Description" placeholder="Write Your Description Here.."class="form-control" >aaa</textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -211,6 +211,16 @@
         <partial name="_ValidationScriptsPartial" />
     }
     
-    <script type="text/javascript">CKEDITOR.replace('descriptionEditor');</script>
+    <script type="text/javascript">
+        CKEDITOR.plugins.addExternal( 'confighelper', 'https://martinezdelizarrondo.com/ckplugins/confighelper/' );
+        var config = { extraPlugins: 'confighelper', toolbar:'Basic'};
+        CKEDITOR.replace('descriptionEditor',
+            {
+                resize_enabled: true,
+                height: 300,
+                width: 800     
+            },
+            config);
+    </script>
 
 }
