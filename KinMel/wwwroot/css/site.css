@@ -147,8 +147,6 @@ nav .sidenav-trigger {
 }
 
 /*********Profile-page*********/
-.profile-page-grid {
-}
 
 .cover-image {
     display: grid;
@@ -159,7 +157,7 @@ nav .sidenav-trigger {
 }
 
     .cover-image > img {
-        width: -webkit-fill-available;
+        width: 100%;
         height: 300px;
         -webkit-object-fit: cover;
         object-fit: cover;
@@ -174,7 +172,7 @@ nav .sidenav-trigger {
 }
 
 .profile-picture {
-    grid-column: 1/7;
+    height: 360px;
 }
 
     .profile-picture > img {
@@ -186,18 +184,12 @@ nav .sidenav-trigger {
         ;
     }
 
-.about-me {
-}
-
     .about-me > p {
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 6;
         -webkit-box-orient: vertical;
     }
-
-.side-content-grid > ul {
-}
 
     .side-content-grid > ul > li {
         padding: 10px 20px;
@@ -248,6 +240,23 @@ nav .sidenav-trigger {
     position: absolute;
     top: 80px;
     left: 340px
+}
+
+.profile-content-grid {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    grid-gap: 1em;
+}
+
+.profile-content-grid > div:nth-child(1) {
+    width: 360px;
+}
+
+.profile-ads {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-gap: 1em;
+    grid-column: 2/3;
 }
 
 /*************!GRID**************/
