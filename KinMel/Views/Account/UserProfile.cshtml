@@ -1,128 +1,216 @@
-﻿@model KinMel.Models.AccountDTO
+﻿@using Microsoft.EntityFrameworkCore
+@model KinMel.Models.AccountDTO
 
 @{
     ViewData["Title"] = "User Profile";
 }
 
-<h2>Details</h2>
+<div class="browse-width">
+    <div class="profile-page-grid">
+        <div class="cover-image">
+            <img src="https://placeimg.com/768/260/arch" alt="Cover picture" />
+            <!--SideCard-->
+            <div class="side-content-grid card z-depth-4">
+                <div class="profile-picture">
+                    @if (!string.IsNullOrWhiteSpace(@Model.ProfilePictureUrl))
+                    {
+                        <img src="@Model.ProfilePictureUrl" alt="@Model.FullName's Profile Picture" />
+                    }
+                </div>
+                <div class="about-me grey lighten-4 card-content">
+                    <b>About me!</b>
+                    <p>
+                        Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+                        Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+                        Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+                        Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+                        Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+                    </p>
+                    <a class="pink-text text-darken-3">Read more<i class="material-icons align-middle">arrow_forward</i></a>
+                </div>
+                <ul>
+                    <li>
+                        <label asp-for="Email"></label>
+                        <p>@Html.DisplayFor(model => model.Email)</p>
+                    </li>
+                    <li>
+                        <label asp-for="PhoneNumber"></label>
+                        @if (Model.PhoneNumberConfirmed == true)
+                        {
+                            <p>@Html.DisplayFor(model => model.PhoneNumberConfirmed)<i class="material-icons cyan-text tooltipped" data-tooltip="Phone verified" data-position="left">verified_user</i></p>
+                        }
+                        else
+                        {
+                            <p>@Html.DisplayFor(model => model.PhoneNumberConfirmed)<i class="material-icons red-text tooltipped" data-tooltip="Phone not verified" data-position="left">phonelink_erase</i></p>
+                        }
+                        <p>@Html.DisplayFor(model => model.PhoneNumber)</p>
+                    </li>
+                    <li>
+                        <label asp-for="City"></label>
+                        <p>@Html.DisplayFor(model => model.City)</p>
+                    </li>
+                </ul>
+                <!--TopHeader-->
+                <div class="profile-username white-text">
+                    @Html.DisplayFor(model => model.FullName)
+                </div>
+                <!--joined Date-->
+                <div class="profile-joindate grey-text text-lighten-2">
+                    Joined on @Html.DisplayFor(model => model.JoinDate)
+                </div>
+                <div class="star-rating-empty tooltipped" data-tooltip="Average Rating: @Model.AverageStars" data-position="left">
+                    <p class="material-icons pink-text m0">star_border</p>
+                    <p class="material-icons pink-text m0">star_border</p>
+                    <p class="material-icons pink-text m0">star_border</p>
+                    <p class="material-icons pink-text m0">star_border</p>
+                    <p class="material-icons pink-text m0">star_border</p>
+                    <p class="white-text m0">| @Model.Ratings.Count |</p>
+                </div>
+                <div class="star-rating">
+                    @for (var i = 1; i <= Model.AverageStars; i++)
+                    {
+                        <i class="material-icons pink-text">star</i>
 
-<div>
-    <h4></h4>
-    <hr />
-    @if (!string.IsNullOrWhiteSpace(@Model.ProfilePictureUrl))
-    {
-        <img src="@Model.ProfilePictureUrl" />
-    }
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FullName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FullName)
-        </dd>
+                        if ((Model.AverageStars - i) > 0 && (Model.AverageStars - i) < 1)
+                        {
+                            <i class="material-icons pink-text">star_half</i>
+                        }
+                    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumberConfirmed)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AverageStars)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AverageStars)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.JoinDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.JoinDate)
-        </dd>
-
-    </dl>
+                </div>
+            </div>
+            <a asp-action="Create" asp-controller="Ratings" asp-route-id="@Model.Id" class="waves-effect waves-light btn pink tooltipped" data-tooltip="Give a rating and review to the user." data-position="left">
+                <i class="material-icons left">star</i>Rate this user
+            </a>
+        </div>
+    </div>
 </div>
-<div>
-    @if (Model.Ratings != null)
-    {
-        if (Model.Ratings.Any())
+
+<!--Ads from user-->
+<div class="browse-width profile-content-grid">
+    <div></div>
+    <div class="profile-ads">
+        <partial name="_sortingPartial" />
+        @if (Model.ClassifiedAds != null)
         {
-            foreach (Rating rating in Model.Ratings)
+            if (Model.ClassifiedAds.Any())
             {
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(r => rating.RatedById)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(r => rating.RatedById)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(r => rating.Stars)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(r => rating.Stars)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(r => rating.Review)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(r => rating.Review)
-                    </dd>
-                </dl>
+                <!--grid-view-->
+                <div class="main-content-cards hide-on-small-and-down p5">
+                    @foreach (ClassifiedAd classifiedAd in Model.ClassifiedAds)
+                    {
+                        <div class="card m0">
+                            <div class="card-image waves-effect waves-block grey lighten-2 waves-light">
+                                <img class="content-image-grid activator" src="@classifiedAd.PrimaryImageUrl" />
+                            </div>
+                            <div class="card-content">
+                                <span class="card-title activator grey-text text-darken-4">
+                                    <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">@Html.DisplayFor(modelItem => classifiedAd.Title)</a>
+                                </span>
+                                @if (@classifiedAd.Condition == "NEW")
+                                {
+                                    <a class="content-condition btn-large red darken-1">@Html.DisplayFor(modelItem => classifiedAd.Condition)</a>
+                                }
+                                else
+                                {
+                                    <a class="content-condition btn-large cyan darken-3">@Html.DisplayFor(modelItem => classifiedAd.Condition)</a>
+                                }
+                                <p class="material-icons align-middle m-5">person_outline</p>
+                                <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@classifiedAd.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelItem => classifiedAd.CreatedByUser.FullName)</a>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">
+                                    <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">@Html.DisplayFor(modelItem => classifiedAd.Title)</a>
+                                    <i class="material-icons right">close</i>
+                                </span>
+                                <p class="content-description">@Html.DisplayFor(modelItem => classifiedAd.Description)</p>
+                                <p class="content-datecreated">@Html.DisplayFor(modelItem => classifiedAd.DateCreated)</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!--list view-->
+                <div class="hide-on-med-and-up">
+                    @foreach (ClassifiedAd classifiedAd in Model.ClassifiedAds)
+                    {
+                        <div class="display-flex">
+                            <div class="image-container-list">
+                                <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">
+                                    <img class="content-image-list" src="@classifiedAd.ImageUrlList.FirstOrDefault()" />
+                                </a>
+                            </div>
+                            <div class="col s12">
+                                <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">@Html.DisplayFor(modelItem => classifiedAd.Title)</a>
+                                @if (@classifiedAd.Condition == "NEW")
+                                {
+                                    <a class="content-condition-list red-text darken-1">(@Html.DisplayFor(modelItem => classifiedAd.Condition))</a>
+                                }
+                                else
+                                {
+                                    <a class="content-condition-list cyan-text darken-3">(@Html.DisplayFor(modelItem => classifiedAd.Condition))</a>
+                                }
+                                <div>
+                                    <div class="col s12 m8 l8 p0">
+                                        <p class="content-description">@Html.DisplayFor(modelItem => classifiedAd.Description)</p>
+                                        <p class="material-icons align-middle m-5">person_outline</p>
+                                        <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@classifiedAd.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelItem => classifiedAd.CreatedByUser.FullName)</a>
+                                    </div>
+                                    <div class="col s12 m4 l4 p0">
+                                        <div class="col s6 m6 p0">
+                                            <p class="content-datecreated">@Html.DisplayFor(modelItem => classifiedAd.DateCreated)</p>
+                                        </div>
+                                        <div class="col s6 m6 p0 center">
+                                            <p class="content-price">Rs. @Html.DisplayFor(modelItem => classifiedAd.Price)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                    }
+                </div>
+            }
+
+        }
+    </div>
+</div>
+
+<!--user reviews-->
+<div class="browse-width profile-content-grid">
+    <div></div>
+    <div class="profile-ads">
+        <div class="card-header">
+            Reviews about @Model.FullName | @Model.Ratings.Count |
+        </div>
+        @if (Model.Ratings != null)
+        {
+            if (Model.Ratings.Any())
+            {
+                foreach (Rating rating in Model.Ratings)
+                {
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(r => rating.RatedById)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(r => rating.RatedById)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(r => rating.Stars)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(r => rating.Stars)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(r => rating.Review)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(r => rating.Review)
+                        </dd>
+                    </dl>
+                }
             }
         }
-    }
-</div>
-
-<div>
-    @if (Model.ClassifiedAds != null)
-    {
-        if (Model.ClassifiedAds.Any())
-        {
-            foreach (ClassifiedAd classifiedAd in Model.ClassifiedAds)
-            {
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(c => classifiedAd.Title)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(c => classifiedAd.Title)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(c => classifiedAd.Price)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(c => classifiedAd.Price)
-                    </dd>
-                </dl>
-            }
-        }
-    }
-</div>
-<div>
-    <a asp-action="Create" asp-controller="Ratings" asp-route-id="@Model.Id">Rate This user</a>
+    </div>
 </div>
