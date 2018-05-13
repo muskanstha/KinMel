@@ -1,0 +1,25 @@
+﻿@model IEnumerable<KinMel.Models.Notification>
+
+@{
+    ViewData["Title"] = "Default";
+}
+@foreach (var item in Model)
+{
+    <li>
+        <a class="blue-text" asp-action="Details" asp-controller="Notifications" asp-route-id="@item.Id">
+            @Html.DisplayFor(modelItem => item.NotificationText)
+        </a>
+        <a class="red-text" onclick="DeleteNotification(@item.Id)">x</a>
+    </li>
+
+}
+<li>
+    <a asp-controller="Notifications" asp-action="Index">See All Notifications</a>
+</li>
+
+
+<script type="text/javascript">
+    function DeleteNotification(id) {
+        $.getJSON("notifications/Delete/" + id);
+    };
+</script>

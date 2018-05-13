@@ -7,18 +7,20 @@
 <section class="browse-width">
     <div class="page-container-grid">
         <!--Side-Content-->
-        @await Html.PartialAsync("_categoriesSideMenu")
+        <partial name="_categoriesSideMenu" />
         <!--Main-Content-->
         <div class="main-content">
+
             <!--sorting-->
-            @await Html.PartialAsync("_sortingPartial")
+            <partial name="_sortingPartial"/>
+
             <!--grid-view-->
             <div class="main-content-cards hide-on-small-and-down">
                 @foreach (var item in Model)
                 {
                     <div class="card m0">
                         <div class="card-image waves-effect waves-block grey lighten-2 waves-light">
-                            <img class="content-image-grid activator" src="@item.ImageUrlList.FirstOrDefault()" />
+                            <img class="content-image-grid activator" src="@item.PrimaryImageUrl"/>
                         </div>
                         <div class="card-content">
                             <span class="card-title activator grey-text text-darken-4">
@@ -53,7 +55,7 @@
                     <div class="display-flex">
                         <div class="image-container-list">
                             <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">
-                                <img class="content-image-list" src="@item.ImageUrlList.FirstOrDefault()" />
+                                <img class="content-image-list" src="@item.ImageUrlList.FirstOrDefault()"/>
                             </a>
                         </div>
                         <div class="col s12">
@@ -83,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr />
+                    <hr/>
                 }
             </div>
         </div>

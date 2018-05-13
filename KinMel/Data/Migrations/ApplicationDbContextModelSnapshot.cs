@@ -19,6 +19,29 @@ namespace KinMel.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("KinMel.Models.Answer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CreatedById");
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<int>("QuestionId");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Answer");
+                });
+
             modelBuilder.Entity("KinMel.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -194,6 +217,29 @@ namespace KinMel.Data.Migrations
                     b.HasIndex("NotificationToId");
 
                     b.ToTable("Notification");
+                });
+
+            modelBuilder.Entity("KinMel.Models.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ClassifiedAdId");
+
+                    b.Property<string>("CreatedById");
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassifiedAdId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.ToTable("Question");
                 });
 
             modelBuilder.Entity("KinMel.Models.Rating", b =>
@@ -705,6 +751,18 @@ namespace KinMel.Data.Migrations
                     b.HasDiscriminator().HasValue("VehiclesParts");
                 });
 
+            modelBuilder.Entity("KinMel.Models.Answer", b =>
+                {
+                    b.HasOne("KinMel.Models.ApplicationUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
+
+                    b.HasOne("KinMel.Models.Question", "Category")
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("KinMel.Models.ClassifiedAd", b =>
                 {
                     b.HasOne("KinMel.Models.ApplicationUser", "CreatedByUser")
@@ -726,6 +784,18 @@ namespace KinMel.Data.Migrations
                     b.HasOne("KinMel.Models.ApplicationUser", "NotificationTo")
                         .WithMany("Notifications")
                         .HasForeignKey("NotificationToId");
+                });
+
+            modelBuilder.Entity("KinMel.Models.Question", b =>
+                {
+                    b.HasOne("KinMel.Models.ClassifiedAd", "ClassifiedAd")
+                        .WithMany("Questions")
+                        .HasForeignKey("ClassifiedAdId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("KinMel.Models.ApplicationUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById");
                 });
 
             modelBuilder.Entity("KinMel.Models.Rating", b =>
