@@ -13,6 +13,7 @@ using KinMel.Hubs;
 using KinMel.Models;
 using KinMel.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace KinMel
 {
@@ -44,6 +45,7 @@ namespace KinMel
 
         }
 
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -69,6 +71,7 @@ namespace KinMel
             app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatHub>("/chathub");
+                routes.MapHub<NotificationHub>("/notificationhub");
             });
 
             app.UseMvc(routes =>

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<KinMel.Models.Question>
+
+@{
+    ViewData["Title"] = "Default";
+}
+<ul>
+    @foreach (var item in Model)
+    {
+        <li class="blue-text">
+            <p>QUESTION</p>
+            @Html.DisplayFor(modelItem => item.Text)<br/>
+            @Html.DisplayFor(modelItem => item.CreatedBy.FullName)
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </li>
+        foreach (var answer in item.Answers)
+        {
+            <li class="red-text">
+                <p>ANSWER</p>
+                @Html.DisplayFor(modelItem => answer.Text)<br/>
+                @Html.DisplayFor(modelItem => answer.CreatedBy.FullName)
+                @Html.DisplayFor(modelItem => answer.DateCreated)
+            </li>
+        }
+        <li>
+            <form asp-area="" asp-controller="Answers" asp-action="Create" method="post">
+                <input name="Text" />
+                <input name="QuestionId" hidden value="@item.Id" />
+
+                <button type="submit" value="Create" class="btn">Answer Question</button>
+            </form>
+        </li>
+    }
+
+</ul>
