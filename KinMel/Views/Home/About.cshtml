@@ -1,34 +1,72 @@
 ﻿@{
-    ViewData["Title"] = "About";
+    ViewData["Title"] = "Meet Our Team";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+@*<h4>@ViewData["Title"]</h4>
+<h3>@ViewData["Message"]</h3>*@
+<div class="page-container" style="background: lightblue; ">
+<section  class="browse-width">
+    <h5 style="text-align: center; font-weight: bold;color: darkgreen">@ViewData["Title"]</h5>
+    <h6 style="text-align: center;font-family: italic" >@ViewData["Message"]</h6>
+    <div>
+        @*<div class="card-header">Team M</div>*@
+        <div class="card "></div>
+        <div class="main-content-cards align-middle ">
+            <div>
+                <div class="card ">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="circle responsive-img" src="https://scontent-arn2-1.xx.fbcdn.net/v/t1.0-9/31693225_1879470285438712_2844649057383612416_n.jpg?_nc_cat=0&oh=527fb8d938c5e545ad833cd3a5f48f0d&oe=5B95C993">
+                    </div>
+                </div>
+                <ul style="text-align: center; font-family: elephant;color:firebrick">
+                    <li>Muskan Shrestha</li>
+                    <li>Back-End Master</li>
+                </ul>
+               
+            </div>
+            <div>
+                <div class="card ">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="circle responsive-img activator" src="https://media.licdn.com/dms/image/C4E03AQEMnrrhvpu2iA/profile-displayphoto-shrink_800_800/0?e=1531958400&v=beta&t=3xfw3NgL0RX1uGI8s3avKY_Jl6NnRbaahShtvniJ3qo">
+                    </div>
+                </div>
+                <ul style="text-align: center;font-family: elephant;color:firebrick">
+                    <li>Yogesh Bhattarai</li>
+                    <li>Front-End Master</li>
+                </ul>                   
+            </div>
+            <div>
+                <div class="card ">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="circle responsive-img activator" src="https://media.licdn.com/dms/image/C4D03AQEd6Iut3jUWiA/profile-displayphoto-shrink_800_800/0?e=1531958400&v=beta&t=QtffoYwvkTEt7SRLzdggzbuLqvlPR1Fi3HPLEvXWynY">
+                    </div>
+                </div>
+                <ul style="text-align: center;font-family: elephant;color:firebrick">
+                    <li >Bipin rai </li>
+                    <li>Ekdum Kada Master</li>
+                </ul>
+            </div>
+            <div>
+                <div class="card ">
+                    <div class="card-image waves-effect waves-block waves-light">
+                        <img class="circle responsive-img activator" src="https://media.licdn.com/dms/image/C5603AQFjZyJsRC4UzQ/profile-displayphoto-shrink_800_800/0?e=1531958400&v=beta&t=mCMcvXbAZh5DcGVupDrCQ0_BZ_x8WvkrBWxIAOqYhHQ">
+                    </div>
 
-<p>Use this area to provide additional information.</p>
-<a asp-action="UserProfile" asp-controller="Account" asp-route-id="92f91e52-f4fd-47d7-af89-18b335b7d729" class="content-title">aaaa</a>
+                </div>
+                <ul style="text-align: center;font-family: elephant;color:firebrick">
+                    <li>Mr.Gautam </li>
+                    <li>Khatra Programmer</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 
-<div class="container">
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-6">&nbsp;</div>
-        <div class="col-6">
-            User..........<input type="text" id="userInput" />
-            <br />
-            Message...<input type="text" id="messageInput" />
-            <input type="button" id="sendButton" value="Send Message" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <hr />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">&nbsp;</div>
-        <div class="col-6">
-            <ul id="messagesList"></ul>
-        </div>
-    </div>
+<div class="card-content">
+    <P>The startup company KinMel is a small company with no financial backings and very limited human resource. Organization’s most important and foremost effort is to step in the market introducing somewhat new features and assisting the clients by reducing the gap between the technology and Product. Organization will mainly be focusing on the usability and flexibility.
+        The rapidly growing digital market and its users motivated the team to establish this KinMel organization. Marketing prospect of this platform is bright analyzing the potentiality of market. The flexibility and some uncommon features in the product makes it promising over the existing competitors. The problems and opportunities of our organization with the specific solution-oriented analysis will be discussed clinically below.
+        he startup company KinMel is a small company with no financial backings and very limited human resource. Organization’s most important and foremost effort is to step in the market introducing somewhat new features and assisting the clients by reducing the gap between the technology and Product. Organization will mainly be focusing on the usability and flexibility.
+        The rapidly growing digital market and its users motivated the team to establish this KinMel organization. Marketing prospect of this platform is bright analyzing the potentiality of market. The flexibility and some uncommon features in the product makes it promising over the existing competitors. The problems and opportunities of our organization with the specific solution-oriented analysis will be discussed clinically below.
+    </P>
 </div>
-<script src="~/lib/signalr/signalr.js"></script>
-<script src="~/js/chat.js"></script>
+</div>
+

@@ -17,7 +17,7 @@ namespace KinMel.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Kinmel Team is awesome";
 
             return View();
         }
