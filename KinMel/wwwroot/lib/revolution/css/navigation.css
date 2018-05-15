@@ -1,0 +1,2810 @@
+
+.ares.tparrows {
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+    min-height: 60px;
+    min-width: 60px;
+    position: absolute;
+    z-index: 100;
+}
+
+    .ares.tparrows:hover {
+    }
+
+    .ares.tparrows:before {
+        -moz-transition: color 0.3s;
+        -webkit-transition: color 0.3s;
+        color: #aaa;
+        display: block;
+        font-family: "revicons";
+        font-size: 25px;
+        line-height: 60px;
+        position: relative;
+        text-align: center;
+        transition: color 0.3s;
+        z-index: 2;
+    }
+
+    .ares.tparrows.tp-leftarrow:before {
+        content: "\e81f";
+    }
+
+    .ares.tparrows.tp-rightarrow:before {
+        content: "\e81e";
+    }
+
+    .ares.tparrows:hover:before {
+        color: #000;
+    }
+
+.ares .tp-title-wrap {
+    -webkit-transform: scaleX(0);
+    -webkit-transform-origin: 0% 50%;
+    -webkit-transition: -webkit-transform 0.3s;
+    background: #fff;
+    border-radius: 0px 30px 30px 0px;
+    display: inline-block;
+    line-height: 60px;
+    margin-left: 30px;
+    min-height: 60px;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    transform: scaleX(0);
+    transform-origin: 0% 50%;
+    transition: transform 0.3s;
+    z-index: 1;
+}
+
+.ares.tp-rightarrow .tp-title-wrap {
+    -webkit-transform-origin: 100% 50%;
+    border-radius: 30px 0px 0px 30px;
+    margin-left: 0px;
+    margin-right: 30px;
+    right: 0px;
+}
+
+.ares.tparrows:hover .tp-title-wrap {
+    -webkit-transform: scaleX(1) scaleY(1);
+    transform: scaleX(1) scaleY(1);
+}
+
+.ares .tp-arr-titleholder {
+    -webkit-transition: -webkit-transform 0.3s;
+    color: #000;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 60px;
+    margin-left: 10px;
+    opacity: 0;
+    padding: 0px 20px;
+    position: relative;
+    text-transform: uppercase;
+    transform: translateX(200px);
+    transition: transform 0.3s;
+    white-space: nowrap;
+}
+
+.ares.tp-rightarrow .tp-arr-titleholder {
+    margin-left: 0px;
+    margin-right: 10px;
+    transform: translateX(-200px);
+}
+
+.ares.tparrows:hover .tp-arr-titleholder {
+    -webkit-transform: translateX(0px);
+    opacity: 1;
+    transform: translateX(0px);
+    transition-delay: 0.1s;
+}
+
+/* BULLETS */
+
+.ares.tp-bullets {
+}
+
+    .ares.tp-bullets:before {
+        background: transparent;
+        box-sizing: content-box;
+        content: " ";
+        height: 100%;
+        margin-left: -10px;
+        margin-top: -10px;
+        padding: 10px;
+        position: absolute;
+        width: 100%;
+    }
+
+.ares .tp-bullet {
+    background: #e5e5e5;
+    border-radius: 50%;
+    box-sizing: content-box;
+    cursor: pointer;
+    height: 13px;
+    position: absolute;
+    width: 13px;
+}
+
+    .ares .tp-bullet:hover,
+    .ares .tp-bullet.selected {
+        background: #fff;
+    }
+
+.ares .tp-bullet-title {
+    -webkit-transform: translateX(-20px);
+    -webkit-transition: transform 0.3s;
+    background: #fff;
+    background: rgba(255, 255, 255, 0.75);
+    color: #888;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 0px 10px;
+    position: absolute;
+    right: 27px;
+    top: -4px;
+    transform: translateX(-20px);
+    transition: transform 0.3s;
+    visibility: hidden;
+    white-space: nowrap;
+}
+
+    .ares .tp-bullet-title:after {
+        border-color: transparent transparent transparent rgba(255, 255, 255, 0.75);
+        border-style: solid;
+        border-width: 10px 0 10px 10px;
+        content: " ";
+        height: 0px;
+        position: absolute;
+        right: -10px;
+        top: 0px;
+        width: 0px;
+    }
+
+.ares .tp-bullet:hover .tp-bullet-title {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+    visibility: visible;
+}
+
+.ares .tp-bullet.selected:hover .tp-bullet-title {
+    background: #fff;
+}
+
+    .ares .tp-bullet.selected:hover .tp-bullet-title:after {
+        border-color: transparent transparent transparent #fff;
+    }
+
+.ares.tp-bullets:hover .tp-bullet-title {
+    visibility: hidden;
+}
+
+.ares.tp-bullets:hover .tp-bullet:hover .tp-bullet-title {
+    visibility: visible;
+}
+
+/* TABS */
+
+.ares .tp-tab {
+    border-bottom: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    opacity: 1;
+    padding: 10px;
+}
+
+.ares .tp-tab-image {
+    display: inline-block;
+    float: left;
+    height: 60px;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+    width: 60px;
+}
+
+.ares .tp-tab-content {
+    background: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    color: #333;
+    display: inline-block;
+    height: 100%;
+    left: 0px;
+    margin-top: -15px;
+    overflow: hidden;
+    padding: 15px 15px 15px 85px;
+    position: relative;
+    position: absolute;
+    width: 100%;
+}
+
+.ares .tp-tab-date {
+    color: #aaa;
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+
+.ares .tp-tab-title {
+    color: #333;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    text-align: left;
+    text-transform: none;
+}
+
+.ares .tp-tab:hover,
+.ares .tp-tab.selected {
+    background: #eee;
+}
+
+.ares .tp-tab-mask {
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 960px) {
+}
+
+@media only screen and (max-width: 768px) {
+}
+
+/* ARROWS */
+
+.custom.tparrows {
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    position: absolute;
+    width: 40px;
+    z-index: 100;
+}
+
+    .custom.tparrows:hover {
+        background: #000;
+    }
+
+    .custom.tparrows:before {
+        color: #fff;
+        display: block;
+        font-family: "revicons";
+        font-size: 15px;
+        line-height: 40px;
+        text-align: center;
+    }
+
+    .custom.tparrows.tp-leftarrow:before {
+        content: "\e824";
+    }
+
+    .custom.tparrows.tp-rightarrow:before {
+        content: "\e825";
+    }
+
+
+
+/* BULLETS */
+
+.custom.tp-bullets {
+}
+
+    .custom.tp-bullets:before {
+        background: transparent;
+        box-sizing: content-box;
+        content: " ";
+        height: 100%;
+        margin-left: -10px;
+        margin-top: -10px;
+        padding: 10px;
+        position: absolute;
+        width: 100%;
+    }
+
+.custom .tp-bullet {
+    background: #aaa;
+    background: rgba(125, 125, 125, 0.5);
+    box-sizing: content-box;
+    cursor: pointer;
+    height: 12px;
+    position: absolute;
+    width: 12px;
+}
+
+    .custom .tp-bullet:hover,
+    .custom .tp-bullet.selected {
+        background: rgb(125, 125, 125);
+    }
+
+.custom .tp-bullet-image {
+}
+
+.custom .tp-bullet-title {
+}
+
+
+/* ARROWS */
+
+.dione.tparrows {
+    -webkit-transition: all 0.3s;
+    background: transparent;
+    background: rgba(0, 0, 0, 0);
+    height: 100%;
+    line-height: 100%;
+    transition: all 0.3s;
+    width: 100px;
+}
+
+    .dione.tparrows:hover {
+        background: rgba(0, 0, 0, 0.45);
+    }
+
+.dione .tp-arr-imgwrapper {
+    height: 100%;
+    left: 0px;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    width: 100px;
+}
+
+.dione.tp-rightarrow .tp-arr-imgwrapper {
+    left: auto;
+    right: 0px;
+}
+
+.dione .tp-arr-imgholder {
+    -webkit-transform: translateX(-50px);
+    -webkit-transition: all 0.3s;
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+    left: 0px;
+    opacity: 0;
+    top: 0px;
+    transform: translateX(-50px);
+    transition: all 0.3s;
+    visibility: hidden;
+    width: 100px;
+}
+
+.dione.tparrows.tp-rightarrow .tp-arr-imgholder {
+    -webkit-transform: translateX(50px);
+    left: auto;
+    right: 0px;
+    transform: translateX(50px);
+}
+
+.dione.tparrows:before {
+    -webkit-transition: all 0.3s;
+    font-size: 30px;
+    left: 50%;
+    line-height: 30px;
+    margin-left: -22px;
+    margin-top: -15px;
+    position: absolute;
+    top: 50%;
+    transition: all 0.3s;
+}
+
+.dione.tparrows.tp-rightarrow:before {
+    margin-left: 6px;
+}
+
+.dione.tparrows:hover:before {
+    -webkit-transform: translateX(-20px);
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.dione.tparrows.tp-rightarrow:hover:before {
+    -webkit-transform: translateX(20px);
+    transform: translateX(20px);
+}
+
+.dione.tparrows:hover .tp-arr-imgholder {
+    -webkit-transform: translateX(0px);
+    opacity: 1;
+    transform: translateX(0px);
+    visibility: visible;
+}
+
+
+
+/* BULLETS */
+
+.dione .tp-bullet {
+    -webkit-transition: all 0.3s;
+    background: #000;
+    background-color: rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    height: 50px;
+    margin: 0px;
+    opacity: 1;
+    padding: 3px;
+    transition: all 0.3s;
+    width: 50px;
+}
+
+.dione .tp-bullet-image {
+    -moz-box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    background-position: center center;
+    background-size: cover;
+    box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    display: block;
+    height: 44px;
+    position: relative;
+    width: 44px;
+}
+
+.dione .tp-bullet-title {
+    -webkit-border-radius: 4px;
+    -webkit-transform: translateZ(0.001px) translateX(-50%) translateY(14px);
+    -webkit-transform-origin: 50% 100%;
+    -webkit-transition: all 0.3s;
+    background: #000;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    bottom: 65px;
+    color: #fff;
+    display: inline-block;
+    left: 50%;
+    opacity: 0;
+    opacity: 0;
+    padding: 10px 30px;
+    position: absolute;
+    transform: translateZ(0.001px) translateX(-50%) translateY(14px);
+    transform-origin: 50% 100%;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.dione .tp-bullet:hover .tp-bullet-title {
+    -webkit-transform: rotateX(0deg) translateX(-50%);
+    opacity: 1;
+    transform: rotateX(0deg) translateX(-50%);
+}
+
+.dione .tp-bullet.selected,
+.dione .tp-bullet:hover {
+    background: rgba(255, 255, 255, 1);
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(119, 119, 119, 1)));
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#777777", GradientType=0);
+}
+
+.dione .tp-bullet-title:after {
+    border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
+    border-style: solid;
+    border-width: 8px 8px 0 8px;
+    bottom: -8px;
+    content: " ";
+    height: 0;
+    left: 50%;
+    margin-left: -8px;
+    position: absolute;
+    width: 0;
+}
+
+/* ARROWS */
+
+.erinyen.tparrows {
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 35px;
+    cursor: pointer;
+    display: block;
+    min-height: 70px;
+    min-width: 70px;
+    position: absolute;
+    z-index: 100;
+}
+
+    .erinyen.tparrows:before {
+        color: #fff;
+        display: block;
+        font-family: "revicons";
+        font-size: 20px;
+        line-height: 70px;
+        position: relative;
+        text-align: center;
+        z-index: 2;
+    }
+
+    .erinyen.tparrows.tp-leftarrow:before {
+        content: "\e824";
+    }
+
+    .erinyen.tparrows.tp-rightarrow:before {
+        content: "\e825";
+    }
+
+.erinyen .tp-title-wrap {
+    -moz-transform: scale(0);
+    -moz-transition: opacity 0.3s;
+    -webkit-transform: scale(0);
+    -webkit-transition: opacity 0.3s;
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 35px;
+    display: inline-block;
+    line-height: 70px;
+    margin-left: 0px;
+    min-height: 70px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    transform: scale(0);
+    transition: opacity 0.3s;
+    visibility: hidden;
+    z-index: 1;
+}
+
+.erinyen.tparrows:hover .tp-title-wrap {
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+}
+
+.erinyen.tp-rightarrow .tp-title-wrap {
+    -webkit-transform-origin: 100% 50%;
+    border-radius: 35px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 10px;
+    padding-right: 20px;
+    right: 0px;
+}
+
+
+.erinyen.tp-leftarrow .tp-title-wrap {
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+.erinyen .tp-arr-titleholder {
+    -webkit-transition: -webkit-transform 0.3s;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    line-height: 70px;
+    margin-left: 11px;
+    opacity: 0;
+    padding: 0px 20px;
+    position: relative;
+    text-transform: uppercase;
+    transform: translateX(200px);
+    transition: transform 0.3s;
+    white-space: nowrap;
+}
+
+.erinyen .tp-arr-imgholder {
+    background-position: center center;
+    background-size: cover;
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+.erinyen .tp-arr-img-over {
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+.erinyen.tp-rightarrow .tp-arr-titleholder {
+    margin-left: 0px;
+    margin-right: 11px;
+    transform: translateX(-200px);
+}
+
+.erinyen.tparrows:hover .tp-arr-titleholder {
+    -webkit-transform: translateX(0px);
+    opacity: 1;
+    transform: translateX(0px);
+    transition-delay: 0.1s;
+}
+
+/* BULLETS */
+
+.erinyen.tp-bullets {
+}
+
+    .erinyen.tp-bullets:before {
+        background: #555555; /* old browsers */
+        background: -moz-linear-gradient(top, #555555 0%, #222222 100%); /* ff3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #555555), color-stop(100%, #222222)); /* chrome,safari4+ */
+        background: -webkit-linear-gradient(top, #555555 0%, #222222 100%); /* chrome10+,safari5.1+ */
+        background: -o-linear-gradient(top, #555555 0%, #222222 100%); /* opera 11.10+ */
+        background: -ms-linear-gradient(top, #555555 0%, #222222 100%); /* ie10+ */
+        background: linear-gradient(to bottom, #555555 0%, #222222 100%); /* w3c */
+        border-radius: 10px;
+        box-shadow: 0px 0px 2px 1px rgba(33, 33, 33, 0.3);
+        box-sizing: content-box;
+        content: " ";
+        filter: progid:dximagetransform.microsoft.gradient(startcolorstr="#555555", endcolorstr="#222222", gradienttype=0); /* ie6-9 */
+        height: 100%;
+        margin-left: -15px;
+        margin-top: -10px;
+        padding: 10px 15px;
+        position: absolute;
+        width: 100%;
+    }
+
+.erinyen .tp-bullet {
+    background: #111;
+    border-radius: 50%;
+    box-sizing: content-box;
+    cursor: pointer;
+    height: 13px;
+    position: absolute;
+    width: 13px;
+}
+
+    .erinyen .tp-bullet:hover,
+    .erinyen .tp-bullet.selected {
+        background: #e5e5e5; /* old browsers */
+        background: -moz-linear-gradient(top, #e5e5e5 0%, #999999 100%); /* ff3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e5e5e5), color-stop(100%, #999999)); /* chrome,safari4+ */
+        background: -webkit-linear-gradient(top, #e5e5e5 0%, #999999 100%); /* chrome10+,safari5.1+ */
+        background: -o-linear-gradient(top, #e5e5e5 0%, #999999 100%); /* opera 11.10+ */
+        background: -ms-linear-gradient(top, #e5e5e5 0%, #999999 100%); /* ie10+ */
+        background: linear-gradient(to bottom, #e5e5e5 0%, #999999 100%); /* w3c */
+        border: 1px solid #555;
+        filter: progid:dximagetransform.microsoft.gradient(startcolorstr="#e5e5e5", endcolorstr="#999999", gradienttype=0); /* ie6-9 */
+        height: 12px;
+        width: 12px;
+    }
+
+.erinyen .tp-bullet-image {
+}
+
+.erinyen .tp-bullet-title {
+}
+
+
+/* THUMBS */
+
+.erinyen .tp-thumb {
+    opacity: 1
+}
+
+.erinyen .tp-thumb-over {
+    -webkit-transition: all 0.3s;
+    background: #000;
+    background: rgba(0, 0, 0, 0.25);
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    transition: all 0.3s;
+    width: 100%;
+    z-index: 1;
+}
+
+.erinyen .tp-thumb-more:before {
+    color: #aaa;
+    color: rgba(255, 255, 255, 0.75);
+    display: block;
+    font-family: "revicons";
+    font-size: 12px;
+    line-height: 12px;
+    position: absolute;
+    right: 20px;
+    text-align: left;
+    top: 20px;
+    z-index: 2;
+    z-index: 2;
+}
+
+.erinyen .tp-thumb-more:before {
+    content: "\e825";
+}
+
+.erinyen .tp-thumb-title {
+    -webkit-transition: all 0.3s;
+    box-sizing: border-box;
+    color: #fff;
+    display: block;
+    font-family: "Raleway";
+    font-size: 12px;
+    font-weight: 500;
+    height: 100%;
+    left: 0px;
+    letter-spacing: 1px;
+    line-height: 15px;
+    padding: 20px 35px 20px 20px;
+    position: absolute;
+    text-align: left;
+    top: 0px;
+    transition: all 0.3s;
+    width: 100%;
+    z-index: 2;
+    z-index: 2;
+}
+
+.erinyen .tp-thumb.selected .tp-thumb-more:before,
+.erinyen .tp-thumb:hover .tp-thumb-more:before {
+    color: #aaa;
+}
+
+.erinyen .tp-thumb.selected .tp-thumb-over,
+.erinyen .tp-thumb:hover .tp-thumb-over {
+    background: #fff;
+}
+
+.erinyen .tp-thumb.selected .tp-thumb-title,
+.erinyen .tp-thumb:hover .tp-thumb-title {
+    color: #000;
+}
+
+
+/* TABS */
+
+.erinyen .tp-tab-title {
+    color: #a8d8ee;
+    font-family: "Roboto Slab" margin-bottom:5px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.erinyen .tp-tab-desc {
+    color: #fff;
+    font-family: "Roboto Slab";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+}
+
+/* BULLETS */
+
+.gyges.tp-bullets {
+}
+
+    .gyges.tp-bullets:before {
+        background: #777777; /* Old browsers */
+        background: -moz-linear-gradient(top, #777777 0%, #666666 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #777777), color-stop(100%, #666666));
+        background: -webkit-linear-gradient(top, #777777 0%, #666666 100%);
+        background: -o-linear-gradient(top, #777777 0%, #666666 100%);
+        background: -ms-linear-gradient(top, #777777 0%, #666666 100%);
+        background: linear-gradient(to bottom, #777777 0%, #666666 100%);
+        border-radius: 10px;
+        box-sizing: content-box;
+        content: " ";
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#777777", endColorstr="#666666", GradientType=0);
+        height: 100%;
+        margin-left: -10px;
+        margin-top: -10px;
+        padding: 10px;
+        position: absolute;
+        width: 100%;
+    }
+
+.gyges .tp-bullet {
+    background: #333;
+    border: 3px solid #444;
+    border-radius: 50%;
+    box-sizing: content-box;
+    cursor: pointer;
+    height: 12px;
+    position: absolute;
+    width: 12px;
+}
+
+    .gyges .tp-bullet:hover,
+    .gyges .tp-bullet.selected {
+        background: #ffffff; /* Old browsers */
+        background: -moz-linear-gradient(top, #ffffff 0%, #e1e1e1 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #e1e1e1)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #ffffff 0%, #e1e1e1 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, #ffffff 0%, #e1e1e1 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, #ffffff 0%, #e1e1e1 100%); /* IE10+ */
+        background: linear-gradient(to bottom, #ffffff 0%, #e1e1e1 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#e1e1e1", GradientType=0); /* IE6-9 */
+    }
+
+.gyges .tp-bullet-image {
+}
+
+.gyges .tp-bullet-title {
+}
+
+
+/* THUMBS */
+
+.gyges .tp-thumb {
+    opacity: 1
+}
+
+.gyges .tp-thumb-img-wrap {
+    -webkit-transition: all 0.3s;
+    background: #000;
+    background-color: rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    display: inline-block;
+    height: 100%;
+    margin: 0px;
+    padding: 3px;
+    position: relative;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.gyges .tp-thumb-image {
+    -moz-box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    display: block;
+    padding: 3px;
+    position: relative;
+}
+
+.gyges .tp-thumb-title {
+    -webkit-border-radius: 4px;
+    -webkit-transform: translateZ(0.001px) translateX(-50%) translateY(14px);
+    -webkit-transform-origin: 50% 100%;
+    -webkit-transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 4px;
+    bottom: 100%;
+    display: inline-block;
+    left: 50%;
+    margin-bottom: 20px;
+    opacity: 0;
+    padding: 10px 30px;
+    position: absolute;
+    transform: translateZ(0.001px) translateX(-50%) translateY(14px);
+    transform-origin: 50% 100%;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.gyges .tp-thumb:hover .tp-thumb-title {
+    -webkit-transform: rotateX(0deg) translateX(-50%);
+    opacity: 1;
+    transform: rotateX(0deg) translateX(-50%);
+}
+
+.gyges .tp-thumb:hover .tp-thumb-img-wrap,
+.gyges .tp-thumb.selected .tp-thumb-img-wrap {
+    background: rgba(255, 255, 255, 1);
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(119, 119, 119, 1)));
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#777777", GradientType=0);
+}
+
+.gyges .tp-thumb-title:after {
+    border-color: rgba(255, 255, 255, 0.8) transparent transparent transparent;
+    border-style: solid;
+    border-width: 8px 8px 0 8px;
+    bottom: -8px;
+    content: " ";
+    height: 0;
+    left: 50%;
+    margin-left: -8px;
+    position: absolute;
+    width: 0;
+}
+
+
+/* TABS */
+
+.gyges .tp-tab {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    opacity: 1;
+    padding: 10px;
+}
+
+.gyges .tp-tab-image {
+    display: inline-block;
+    float: left;
+    height: 60px;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+    width: 60px;
+}
+
+.gyges .tp-tab-content {
+    background: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    color: #333;
+    display: inline-block;
+    height: 100%;
+    left: 0px;
+    margin-top: -15px;
+    overflow: hidden;
+    padding: 15px 15px 15px 85px;
+    position: relative;
+    position: absolute;
+    width: 100%;
+}
+
+.gyges .tp-tab-date {
+    color: rgba(255, 255, 255, 0.25);
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+
+.gyges .tp-tab-title {
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    text-align: left;
+    text-transform: none;
+}
+
+.gyges .tp-tab:hover,
+.gyges .tp-tab.selected {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.gyges .tp-tab-mask {
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 960px) {
+}
+
+@media only screen and (max-width: 768px) {
+}
+
+/*-----------------------------------------------------------------------------
+
+- Revolution Slider 5.0 Navigatin Skin Style  -
+
+ HADES SKIN
+
+author:  ThemePunch
+email:      info@themepunch.com
+website:    http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+/* ARROWS */
+
+.hades.tparrows {
+    background: #000;
+    background: rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: block;
+    height: 100px;
+    position: absolute;
+    width: 100px;
+    z-index: 100;
+}
+
+    .hades.tparrows:before {
+        color: #fff;
+        display: block;
+        font-family: "revicons";
+        font-size: 30px;
+        line-height: 100px;
+        text-align: center;
+        transition: background 0.3s, color 0.3s;
+    }
+
+    .hades.tparrows.tp-leftarrow:before {
+        content: "\e824";
+    }
+
+    .hades.tparrows.tp-rightarrow:before {
+        content: "\e825";
+    }
+
+    .hades.tparrows:hover:before {
+        background: #fff;
+        background: rgba(255, 255, 255, 1);
+        color: #aaa;
+    }
+
+.hades .tp-arr-allwrapper {
+    -khtml-opacity: 0.0;
+    -moz-opacity: 0.0;
+    -ms-filter: "progid:dximagetransform.microsoft.alpha(opacity=0)";
+    -webkit-transform: rotatey(-90deg);
+    -webkit-transform-origin: 0% 50%;
+    -webkit-transition: all 0.3s;
+    background: #888;
+    filter: alpha(opacity=0);
+    height: 100px;
+    left: 100%;
+    opacity: 0.0;
+    position: absolute;
+    top: 0px;
+    transform: rotatey(-90deg);
+    transform-origin: 0% 50%;
+    transition: all 0.3s;
+    width: 100px;
+}
+
+.hades.tp-rightarrow .tp-arr-allwrapper {
+    -webkit-transform: rotatey(90deg);
+    -webkit-transform-origin: 100% 50%;
+    left: auto;
+    right: 100%;
+    transform: rotatey(90deg);
+    transform-origin: 100% 50%;
+}
+
+.hades:hover .tp-arr-allwrapper {
+    -khtml-opacity: 1;
+    -moz-opacity: 1;
+    -ms-filter: "progid:dximagetransform.microsoft.alpha(opacity=100)";
+    -webkit-transform: rotatey(0deg);
+    filter: alpha(opacity=100);
+    opacity: 1;
+    transform: rotatey(0deg);
+}
+
+.hades .tp-arr-iwrapper {
+}
+
+.hades .tp-arr-imgholder {
+    background-size: cover;
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+.hades .tp-arr-titleholder {
+}
+
+.hades .tp-arr-subtitleholder {
+}
+
+
+/* BULLETS */
+
+.hades.tp-bullets {
+}
+
+    .hades.tp-bullets:before {
+        background: transparent;
+        box-sizing: content-box;
+        content: " ";
+        height: 100%;
+        margin-left: -10px;
+        margin-top: -10px;
+        padding: 10px;
+        position: absolute;
+        width: 100%;
+    }
+
+.hades .tp-bullet {
+    -webkit-perspective: 400;
+    -webkit-transform: translatez(0.01px);
+    background: #888;
+    border: 5px solid #fff;
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.2);
+    box-sizing: content-box;
+    cursor: pointer;
+    height: 3px;
+    perspective: 400;
+    position: absolute;
+    transform: translatez(0.01px);
+    width: 3px;
+}
+
+    .hades .tp-bullet:hover,
+    .hades .tp-bullet.selected {
+        background: #555;
+    }
+
+.hades .tp-bullet-image {
+    -webkit-perspective: 600;
+    -webkit-transform: rotatex(-90deg);
+    -webkit-transform-origin: 50% 100%;
+    -webkit-transform-style: flat;
+    background-position: center center;
+    background-size: cover;
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.2);
+    height: 60px;
+    left: -60px;
+    opacity: 0;
+    perspective: 600;
+    position: absolute;
+    top: -80px;
+    transform: rotatex(-90deg);
+    transform-origin: 50% 100%;
+    transform-style: flat;
+    transition: all 0.3s;
+    visibility: hidden;
+    width: 120px;
+}
+
+.hades .tp-bullet:hover .tp-bullet-image {
+    -webkit-transform: rotatex(0deg);
+    display: block;
+    opacity: 1;
+    transform: rotatex(0deg);
+    visibility: visible;
+}
+
+.hades .tp-bullet-title {
+}
+
+
+/* THUMBS */
+
+.hades .tp-thumb {
+    opacity: 1
+}
+
+.hades .tp-thumb-img-wrap {
+    -webkit-transition: all 0.3s;
+    background: #000;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 100%;
+    margin: 0px;
+    padding: 3px;
+    position: relative;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.hades .tp-thumb-image {
+    -moz-box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    display: block;
+    padding: 3px;
+    position: relative;
+}
+
+
+.hades .tp-thumb:hover .tp-thumb-img-wrap,
+.hades .tp-thumb.selected .tp-thumb-img-wrap {
+    background: rgba(255, 255, 255, 1);
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(119, 119, 119, 1)));
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#777777", GradientType=0);
+}
+
+.hades .tp-thumb-title:after {
+    border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
+    border-style: solid;
+    border-width: 8px 8px 0 8px;
+    bottom: -8px;
+    content: " ";
+    height: 0;
+    left: 50%;
+    margin-left: -8px;
+    position: absolute;
+    width: 0;
+}
+
+
+/* TABS */
+
+.hades .tp-tab {
+    opacity: 1;
+}
+
+.hades .tp-tab-title {
+    color: #333;
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 25px;
+    text-align: center;
+}
+
+.hades .tp-tab-price {
+    color: #999;
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.hades .tp-tab-button {
+    background: #219bd7;
+    border-radius: 4px;
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 15px;
+    padding: 5px 15px;
+    text-align: center;
+}
+
+.hades .tp-tab-inner {
+    text-align: center;
+}
+
+
+
+/*-----------------------------------------------------------------------------
+
+- Revolution Slider 5.0 Navigatin Skin Style  -
+
+ HEBE SKIN
+
+author:  ThemePunch
+email:      info@themepunch.com
+website:    http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+/* ARROWS */
+
+.hebe.tparrows {
+    background: #fff;
+    cursor: pointer;
+    display: block;
+    min-height: 70px;
+    min-width: 70px;
+    position: absolute;
+    z-index: 100;
+}
+
+    .hebe.tparrows:hover {
+    }
+
+    .hebe.tparrows:before {
+        -moz-transition: color 0.3s;
+        -webkit-transition: color 0.3s;
+        background: #fff;
+        color: #aaa;
+        display: block;
+        font-family: "revicons";
+        font-size: 30px;
+        line-height: 70px;
+        min-height: 70px;
+        min-width: 70px;
+        position: relative;
+        text-align: center;
+        transition: color 0.3s;
+        z-index: 2;
+    }
+
+    .hebe.tparrows.tp-leftarrow:before {
+        content: "\e824";
+    }
+
+    .hebe.tparrows.tp-rightarrow:before {
+        content: "\e825";
+    }
+
+    .hebe.tparrows:hover:before {
+        color: #000;
+    }
+
+.hebe .tp-title-wrap {
+    -webkit-transform: scaleX(0);
+    -webkit-transform-origin: 0% 50%;
+    -webkit-transition: -webkit-transform 0.3s;
+    background: #000;
+    background: rgba(0, 0, 0, 0.75);
+    display: inline-block;
+    line-height: 60px;
+    margin-left: 0px;
+    min-height: 60px;
+    position: absolute;
+    top: -10px;
+    transform: scaleX(0);
+    transform-origin: 0% 50%;
+    transition: transform 0.3s;
+    z-index: 0;
+}
+
+.hebe.tp-rightarrow .tp-title-wrap {
+    -webkit-transform-origin: 100% 50%;
+    right: 0px;
+}
+
+.hebe.tparrows:hover .tp-title-wrap {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+}
+
+.hebe .tp-arr-titleholder {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 90px;
+    padding: 0px 20px 0px 90px;
+    position: relative;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.hebe.tp-rightarrow .tp-arr-titleholder {
+    margin-left: 0px;
+    padding: 0px 90px 0px 20px;
+}
+
+.hebe.tparrows:hover .tp-arr-titleholder {
+    -webkit-transform: translateX(0px);
+    opacity: 1;
+    transform: translateX(0px);
+    transition-delay: 0.1s;
+}
+
+.hebe .tp-arr-imgholder {
+    background-position: center center;
+    background-size: cover;
+    display: block;
+    height: 90px;
+    left: 100%;
+    position: absolute;
+    right: -90px;
+    top: 0px;
+    width: 90px;
+}
+
+.hebe.tp-rightarrow .tp-arr-imgholder {
+    left: -90px;
+    right: auto;
+}
+
+/* BULLETS */
+
+.hebe.tp-bullets {
+}
+
+    .hebe.tp-bullets:before {
+        background: transparent;
+        box-sizing: content-box;
+        content: " ";
+        height: 100%;
+        margin-left: -10px;
+        margin-top: -10px;
+        padding: 10px;
+        position: absolute;
+        width: 100%;
+    }
+
+.hebe .tp-bullet {
+    -webkit-perspective: 400;
+    -webkit-transform: translateZ(0.01px);
+    background: #fff;
+    border: 5px solid #222;
+    border-radius: 50%;
+    box-sizing: content-box;
+    cursor: pointer;
+    height: 3px;
+    perspective: 400;
+    position: absolute;
+    transform: translateZ(0.01px);
+    transition: all 0.3s;
+    width: 3px;
+}
+
+    .hebe .tp-bullet:hover,
+    .hebe .tp-bullet.selected {
+        background: #222;
+        border-color: #fff;
+    }
+
+.hebe .tp-bullet-image {
+    -webkit-perspective: 600;
+    -webkit-transform: scale(0);
+    -webkit-transform-origin: 50% 100%;
+    -webkit-transform-style: flat;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 6px;
+    height: 70px;
+    left: -40px;
+    opacity: 0;
+    perspective: 600;
+    position: absolute;
+    top: -90px;
+    transform: scale(0);
+    transform-origin: 50% 100%;
+    transform-style: flat;
+    transition: all 0.3s;
+    visibility: hidden;
+    width: 70px;
+}
+
+.hebe .tp-bullet:hover .tp-bullet-image {
+    -webkit-transform: scale(1);
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+    visibility: visible;
+}
+
+.hebe .tp-bullet-title {
+}
+
+
+/* TABS */
+
+.hebe .tp-tab-title {
+    color: #a8d8ee;
+    font-family: "Roboto Slab" margin-bottom:5px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.hebe .tp-tab-desc {
+    color: #fff;
+    font-family: "Roboto Slab";
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+}
+
+
+/*-----------------------------------------------------------------------------
+
+- Revolution Slider 5.0 Navigatin Skin Style  -
+
+ HEPHAISTOS SKIN
+
+author:  ThemePunch
+email:      info@themepunch.com
+website:    http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+/* ARROWS */
+
+.hephaistos.tparrows {
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    position: absolute;
+    width: 40px;
+    z-index: 100;
+}
+
+    .hephaistos.tparrows:hover {
+        background: #000;
+    }
+
+    .hephaistos.tparrows:before {
+        color: #fff;
+        display: block;
+        font-family: "revicons";
+        font-size: 18px;
+        line-height: 40px;
+        text-align: center;
+    }
+
+    .hephaistos.tparrows.tp-leftarrow:before {
+        content: "\e82c";
+        margin-left: -2px;
+    }
+
+    .hephaistos.tparrows.tp-rightarrow:before {
+        content: "\e82d";
+        margin-right: -2px;
+    }
+
+
+
+/* BULLETS */
+
+.hephaistos.tp-bullets {
+}
+
+    .hephaistos.tp-bullets:before {
+        background: transparent;
+        box-sizing: content-box;
+        content: " ";
+        height: 100%;
+        margin-left: -10px;
+        margin-top: -10px;
+        padding: 10px;
+        position: absolute;
+        width: 100%;
+    }
+
+.hephaistos .tp-bullet {
+    background: #999;
+    border: 3px solid #f5f5f5;
+    border-radius: 50%;
+    box-shadow: 0px 0px 2px 1px rgba(130, 130, 130, 0.3);
+    box-sizing: content-box;
+    cursor: pointer;
+    height: 12px;
+    position: absolute;
+    width: 12px;
+}
+
+    .hephaistos .tp-bullet:hover,
+    .hephaistos .tp-bullet.selected {
+        background: #fff;
+        border-color: #000;
+    }
+
+.hephaistos .tp-bullet-image {
+}
+
+.hephaistos .tp-bullet-title {
+}
+
+
+/*-----------------------------------------------------------------------------
+
+- Revolution Slider 5.0 Navigatin Skin Style  -
+
+ HERMES SKIN
+
+author:  ThemePunch
+email:      info@themepunch.com
+website:    http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+/* ARROWS */
+
+.hermes.tparrows {
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    display: block;
+    height: 110px;
+    position: absolute;
+    width: 30px;
+    z-index: 100;
+}
+
+    .hermes.tparrows:before {
+        -webkit-transform: translateX(0px);
+        -webkit-transition: all 0.3s;
+        color: #fff;
+        display: block;
+        font-family: "revicons";
+        font-size: 15px;
+        line-height: 110px;
+        text-align: center;
+        transform: translateX(0px);
+        transition: all 0.3s;
+    }
+
+    .hermes.tparrows.tp-leftarrow:before {
+        content: "\e824";
+    }
+
+    .hermes.tparrows.tp-rightarrow:before {
+        content: "\e825";
+    }
+
+    .hermes.tparrows.tp-leftarrow:hover:before {
+        -webkit-transform: translateX(-20px);
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    .hermes.tparrows.tp-rightarrow:hover:before {
+        -webkit-transform: translateX(20px);
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+.hermes .tp-arr-allwrapper {
+    -webkit-perspective: 1000px;
+    -webkit-transition: -webkit-transform 0.3s 0.3s;
+    height: 140px;
+    left: 0px;
+    overflow: hidden;
+    perspective: 1000px;
+    position: absolute;
+    top: 0px;
+    transition: transform 0.3s 0.3s;
+    visibility: hidden;
+    width: 180px;
+}
+
+.hermes.tp-rightarrow .tp-arr-allwrapper {
+    left: auto;
+    right: 0px;
+}
+
+.hermes.tparrows:hover .tp-arr-allwrapper {
+    visibility: visible;
+}
+
+.hermes .tp-arr-imgholder {
+    -webkit-transform: translateX(-180px);
+    height: 110px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    transform: translateX(-180px);
+    transition: all 0.3s;
+    transition-delay: 0.3s;
+    width: 180px;
+}
+
+.hermes.tp-rightarrow .tp-arr-imgholder {
+    -webkit-transform: translateX(180px);
+    transform: translateX(180px);
+}
+
+.hermes.tparrows:hover .tp-arr-imgholder {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+}
+
+.hermes .tp-arr-titleholder {
+    -webkit-transform: rotateX(-90deg);
+    -webkit-transform-origin: 50% 0;
+    -webkit-transition: all 0.3s;
+    background: #000;
+    background: rgba(0, 0, 0, 0.75);
+    box-sizing: border-box;
+    color: #fff;
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    line-height: 30px;
+    padding: 0px 10px;
+    position: absolute;
+    text-align: left;
+    top: 110px;
+    transform: rotateX(-90deg);
+    transform-origin: 50% 0;
+    transition: all 0.3s;
+    white-space: nowrap;
+    width: 180px;
+}
+
+.hermes.tparrows:hover .tp-arr-titleholder {
+    -webkit-transform: rotateX(0deg);
+    -webkit-transition-delay: 0.6s;
+    transform: rotateX(0deg);
+    transition-delay: 0.6s;
+}
+
+
+/* BULLETS */
+
+.hermes.tp-bullets {
+}
+
+.hermes .tp-bullet {
+    -webkit-transition: background 0.3s ease;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 2px #FFF;
+    height: 16px;
+    overflow: hidden;
+    position: absolute;
+    transition: background 0.3s ease;
+    width: 16px;
+}
+
+    .hermes .tp-bullet:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .hermes .tp-bullet:after {
+        -webkit-transition: height 0.3s ease;
+        background-color: #FFF;
+        bottom: 0;
+        box-shadow: 0 0 1px #FFF;
+        content: ' ';
+        height: 0;
+        left: 0;
+        position: absolute;
+        transition: height 0.3s ease;
+        width: 100%;
+    }
+
+    .hermes .tp-bullet.selected:after {
+        height: 100%;
+    }
+
+
+/* TABS */
+
+.hermes .tp-tab {
+    box-sizing: border-box;
+    opacity: 1;
+    padding-right: 10px;
+}
+
+.hermes .tp-tab-image {
+    height: 60%;
+    position: relative;
+    width: 100%;
+}
+
+.hermes .tp-tab-content {
+    background: rgb(54, 54, 54);
+    bottom: 0px;
+    box-sizing: border-box;
+    color: #fff;
+    display: block;
+    left: -10px;
+    min-height: 40%;
+    padding: 20px 20px 20px 30px;
+    position: absolute;
+    width: 100%;
+}
+
+.hermes .tp-tab-date {
+    color: #888;
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.hermes .tp-tab-title {
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 19px;
+    text-transform: uppercase;
+}
+
+.hermes .tp-tab.selected .tp-tab-title:after {
+    border-color: transparent transparent transparent rgb(54, 54, 54);
+    border-style: solid;
+    border-width: 30px 0 30px 10px;
+    bottom: 50%;
+    content: " ";
+    height: 0px;
+    margin-bottom: -30px;
+    position: absolute;
+    right: -9px;
+    width: 0px;
+}
+
+.hermes .tp-tab-mask {
+    padding-right: 10px !important;
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 960px) {
+    .hermes .tp-tab .tp-tab-title {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .hermes .tp-tab-date {
+        font-size: 11px;
+        line-height: 13px;
+        margin-bottom: 10px;
+    }
+
+    .hermes .tp-tab-content {
+        padding: 15px 15px 15px 25px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .hermes .tp-tab .tp-tab-title {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .hermes .tp-tab-date {
+        font-size: 10px;
+        line-height: 12px;
+        margin-bottom: 5px;
+    }
+
+    .hermes .tp-tab-content {
+        padding: 10px 10px 10px 20px;
+    }
+}
+
+/*-----------------------------------------------------------------------------
+
+- Revolution Slider 5.0 Navigatin Skin Style  -
+
+ HESPERIDEN SKIN
+
+author:  ThemePunch
+email:      info@themepunch.com
+website:    http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+/* ARROWS */
+
+.hesperiden.tparrows {
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    position: absolute;
+    width: 40px;
+    z-index: 100;
+}
+
+    .hesperiden.tparrows:hover {
+        background: #000;
+    }
+
+    .hesperiden.tparrows:before {
+        color: #fff;
+        display: block;
+        font-family: "revicons";
+        font-size: 20px;
+        line-height: 40px;
+        text-align: center;
+    }
+
+    .hesperiden.tparrows.tp-leftarrow:before {
+        content: "\e82c";
+        margin-left: -3px;
+    }
+
+    .hesperiden.tparrows.tp-rightarrow:before {
+        content: "\e82d";
+        margin-right: -3px;
+    }
+
+/* BULLETS */
+
+.hesperiden.tp-bullets {
+}
+
+    .hesperiden.tp-bullets:before {
+        background: transparent;
+        border-radius: 8px;
+        box-sizing: content-box;
+        content: " ";
+        height: 100%;
+        margin-left: -10px;
+        margin-top: -10px;
+        padding: 10px;
+        position: absolute;
+        width: 100%;
+    }
+
+.hesperiden .tp-bullet {
+    background: #999999; /* old browsers */
+    background: -moz-linear-gradient(top, #999999 0%, #e1e1e1 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #999999), color-stop(100%, #e1e1e1)); /* chrome,safari4+ */
+    background: -webkit-linear-gradient(top, #999999 0%, #e1e1e1 100%); /* chrome10+,safari5.1+ */
+    background: -o-linear-gradient(top, #999999 0%, #e1e1e1 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(top, #999999 0%, #e1e1e1 100%); /* ie10+ */
+    background: linear-gradient(to bottom, #999999 0%, #e1e1e1 100%); /* w3c */
+    border: 3px solid #e5e5e5;
+    border-radius: 50%;
+    box-sizing: content-box;
+    cursor: pointer;
+    filter: progid:dximagetransform.microsoft.gradient( startcolorstr="#999999", endcolorstr="#e1e1e1", gradienttype=0); /* ie6-9 */
+    height: 12px;
+    position: absolute;
+    width: 12px;
+}
+
+    .hesperiden .tp-bullet:hover,
+    .hesperiden .tp-bullet.selected {
+        background: #666;
+    }
+
+.hesperiden .tp-bullet-image {
+}
+
+.hesperiden .tp-bullet-title {
+}
+
+
+/* THUMBS */
+
+.hesperiden .tp-thumb {
+    -webkit-perspective: 600px;
+    opacity: 1;
+    perspective: 600px;
+}
+
+    .hesperiden .tp-thumb .tp-thumb-title {
+        -webkit-transform: rotatex(90deg) translatez(0.001px);
+        -webkit-transform-origin: 50% 100%;
+        -webkit-transition: all 0.3s;
+        background-color: #000;
+        bottom: 0px;
+        box-sizing: border-box;
+        color: #fff;
+        display: block;
+        font-size: 12px;
+        left: 0px;
+        margin-top: -10px;
+        opacity: 0;
+        overflow: hidden;
+        padding: 5px 10px;
+        position: absolute;
+        text-align: center;
+        transform: rotatex(90deg) translatez(0.001px);
+        transform-origin: 50% 100%;
+        transition: all 0.3s;
+        white-space: nowrap;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .hesperiden .tp-thumb:hover .tp-thumb-title {
+        -webkit-transform: rotatex(0deg);
+        opacity: 1;
+        transform: rotatex(0deg);
+    }
+
+/* TABS */
+
+.hesperiden .tp-tab {
+    border-bottom: 1px solid #e5e5e5;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    opacity: 1;
+    padding: 10px;
+}
+
+.hesperiden .tp-tab-image {
+    display: inline-block;
+    float: left;
+    height: 60px;
+    max-height: 100%;
+    max-width: 100%;
+    position: relative;
+    width: 60px;
+}
+
+.hesperiden .tp-tab-content {
+    background: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    color: #333;
+    display: inline-block;
+    height: 100%;
+    left: 0px;
+    margin-top: -15px;
+    overflow: hidden;
+    padding: 15px 15px 15px 85px;
+    position: relative;
+    position: absolute;
+    width: 100%;
+}
+
+.hesperiden .tp-tab-date {
+    color: #aaa;
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 0px;
+}
+
+.hesperiden .tp-tab-title {
+    color: #333;
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    text-align: left;
+    text-transform: none;
+}
+
+.hesperiden .tp-tab:hover,
+.hesperiden .tp-tab.selected {
+    background: #eee;
+}
+
+.hesperiden .tp-tab-mask {
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 960px) {
+}
+
+@media only screen and (max-width: 768px) {
+}
+
+/*-----------------------------------------------------------------------------
+
+- Revolution Slider 5.0 Navigatin Skin Style  -
+
+ METIS SKIN
+
+author:  ThemePunch
+email:      info@themepunch.com
+website:    http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+/* ARROWS */
+
+.metis.tparrows {
+    -webkit-transition: all 0.3s;
+    background: #fff;
+    box-sizing: border-box;
+    height: 60px;
+    padding: 10px;
+    transition: all 0.3s;
+    width: 60px;
+}
+
+    .metis.tparrows:hover {
+        background: #fff;
+        background: rgba(255, 255, 255, 0.75);
+    }
+
+    .metis.tparrows:before {
+        -webkit-transition: all 0.3s;
+        color: #000;
+        transition: all 0.3s;
+    }
+
+    .metis.tparrows:hover:before {
+        transform: scale(1.5);
+    }
+
+
+/* BULLETS */
+
+.metis .tp-bullet {
+    -webkit-transition: all 0.3s;
+    background: #000;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    box-sizing: border-box;
+    height: 50px;
+    margin: 0px;
+    opacity: 1;
+    padding: 3px;
+    transition: all 0.3s;
+    width: 50px;
+}
+
+.metis .tp-bullet-image {
+    -moz-box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    background-position: center center;
+    background-size: cover;
+    border-radius: 50%;
+    box-shadow: inset 5px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    display: block;
+    height: 44px;
+    position: relative;
+    width: 44px;
+}
+
+.metis .tp-bullet-title {
+    -webkit-border-radius: 4px;
+    -webkit-transform: translateZ(0.001px) translateX(-50%) translateY(14px);
+    -webkit-transform-origin: 50% 100%;
+    -webkit-transition: all 0.3s;
+    background: #000;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    bottom: 65px;
+    color: #fff;
+    display: inline-block;
+    left: 50%;
+    opacity: 0;
+    opacity: 0;
+    padding: 10px 30px;
+    position: absolute;
+    transform: translateZ(0.001px) translateX(-50%) translateY(14px);
+    transform-origin: 50% 100%;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.metis .tp-bullet:hover .tp-bullet-title {
+    -webkit-transform: rotateX(0deg) translateX(-50%);
+    opacity: 1;
+    transform: rotateX(0deg) translateX(-50%);
+}
+
+.metis .tp-bullet.selected,
+.metis .tp-bullet:hover {
+    background: rgba(255, 255, 255, 1);
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(100%, rgba(119, 119, 119, 1)));
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(119, 119, 119, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#777777", GradientType=0);
+}
+
+.metis .tp-bullet-title:after {
+    border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
+    border-style: solid;
+    border-width: 8px 8px 0 8px;
+    bottom: -8px;
+    content: " ";
+    height: 0;
+    left: 50%;
+    margin-left: -8px;
+    position: absolute;
+    width: 0;
+}
+
+.metis .tp-tab-number {
+    color: #fff;
+    display: inline-block;
+    float: left;
+    font-family: "Playfair Display";
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 30px;
+    margin-right: 17px;
+    width: 50px;
+}
+
+.metis .tp-tab-mask {
+    left: 0px;
+    max-width: 90px !important;
+    padding-left: 20px;
+    transition: 0.4s padding-left, 0.4s left, 0.4s max-width;
+}
+
+.metis:hover .tp-tab-mask {
+    left: 50px;
+    max-width: 500px !important;
+    padding-left: 0px;
+}
+
+.metis .tp-tab-divider {
+    border-right: 1px solid transparent;
+    display: inline-block;
+    float: left;
+    height: 30px;
+    margin-top: 5px;
+    width: 1px;
+}
+
+.metis .tp-tab-title {
+    color: #fff;
+    display: inline-block;
+    font-family: "Playfair Display";
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    padding-left: 30px;
+    padding-top: 10px;
+    position: relative;
+    transform: translateX(-100%);
+    transition: 0.4s all;
+}
+
+.metis .tp-tab-title-mask {
+    left: 67px;
+    overflow: hidden;
+    position: absolute;
+}
+
+.metis:hover .tp-tab-title {
+    transform: translateX(0);
+}
+
+.metis .tp-tab {
+    opacity: 0.15;
+    transition: 0.4s all;
+}
+
+    .metis .tp-tab:hover,
+    .metis .tp-tab.selected {
+        opacity: 1;
+    }
+
+        .metis .tp-tab.selected .tp-tab-divider {
+            border-right: 1px solid #cdb083;
+        }
+
+.metis.tp-tabs {
+    max-width: 118px !important;
+    padding-left: 50px;
+}
+
+    .metis.tp-tabs:before {
+        background: rgba(0, 0, 0, 0.15);
+        border-right: 1px solid rgba(255, 255, 255, 0.10);
+        content: " ";
+        height: 100%;
+        left: 0px;
+        position: absolute;
+        top: 0px;
+        transition: 0.4s all;
+        width: 88px;
+    }
+
+    .metis.tp-tabs:hover:before {
+        width: 118px;
+    }
+
+@media (max-width: 499px) {
+    .metis.tp-tabs:before {
+        background: rgba(0, 0, 0, 0.75);
+    }
+}
+
+/*-----------------------------------------------------------------------------
+
+- Revolution Slider 5.0 Navigatin Skin Style  -
+
+ PERSEPHONE SKIN
+
+author:  ThemePunch
+email:      info@themepunch.com
+website:    http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+/* ARROWS */
+
+.persephone.tparrows {
+    background: #aaa;
+    background: rgba(200, 200, 200, 0.5);
+    border: 1px solid #f5f5f5;
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    position: absolute;
+    width: 40px;
+    z-index: 100;
+}
+
+    .persephone.tparrows:hover {
+        background: #333;
+    }
+
+    .persephone.tparrows:before {
+        color: #fff;
+        display: block;
+        font-family: "revicons";
+        font-size: 15px;
+        line-height: 40px;
+        text-align: center;
+    }
+
+    .persephone.tparrows.tp-leftarrow:before {
+        content: "\e824";
+    }
+
+    .persephone.tparrows.tp-rightarrow:before {
+        content: "\e825";
+    }
+
+
+
+/* BULLETS */
+
+.persephone.tp-bullets {
+}
+
+    .persephone.tp-bullets:before {
+        background: # transparent;
+        box-sizing: content-box;
+        content: " ";
+        height: 100%;
+        margin-left: -10px;
+        margin-top: -10px;
+        padding: 10px;
+        position: absolute;
+        width: 100%;
+    }
+
+.persephone .tp-bullet {
+    background: #aaa;
+    border: 1px solid #e5e5e5;
+    box-sizing: content-box;
+    cursor: pointer;
+    height: 12px;
+    position: absolute;
+    width: 12px;
+}
+
+    .persephone .tp-bullet:hover,
+    .persephone .tp-bullet.selected {
+        background: #222;
+    }
+
+.persephone .tp-bullet-image {
+}
+
+.persephone .tp-bullet-title {
+}
+
+
+/*-----------------------------------------------------------------------------
+
+- Revolution Slider 5.0 Navigatin Skin Style  -
+
+ URANUS SKIN
+
+author:  ThemePunch
+email:      info@themepunch.com
+website:    http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+/* ARROWS */
+
+.uranus.tparrows {
+    background: transparent;
+    height: 50px;
+    width: 50px;
+}
+
+    .uranus.tparrows:before {
+        -webkit-transition: all 0.3s;
+        font-size: 40px;
+        height: 50px;
+        line-height: 50px;
+        transition: all 0.3s;
+        width: 50px;
+    }
+
+    .uranus.tparrows:hover:before {
+        opacity: 0.75;
+    }
+
+/* BULLETS */
+
+.uranus .tp-bullet {
+    -webkit-transition: box-shadow 0.3s ease;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0);
+    transition: box-shadow 0.3s ease;
+}
+
+    .uranus .tp-bullet.selected,
+    .uranus .tp-bullet:hover {
+        background: transparent;
+        border: none;
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px #FFF;
+    }
+
+
+
+.uranus .tp-bullet-inner {
+    -webkit-transition: background-color 0.3s ease, -webkit-transform 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.7);
+    background-color: #FFF;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    height: 100%;
+    left: 0;
+    outline: none;
+    position: absolute;
+    text-indent: -999em;
+    top: 0;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+}
+
+.uranus .tp-bullet.selected .tp-bullet-inner,
+.uranus .tp-bullet:hover .tp-bullet-inner {
+    -webkit-transform: scale(0.4);
+    background-color: #fff;
+    transform: scale(0.4);
+}
+
+/*-----------------------------------------------------------------------------
+
+- Revolution Slider 5.0 Navigatin Skin Style  -
+
+ ZEUS SKIN
+
+author:  ThemePunch
+email:      info@themepunch.com
+website:    http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+/* ARROWS */
+
+.zeus.tparrows {
+    background: rgba(0, 0, 0, 0.10);
+    border-radius: 35px;
+    cursor: pointer;
+    display: block;
+    min-height: 70px;
+    min-width: 70px;
+    overflow: hidden;
+    position: absolute;
+    z-index: 100;
+}
+
+    .zeus.tparrows:before {
+        color: #fff;
+        display: block;
+        font-family: "revicons";
+        font-size: 20px;
+        line-height: 70px;
+        position: relative;
+        text-align: center;
+        z-index: 2;
+    }
+
+    .zeus.tparrows.tp-leftarrow:before {
+        content: "\e824";
+    }
+
+    .zeus.tparrows.tp-rightarrow:before {
+        content: "\e825";
+    }
+
+.zeus .tp-title-wrap {
+    -moz-transition: all 0.3s;
+    -webkit-transform: scale(0);
+    -webkit-transition: all 0.3s;
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    height: 100%;
+    left: 0px;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    transform: scale(0);
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.zeus .tp-arr-imgholder {
+    -moz-transition: all 0.3s;
+    -webkit-transform: translateX(-100%);
+    -webkit-transition: all 0.3s;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 50%;
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    transform: translateX(-100%);
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.zeus.tp-rightarrow .tp-arr-imgholder {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+
+.zeus.tparrows:hover .tp-arr-imgholder {
+    -webkit-transform: translateX(0);
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.zeus.tparrows:hover .tp-title-wrap {
+    -webkit-transform: scale(1);
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+/* BULLETS */
+
+.zeus .tp-bullet {
+    -webkit-box-sizing: content-box;
+    -webkit-transition: opacity 0.3s ease;
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-sizing: content-box;
+    height: 13px;
+    transition: opacity 0.3s ease;
+    width: 13px;
+}
+
+    .zeus .tp-bullet:after {
+        -webkit-transform: scale(0);
+        -webkit-transform-origin: 50% 50%;
+        -webkit-transition: -webkit-transform 0.3s ease;
+        background-color: #FFF;
+        border-radius: 50%;
+        content: "";
+        height: 100%;
+        left: 0;
+        position: absolute;
+        transform: scale(0);
+        transform-origin: 50% 50%;
+        transition: transform 0.3s ease;
+        width: 100%;
+    }
+
+    .zeus .tp-bullet:hover:after,
+    .zeus .tp-bullet.selected:after {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+
+.zeus .tp-bullet-image,
+.zeus .tp-bullet-imageoverlay {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-origin: 50% 50%;
+    -webkit-transition: all 0.3s ease;
+    backface-visibility: hidden;
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    background-position: center center;
+    background-size: cover;
+    border-radius: 4px;
+    bottom: 25px;
+    box-sizing: border-box;
+    height: 60px;
+    left: 50%;
+    margin-left: -65px;
+    opacity: 0;
+    position: absolute;
+    transform-origin: 50% 50%;
+    transition: all 0.3s ease;
+    visibility: hidden;
+    width: 135px;
+}
+
+
+.zeus .tp-bullet-title,
+.zeus .tp-bullet-imageoverlay {
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    z-index: 2;
+}
+
+.zeus .tp-bullet-title {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-origin: 50% 50%;
+    -webkit-transition: all 0.3s ease;
+    backface-visibility: hidden;
+    bottom: 45px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    left: -57px;
+    line-height: 15px;
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    transform-origin: 50% 50%;
+    transition: all 0.3s ease;
+    vertical-align: middle;
+    visibility: hidden;
+    width: 135px;
+    z-index: 3;
+}
+
+.zeus .tp-bullet:hover .tp-bullet-title,
+.zeus .tp-bullet:hover .tp-bullet-image,
+.zeus .tp-bullet:hover .tp-bullet-imageoverlay {
+    -webkit-transform: translateY(0px);
+    opacity: 1;
+    transform: translateY(0px);
+    visibility: visible;
+}
+
+/* THUMBS */
+
+.zeus .tp-thumb {
+    opacity: 1
+}
+
+.zeus .tp-thumb-over {
+    -webkit-transition: all 0.3s;
+    background: #000;
+    background: rgba(0, 0, 0, 0.25);
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    transition: all 0.3s;
+    width: 100%;
+    z-index: 1;
+}
+
+.zeus .tp-thumb-more:before {
+    color: #aaa;
+    color: rgba(255, 255, 255, 0.75);
+    display: block;
+    font-family: "revicons";
+    font-size: 12px;
+    line-height: 12px;
+    position: absolute;
+    right: 20px;
+    text-align: left;
+    top: 20px;
+    z-index: 2;
+    z-index: 2;
+}
+
+.zeus .tp-thumb-more:before {
+    content: "\e825";
+}
+
+.zeus .tp-thumb-title {
+    -webkit-transition: all 0.3s;
+    box-sizing: border-box;
+    color: #fff;
+    display: block;
+    font-family: "Raleway";
+    font-size: 12px;
+    font-weight: 500;
+    height: 100%;
+    left: 0px;
+    letter-spacing: 1px;
+    line-height: 15px;
+    padding: 20px 35px 20px 20px;
+    position: absolute;
+    text-align: left;
+    top: 0px;
+    transition: all 0.3s;
+    width: 100%;
+    z-index: 2;
+    z-index: 2;
+}
+
+.zeus .tp-thumb.selected .tp-thumb-more:before,
+.zeus .tp-thumb:hover .tp-thumb-more:before {
+    color: #aaa;
+}
+
+.zeus .tp-thumb.selected .tp-thumb-over,
+.zeus .tp-thumb:hover .tp-thumb-over {
+    background: #000;
+}
+
+.zeus .tp-thumb.selected .tp-thumb-title,
+.zeus .tp-thumb:hover .tp-thumb-title {
+    color: #fff;
+}
+
+
+/* TABS */
+
+.zeus .tp-tab {
+    box-sizing: border-box;
+    opacity: 1;
+}
+
+.zeus .tp-tab-title {
+    background: rgba(0, 0, 0, 0.25);
+    color: #fff;
+    display: block;
+    font-family: "Roboto Slab", serif;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 13px;
+    padding: 9px 10px;
+    text-align: center;
+}
+
+.zeus .tp-tab:hover .tp-tab-title,
+.zeus .tp-tab.selected .tp-tab-title {
+    background: rgba(255, 255, 255, 1);
+    color: #000;
+}
+
+
+
+/*-----------------------------------------------------------------------------
+
+- Revolution Slider 5.0 Navigatin Skin Style  -
+
+ ZEUS SKIN
+
+author:  ThemePunch
+email:      info@themepunch.com
+website:    http://www.themepunch.com
+-----------------------------------------------------------------------------*/
+
+
+.post-tabs .tp-thumb {
+    opacity: 1
+}
+
+.post-tabs .tp-thumb-over {
+    -webkit-transition: all 0.3s;
+    background: #252525;
+    height: 100%;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    transition: all 0.3s;
+    width: 100%;
+    z-index: 1;
+}
+
+.post-tabs .tp-thumb-more:before {
+    color: #aaa;
+    color: rgba(255, 255, 255, 0.75);
+    display: block;
+    font-family: "revicons";
+    font-size: 12px;
+    line-height: 12px;
+    position: absolute;
+    right: 15px;
+    text-align: left;
+    top: 15px;
+    z-index: 2;
+    z-index: 2;
+}
+
+.post-tabs .tp-thumb-more:before {
+    content: "\e825";
+}
+
+.post-tabs .tp-thumb-title {
+    -webkit-transition: all 0.3s;
+    box-sizing: border-box;
+    color: #fff;
+    display: block;
+    font-family: "raleway";
+    font-size: 12px;
+    font-weight: 500;
+    height: 100%;
+    left: 0px;
+    letter-spacing: 1px;
+    line-height: 15px;
+    padding: 15px 30px 15px 15px;
+    position: absolute;
+    text-align: left;
+    top: 0px;
+    transition: all 0.3s;
+    width: 100%;
+    z-index: 2;
+    z-index: 2;
+}
+
+.post-tabs .tp-thumb.selected .tp-thumb-more:before,
+.post-tabs .tp-thumb:hover .tp-thumb-more:before {
+    color: #aaa;
+}
+
+.post-tabs .tp-thumb.selected .tp-thumb-over,
+.post-tabs .tp-thumb:hover .tp-thumb-over {
+    background: #fff;
+}
+
+.post-tabs .tp-thumb.selected .tp-thumb-title,
+.post-tabs .tp-thumb:hover .tp-thumb-title {
+    color: #000;
+}
