@@ -481,13 +481,15 @@ namespace KinMel.Controllers
         [HttpGet("/UserProfile/{id}")]
         public async Task<IActionResult> UserProfile(string id)
         {
-            ApplicationUser user = await _context.Users.Include(u => u.Ratings).Include(u=> u.ClassifiedAds)
+            ApplicationUser user = await _context.Users.Include(u => u.Ratings).ThenInclude(r => r.RatedBy).Include(u=> u.ClassifiedAds)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
 
             var accountDTO = new AccountDTO()
             {
                 Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
                 FullName = user.FullName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
