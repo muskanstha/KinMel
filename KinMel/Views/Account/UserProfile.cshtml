@@ -76,7 +76,6 @@
                             <i class="material-icons pink-text">star_half</i>
                         }
                     }
-
                 </div>
             </div>
             <a asp-action="Create" asp-controller="Ratings" asp-route-id="@Model.Id" class="waves-effect waves-light btn pink tooltipped" data-tooltip="Give a rating and review to the user." data-position="left">
@@ -90,7 +89,9 @@
 <div class="browse-width profile-content-grid">
     <div></div>
     <div class="profile-ads">
-        <partial name="_sortingPartial" />
+        <div class="card-header">
+            Latest Ads from @Model.FirstName | @Model.ClassifiedAds.Count |
+        </div>
         @if (Model.ClassifiedAds != null)
         {
             if (Model.ClassifiedAds.Any())
@@ -181,7 +182,7 @@
     <div></div>
     <div class="profile-ads">
         <div class="card-header">
-            Reviews about @Model.FullName | @Model.Ratings.Count |
+            Reviews about @Model.FirstName | @Model.Ratings.Count |
         </div>
         @if (Model.Ratings != null)
         {
@@ -189,26 +190,33 @@
             {
                 foreach (Rating rating in Model.Ratings)
                 {
-                    <dl class="dl-horizontal">
-                        <dt>
-                            @Html.DisplayNameFor(r => rating.RatedById)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(r => rating.RatedById)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(r => rating.Stars)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(r => rating.Stars)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(r => rating.Review)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(r => rating.Review)
-                        </dd>
-                    </dl>
+                    <div class="profile-reviews-grid">
+                        <div>
+                            <img src="@rating.RatedBy.ProfilePictureUrl" />
+                            <a asp-controller="Ratings" asp-route-id=@rating.RatedById class="content-username align-middle"> @Html.DisplayFor(r => rating.RatedBy.FirstName)</a>
+                        </div>
+                        <div>
+                            <div>
+                                <div class="tooltipped" data-tooltip="Average Rating: @rating.Stars" data-position="left">
+                                    <p class="material-icons pink-text m0">star_border</p>
+                                    <p class="material-icons pink-text m0">star_border</p>
+                                    <p class="material-icons pink-text m0">star_border</p>
+                                    <p class="material-icons pink-text m0">star_border</p>
+                                    <p class="material-icons pink-text m0">star_border</p>
+                                </div>
+                                <div>
+                                    @for (var i = 1; i <= rating.Stars; i++)
+                                    {
+                                        <i class="material-icons pink-text">star</i>
+                                    }
+                                </div>
+                            </div>
+                            <div>
+                                @Html.DisplayFor(r => rating.Review)
+                            </div>
+                            <hr class="m0" />
+                        </div>
+                    </div>
                 }
             }
         }
