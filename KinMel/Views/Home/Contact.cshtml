@@ -15,45 +15,56 @@
         <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
         <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
     </address>*@
-<div class = "row">
-    <div class = "input-field col s6">
-        <i class = "material-icons prefix">account_circle</i>
-        <input placeholder = "FullName"  id = "name"
-               type = "text" class = "active validate" required />
-        <label for = "name">FullName</label>
-    </div>
-               
-    <div class = "input-field col s6">      
-        <label for = "phone">Phone</label>
-        <input id = "phone" type = "number" placeholder = "Phone Number"
-               class = "validate" required />          
-    </div>
-</div>
-<div class = "row">
-    <div class = "input-field col s12">
-        <input placeholder = "Email" id = "email" type = "email"
-               class = "validate">
-        <label for = "email">Email</label>
-    </div>
-</div>
-            
-<div class = "row">
-    <div class = "input-field col s12">
-        <i class = "material-icons prefix">mode_edit</i>
-        <textarea id = "subject" class = "materialize-textarea"></textarea>
-        <label for = "subject">Subject</label>
-    </div>
+
+<meta name="viewport" />
+<div class="card-panel card-panel-large z-depth-4">
+    <form action="https://formspree.io/dipakgautam120@gmail.com" method="POST">
+        <div class="row">
+            <div class="input-field col s12 m6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="name" type="text" class="active validate" required />
+                <label for="name">Full Name</label>
+            </div>
+
+            <div class="input-field col s12 m6">
+                <i class="material-icons prefix">phone_iphone</i>
+
+                <input id="phone" type="number" class="validate" required />
+                <label for="phone">Phone Number</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">email</i>
+                <input id="email" type="text" class="validate" required>
+                <label for="email">Email</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">mode_edit</i>
+                <textarea id="subject" class="materialize-textarea"></textarea>
+                <label for="subject">Subject</label>
+            </div>
+        </div>
+
+        <textarea id="placeholder" placeholder="Type here..."></textarea>
+        <div class="card-panel">
+            <button class="btn waves-effect waves-light red" type="submit">
+                Send
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
 </div>
 
-<script language="javascript" type="text/javascript"></script>
-<script type="text/javascript" src="https://cdn.ckeditor.com/4.8.0/standard-all/ckeditor.js"></script>
-<textarea id="editor1" name="editor1">
-</textarea>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-<script type="text/javascript">CKEDITOR.replace('editor1');</script>
-<div class = "card-panel">
-    <button class = "btn waves-effect waves-light red" type = "submit">Send
-        <i class = "material-icons right">send</i></button>
+    <script type="text/javascript">
+        CKEDITOR.plugins.addExternal('confighelper', 'https://martinezdelizarrondo.com/ckplugins/confighelper/');
+        var config = { extraPlugins: 'confighelper', toolbar: 'Basic' };
+        CKEDITOR.replace('placeholder', config);
+    </script>
+}
     
-</div>
-
