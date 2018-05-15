@@ -159,7 +159,7 @@
         }else{
           revapi19 = tpj("#rev_slider_19_1").show().revolution({
             sliderType:"standard",
-              sliderLayout: "fullwidth",
+              sliderLayout: "auto",
             dottedOverlay:"none",
             delay:9000,
             navigation: {
@@ -199,7 +199,7 @@
             responsiveLevels:[1240,1024,778,480],
             visibilityLevels:[1240,1024,778,480],
             gridwidth:[1270,1024,778,480],
-            gridheight:[600,510,420,300],
+            gridheight:[500,440,350,280],
             lazyType:"none",
             shadow:0,
             spinner:"spinner2",
@@ -207,7 +207,7 @@
             stopAfterLoops:-1,
             stopAtSlide:-1,
               shuffle: "off",
-            autoHeight:"off",
+            autoHeight:"on",
             disableProgressBar:"off",
             hideThumbsOnMobile:"off",
             hideSliderAtLimit:0,
