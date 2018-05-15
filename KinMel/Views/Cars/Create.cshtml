@@ -146,17 +146,21 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <textarea id="descriptionEditor"asp-for="Description" placeholder="Write Your Description Here.."class="form-control" >aaa</textarea>
+          
+                <textarea id="placeholder" asp-for="Description" placeholder="Write Your Description Here.." class="form-control">aaa</textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
+
             </div>
+            
+
             <div class="form-group">
                 <label asp-for="Condition"></label>
                 @{
                     var conditionlist = new SelectList(new List<SelectListItem>
-                        {
-                            new SelectListItem { Value = "NEW", Text = "NEW" },
-                            new SelectListItem { Value = "USED", Text = "USED" },
-                        }, "Value", "Text", Context.Request.Query["conditionlist"]);
+                                                {
+                                                    new SelectListItem { Value = "NEW", Text = "NEW" },
+                                                    new SelectListItem { Value = "USED", Text = "USED" },
+                                                }, "Value", "Text", Context.Request.Query["conditionlist"]);
                 }
                 <select asp-for="Condition" asp-items="@conditionlist"></select>
                 <span asp-validation-for="Condition" class="text-danger"></span>
@@ -208,19 +212,22 @@
 
 @section Scripts {
     @{
-        <partial name="_ValidationScriptsPartial" />
+        <partial name="_ValidationScriptsPartial"/>
     }
-    
     <script type="text/javascript">
-        CKEDITOR.plugins.addExternal( 'confighelper', 'https://martinezdelizarrondo.com/ckplugins/confighelper/' );
-        var config = { extraPlugins: 'confighelper', toolbar:'Basic'};
-        CKEDITOR.replace('descriptionEditor',
-            {
-                resize_enabled: true,
-                height: 300,
-                width: 800     
-            },
-            config);
+        CKEDITOR.plugins.addExternal('confighelper', 'https://martinezdelizarrondo.com/ckplugins/confighelper/');
+        var config = {
+            toolbarGroups: [
+                { name: 'basicstyles', groups: ['basicstyles'] },
+                { name: 'styles', groups: ['Bold', 'Italic', 'underline'] },
+                { name: 'editing', groups: ['find', 'selection', 'spellchecker'] },
+                { name: 'tools' } 
+            ],
+            extraPlugins: 'confighelper',
+            height: 100,
+            width: 800
+        }
+        CKEDITOR.replace('placeholder', config);
     </script>
 
 }
