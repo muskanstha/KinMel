@@ -8,7 +8,38 @@
 <div class="browse-width">
     <div class="profile-page-grid">
         <div class="cover-image">
-            <img src="https://placeimg.com/768/260/arch" alt="Cover picture" />
+            <img src="https://picsum.photos/1000/400?image=0" alt="Cover picture" />
+            <div class="profile-header">
+                <div>
+                    <div class="star-rating-empty tooltipped" data-tooltip="Average Rating: @Model.AverageStars" data-position="left">
+                        <p class="material-icons pink-text m0">star_border</p>
+                        <p class="material-icons pink-text m0">star_border</p>
+                        <p class="material-icons pink-text m0">star_border</p>
+                        <p class="material-icons pink-text m0">star_border</p>
+                        <p class="material-icons pink-text m0">star_border</p>
+                        <p class="white-text m0">| @Model.Ratings.Count |</p>
+                    </div>
+                    <div class="star-rating">
+                        @for (var i = 1; i <= Model.AverageStars; i++)
+                        {
+                            <i class="material-icons pink-text">star</i>
+
+                            if ((Model.AverageStars - i) > 0 && (Model.AverageStars - i) < 1)
+                            {
+                                <i class="material-icons pink-text">star_half</i>
+                            }
+                        }
+                    </div>
+                </div>
+                <!--TopHeader-->
+                <div class="profile-username white-text">
+                    @Html.DisplayFor(model => model.FullName)
+                </div>
+                <!--joined Date-->
+                <div class="profile-joindate grey-text text-lighten-2">
+                    Joined on @Html.DisplayFor(model => model.JoinDate)
+                </div>
+            </div>
             <!--SideCard-->
             <div class="side-content-grid card z-depth-4">
                 <div class="profile-picture">
@@ -50,33 +81,6 @@
                         <p>@Html.DisplayFor(model => model.City)</p>
                     </li>
                 </ul>
-                <!--TopHeader-->
-                <div class="profile-username white-text">
-                    @Html.DisplayFor(model => model.FullName)
-                </div>
-                <!--joined Date-->
-                <div class="profile-joindate grey-text text-lighten-2">
-                    Joined on @Html.DisplayFor(model => model.JoinDate)
-                </div>
-                <div class="star-rating-empty tooltipped" data-tooltip="Average Rating: @Model.AverageStars" data-position="left">
-                    <p class="material-icons pink-text m0">star_border</p>
-                    <p class="material-icons pink-text m0">star_border</p>
-                    <p class="material-icons pink-text m0">star_border</p>
-                    <p class="material-icons pink-text m0">star_border</p>
-                    <p class="material-icons pink-text m0">star_border</p>
-                    <p class="white-text m0">| @Model.Ratings.Count |</p>
-                </div>
-                <div class="star-rating">
-                    @for (var i = 1; i <= Model.AverageStars; i++)
-                    {
-                        <i class="material-icons pink-text">star</i>
-
-                        if ((Model.AverageStars - i) > 0 && (Model.AverageStars - i) < 1)
-                        {
-                            <i class="material-icons pink-text">star_half</i>
-                        }
-                    }
-                </div>
             </div>
             <a asp-action="Create" asp-controller="Ratings" asp-route-id="@Model.Id" class="waves-effect waves-light btn pink tooltipped" data-tooltip="Give a rating and review to the user." data-position="left">
                 <i class="material-icons left">star</i>Rate this user
@@ -84,7 +88,42 @@
         </div>
     </div>
 </div>
-
+<!--About-me-for-small-->
+<div class="about-me-small-grid">
+    <ul>
+        <li>
+            <label asp-for="Email"></label>
+            <p>@Html.DisplayFor(model => model.Email)</p>
+        </li>
+        <li>
+            <label asp-for="PhoneNumber"></label>
+            @if (Model.PhoneNumberConfirmed == true)
+            {
+                <p>@Html.DisplayFor(model => model.PhoneNumberConfirmed)<i class="material-icons cyan-text tooltipped" data-tooltip="Phone verified" data-position="left">verified_user</i></p>
+            }
+            else
+            {
+                <p>@Html.DisplayFor(model => model.PhoneNumberConfirmed)<i class="material-icons red-text tooltipped" data-tooltip="Phone not verified" data-position="left">phonelink_erase</i></p>
+            }
+            <p>@Html.DisplayFor(model => model.PhoneNumber)</p>
+        </li>
+        <li>
+            <label asp-for="City"></label>
+            <p>@Html.DisplayFor(model => model.City)</p>
+        </li>
+    </ul>
+    <div class="grey lighten-4 card-content">
+        <b>About me!</b>
+        <p>
+            Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+            Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+            Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+            Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+            Sapien elit in malesuada semper mi, id sollicitudin urna fermentum.
+        </p>
+        <a class="pink-text text-darken-3">Read more<i class="material-icons align-middle">arrow_forward</i></a>
+    </div>
+</div>
 <!--Ads from user-->
 <div class="browse-width profile-content-grid">
     <div></div>
@@ -137,11 +176,11 @@
                     {
                         <div class="display-flex">
                             <div class="image-container-list">
-                                <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">
+                                <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug">
                                     <img class="content-image-list" src="@classifiedAd.ImageUrlList.FirstOrDefault()" />
                                 </a>
                             </div>
-                            <div class="col s12">
+                            <div class="contents-list">
                                 <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">@Html.DisplayFor(modelItem => classifiedAd.Title)</a>
                                 @if (@classifiedAd.Condition == "NEW")
                                 {
@@ -151,19 +190,16 @@
                                 {
                                     <a class="content-condition-list cyan-text darken-3">(@Html.DisplayFor(modelItem => classifiedAd.Condition))</a>
                                 }
+
                                 <div>
-                                    <div class="col s12 m8 l8 p0">
-                                        <p class="content-description">@Html.DisplayFor(modelItem => classifiedAd.Description)</p>
+                                    <div>
+                                        <p class="content-description-list">@Html.DisplayFor(modelItem => classifiedAd.Description)</p>
                                         <p class="material-icons align-middle m-5">person_outline</p>
                                         <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@classifiedAd.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelItem => classifiedAd.CreatedByUser.FullName)</a>
                                     </div>
-                                    <div class="col s12 m4 l4 p0">
-                                        <div class="col s6 m6 p0">
-                                            <p class="content-datecreated">@Html.DisplayFor(modelItem => classifiedAd.DateCreated)</p>
-                                        </div>
-                                        <div class="col s6 m6 p0 center">
-                                            <p class="content-price">Rs. @Html.DisplayFor(modelItem => classifiedAd.Price)</p>
-                                        </div>
+                                    <div>
+                                        <p class="content-datecreated">@Html.DisplayFor(modelItem => classifiedAd.DateCreated)</p>
+                                        <p class="content-price">Rs. @Html.DisplayFor(modelItem => classifiedAd.Price)</p>
                                     </div>
                                 </div>
                             </div>
@@ -193,18 +229,18 @@
                     <div class="profile-reviews-grid">
                         <div>
                             <img src="@rating.RatedBy.ProfilePictureUrl" />
-                            <a asp-controller="Ratings" asp-route-id=@rating.RatedById class="content-username align-middle"> @Html.DisplayFor(r => rating.RatedBy.FirstName)</a>
+                            <a asp-controller="Account" asp-route-id=@rating.RatedById class="content-username align-middle"> @Html.DisplayFor(r => rating.RatedBy.FirstName)</a>
                         </div>
                         <div>
                             <div>
-                                <div class="tooltipped" data-tooltip="Average Rating: @rating.Stars" data-position="left">
+                                <div class="star-rating-empty tooltipped white" data-tooltip="Rating: @rating.Stars" data-position="left">
                                     <p class="material-icons pink-text m0">star_border</p>
                                     <p class="material-icons pink-text m0">star_border</p>
                                     <p class="material-icons pink-text m0">star_border</p>
                                     <p class="material-icons pink-text m0">star_border</p>
                                     <p class="material-icons pink-text m0">star_border</p>
                                 </div>
-                                <div>
+                                <div class="star-rating">
                                     @for (var i = 1; i <= rating.Stars; i++)
                                     {
                                         <i class="material-icons pink-text">star</i>
@@ -214,9 +250,9 @@
                             <div>
                                 @Html.DisplayFor(r => rating.Review)
                             </div>
-                            <hr class="m0" />
                         </div>
                     </div>
+                    <hr />
                 }
             }
         }
