@@ -9,6 +9,11 @@ namespace KinMel.Models.AccountViewModels
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Username")]
+        [RegularExpression("^[-0-9A-Za-z_]{5,15}$")]
+        public string UserName { get; set; }
+
+        [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
@@ -20,6 +25,7 @@ namespace KinMel.Models.AccountViewModels
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
 
         [Required]
         [Display(Name = "Address")]
