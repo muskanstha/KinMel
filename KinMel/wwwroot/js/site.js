@@ -18,11 +18,11 @@ $(document).ready(function () {
     //Tooltip
     $(".tooltipped").tooltip({ delay: 50 });
 
-        //var count = JSON.parse($.getJSON("notifications/notificationcount/"));
-        //console.log(1);
-        $.getJSON("notifications/notificationcount/",
-            function (data) {
-                document.getElementById("notificationCount").innerHTML = data;
+    //var count = JSON.parse($.getJSON("notifications/notificationcount/"));
+    console.log(1);
+    $.getJSON("/notifications/notificationcount/",
+        function (data) {
+            document.getElementById("notificationCount").innerHTML = data;
         });
 
     ////carousel
