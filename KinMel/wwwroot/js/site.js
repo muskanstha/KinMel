@@ -18,6 +18,16 @@ $(document).ready(function () {
     //Tooltip
     $(".tooltipped").tooltip({ delay: 50 });
 
+    //$(document).ready(function () {
+    //    $('.carousel').carousel();
+    //});
+
+    // details carousel
+    $('.carousel.carousel-slider').carousel({
+        fullWidth: true,
+        indicators: true
+    });
+
     //var count = JSON.parse($.getJSON("notifications/notificationcount/"));
     console.log(1);
     $.getJSON("/notifications/notificationcount/",
