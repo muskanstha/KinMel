@@ -103,8 +103,8 @@
     </section>
     <div class="divider"></div>
     <section>
-        <div class="row">
-            <div class="grey lighten-4 col s12 m8 l8">
+        <div id="details-map-carousel-div" class="row">
+            <div class="grey lighten-4 col s12 m7 l7">
                 <div id="details-carousel" class="carousel carousel-slider">
                     <a class="carousel-item"><img src="@Model.PrimaryImageUrl"></a>
                     @if (Model.ImageUrlList.Any())
@@ -116,9 +116,7 @@
                     }
                 </div>
             </div>
-            <div class="col s12 m4 l4">
-                Map goes here
-
+            <div id="details-map-div" class="col s12 m4 l4">
             </div>
         </div>
     </section>
@@ -126,7 +124,7 @@
 
     <section>
         <div class="col s12">
-            <div class="details--header">Description</div>
+            <div class="details-header">Description</div>
             @Model.Description
 
         </div>
@@ -201,7 +199,6 @@
                     </ul>
                 </div>
 
-
             </div>
             <div class="col s12">
                 <div class="row">
@@ -214,16 +211,16 @@
                                         <label asp-for="@Model.WarrantyType"></label>
                                     </td>
                                     <td>
-                                        <p> @Html.DisplayFor(m => m.WarrantyType)</p>
+                                        <p> @Html.DisplayFor(m => m.WarrantyType)|</p>
                                     </td>
-                                    <td class="separator"></td>
+                                    
                                     <td>
                                         <label asp-for="@Model.WarrantyPeriod"></label>
                                     </td>
                                     <td>
-                                        <p> @Html.DisplayFor(m => m.WarrantyPeriod)</p>
+                                        <p> @Html.DisplayFor(m => m.WarrantyPeriod)|</p>
                                     </td>
-                                    <td class="separator"></td>
+                                    
                                     <td>
                                         <label asp-for="@Model.WarrantyIncludes"></label>
                                     </td>
@@ -249,10 +246,10 @@
                 <form asp-area="" asp-controller="Questions" asp-action="Create" method="post">
                     <div class="input-field col s9">
                         <label class="active" for="Text">Post a new question</label>
-                        <input id="Text" name="Text"/>
+                        <input id="Text" name="Text" />
                     </div>
                     <div class="input-field col s3">
-                        <input name="ClassifiedAdId" hidden value="@Model.Id"/>
+                        <input name="ClassifiedAdId" hidden value="@Model.Id" />
                         <button type="submit" value="Create" class="btn">Submit Question</button>
                     </div>
                 </form>
