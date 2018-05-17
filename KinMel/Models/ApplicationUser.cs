@@ -69,7 +69,7 @@ namespace KinMel.Models
         }
 
         public bool AcceptedTerms { get; set; }
-
+        [DisplayFormat(DataFormatString = "{0:MMMM, yyyy}", ApplyFormatInEditMode = true)]
         public DateTime JoinDate { get; set; }
     }
 
