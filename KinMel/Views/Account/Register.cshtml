@@ -14,6 +14,12 @@
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">person_outline</i>
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="input-field">
+                    <i class="material-icons prefix">person_outline</i>
                     <label asp-for="FirstName"></label>
                     <input asp-for="FirstName" />
                     <span asp-validation-for="FirstName" class="text-danger"></span>

@@ -23,7 +23,7 @@
                         <a class="content-condition btn-large waves-effect waves-light cyan darken-3">@Html.DisplayFor(modelItem => item.Condition)</a>
                     }
                     <p class="material-icons align-middle m-5">person_outline</p>
-                    <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
+                    <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUser.UserName class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">

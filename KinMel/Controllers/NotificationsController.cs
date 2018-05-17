@@ -9,12 +9,14 @@ using KinMel.Data;
 using KinMel.Hubs;
 using KinMel.Models;
 using KinMel.ViewComponents;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 
 
 namespace KinMel.Controllers
 {
+    [Authorize]
     public class NotificationsController : Controller
     {
         private readonly ApplicationDbContext _context;

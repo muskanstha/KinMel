@@ -69,13 +69,14 @@ namespace KinMel.Models
         }
 
         public bool AcceptedTerms { get; set; }
-
+        [DisplayFormat(DataFormatString = "{0:MMMM, yyyy}", ApplyFormatInEditMode = true)]
         public DateTime JoinDate { get; set; }
     }
 
     public class AccountDTO
     {
         public string Id { get; set; }
+        public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 

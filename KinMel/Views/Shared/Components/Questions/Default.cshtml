@@ -3,31 +3,68 @@
 @{
     ViewData["Title"] = "Default";
 }
-<ul>
+<ul class="collection">
     @foreach (var item in Model)
     {
-        <li class="blue-text">
-            <p>QUESTION</p>
-            @Html.DisplayFor(modelItem => item.Text)<br/>
-            @Html.DisplayFor(modelItem => item.CreatedBy.FullName)
-            @Html.DisplayFor(modelItem => item.DateCreated)
+        <li class="collection-item avatar">
+            <img src="@item.CreatedBy.ProfilePictureUrl" alt="" class="circle">
+            <span class="title">
+                @Html.DisplayFor(modelItem => item.Text)
+            </span>
+            <p>
+                <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@item.CreatedBy.UserName">@Html.DisplayFor(modelItem => item.CreatedBy.UserName)</a>
+                <br />
+                <label class="">
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </label>
+            </p>
+            @*<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>*@
         </li>
+
         foreach (var answer in item.Answers)
         {
-            <li class="red-text">
-                <p>ANSWER</p>
-                @Html.DisplayFor(modelItem => answer.Text)<br/>
-                @Html.DisplayFor(modelItem => answer.CreatedBy.FullName)
-                @Html.DisplayFor(modelItem => answer.DateCreated)
+            <li>
+                <div class="row">
+                    <div class="col s1">
+                    </div>
+                    <div class="col s11">
+                        <ul class="collection">
+                            <li class="collection-item avatar">
+                                <img src="@answer.CreatedBy.ProfilePictureUrl" alt="" class="circle">
+                                <span class="title">
+                                    @Html.DisplayFor(modelItem => answer.Text)
+                                </span>
+                                <p>
+                                    <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@answer.CreatedBy.UserName">@Html.DisplayFor(modelItem => answer.CreatedBy.UserName)</a>
+                                    <br />
+                                    <label class="">
+                                        @Html.DisplayFor(modelItem => item.DateCreated)
+                                    </label>
+                                </p>
+                                @*<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>*@
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </li>
         }
         <li>
-            <form asp-area="" asp-controller="Answers" asp-action="Create" method="post">
-                <input name="Text" />
-                <input name="QuestionId" hidden value="@item.Id" />
-
-                <button type="submit" value="Create" class="btn">Answer Question</button>
-            </form>
+            <div class="row">
+                <div class="col s1">
+                </div>
+                <div class="col s11">
+                    <form asp-area="" asp-controller="Answers" asp-action="Create" method="post">
+                        <div class="input-field col s9">
+                            <label class="active" for="Text">Post your answer</label>
+                            <input id="Text" name="Text" />
+                        </div>
+                        <div class="input-field col s3">
+                            <input name="QuestionId" hidden value="@item.Id" />
+                            <button type="submit" value="Create" class="btn">Answer Question</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </li>
     }
 
