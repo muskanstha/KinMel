@@ -69,7 +69,7 @@ namespace KinMel.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -230,7 +230,7 @@ namespace KinMel.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Email,
+                    UserName = model.UserName,
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
@@ -482,12 +482,13 @@ namespace KinMel.Controllers
         public async Task<IActionResult> UserProfile(string id)
         {
             ApplicationUser user = await _context.Users.Include(u => u.Ratings).ThenInclude(r => r.RatedBy).Include(u=> u.ClassifiedAds)
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefaultAsync(m => m.UserName == id);
 
 
             var accountDTO = new AccountDTO()
             {
                 Id = user.Id,
+                UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 FullName = user.FullName,
