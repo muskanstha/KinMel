@@ -147,13 +147,6 @@ nav .sidenav-trigger {
     padding: 5px;
 }
 
-.main-content {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    grid-template-areas: "sorting" "main-content";
-    grid-gap: 1em;
-}
-
 .index-content {
     display: grid;
     grid-gap: 1em;
@@ -798,6 +791,7 @@ nav .sidenav-trigger {
     color: #fff;
     font-size: 16px;
     padding: 8px 20px;
+    margin-bottom: 10px;
 }
 
 .browse-width {
