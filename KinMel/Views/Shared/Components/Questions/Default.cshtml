@@ -9,13 +9,13 @@
         <li class="collection-item avatar">
             <img src="@item.CreatedBy.ProfilePictureUrl" alt="" class="circle">
             <span class="title">
-                @Html.DisplayFor(modelItem => item.Text)
+                <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@item.CreatedBy.UserName">@Html.DisplayFor(modelItem => item.CreatedBy.UserName)</a>
             </span>
             <p>
-                <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@item.CreatedBy.UserName">@Html.DisplayFor(modelItem => item.CreatedBy.UserName)</a>
+                @Html.DisplayFor(modelItem => item.Text)
                 <br />
                 <label class="">
-                    @Html.DisplayFor(modelItem => item.DateCreated)
+                   Asked at @Html.DisplayFor(modelItem => item.DateCreated)
                 </label>
             </p>
             @*<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>*@
@@ -32,13 +32,13 @@
                             <li class="collection-item avatar">
                                 <img src="@answer.CreatedBy.ProfilePictureUrl" alt="" class="circle">
                                 <span class="title">
-                                    @Html.DisplayFor(modelItem => answer.Text)
+                                    <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@answer.CreatedBy.UserName">@Html.DisplayFor(modelItem => answer.CreatedBy.UserName)</a>
                                 </span>
                                 <p>
-                                    <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@answer.CreatedBy.UserName">@Html.DisplayFor(modelItem => answer.CreatedBy.UserName)</a>
+                                    @Html.DisplayFor(modelItem => answer.Text)
                                     <br />
                                     <label class="">
-                                        @Html.DisplayFor(modelItem => item.DateCreated)
+                                       Answered at @Html.DisplayFor(modelItem => item.DateCreated)
                                     </label>
                                 </p>
                                 @*<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>*@
@@ -54,11 +54,11 @@
                 </div>
                 <div class="col s11">
                     <form asp-area="" asp-controller="Answers" asp-action="Create" method="post">
-                        <div class="input-field col s9">
+                        <div class="input-field col s12 m9">
                             <label class="active" for="Text">Post your answer</label>
-                            <input id="Text" name="Text" />
+                            <input id="Text" name="Text" required />
                         </div>
-                        <div class="input-field col s3">
+                        <div class="input-field col s12 m3">
                             <input name="QuestionId" hidden value="@item.Id" />
                             <button type="submit" value="Create" class="btn">Answer Question</button>
                         </div>

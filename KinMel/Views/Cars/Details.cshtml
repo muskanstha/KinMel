@@ -1,4 +1,5 @@
-﻿@model KinMel.Models.Car
+﻿@using System.Security.AccessControl
+@model KinMel.Models.Car
 
 @{
     ViewData["Title"] = "Details";
@@ -15,96 +16,88 @@
     <div class="col s12">
         <p class="details-title">
             @Model.Title
-            @*<span class="details-price">Nrs.@Model.Price</span>*@
+        </p>
+        <p class="details-price">
+            Nrs.@Model.Price
+            <label class="">
+                <i class="material-icons align-middle tiny">access_time</i> @Html.DisplayFor(m => m.DateCreated)
+            </label>
         </p>
     </div>
     <div class="divider"></div>
+
     <section>
-        <div class="col s12">
-            <div id="details-header" class="row">
-                <div class="card-panel grey lighten-5 col s12 m12 l5">
-                    <div class="row valign-wrapper">
-                        <div class="col s3">
-                            <img src="@Model.CreatedByUser.ProfilePictureUrl" alt="" class="circle responsive-img">
-                        </div>
-                        <div class="col s9">
-                            <label class="">Created By</label>
-                            <p>
-                                <i class="material-icons align-middle">account_circle</i>
-                                <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@Model.CreatedByUser.UserName">
-                                    @Model.CreatedByUser.UserName
-                                </a>
-                            </p>
-                            <p>
-                                <i class="material-icons align-middle">location_city</i>
-                                @Model.CreatedByUser.City
-                            </p>
-                            <p>
-                                <i class="material-icons align-middle">date_range</i>
-                                User Since: @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
-                            </p>
-                            <label class="">
-                                <i class="material-icons align-middle">access_time</i>
-                                @Html.DisplayFor(m => m.DateCreated)
-                            </label>
+        <div class="row">
+            <div class="col s12">
+                <div id="details-header" class="row">
+                    <div class="card-panel grey lighten-5 col s12 m12 l5">
+                        <div class="row valign-wrapper">
+                            <div class="col s3">
+                                <img src="@Model.CreatedByUser.ProfilePictureUrl" alt="" class="circle responsive-img">
+                            </div>
+                            <div class="col s9">
+                                <p>
+                                    <i class="material-icons align-middle">account_circle</i>
+                                    <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@Model.CreatedByUser.UserName">
+                                        @Model.CreatedByUser.UserName
+                                    </a>
+                                </p>
+                                <p>
+                                    <i class="material-icons align-middle">location_city</i>
+                                    @Model.CreatedByUser.City
+                                </p>
+                                <p>
+                                    <i class="material-icons align-middle">date_range</i>
+                                    User Since: @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="card-panel grey lighten-5 col s12 m6 l3">
-                    <div class="fields-list">
-                        <ul>
-                            <li>
-                                <label asp-for="@Model.Price"></label>
-                                <p> @Html.DisplayFor(m => m.Price)</p>
-                            </li>
-                            <li>
-                                <label asp-for="@Model.PriceNegotiable"></label>
-                                <p> @Html.DisplayFor(m => m.PriceNegotiable)</p>
-                            </li>
-                            <li>
-                                <label asp-for="@Model.Condition"></label>
-                                <p> @Html.DisplayFor(m => m.Condition)</p>
-                            </li>
-                            <li>
-                                <label asp-for="@Model.UsedFor"></label>
-                                <p> @Html.DisplayFor(m => m.UsedFor)</p>
-                            </li>
-                        </ul>
+                    <div class="card-panel grey lighten-5 col s12 m6 l3">
+                        <div class="fields-list">
+                            <ul>
+                                <li>
+                                    <label asp-for="@Model.PriceNegotiable"></label>
+                                    <p> @Html.DisplayFor(m => m.PriceNegotiable)</p>
+                                </li>
+                                <li>
+                                    <label asp-for="@Model.Condition"></label>
+                                    <p> @Html.DisplayFor(m => m.Condition)</p>
+                                </li>
+                                <li>
+                                    <label asp-for="@Model.UsedFor"></label>
+                                    <p> @Html.DisplayFor(m => m.UsedFor)</p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="card-panel grey lighten-5 col s12 m6 l3">
-                    <div class="fields-list">
-                        <ul>
+                    <div class="card-panel grey lighten-5 col s12 m6 l3">
+                        <div class="fields-list">
+                            <ul>
+                                <li>
+                                    <label asp-for="@Model.Address"></label>
+                                    <p> @Html.DisplayFor(m => m.Address)</p>
+                                </li>
+                                <li>
+                                    <label asp-for="@Model.City"></label>
+                                    <p> @Html.DisplayFor(m => m.City)</p>
+                                </li>
 
-                            <li>
-                                <label asp-for="@Model.Address"></label>
-                                <p> @Html.DisplayFor(m => m.Address)</p>
-                            </li>
-                            <li>
-                                <label asp-for="@Model.City"></label>
-                                <p> @Html.DisplayFor(m => m.City)</p>
-                            </li>
-                            <li>
-                                <label asp-for="@Model.Delivery"></label>
-                                <p> @Html.DisplayFor(m => m.Delivery)</p>
-                            </li>
-                            <li>
-                                <label asp-for="@Model.DeliveryCharges"></label>
-                                <p> @Html.DisplayFor(m => m.DeliveryCharges)</p>
-                            </li>
-
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
+
     </section>
     <div class="divider"></div>
+
     <section>
         <div id="details-map-carousel-div" class="row">
-            <div class="grey lighten-4 col s12 m7 l7">
+            <div class="grey lighten-4 col s12 m6 l6">
                 <div id="details-carousel" class="carousel carousel-slider">
                     <a class="carousel-item"><img src="@Model.PrimaryImageUrl"></a>
                     @if (Model.ImageUrlList.Any())
@@ -116,7 +109,7 @@
                     }
                 </div>
             </div>
-            <div id="details-map-div" class="col s12 m4 l4">
+            <div id="details-map-div" class="col s12 m5 l5">
             </div>
         </div>
     </section>
@@ -124,9 +117,8 @@
 
     <section>
         <div class="col s12">
-            <div class="details-header">Description</div>
-            @Model.Description
-
+            <div class="details-card-header">Description</div>
+            <div>@Html.Raw(@Model.Description)</div>
         </div>
     </section>
 
@@ -134,8 +126,9 @@
     <section>
 
         <div class="col s12">
+            <div class="details-card-header">Specifications</div>
+
             <div class="row">
-                <div class="details-card-header">Specifications</div>
 
                 <div class="col s12 m6 fields-list">
                     <ul>
@@ -198,57 +191,76 @@
 
                     </ul>
                 </div>
-
             </div>
-            <div class="col s12">
-                <div class="row">
-                    <div class="col s12 fields-list">
-                        <div class="details-card-header">Warranty Details</div>
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <label asp-for="@Model.WarrantyType"></label>
-                                    </td>
-                                    <td>
-                                        <p> @Html.DisplayFor(m => m.WarrantyType)|</p>
-                                    </td>
-                                    
-                                    <td>
-                                        <label asp-for="@Model.WarrantyPeriod"></label>
-                                    </td>
-                                    <td>
-                                        <p> @Html.DisplayFor(m => m.WarrantyPeriod)|</p>
-                                    </td>
-                                    
-                                    <td>
-                                        <label asp-for="@Model.WarrantyIncludes"></label>
-                                    </td>
-                                    <td>
-                                        <p> @Html.DisplayFor(m => m.WarrantyIncludes)</p>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        </div>
+
+    </section>
+    <section>
+        <div class="col s12">
+            <div class="details-card-header">Warranty Details</div>
+            <div class="row">
+                <div class="col s12 m6 fields-list">
+                    <ul class="row">
+                        <li>
+                            <label asp-for="@Model.WarrantyType"></label>
+                            <p> @Html.DisplayFor(m => m.WarrantyType)</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s12 m6 fields-list">
+                    <ul class="row">
+                        <li>
+                            <label asp-for="@Model.WarrantyPeriod"></label>
+                            <p> @Html.DisplayFor(m => m.WarrantyPeriod)</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s12 m12 fields-list">
+                    <ul class="row">
+                        <li>
+                            <label asp-for="@Model.WarrantyIncludes"></label>
+                            <p> @Html.DisplayFor(m => m.WarrantyIncludes)</p>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
     <section>
-        <div class="row">
-            <div class="col s12">
-                <div class="details-card-header">Questions & Answers</div>
-                @await Component.InvokeAsync("Questions", new { id = Model.Id })
+        <div class="col s12">
+            <div class="details-card-header">Delivery Details</div>
+            <div class="row">
+                <div class="col s12 m6 fields-list">
+                    <ul class="row">
+                        <li>
+                            <label asp-for="@Model.Delivery"></label>
+                            <p> @Html.DisplayFor(m => m.Delivery)</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s12 m6 fields-list">
+                    <ul class="row">
+                        <li>
+                            <label asp-for="@Model.DeliveryCharges"></label>
+                            <p> @Html.DisplayFor(m => m.DeliveryCharges)</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
+        </div>
+    </section>
+    <section>
+        <div class="col s12">
+            <div class="details-card-header">Questions & Answers</div>
+            @await Component.InvokeAsync("Questions", new { id = Model.Id })
             <div class="col s12">
                 <h6 class="blue-text">Couldn't find the answer to what you were looking for?</h6>
                 <form asp-area="" asp-controller="Questions" asp-action="Create" method="post">
-                    <div class="input-field col s9">
+                    <div class="input-field col s12 m9">
                         <label class="active" for="Text">Post a new question</label>
-                        <input id="Text" name="Text" />
+                        <input id="Text" name="Text" required />
                     </div>
-                    <div class="input-field col s3">
+                    <div class="input-field col s12 m3">
                         <input name="ClassifiedAdId" hidden value="@Model.Id" />
                         <button type="submit" value="Create" class="btn">Submit Question</button>
                     </div>
