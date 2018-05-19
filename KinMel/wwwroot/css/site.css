@@ -219,12 +219,12 @@ nav .sidenav-trigger {
     grid-gap: 1em;
 }
 
-.about-me-small-grid > div > p {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-}
+    .about-me-small-grid > div > p {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+    }
 
 .about-me > p {
     overflow: hidden;
@@ -250,10 +250,10 @@ nav .sidenav-trigger {
     float: right;
 }
 
-    .side-content-grid > ul > li > p {
-        margin: 0px;
-        float: right;
-    }
+.side-content-grid > ul > li > p {
+    margin: 0px;
+    float: right;
+}
 
 .profile-header {
     display: grid;
@@ -425,9 +425,9 @@ nav .sidenav-trigger {
             font-size: 14px;
         }
 
-        .side-content-grid {
-            width: 28vw
-        }
+    .side-content-grid {
+        width: 28vw
+    }
 
     .about-me {
         display: none;
@@ -441,9 +441,9 @@ nav .sidenav-trigger {
         height: 28vw;
     }
 
-    .profile-picture > img {
-        padding: 0.6vw;
-    }
+        .profile-picture > img {
+            padding: 0.6vw;
+        }
 
     .profile-content-grid {
         display: block;
@@ -463,11 +463,11 @@ nav .sidenav-trigger {
         padding: 0 2.2vw;
     }
 
-    .cover-image > a > i {
-        line-height: 4vw;
-        font-size: 2.2vw;
-        margin-right: 2.1vw;
-    }
+        .cover-image > a > i {
+            line-height: 4vw;
+            font-size: 2.2vw;
+            margin-right: 2.1vw;
+        }
 
     /***floating-button***/
     .btn-floating.btn-large {
@@ -494,13 +494,13 @@ nav .sidenav-trigger {
         width: 34vw;
     }
 
-    .select-wrapper .caret {
-        width: 5vw;
-        height: 5vw;
-        right: 0;
-        top: 0;
-        bottom: 1vw;
-    }
+        .select-wrapper .caret {
+            width: 5vw;
+            height: 5vw;
+            right: 0;
+            top: 0;
+            bottom: 1vw;
+        }
 
     .dropdown-content li > a, .dropdown-content li > span {
         font-size: 3.4vw;
@@ -537,20 +537,20 @@ nav .sidenav-trigger {
         height: 12.6vw !important;
     }
 
-    nav .brand-logo {
-        font-size: 6.4vw !important;
-        line-height: 12.8vw !important;
-    }
-
-    nav .sidenav-trigger {
-        height: 12.8vw !important;
-    }
-
-        nav .sidenav-trigger i {
+        nav .brand-logo {
             font-size: 6.4vw !important;
-            height: 12.8vw !important;
             line-height: 12.8vw !important;
         }
+
+        nav .sidenav-trigger {
+            height: 12.8vw !important;
+        }
+
+            nav .sidenav-trigger i {
+                font-size: 6.4vw !important;
+                height: 12.8vw !important;
+                line-height: 12.8vw !important;
+            }
 
     .navbar-fixed {
         height: 12.8vw !important;
@@ -642,16 +642,16 @@ nav .sidenav-trigger {
         width: 20vw !important;
     }
 
-    .taxonomy .taxonomy-sections > li a i {
-        height: 7.2vw !important;
-        font-size: 7.2vw !important;
-        line-height: 7.2vw !important;
-    }
+        .taxonomy .taxonomy-sections > li a i {
+            height: 7.2vw !important;
+            font-size: 7.2vw !important;
+            line-height: 7.2vw !important;
+        }
 
-    .taxonomy .taxonomy-sections > li a span {
-        font-size: 2.6vw !important;
-        line-height: 3.2vw !important;
-    }
+        .taxonomy .taxonomy-sections > li a span {
+            font-size: 2.6vw !important;
+            line-height: 3.2vw !important;
+        }
 
     .taxonomy:not(.expanded) .taxonomy-sections {
         grid-template-columns: repeat(22, 20vw) !important;
@@ -686,7 +686,7 @@ nav .sidenav-trigger {
     }
 
     /***floating-button***/
-    
+
     .btn-floating.btn-large {
         width: 11vw;
         height: 11vw;
@@ -797,6 +797,10 @@ nav .sidenav-trigger {
 .browse-width {
     max-width: 1280px;
     margin: 0 auto;
+}
+
+.escape-float {
+    float: none !important;
 }
 /******************END********************/
 /****************Content*****************/
@@ -924,10 +928,10 @@ nav .sidenav-trigger {
     border-bottom: 1px solid #e0e0e0;
 }
 
-.fields-list > ul > li > p {
-    margin: 0px;
-    float: right;
-}
+    .fields-list > ul > li > p {
+        margin: 0px;
+        float: right;
+    }
 
 #details-carousel > .carousel-item > img {
     width: 100%;
