@@ -53,7 +53,7 @@ namespace KinMel.Models
             {
                 if (this._imageUrls == null)
                 {
-                    return new List<string>() { "/images/NoImage.svg" };
+                    return new List<string>() { /*"/images/NoImage.svg" */};
                 }
                 return JsonConvert.DeserializeObject<List<string>>(this._imageUrls);
             }
@@ -64,7 +64,7 @@ namespace KinMel.Models
         public Boolean PriceNegotiable { get; set; }
         public Boolean Delivery { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
         public bool IsSold { get; set; }
         public bool IsActive { get; set; }
