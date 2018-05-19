@@ -1,7 +1,7 @@
-﻿@model KinMel.Models.ClassifiedAdCreateViewModel
-
+﻿@model ClassifiedAdCreateViewModel
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create An Ad";
+    ViewData.AddActivePage(ManageNavPages.CreateAd);
 }
 
 <h2>Create</h2>
@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="CreateAd">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
