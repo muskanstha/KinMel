@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Inflector;
+using KinMel.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +16,7 @@ using KinMel.Models;
 using KinMel.Models.ManageViewModels;
 using KinMel.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace KinMel.Controllers
 {
@@ -21,6 +24,8 @@ namespace KinMel.Controllers
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -35,13 +40,15 @@ namespace KinMel.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            _context = context;
         }
 
         [TempData]
@@ -141,7 +148,28 @@ namespace KinMel.Controllers
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToAction(nameof(Index));
         }
+        // GET: Manage/Create
+        public IActionResult CreateAd()
+        {
+            ViewData["CategoryName"] = new SelectList(_context.Set<Category>().OrderBy(c => c.Name), "Name", "Name");
+            return View();
+        }
 
+        // POST: ClassifiedAds/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateAd([Bind("CategoryName")] ClassifiedAdCreateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Create", model.CategoryName.Pluralize());
+            }
+            ViewData["CategoryName"] = new SelectList(_context.Set<Category>().OrderBy(c => c.Name), "Name", "Name", model.CategoryName);
+
+            return View(model);
+        }
         [HttpGet]
         public async Task<IActionResult> ProfilePicture()
         {
