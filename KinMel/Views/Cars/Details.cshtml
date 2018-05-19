@@ -83,7 +83,10 @@
                                     <label asp-for="@Model.City"></label>
                                     <p> @Html.DisplayFor(m => m.City)</p>
                                 </li>
-
+                                <li>
+                                    <label>one more field</label>
+                                    <p> field value</p>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -219,7 +222,7 @@
                     <ul class="row">
                         <li>
                             <label asp-for="@Model.WarrantyIncludes"></label>
-                            <p> @Html.DisplayFor(m => m.WarrantyIncludes)</p>
+                            <p class="escape-float"> @Html.DisplayFor(m => m.WarrantyIncludes)</p>
                         </li>
                     </ul>
                 </div>
