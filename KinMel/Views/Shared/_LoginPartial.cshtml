@@ -8,10 +8,14 @@
 {
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="right hide-on-med-and-down">
         <ul class="right hide-on-med-and-down">
-
             <!-- Notification Dropdown Trigger -->
-            <li>
-                <a class="dropdown-trigger" data-target="notificationdropdown">Notifications <span style="color: red;" id="notificationCount"></span></a>
+            <li class="notifications">
+                <a class="dropdown-trigger" data-target="notificationdropdown">
+                    <i class="material-icons">
+                        notifications
+                    </i>
+                    <span id="notificationCount"></span>
+                </a>
             </li>
 
             <!-- Dropdown Trigger -->

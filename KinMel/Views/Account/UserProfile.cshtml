@@ -136,10 +136,10 @@
             if (Model.ClassifiedAds.Any())
             {
                 <!--grid-view-->
-                <div class="main-content-cards hide-on-small-and-down p5">
+                <div class="main-content-cards hide-on-small-and-down p-5">
                     @foreach (ClassifiedAd classifiedAd in Model.ClassifiedAds)
                     {
-                        <div class="card m0">
+                        <div class="card m-0">
                             <div class="card-image waves-effect waves-block grey lighten-2 waves-light">
                                 <img class="content-image-grid activator" src="@classifiedAd.PrimaryImageUrl" />
                             </div>
@@ -234,11 +234,11 @@
                         <div>
                             <div>
                                 <div class="star-rating-empty tooltipped white" data-tooltip="Rating: @rating.Stars" data-position="left">
-                                    <p class="material-icons pink-text m0">star_border</p>
-                                    <p class="material-icons pink-text m0">star_border</p>
-                                    <p class="material-icons pink-text m0">star_border</p>
-                                    <p class="material-icons pink-text m0">star_border</p>
-                                    <p class="material-icons pink-text m0">star_border</p>
+                                    <p class="material-icons pink-text m-0">star_border</p>
+                                    <p class="material-icons pink-text m-0">star_border</p>
+                                    <p class="material-icons pink-text m-0">star_border</p>
+                                    <p class="material-icons pink-text m-0">star_border</p>
+                                    <p class="material-icons pink-text m-0">star_border</p>
                                 </div>
                                 <div class="star-rating">
                                     @for (var i = 1; i <= rating.Stars; i++)
