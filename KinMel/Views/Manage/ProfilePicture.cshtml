@@ -3,29 +3,28 @@
     ViewData["Title"] = "Change Profile Picture";
     ViewData.AddActivePage(ManageNavPages.ProfilePicture);
 }
-
-<div>
-    <div class="card-header">
-        Profile Picture
+<partial name="_StatusMessage" model="@Model.StatusMessage" />
+<div class="card-header mb-0">
+    Profile Picture
+</div>
+<div class="row m-0 p-20">
+    <div class="col s12 m12 l4 p-0 center">
+        <img id="output_image" src="@Model.ProfilePictureUrl" />
     </div>
-    <div class="card-content">
-        <p class="text-info">
-            You can upload new or change your profile picture from here.
-        </p>
-        <img src="@Model.ProfilePictureUrl" style="max-width: 250px;" />
-    </div>
-    <div>
-        <form method="post" enctype="multipart/form-data" asp-action="ProfilePicture">
-            <h5>Image Preview</h5>
-            <img id="output_image" style="max-width: 250px;" />
-            <div class="form-group">
+    <form class="col s12 m12 l8" method="post" enctype="multipart/form-data" asp-action="ProfilePicture">
+        <p class="m-0 p-5">You can upload new or change your profile picture from here.</p>
+        <div class="file-field input-field">
+            <div class="btn-small">
+                <span>Browse</span>
                 <input type="file" accept=".png,.jpg,.jpeg,.gif,.tif" name="profilePicture" id="profilePicture" onchange="preview_image(event)" />
             </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
 
-            <button type="submit" class="btn btn-default right">Upload Picture</button>
-        </form>
-    </div>
-
+        <button type="submit" class="btn btn-default mb-20 right">Upload Picture</button>
+    </form>
 </div>
 <script type='text/javascript'>
     function preview_image(event) {
