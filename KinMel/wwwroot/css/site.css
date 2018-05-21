@@ -120,23 +120,21 @@ nav .sidenav-trigger {
     padding: 16px;
 }
 
-/*.slider {
-    height: 400px !important;
+.notifications > a {
+    position: relative;
 }
 
-.slider .indicators {
-    z-index: 2;
-}
-
-    .slider .indicators .indicator-item {
-        height: 12px !important;
-        width: 12px !important;
-        margin: 0 12px;
+    .notifications > a > span {
+        position: absolute;
+        font-size: 12px;
+        top: 15px;
+        left: 26px;
+        color: white;
+        padding: 6px;
+        background-color: red;
+        line-height: 9px;
+        border-radius: 50%;
     }
-
-.slides > li > img {
-    filter: blur(2px) brightness(1);
-}*/
 
 /**************GRID**************/
 .page-container-grid {
@@ -724,30 +722,6 @@ nav .sidenav-trigger {
 }
 /*********************END*********************/
 /*************Custom Classes***************/
-.m-5 {
-    margin: -5px !important;
-}
-
-.m0 {
-    margin: 0px !important;
-}
-
-.mb0 {
-    margin-bottom: 0px;
-}
-
-.p0 {
-    padding: 0px !important;
-}
-
-.pl0 {
-    padding-left: 0px !important;
-}
-
-.p5 {
-    padding: 5px;
-}
-
 .align-middle {
     vertical-align: middle;
 }
