@@ -95,19 +95,19 @@ nav .sidenav-trigger {
     width: 100px;
 }
 
-.select-wrapper .caret {
+.sorting-grid > div > .select-wrapper .caret {
     margin: 0px;
     fill: #111111;
 }
 
-.select-wrapper input.select-dropdown {
+.sorting-grid > div > .select-wrapper input.select-dropdown {
     height: 1.5em;
     padding-left: 5px;
     color: #111111;
     margin: 0px;
 }
 
-    .select-wrapper input.select-dropdown:focus {
+    .sorting-grid > div > .select-wrapper input.select-dropdown:focus {
         border-bottom: 1px solid #fff;
     }
 
@@ -140,6 +140,10 @@ nav .sidenav-trigger {
         width: 240px;
         height: 240px;
         object-fit: cover;
+    }
+
+    .nav-pills > .active > a {
+        color: #222222;
     }
 /**************GRID**************/
 .page-container-grid {
@@ -419,12 +423,12 @@ nav .sidenav-trigger {
         font-size: 13px;
     }
 
-    .select-wrapper {
+    .sorting-grid > div > .select-wrapper {
         float: right;
         width: 150px;
     }
 
-        .select-wrapper input.select-dropdown {
+        .sorting-grid > div > .select-wrapper input.select-dropdown {
             font-size: 14px;
         }
 
@@ -489,15 +493,15 @@ nav .sidenav-trigger {
         height: 8.2vw;
     }
 
-    .select-wrapper input.select-dropdown {
-        font-size: 3.3vw;
-    }
+        .sorting-grid > div > .select-wrapper input.select-dropdown {
+            font-size: 3.3vw;
+        }
 
-    .select-wrapper {
+    .sorting-grid > div > .select-wrapper {
         width: 34vw;
     }
 
-        .select-wrapper .caret {
+        .sorting-grid > div > .select-wrapper .caret {
             width: 5vw;
             height: 5vw;
             right: 0;
@@ -505,11 +509,12 @@ nav .sidenav-trigger {
             bottom: 1vw;
         }
 
-    .dropdown-content li > a, .dropdown-content li > span {
-        font-size: 3.4vw;
-        line-height: 22px;
-        padding: 14px 16px;
-    }
+        .sorting-grid > div > .select-wrapper .dropdown-content li > a,
+        .sorting-grid > div > .select-wrapper .dropdown-content li > span {
+            font-size: 3.4vw;
+            line-height: 22px;
+            padding: 14px 16px;
+        }
 
     .footer a {
         font-size: 3.6vw;
