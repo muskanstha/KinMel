@@ -136,6 +136,11 @@ nav .sidenav-trigger {
         border-radius: 50%;
     }
 
+    #output_image {
+        width: 240px;
+        height: 240px;
+        object-fit: cover;
+    }
 /**************GRID**************/
 .page-container-grid {
     display: grid;
@@ -720,6 +725,14 @@ nav .sidenav-trigger {
         grid-template-areas: "sideMenu" "main";
     }
 }
+
+@media (max-width: 350px){
+    #output_image {
+        width: 85vw;
+        height: 85vw;
+        object-fit: cover;
+    }
+}
 /*********************END*********************/
 /*************Custom Classes***************/
 .align-middle {
@@ -775,6 +788,12 @@ nav .sidenav-trigger {
 
 .escape-float {
     float: none !important;
+}
+
+.btn-small{
+    height: 30px !important;
+    line-height: 30px !important;
+    font-size: 12px;
 }
 /******************END********************/
 /****************Content*****************/
