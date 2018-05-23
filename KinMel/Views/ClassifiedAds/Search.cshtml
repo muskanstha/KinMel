@@ -21,19 +21,16 @@
             <div class="col s12 m2 l2" style="margin-top: 45px;">
                 <div class="card blue-white lighten-4">
                     <div class="card-content black-text">
-                        <span class="card-title" style="color: brown; ">Search Goods</span>
+                        <span class="card-title" style="color: brown; ">Search Ads</span>
                         @using (Html.BeginForm("Search", "ClassifiedAds", FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true)
+                          
                             <div class="input-field">
                                 @Html.LabelFor(m => m.City)
-                                @Html.TextBoxFor(m => m.City)
-                            </div>
-
-                            <div class="input-field">
-                                @Html.LabelFor(m => m.City)
-                                <input type="text" id="autocomplete" />
+                                @Html.TextBoxFor(m=>m.City, htmlAttributes: new { id = "autocomplete", placeholder="" })
+                               
                             </div>
 
                             <div class="input-field">
@@ -350,9 +347,7 @@
 
 
 
-@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI&libraries=places" async defer></script>*@
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI&libraries=places"></script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI&libraries=places" async defer></script>
 <script>
     google.maps.event.addDomListener(window, 'load', function () {
         var options = {
@@ -363,6 +358,4 @@
         var places = new new google.maps.places.Autocomplete(input, options);
 
     });
-
-
 </script>
