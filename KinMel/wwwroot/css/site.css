@@ -886,12 +886,12 @@ nav .sidenav-trigger {
 /******************End*******************/
 /****************Details*****************/
 .details-title {
-    font-size: 18px;
+    font-size: 1.5em;
     font-weight: bold;
 }
 
 .details-price {
-    font-size: 14px;
+    font-size: 2em;
     color: darkgreen;
     font-weight: bold;
 }
@@ -905,8 +905,17 @@ nav .sidenav-trigger {
     color: #fff;
     font-size: 16px;
     padding: 8px 20px;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
 }
 
+.details-header > .explain {
+    flex-grow: 1;
+    border-left: 1px solid rgba(101,108,115,0.42);
+    margin-left: 4px;
+    padding: 4px 4px 2px;
+}
 .card-profile-image {
     width: 70px;
     position: absolute;
