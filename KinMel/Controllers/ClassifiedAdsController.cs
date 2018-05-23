@@ -12,6 +12,12 @@ using KinMel.Data;
 using KinMel.Models;
 using KinMel.Services;
 using Microsoft.EntityFrameworkCore.Design;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using Microsoft.IdentityModel.Protocols;
 
 namespace KinMel.Controllers
 {
@@ -62,7 +68,7 @@ namespace KinMel.Controllers
                 {
                     
                     //city
-                    if (m.City != null && m.PriceFrom == null && m.PriceTo == null && m.Condition == null && m.PriceFrom == null && m.PriceTo == null)
+                    if (m.City != null && m.PriceFrom == null && m.PriceTo == null && m.Condition == null)
                     {
                         properties = properties.Where(k => k.City == m.City).ToList();
                         m.PropertyResults = properties;
@@ -125,6 +131,38 @@ namespace KinMel.Controllers
             return View(m);
 
         }
+
+
+        //cordinate finding
+        //protected void Page_Load(object sender, EventArgs e)
+        //{
+        //    if (!this.IsPostBack)
+        //    {
+        //        DataTable dt = this.GetData("select * from Locations");
+        //        rptMarkers.DataSource = dt;
+        //        rptMarkers.DataBind();
+        //    }
+        //}
+
+        ////private DataTable GetData(string query)
+        ////{
+        ////    string conString = ConfigurationManager<>.ConnectionStrings["constr"].ConnectionString;
+        ////    SqlCommand cmd = new SqlCommand(query);
+        ////    using (SqlConnection con = new SqlConnection(conString))
+        ////    {
+        ////        using (SqlDataAdapter sda = new SqlDataAdapter())
+        ////        {
+        ////            cmd.Connection = con;
+
+        ////            sda.SelectCommand = cmd;
+        ////            using (DataTable dt = new DataTable())
+        ////            {
+        ////                sda.Fill(dt);
+        ////                return dt;
+        ////            }
+        ////        }
+        ////    }
+        ////}
 
         // GET: ClassifiedAds/Details/5
         //public async Task<IActionResult> Details(int? id)
