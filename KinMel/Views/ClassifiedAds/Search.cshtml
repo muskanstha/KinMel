@@ -6,78 +6,6 @@
     ViewData["Title"] = "Search";
 }
 
-<!--kam gareko xina tala ko le-->
-@*<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAacPaT9YiOu-8leoacd1RDbRfx7an1u74&libraries=places&callback=initMap"
-            async defer></script>
-    <script>
-
-        google.maps.event.addDomListener(window, 'load', function () {
-            var options = {
-                types: ['(cities)'],
-                componentRestrictions: { country: "NP" }
-            };
-            var input = document.getElementById('City');
-            var places = new new google.maps.places.Autocomplete(input,options);
-
-        });
-
-        //autocomplete = new google.maps.places.Autocomplete(document.getElementById('City'));
-        //autocomplete.addListener();
-    </script>*@
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-    <style type="text/css">
-        body {
-            font-family: Arial;
-            font-size: 10pt;
-        }
-    </style>
-</head>
-<body>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI&libraries=places" async defer></script>
-<script type="text/javascript">
-    google.maps.event.addDomListener(window, 'load', function () {
-        var places = new google.maps.places.Autocomplete(document.getElementById('txtPlaces'));
-        google.maps.event.addListener(places, 'place_changed', function () {
-            var place = places.getPlace();
-            var address = place.formatted_address;
-            var latitude = place.geometry.location.A;
-            var longitude = place.geometry.location.F;
-            var mesg = "Address: " + address;
-            mesg += "\nLatitude: " + latitude;
-            mesg += "\nLongitude: " + longitude;
-            alert(mesg);
-        });
-    });
-</script>
-<span>Location:</span>
-<input type="text" id="txtPlaces" style="width: 250px" placeholder="Enter a location" />
-</body>
-</html>
-
-
-<!--arko wala-->
-<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI&libraries=places" async defer></script>
-<script>
-    var autocomplete;
-    function initialize() {
-        autocomplete = new google.maps.places.Autocomplete(
-            
-            (document.getElementById('autocomplete')),
-            { types: ['geocode'] }
-        );
-        google.maps.event.addListener(autocomplete, 'place_changed', function() {});
-    }
-</script>
-
-
-<div id="locationField">
-    <input id="autocomplete" name="location" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
-</div>
 
 <!--Breadcrumbs-->
 <div class="page-container grey lighten-3">
@@ -103,14 +31,10 @@
                                 @Html.TextBoxFor(m => m.City)
                             </div>
 
-                            @*<div class="input-field">
-                                    @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-
-                                        <input type="text" id="City"  />
-                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-
-                                </div>*@
-
+                            <div class="input-field">
+                                @Html.LabelFor(m => m.City)
+                                <input type="text" id="autocomplete" />
+                            </div>
 
                             <div class="input-field">
                                 @Html.LabelFor(m => m.Condition)
@@ -390,23 +314,7 @@
 <div class="col-md-7 embed-responsive">
     <div class="map">
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI"></script>
-        <script type="text/javascript">
-            var markers = [
-                <asp: Repeater ID="rptMarkers" runat="server">
-                    <ItemTemplate>
-                        {
-                            "title": '<%# Eval("Name") %>',
-                            "lat": '<%# Eval("Latitude") %>',
-                            "lng": '<%# Eval("Longitude") %>',
-                            "description": '<%# Eval("Description") %>'
-                    }
-                        </ItemTemplate>
-                    <SeparatorTemplate>
-                        ,
-                    </SeparatorTemplate>
-                </asp: Repeater >
-                    ];
-        </script>
+
         <script type="text/javascript">
             window.onload = function () {
                 var mapOptions = {
@@ -438,3 +346,23 @@
 
     </div>
 </div>
+
+
+
+
+@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI&libraries=places" async defer></script>*@
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI&libraries=places"></script>
+
+<script>
+    google.maps.event.addDomListener(window, 'load', function () {
+        var options = {
+            //types: ['(cities)'],
+            componentRestrictions: { country: "NP" }
+        };
+        var input = document.getElementById('autocomplete');
+        var places = new new google.maps.places.Autocomplete(input, options);
+
+    });
+
+
+</script>
