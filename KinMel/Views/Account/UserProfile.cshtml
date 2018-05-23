@@ -12,14 +12,14 @@
             <div class="profile-header">
                 <div>
                     <div class="star-rating-empty tooltipped" data-tooltip="Average Rating: @Model.AverageStars" data-position="left">
-                        <p class="material-icons pink-text m0">star_border</p>
-                        <p class="material-icons pink-text m0">star_border</p>
-                        <p class="material-icons pink-text m0">star_border</p>
-                        <p class="material-icons pink-text m0">star_border</p>
-                        <p class="material-icons pink-text m0">star_border</p>
-                        <p class="white-text m0">| @Model.Ratings.Count |</p>
+                        <p class="material-icons pink-text m-0">star_border</p>
+                        <p class="material-icons pink-text m-0">star_border</p>
+                        <p class="material-icons pink-text m-0">star_border</p>
+                        <p class="material-icons pink-text m-0">star_border</p>
+                        <p class="material-icons pink-text m-0">star_border</p>
+                        <p class="white-text m-0">| @Model.Ratings.Count |</p>
                     </div>
-                    <div class="star-rating">
+                    <div class="star-rating tooltipped" data-tooltip="Average Rating: @Model.AverageStars" data-position="left">
                         @for (var i = 1; i <= Model.AverageStars; i++)
                         {
                             <i class="material-icons pink-text">star</i>
@@ -240,7 +240,7 @@
                                     <p class="material-icons pink-text m-0">star_border</p>
                                     <p class="material-icons pink-text m-0">star_border</p>
                                 </div>
-                                <div class="star-rating">
+                                <div class="star-rating tooltipped" data-tooltip="Rating: @rating.Stars" data-position="left">
                                     @for (var i = 1; i <= rating.Stars; i++)
                                     {
                                         <i class="material-icons pink-text">star</i>
