@@ -2,17 +2,12 @@
     Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Manage your account</h2>
-
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
+<div class="browse-width">    
     <div class="row">
-        <div class="col 3">
+        <div class="col s12 m3">
             <partial name="_ManageNav" />
-
         </div>
-        <div class="col 9">
+        <div class="card z-depth-5 col s12 m9 p-5">
             @RenderBody()
         </div>
     </div>

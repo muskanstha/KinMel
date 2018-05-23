@@ -7,27 +7,27 @@
     <div class="row">
         <div class="card-panel card-panel-small z-depth-4">
             <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                <div asp-validation-summary="All" class="text-danger"></div>
+                @*<div asp-validation-summary="All" class="text-danger"></div>*@
                 <div class="input-field row">
-                    <h4 class="center m0">KinMel</h4>
+                    <h4 class="center m-0">KinMel</h4>
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">person_outline</i>
-                    <label asp-for="UserName"></label>
+                    <label asp-for="UserName" class="active"></label>
                     <input asp-for="UserName" />
-                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <span asp-validation-for="UserName" class="red-text"></span>
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">lock_outline</i>
-                    <label asp-for="Password"></label>
+                    <label asp-for="Password" class="active"></label>
                     <input asp-for="Password" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <span asp-validation-for="Password" class="red-text"></span>
                 </div>
                 <div class="input-field">
                     <div class="switch">
-                        <label asp-for="RememberMe">
+                        <label asp-for="RememberMe" class="active">
                             <input asp-for="RememberMe" />
-                            <span class="lever m0"></span>
+                            <span class="lever m-0"></span>
                         </label>
                         <b><label asp-for="RememberMe" class="black-text"></label></b>
                     </div>
@@ -35,11 +35,11 @@
                 <div class="input-field">
                     <button type="submit" title="Login" class="btn waves-effect waves-light col s12">Log in</button>
                 </div>
-                <div class="row m0">
-                    <div class="input-field col s6 m6 l6 p0">
+                <div class="row m-0">
+                    <div class="input-field col s6 m6 l6 p-0">
                         <p><a asp-action="ForgotPassword" class="red-text">Forgot password?</a></p>
                     </div>
-                    <div class="input-field col s6 m6 l6 right-align p0">
+                    <div class="input-field col s6 m6 l6 right-align p-0">
                         <p><a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Register</a></p>
                     </div>
                 </div>

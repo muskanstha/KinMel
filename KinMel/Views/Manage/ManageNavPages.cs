@@ -19,6 +19,7 @@ namespace KinMel.Views.Manage
 
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
         public static string ProfilePicture => "ProfilePicture";
+        public static string CreateAd => "CreateAd";
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
@@ -28,6 +29,7 @@ namespace KinMel.Views.Manage
 
         public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
         public static string ProfilePictureNavClass(ViewContext viewContext) => PageNavClass(viewContext, ProfilePicture);
+        public static string CreateAdNavClass(ViewContext viewContext) => PageNavClass(viewContext, CreateAd);
 
         public static string PageNavClass(ViewContext viewContext, string page)
         {

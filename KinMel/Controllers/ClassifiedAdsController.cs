@@ -347,28 +347,28 @@ namespace KinMel.Controllers
         }
 
 
-        // GET: ClassifiedAds/Create
-        public IActionResult Create()
-        {
-            ViewData["CategoryName"] = new SelectList(_context.Set<Category>().OrderBy(c => c.Name), "Name", "Name");
-            return View();
-        }
+        //// GET: ClassifiedAds/Create
+        //public IActionResult Create()
+        //{
+        //    ViewData["CategoryName"] = new SelectList(_context.Set<Category>().OrderBy(c => c.Name), "Name", "Name");
+        //    return View();
+        //}
 
-        // POST: ClassifiedAds/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("CategoryName")] ClassifiedAdCreateViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                return RedirectToAction("Create", model.CategoryName.Pluralize());
-            }
-            ViewData["CategoryName"] = new SelectList(_context.Set<Category>().OrderBy(c => c.Name), "Name", "Name", model.CategoryName);
+        //// POST: ClassifiedAds/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Create([Bind("CategoryName")] ClassifiedAdCreateViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        return RedirectToAction("Create", model.CategoryName.Pluralize());
+        //    }
+        //    ViewData["CategoryName"] = new SelectList(_context.Set<Category>().OrderBy(c => c.Name), "Name", "Name", model.CategoryName);
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
 
         //// GET: ClassifiedAds/Create
         //public IActionResult Create()
