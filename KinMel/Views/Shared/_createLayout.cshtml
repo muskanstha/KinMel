@@ -1,0 +1,171 @@
+﻿@model KinMel.Models.ClassifiedAd
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="browse-width">
+    <div class="row">
+        <div class="col s12 m3">
+            <partial name="_ManageNav" />
+        </div>
+        <div class="card z-depth-5 col s12 m9 p-5">
+            <div class="card-header">
+                Post a new Ad
+            </div>
+            <div class="card-content">
+                <form method="post" enctype="multipart/form-data" asp-action="Create">
+                    @*<div asp-validation-summary="ModelOnly" class="red-text"></div>*@
+                    <div class="col s12 m6">
+                        <p>Upload your primary image:</p>
+                        <div class="file-field input-field">
+                            <div class="btn-small">
+                                <span>Browse</span>
+                                <input type="file" accept=".png,.jpg,.jpeg,.gif,.tif" name="primaryImage" />
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                        @*<span asp-validation-for="" class="red-text"></span>*@
+                    </div>
+                    <div class="col s12 m6">
+                        <p>Upload multiple images:</p>
+                        <div class="file-field input-field">
+                            <div class="btn-small">
+                                <span>Browse</span>
+                                <input type="file" accept=".png,.jpg,.jpeg,.gif,.tif" name="imageFiles" multiple />
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                        @*<span asp-validation-for="" class="red-text"></span>*@
+                    </div>
+                    <b class="col s12 pt-20">Item Details</b>
+                    <div class="col s12 m6">
+                        <label asp-for="SubCategoryId"></label>
+                        <select asp-for="SubCategoryId" asp-items="ViewBag.SubCategoryId"></select>
+                    </div>
+                    <div class="col s12 m6">
+                        <label asp-for="Condition"></label>
+                        @{
+                            var conditionlist = new SelectList(new List<SelectListItem>
+                                                                {
+                                                                 new SelectListItem { Value = "NEW", Text = "NEW" },
+                                                                 new SelectListItem { Value = "USED", Text = "USED" },
+                                                                }, "Value", "Text", Context.Request.Query["conditionlist"]);
+                        }
+                        <select asp-for="Condition" asp-items="@conditionlist"></select>
+                        <span asp-validation-for="Condition" class="red-text"></span>
+                    </div>
+                    <div class="input-field col s12">
+                        <label asp-for="Title"></label>
+                        <input asp-for="Title" />
+                        <span asp-validation-for="Title" class="red-text"></span>
+                    </div>
+                    <div class="input-field col s12">
+                        <label asp-for="Description"></label>
+                        <textarea id="placeholder" asp-for="Description" placeholder="Write Your Description Here..">aaa</textarea>
+                        <span asp-validation-for="Description" class="red-text"></span>
+                    </div>
+                    <div class="input-field col s12 m4">
+                        <label asp-for="Price"></label>
+                        <input asp-for="Price" />
+                        <span asp-validation-for="Price" class="red-text"></span>
+                    </div>
+                    <div class="input-field col s12 m4">
+                        <label asp-for="UsedFor"></label>
+                        <input asp-for="UsedFor" />
+                        <span asp-validation-for="UsedFor" class="red-text"></span>
+                    </div>
+                    <div class="input-field col s12 m4">
+                        <label asp-for="AdDuration"></label>
+                        <input asp-for="AdDuration" />
+                        <span asp-validation-for="AdDuration" class="red-text"></span>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <label asp-for="City"></label>
+                        <input asp-for="City" />
+                        <span asp-validation-for="City" class="red-text"></span>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <label asp-for="Address"></label>
+                        <input asp-for="Address" />
+                        <span asp-validation-for="Address" class="red-text"></span>
+                    </div>                    
+                    @RenderBody()
+                    <b class="col s12 pt-20">Additional Details</b>
+                    <div class="input-field col s12 m6">
+                        <label asp-for="WarrantyIncludes"></label>
+                        <input asp-for="WarrantyIncludes" />
+                        <span asp-validation-for="WarrantyIncludes" class="red-text"></span>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <label asp-for="DeliveryCharges"></label>
+                        <input asp-for="DeliveryCharges" />
+                        <span asp-validation-for="DeliveryCharges" class="red-text"></span>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <label asp-for="WarrantyType"></label>
+                        <input asp-for="WarrantyType" />
+                        <span asp-validation-for="WarrantyType" class="red-text"></span>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <label asp-for="WarrantyPeriod"></label>
+                        <input asp-for="WarrantyPeriod" />
+                        <span asp-validation-for="WarrantyPeriod" class="red-text"></span>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <label asp-for="PriceNegotiable">
+                            <input asp-for="PriceNegotiable" /> @Html.DisplayNameFor(model => model.PriceNegotiable)
+                        </label>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="Delivery" /> @Html.DisplayNameFor(model => model.Delivery)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="IsSold" /> @Html.DisplayNameFor(model => model.IsSold)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <div class="checkbox">
+                            <label>
+                                <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col s12">
+                        <input type="submit" value="Create" class="btn right mt-20 mb-20" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script type="text/javascript">
+        CKEDITOR.plugins.addExternal('confighelper', 'https://martinezdelizarrondo.com/ckplugins/confighelper/');
+        var config = {
+            toolbarGroups: [
+                { name: 'basicstyles', groups: ['basicstyles'] },
+                { name: 'styles', groups: ['Bold', 'Italic', 'underline'] },
+                { name: 'editing', groups: ['find', 'selection', 'spellchecker'] },
+                { name: 'tools' }
+            ],
+            extraPlugins: 'confighelper'
+        }
+        CKEDITOR.replace('placeholder', config);
+    </script>
+}

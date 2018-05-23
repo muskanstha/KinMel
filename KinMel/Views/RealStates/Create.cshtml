@@ -2,148 +2,36 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_createLayout.cshtml";
 }
-
-<h2>Create</h2>
-
-<h4>RealState</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" enctype="multipart/form-data" asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <p>Upload one or more files using this form:</p>
-                <input type="file" accept=".png,.jpg,.jpeg,.gif,.tif" name="imageFiles" multiple />
-                @*<span asp-validation-for="" class="text-danger"></span>*@
-            </div>
-            <div class="form-group">
-                <label asp-for="AdDuration" class="control-label"></label>
-                <input asp-for="AdDuration" class="form-control" />
-                <span asp-validation-for="AdDuration" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UsedFor" class="control-label"></label>
-                <input asp-for="UsedFor" class="form-control" />
-                <span asp-validation-for="UsedFor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WarrantyIncludes" class="control-label"></label>
-                <input asp-for="WarrantyIncludes" class="form-control" />
-                <span asp-validation-for="WarrantyIncludes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DeliveryCharges" class="control-label"></label>
-                <input asp-for="DeliveryCharges" class="form-control" />
-                <span asp-validation-for="DeliveryCharges" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WarrantyType" class="control-label"></label>
-                <input asp-for="WarrantyType" class="form-control" />
-                <span asp-validation-for="WarrantyType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WarrantyPeriod" class="control-label"></label>
-                <input asp-for="WarrantyPeriod" class="form-control" />
-                <span asp-validation-for="WarrantyPeriod" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="PropertyType" class="control-label"></label>
-                <input asp-for="PropertyType" class="form-control" />
-                <span asp-validation-for="PropertyType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LandSize" class="control-label"></label>
-                <input asp-for="LandSize" class="form-control" />
-                <span asp-validation-for="LandSize" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Floors" class="control-label"></label>
-                <input asp-for="Floors" class="form-control" />
-                <span asp-validation-for="Floors" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalRooms" class="control-label"></label>
-                <input asp-for="TotalRooms" class="form-control" />
-                <span asp-validation-for="TotalRooms" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Furnishing" class="control-label"></label>
-                <input asp-for="Furnishing" class="form-control" />
-                <span asp-validation-for="Furnishing" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Features" class="control-label"></label>
-                <input asp-for="Features" class="form-control" />
-                <span asp-validation-for="Features" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SubCategoryId" class="control-label"></label>
-                <select asp-for="SubCategoryId" class="form-control" asp-items="ViewBag.SubCategoryId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Condition" class="control-label"></label>
-                <input asp-for="Condition" class="form-control" />
-                <span asp-validation-for="Condition" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="PriceNegotiable" /> @Html.DisplayNameFor(model => model.PriceNegotiable)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="Delivery" /> @Html.DisplayNameFor(model => model.Delivery)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
-    </div>
+<b class="col s12">Specifications</b>
+<div class="input-field col s12">
+    <label asp-for="PropertyType"></label>
+    <input asp-for="PropertyType"/>
+    <span asp-validation-for="PropertyType" class="red-text"></span>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="input-field col s12 m6">
+    <label asp-for="LandSize"></label>
+    <input asp-for="LandSize"/>
+    <span asp-validation-for="LandSize" class="red-text"></span>
 </div>
-
-@section Scripts {
-    @{    <partial name="_ValidationScriptsPartial" />}
-}
+<div class="input-field col s12 m6">
+    <label asp-for="Floors"></label>
+    <input asp-for="Floors"/>
+    <span asp-validation-for="Floors" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="TotalRooms"></label>
+    <input asp-for="TotalRooms"/>
+    <span asp-validation-for="TotalRooms" class="red-text"></span>
+</div>
+<div class="input-field col s12 m6">
+    <label asp-for="Furnishing"></label>
+    <input asp-for="Furnishing"/>
+    <span asp-validation-for="Furnishing" class="red-text"></span>
+</div>
+<div class="input-field col s12">
+    <label asp-for="Features"></label>
+    <input asp-for="Features"/>
+    <span asp-validation-for="Features" class="red-text"></span>
+</div>
