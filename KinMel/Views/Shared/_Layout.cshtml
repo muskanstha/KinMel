@@ -20,33 +20,40 @@
 </head>
 
 <body class="white">
-    <div class="navbar-fixed">
-        <nav role="navigation">
-            <div class="nav-wrapper page-container row browse-width">
-                <a id="logo-container" asp-area="" asp-controller="Home" asp-action="Index" class="brand-logo">KinMel</a>
-                <div class="fixed-action-btn">
-                    <a asp-controller="Manage" asp-action="CreateAd" class="btn-floating btn-large waves-effect waves-light pink tooltipped" data-tooltip="Post a new Ad" data-position="left">
-                        <i class="material-icons">add</i>
-                    </a>
-                </div>
-
-                <partial name="_LoginPartial" />
-
-                <ul class="right hide-on-med-and-down">
-                    <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
-                </ul>
-
-                <ul class="right hide-on-med-and-down">
-                    <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Search">Filter Ads</a></li>
-                </ul>
-
-                <ul id="nav-mobile" class="sidenav">
-                    <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
-                </ul>
-                <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+<div class="navbar-fixed">
+    @*<div id="google_translate_element"></div><script type="text/javascript">
+                                                 function googleTranslateElementInit() {
+                                                     new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'ne', layout: google.translate.TranslateElement.FloatPosition.TOP_RIGHT}, 'google_translate_element');
+                                                 }
+                                             </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>*@
+        
+    <nav role="navigation">
+        <div class="nav-wrapper page-container row browse-width">
+            <a id="logo-container" asp-area="" asp-controller="Home" asp-action="Index" class="brand-logo">KinMel</a>
+            <div class="fixed-action-btn">
+                <a asp-controller="Manage" asp-action="CreateAd" class="btn-floating btn-large waves-effect waves-light pink tooltipped" data-tooltip="Post a new Ad" data-position="left">
+                    <i class="material-icons">add</i>
+                </a>
             </div>
-        </nav>
-    </div>
+
+            <partial name="_LoginPartial"/>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
+            </ul>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Search">Filter Ads</a></li>
+            </ul>
+
+            <ul id="nav-mobile" class="sidenav">
+                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
+            </ul>
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+
+</div>
 
     <!--Page-loader-->
     @*<div id="loader-wrapper">
