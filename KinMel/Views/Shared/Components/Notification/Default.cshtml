@@ -5,16 +5,19 @@
 }
 @foreach (var item in Model)
 {
-    <li>
-        <a class="blue-text" asp-action="Details" asp-controller="Notifications" asp-route-id="@item.Id">
-            @Html.DisplayFor(modelItem => item.NotificationText)
+    <li class="collection-item avatar">
+        <a class="center p-0" asp-controller="Account" asp-action="UserProfile" asp-route-id="@item.NotificationFrom.UserName">
+            <img class="circle" src="@item.NotificationFrom.ProfilePictureUrl" />
+            <strong class="content-username">@item.NotificationFrom.UserName</strong>
         </a>
-        <a class="red-text" onclick="DeleteNotification(@item.Id)">x</a>
+        <span class="title p-0 grey-text text-darken-2">
+            @Html.DisplayFor(modelItem => item.NotificationText)
+        </span>
+        <p class="content-datecreated grey-text">@Html.DisplayFor(modelItem => item.Date)</p>
     </li>
-
 }
-<li>
-    <a asp-controller="Notifications" asp-action="Index">See All Notifications</a>
+<li class="collection-item p-0">
+    <a class="center-align cyan-text" asp-controller="Notifications" asp-action="Index">See All Notifications</a>
 </li>
 
 

@@ -1,74 +1,32 @@
 ﻿@model IEnumerable<KinMel.Models.Notification>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NotificationTo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NotificationFrom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NotificationText)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActionController)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Action)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActionId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsRead)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NotificationTo.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NotificationFrom.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NotificationText)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActionController)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Action)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActionId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsRead)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <button class="btn" onclick="DeleteNotification(@item.Id)">x</button>
-            </td>
-        </tr>
+@{ 
+    ViewData["Title"] = "Notifications";
 }
-    </tbody>
-</table>
+
+<div class="notification-container">
+    <ul class="collection with-header z-depth-1">
+        <li class="collection-header"><h5>Notifications</h5></li>
+        @foreach (var item in Model)
+        {
+            <li class="collection-item avatar">
+                <a class="center" asp-controller="Account" asp-action="UserProfile" asp-route-id="@item.NotificationFrom.UserName">
+                    <img class="circle" src="@item.NotificationFrom.ProfilePictureUrl" />
+                    <strong class="content-username">@item.NotificationFrom.UserName</strong>
+                </a>
+                <span class="title">
+                    @Html.DisplayFor(modelItem => item.NotificationText)
+                </span>
+                <p class="content-datecreated grey-text">@Html.DisplayFor(modelItem => item.Date)</p>
+            </li>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.IsRead)
+                </td>*@
+            @*<button class="btn" onclick="DeleteNotification(@item.Id)">x</button>*@
+        }
+    </ul>
+</div>
+
 <script type="text/javascript">
     function DeleteNotification(id) {
         $.getJSON("notifications/Delete/" + id);
