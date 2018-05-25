@@ -26,6 +26,13 @@ body {
     }
 }
 
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
 .page-container {
     height: 100%;
     width: 100%;
@@ -125,15 +132,19 @@ nav .sidenav-trigger {
 }
 
     .notifications > a > span {
+        width: 20px;
+        height: 20px;
         position: absolute;
-        font-size: 12px;
+        z-index: 5;
+        line-height: 20px;
+        text-align: center;
+        font-size: 11px;
         top: 15px;
         left: 26px;
-        color: white;
-        padding: 6px;
-        background-color: red;
-        line-height: 9px;
-        border-radius: 50%;
+        background: #ff0057;
+        display: block;
+        border-radius: 10px;
+        padding: 0;
     }
 
     #output_image {
@@ -145,6 +156,40 @@ nav .sidenav-trigger {
     .nav-pills > .active > a {
         color: #222222;
     }
+
+    .notification-container{
+        max-width: 768px;
+        margin: 0 auto;
+    }
+
+.collection .collection-item.avatar {
+    min-height: 72px !important;
+}
+    
+    .collection > li > a > .content-username {
+        position: absolute;
+        overflow: hidden;
+        vertical-align: middle;
+        display: inline-block;
+        width: 72px;
+        left: 0px;
+        top: 50px;
+        text-align: center;
+    }
+
+.collection > li > a > img {
+    object-fit: cover;
+}
+
+.dropdown-content li > span {
+    font-size: 16px;
+}
+
+#notificationdropdown{
+    width: 100% !important;
+    max-width: 500px !important;
+}
+
 /**************GRID**************/
 .page-container-grid {
     display: grid;
@@ -306,9 +351,6 @@ nav .sidenav-trigger {
     .profile-content-grid > div:nth-child(1) {
         width: 360px;
     }
-
-.profile-ads {
-}
 
 .profile-reviews-grid {
     display: grid;
@@ -476,6 +518,10 @@ nav .sidenav-trigger {
             margin-right: 2.1vw;
         }
 
+        .notification-container > .collection {
+            margin: 0px;
+        }
+
     /***floating-button***/
     .btn-floating.btn-large {
         width: 50px;
@@ -538,30 +584,6 @@ nav .sidenav-trigger {
 
     .footer-copyright p {
         font-size: 3.2vw !important;
-    }
-
-    nav {
-        line-height: 12.6vw !important;
-        height: 12.6vw !important;
-    }
-
-        nav .brand-logo {
-            font-size: 6.4vw !important;
-            line-height: 12.8vw !important;
-        }
-
-        nav .sidenav-trigger {
-            height: 12.8vw !important;
-        }
-
-            nav .sidenav-trigger i {
-                font-size: 6.4vw !important;
-                height: 12.8vw !important;
-                line-height: 12.8vw !important;
-            }
-
-    .navbar-fixed {
-        height: 12.8vw !important;
     }
 
     .card-panel-large {
@@ -663,6 +685,21 @@ nav .sidenav-trigger {
 
     .taxonomy:not(.expanded) .taxonomy-sections {
         grid-template-columns: repeat(22, 20vw) !important;
+    }
+
+    .collection > li > a > img {
+        left: 21px !important;
+        height: 30px !important;
+        width: 30px !important;
+    }
+
+    .collection > li > a > .content-username {
+        width: 72px;
+        top: 38px;
+    }
+
+    .collection .collection-item.avatar {
+        min-height: 62px !important;
     }
 
     /***profile***/
