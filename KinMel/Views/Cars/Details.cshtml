@@ -52,40 +52,57 @@
         <div class="row m-0">
             <div class="col s12">
                 <div id="details-header" class="row m-0">
-                    <div class="col s12 m12 l5">
+                    <div class="card-panel col s12 m12 l6">
                         <div class="row m-0 valign-wrapper">
                             <div class="col s4">
-                                <img src="@Model.CreatedByUser.ProfilePictureUrl" alt="" class="circle responsive-img">
+                                <img src="@Model.CreatedByUser.ProfilePictureUrl" alt="" class="details-createdby-img circle">
                             </div>
-                            <div class="explain col s8">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th class="right-align">
-                                                Created By
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="right-align">
-                                                <i class="material-icons align-middle">account_circle</i>
-                                                <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@Model.CreatedByUser.UserName">
-                                                    @Model.CreatedByUser.UserName
-                                                </a>
-                                            </td>
-                                        </tr>
+                            <div class="col s8">
+                                <p class="right-align">
+                                    <label>Created By</label>
 
-                                        <tr>
+                                </p>
+                                <p class="right-align">
+                                    <i class="material-icons align-middle">account_circle</i>
+                                    <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@Model.CreatedByUser.UserName">
+                                        @Model.CreatedByUser.UserName
+                                    </a>
+                                </p>
+                                <p class="right-align">
+                                    <i class="material-icons align-middle">date_range</i>
+                                    @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
 
-                                            <td class="right-align">
-                                                <i class="material-icons align-middle">date_range</i>
-                                                @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                </p>
                             </div>
+                            @*<div class="explain col s8">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="right-align">
+                                                    Created By
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="right-align">
+                                                    <i class="material-icons align-middle">account_circle</i>
+                                                    <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@Model.CreatedByUser.UserName">
+                                                        @Model.CreatedByUser.UserName
+                                                    </a>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+
+                                                <td class="right-align">
+                                                    <i class="material-icons align-middle">date_range</i>
+                                                    @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>*@
                         </div>
                     </div>
                     @*<div class="col s9">
