@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Kinmel</title>
+    <title>@ViewData["Title"]</title>
     <partial name="_Favicons" />
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -20,35 +20,21 @@
 </head>
 
 <body class="white">
-<div class="navbar-fixed">
-   
-    <nav role="navigation">
-        <div class="nav-wrapper page-container row browse-width">
-            <a id="logo-container" asp-area="" asp-controller="Home" asp-action="Index" class="brand-logo">KinMel</a>
-            <div class="fixed-action-btn">
-                <a asp-controller="Manage" asp-action="CreateAd" class="btn-floating btn-large waves-effect waves-light pink tooltipped" data-tooltip="Post a new Ad" data-position="left">
-                    <i class="material-icons">add</i>
-                </a>
+    <div class="navbar-fixed">
+        <nav role="navigation">
+            <div class="nav-wrapper page-container row browse-width">
+                <a id="logo-container" asp-area="" asp-controller="Home" asp-action="Index" class="brand-logo">KinMel</a>
+                <div class="fixed-action-btn">
+                    <a asp-controller="Manage" asp-action="CreateAd" class="btn-floating btn-large waves-effect waves-light pink tooltipped" data-tooltip="Post a new Ad" data-position="left">
+                        <i class="material-icons">add</i>
+                    </a>
+                </div>
+
+                <partial name="_LoginPartial" />
+
             </div>
-
-            <partial name="_LoginPartial"/>
-
-            <ul class="right hide-on-med-and-down">
-                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
-            </ul>
-
-            <ul class="right hide-on-med-and-down">
-                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Search">Filter Ads</a></li>
-            </ul>
-
-            <ul id="nav-mobile" class="sidenav">
-                <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
-            </ul>
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        </div>
-    </nav>
-
-</div>
+        </nav>
+    </div>
 
     <!--Page-loader-->
     @*<div id="loader-wrapper">

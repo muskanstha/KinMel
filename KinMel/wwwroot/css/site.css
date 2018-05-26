@@ -26,6 +26,13 @@ body {
     }
 }
 
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
 .page-container {
     height: 100%;
     width: 100%;
@@ -125,26 +132,64 @@ nav .sidenav-trigger {
 }
 
     .notifications > a > span {
+        width: 20px;
+        height: 20px;
         position: absolute;
-        font-size: 12px;
+        z-index: 5;
+        line-height: 20px;
+        text-align: center;
+        font-size: 11px;
         top: 15px;
         left: 26px;
-        color: white;
-        padding: 6px;
-        background-color: red;
-        line-height: 9px;
-        border-radius: 50%;
+        background: #ff0057;
+        display: block;
+        border-radius: 10px;
+        padding: 0;
     }
 
-    #output_image {
-        width: 240px;
-        height: 240px;
-        object-fit: cover;
-    }
+#output_image {
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+}
 
-    .nav-pills > .active > a {
-        color: #222222;
-    }
+.nav-pills > .active > a {
+    color: #222222;
+}
+
+.notification-container {
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+.collection .collection-item.avatar {
+    min-height: 72px !important;
+}
+
+.collection > li > a > .content-username {
+    position: absolute;
+    overflow: hidden;
+    vertical-align: middle;
+    display: inline-block;
+    width: 72px;
+    left: 0px;
+    top: 50px;
+    text-align: center;
+}
+
+.collection > li > a > img {
+    object-fit: cover;
+}
+
+.dropdown-content li > span {
+    font-size: 16px;
+}
+
+#notificationdropdown {
+    width: 100% !important;
+    max-width: 500px !important;
+}
+
 /**************GRID**************/
 .page-container-grid {
     display: grid;
@@ -306,9 +351,6 @@ nav .sidenav-trigger {
     .profile-content-grid > div:nth-child(1) {
         width: 360px;
     }
-
-.profile-ads {
-}
 
 .profile-reviews-grid {
     display: grid;
@@ -476,6 +518,10 @@ nav .sidenav-trigger {
             margin-right: 2.1vw;
         }
 
+    .notification-container > .collection {
+        margin: 0px;
+    }
+
     /***floating-button***/
     .btn-floating.btn-large {
         width: 50px;
@@ -497,24 +543,24 @@ nav .sidenav-trigger {
             font-size: 3.3vw;
         }
 
-    .sorting-grid > div > .select-wrapper {
-        width: 34vw;
-    }
-
-        .sorting-grid > div > .select-wrapper .caret {
-            width: 5vw;
-            height: 5vw;
-            right: 0;
-            top: 0;
-            bottom: 1vw;
+        .sorting-grid > div > .select-wrapper {
+            width: 34vw;
         }
 
-        .sorting-grid > div > .select-wrapper .dropdown-content li > a,
-        .sorting-grid > div > .select-wrapper .dropdown-content li > span {
-            font-size: 3.4vw;
-            line-height: 22px;
-            padding: 14px 16px;
-        }
+            .sorting-grid > div > .select-wrapper .caret {
+                width: 5vw;
+                height: 5vw;
+                right: 0;
+                top: 0;
+                bottom: 1vw;
+            }
+
+            .sorting-grid > div > .select-wrapper .dropdown-content li > a,
+            .sorting-grid > div > .select-wrapper .dropdown-content li > span {
+                font-size: 3.4vw;
+                line-height: 22px;
+                padding: 14px 16px;
+            }
 
     .footer a {
         font-size: 3.6vw;
@@ -538,30 +584,6 @@ nav .sidenav-trigger {
 
     .footer-copyright p {
         font-size: 3.2vw !important;
-    }
-
-    nav {
-        line-height: 12.6vw !important;
-        height: 12.6vw !important;
-    }
-
-        nav .brand-logo {
-            font-size: 6.4vw !important;
-            line-height: 12.8vw !important;
-        }
-
-        nav .sidenav-trigger {
-            height: 12.8vw !important;
-        }
-
-            nav .sidenav-trigger i {
-                font-size: 6.4vw !important;
-                height: 12.8vw !important;
-                line-height: 12.8vw !important;
-            }
-
-    .navbar-fixed {
-        height: 12.8vw !important;
     }
 
     .card-panel-large {
@@ -665,6 +687,21 @@ nav .sidenav-trigger {
         grid-template-columns: repeat(22, 20vw) !important;
     }
 
+    .collection > li > a > img {
+        left: 21px !important;
+        height: 30px !important;
+        width: 30px !important;
+    }
+
+    .collection > li > a > .content-username {
+        width: 72px;
+        top: 38px;
+    }
+
+    .collection .collection-item.avatar {
+        min-height: 62px !important;
+    }
+
     /***profile***/
     .cover-image > a {
         top: 5vw;
@@ -731,7 +768,7 @@ nav .sidenav-trigger {
     }
 }
 
-@media (max-width: 350px){
+@media (max-width: 350px) {
     #output_image {
         width: 85vw;
         height: 85vw;
@@ -795,7 +832,7 @@ nav .sidenav-trigger {
     float: none !important;
 }
 
-.btn-small{
+.btn-small {
     height: 30px !important;
     line-height: 30px !important;
     font-size: 12px;
@@ -895,12 +932,12 @@ nav .sidenav-trigger {
 /******************End*******************/
 /****************Details*****************/
 .details-title {
-    font-size: 18px;
+    font-size: 1.5em;
     font-weight: bold;
 }
 
 .details-price {
-    font-size: 14px;
+    font-size: 2em;
     color: darkgreen;
     font-weight: bold;
 }
@@ -914,6 +951,16 @@ nav .sidenav-trigger {
     color: #fff;
     font-size: 16px;
     padding: 8px 20px;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.details-header > .explain {
+    flex-grow: 1;
+    border-left: 1px solid rgba(101,108,115,0.42);
+    margin-left: 4px;
+    padding: 4px 4px 2px;
 }
 
 .card-profile-image {
@@ -940,6 +987,14 @@ nav .sidenav-trigger {
     height: 300px;
     object-fit: contain;
     vertical-align: center;
+}
+
+.details-createdby-img {
+    max-height: 142px;
+    max-width: 142px;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px;
 }
 
 @media only screen and (min-width: 992px) {
