@@ -931,6 +931,13 @@ nav .sidenav-trigger {
 }
 /******************End*******************/
 /****************Details*****************/
+
+.shadow-1p {
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: 1px 1px 1px 1px #ccc; /* Firefox 3.5 - 3.6 */
+    box-shadow: 1px 1px 1px 1px #ccc; /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
 .details-title {
     font-size: 1.5em;
     font-weight: bold;
@@ -997,7 +1004,7 @@ nav .sidenav-trigger {
     padding: 5px;
 }
 
-@media only screen and (min-width: 992px) {
+/*@media only screen and (min-width: 992px) {
     #details-header {
         display: flex;
     }
@@ -1007,12 +1014,16 @@ nav .sidenav-trigger {
     #details-map-carousel-div {
         display: flex;
     }
-}
+}*/
 
 #details-map-div {
     background-image: url("/images/map-placeholder.png");
     height: 300px;
     max-height: 300px;
+}
+
+#details-carousel {
+    padding: 5px;
 }
 
 #details-header > .card-panel {

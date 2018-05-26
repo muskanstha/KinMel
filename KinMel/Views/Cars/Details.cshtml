@@ -30,19 +30,21 @@
 
     <section>
         <div id="details-map-carousel-div" class="row">
-            <div class="grey lighten-4 col s12 m6 l6">
-                <div id="details-carousel" class="carousel carousel-slider">
-                    <a class="carousel-item"><img src="@Model.PrimaryImageUrl"></a>
-                    @if (Model.ImageUrlList.Any())
+            <div id="details-carousel" class="col s12 m12 l7 carousel carousel-slider grey lighten-4  shadow-1p">
+                <a class="carousel-item"><img src="@Model.PrimaryImageUrl"></a>
+                @if (Model.ImageUrlList.Any())
+                {
+                    foreach (var item in Model.ImageUrlList)
                     {
-                        foreach (var item in Model.ImageUrlList)
-                        {
-                            <a class="carousel-item"><img src="@item"></a>
-                        }
+                        <a class="carousel-item"><img src="@item"></a>
                     }
-                </div>
+                }
+
             </div>
-            <div id="details-map-div" class="col s12 m5 l5">
+            @*<div style="padding: 10px 5px 10px 5px;" class="hide-on-med-and-down">
+                    <div class="cyan" style="width: 5px; height: 100%"></div>
+                </div>*@
+            <div id="details-map-div" class="col s12 m12 l5 shadow-1p">
             </div>
         </div>
     </section>
@@ -72,50 +74,10 @@
                                     <i class="material-icons align-middle">date_range</i>
                                     @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
 
-                                </p>
                             </div>
-                            @*<div class="explain col s8">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th class="right-align">
-                                                    Created By
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="right-align">
-                                                    <i class="material-icons align-middle">account_circle</i>
-                                                    <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@Model.CreatedByUser.UserName">
-                                                        @Model.CreatedByUser.UserName
-                                                    </a>
-                                                </td>
-                                            </tr>
-
-                                            <tr>
-
-                                                <td class="right-align">
-                                                    <i class="material-icons align-middle">date_range</i>
-                                                    @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>*@
                         </div>
                     </div>
-                    @*<div class="col s9">
-                                <p>
 
-
-                                </p>
-                                <p>
-                                </p>
-                                <p>
-                                </p>
-                            </div>
-                        </div>*@
                     <div class="explain col s12 m6 l3">
                         <table>
                             @*<thead>
@@ -154,11 +116,6 @@
                     </div>
                     <div class="explain col s12 m6 l3">
                         <table>
-                            @*<thead>
-                                    <tr>
-                                        <th colspan="2"><label class="">Created By</label></th>
-                                    </tr>
-                                </thead>*@
                             <tbody>
                                 <tr>
                                     <td>
@@ -195,21 +152,15 @@
     <div class="divider"></div>
 
     <section>
-        <div class="col s12  m-0">
-            <div class="details-card-header">Description</div>
-            <div>@Html.Raw(@Model.Description)</div>
-        </div>
-    </section>
+        <div class="row">
+            <div class="col s12 m12 l7">
+                <div class="details-card-header">Description</div>
+                <div>@Html.Raw(@Model.Description)</div>
+            </div>
 
-    <div class="divider"></div>
-    <section>
-
-        <div class="col s12">
-            <div class="details-card-header">Specifications</div>
-
-            <div class="row  m-0">
-
-                <div class="col s12 m6 fields-list">
+            <div class="col s12 m12 l5">
+                <div class="details-card-header">Specifications</div>
+                <div class="fields-list">
                     <ul>
                         <li>
                             <label asp-for="@Model.Brand"></label>
@@ -239,10 +190,7 @@
                             <label asp-for="@Model.RegisteredDistrict"></label>
                             <p> @Html.DisplayFor(m => m.RegisteredDistrict)</p>
                         </li>
-                    </ul>
-                </div>
-                <div class="col s12 m6 fields-list">
-                    <ul class="row  m-0">
+
                         <li>
                             <label asp-for="@Model.Engine"></label>
                             <p> @Html.DisplayFor(m => m.Engine)</p>
