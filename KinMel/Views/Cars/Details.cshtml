@@ -27,6 +27,24 @@
         </p>
     </div>
     <div class="divider"></div>
+    @*<section>
+        <div class="slider">
+            <ul class="slides">
+                <li>
+                    <img src="@Model.PrimaryImageUrl"> <!-- random image -->
+                </li>
+                @if (Model.ImageUrlList.Any())
+                {
+                    foreach (var item in Model.ImageUrlList)
+                    {
+                        <li>
+                            <img src="@item"> <!-- random image -->
+                        </li>}
+                }
+            </ul>
+        </div>
+    </section>
+    <div class="divider"></div>*@
 
     <section>
         <div id="details-map-carousel-div" class="row">
@@ -65,8 +83,8 @@
 
                                 </p>
                                 <p class="right-align">
-                                    <i class="material-icons align-middle">account_circle</i>
                                     <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@Model.CreatedByUser.UserName">
+                                        <i class="material-icons align-middle">account_circle</i>
                                         @Model.CreatedByUser.UserName
                                     </a>
                                 </p>
