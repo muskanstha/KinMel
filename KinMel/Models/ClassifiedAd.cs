@@ -35,7 +35,6 @@ namespace KinMel.Models
                 {
                     return "/images/NoImage.svg";
                 }
-
                 return this._primaryImageUrl;
             }
             set => _primaryImageUrl = value;
@@ -53,9 +52,9 @@ namespace KinMel.Models
             {
                 if (this._imageUrls == null)
                 {
-                    return new List<string>() { /*"/images/NoImage.svg" */};
+                    return new List<string>() {};
                 }
-                return JsonConvert.DeserializeObject<List<string>>(this._imageUrls);
+                return JsonConvert.DeserializeObject<List<string>>(this._imageUrls).OrderByDescending(url => url).ToList();
             }
         }
         [Required]

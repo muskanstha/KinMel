@@ -26,7 +26,7 @@ $(document).ready(function () {
     $('.carousel.carousel-slider').carousel({
         fullWidth: true,
         indicators: true,
-        noWrap: true,
+        //noWrap: true
     });
 
     //var count = JSON.parse($.getJSON("notifications/notificationcount/"));
