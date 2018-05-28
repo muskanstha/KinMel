@@ -48,8 +48,8 @@
 
     <section>
         <div id="details-map-carousel-div" class="row">
-            <div id="details-carousel" class="col s12 m12 l7 carousel carousel-slider grey lighten-4  shadow-1p">
-                <a class="carousel-item"><img src="@Model.PrimaryImageUrl"></a>
+            <div id="details-carousel" class="col s12 m12 l7 carousel carousel-slider grey lighten-4 shadow-1p">
+                @*<a class="carousel-item"><img src="@Model.PrimaryImageUrl"></a>*@
                 @if (Model.ImageUrlList.Any())
                 {
                     foreach (var item in Model.ImageUrlList)
