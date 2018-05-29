@@ -51,10 +51,10 @@
                         <label asp-for="Condition"></label>
                         @{
                             var conditionlist = new SelectList(new List<SelectListItem>
-                                                                {
-                                                                 new SelectListItem { Value = "NEW", Text = "NEW" },
-                                                                 new SelectListItem { Value = "USED", Text = "USED" },
-                                                                }, "Value", "Text", Context.Request.Query["conditionlist"]);
+                                                                                {
+                                                                                 new SelectListItem { Value = "NEW", Text = "NEW" },
+                                                                                 new SelectListItem { Value = "USED", Text = "USED" },
+                                                                                }, "Value", "Text", Context.Request.Query["conditionlist"]);
                         }
                         <select asp-for="Condition" asp-items="@conditionlist"></select>
                         <span asp-validation-for="Condition" class="red-text"></span>
@@ -93,7 +93,7 @@
                         <label asp-for="Address"></label>
                         <input asp-for="Address" />
                         <span asp-validation-for="Address" class="red-text"></span>
-                    </div>                    
+                    </div>
                     @RenderBody()
                     <b class="col s12 pt-20">Additional Details</b>
                     <div class="input-field col s12 m6">

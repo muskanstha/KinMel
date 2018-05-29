@@ -64,15 +64,10 @@ namespace KinMel.Services
                 using (var fileStream = imageFile.OpenReadStream())
                 {
                     blockBlob.Properties.ContentType = imageFile.ContentType;
-
                     await blockBlob.UploadFromStreamAsync(fileStream);
                 }
-
-
             }
-
-            return "Ok";
-
+            return await ListBlobsFolder(slug);
         }
 
         public static async Task<string> UploadMainBlob(string slug, IFormFile imageFile)
@@ -89,24 +84,24 @@ namespace KinMel.Services
             CloudBlobContainer container = blobClient.GetContainerReference("kinmel");
 
 
-                string[] imageTypes = imageFile.ContentType.Split('/');
+            string[] imageTypes = imageFile.ContentType.Split('/');
 
-                // Get a reference to a blob named "myblob".
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + slug + "-main." + imageTypes[1]);
-                //CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + imageFile.FileName);
+            // Get a reference to a blob named "myblob".
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + slug + "-main." + imageTypes[1]);
+            //CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + imageFile.FileName);
 
-                // Create or overwrite the "myblob" blob with the contents of a local file
-                // named "myfile".
+            // Create or overwrite the "myblob" blob with the contents of a local file
+            // named "myfile".
 
 
-                //await blockBlob.UploadFromStreamAsync(imageFile.OpenReadStream());
+            //await blockBlob.UploadFromStreamAsync(imageFile.OpenReadStream());
 
-                using (var fileStream = imageFile.OpenReadStream())
-                {
-                    blockBlob.Properties.ContentType = imageFile.ContentType;
+            using (var fileStream = imageFile.OpenReadStream())
+            {
+                blockBlob.Properties.ContentType = imageFile.ContentType;
 
-                    await blockBlob.UploadFromStreamAsync(fileStream);
-                }
+                await blockBlob.UploadFromStreamAsync(fileStream);
+            }
 
 
             return blockBlob.Uri.ToString();
@@ -149,6 +144,7 @@ namespace KinMel.Services
             return blockBlob.Uri.ToString();
 
         }
+        
 
         //public static async void DownloadBlob()
         //{
