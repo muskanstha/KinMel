@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Default";
 }
-<ul class="collection">
+<ul class="collection m-0">
     @foreach (var item in Model)
     {
         <li class="collection-item avatar">
@@ -24,11 +24,11 @@
         foreach (var answer in item.Answers)
         {
             <li>
-                <div class="row">
+                <div class="row m-0">
                     <div class="col s1">
                     </div>
                     <div class="col s11">
-                        <ul class="collection">
+                        <ul class="collection m-0">
                             <li class="collection-item avatar">
                                 <img src="@answer.CreatedBy.ProfilePictureUrl" alt="" class="circle">
                                 <span class="title">
