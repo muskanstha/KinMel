@@ -12,15 +12,11 @@ $(document).ready(function () {
 
     // Materialize Dropdown
     $('.dropdown-trigger').dropdown({
-        coverTrigger: false // Displays dropdown below the button
+        coverTrigger: false, // Displays dropdown below the button
     });
 
     //Tooltip
     $(".tooltipped").tooltip({ delay: 50 });
-
-    //$(document).ready(function () {
-    //    $('.carousel').carousel();
-    //});
 
     // details carousel
     $('.carousel.carousel-slider').carousel({
