@@ -229,7 +229,7 @@
                     <div class="profile-reviews-grid">
                         <div>
                             <img src="@rating.RatedBy.ProfilePictureUrl" />
-                            <a asp-controller="Account" asp-route-id=@rating.RatedById class="content-username align-middle"> @Html.DisplayFor(r => rating.RatedBy.FirstName)</a>
+                            <a asp-controller="Account" asp-route-id=@rating.RatedBy.UserName class="content-username align-middle"> @Html.DisplayFor(r => rating.RatedBy.UserName)</a>
                         </div>
                         <div>
                             <div>

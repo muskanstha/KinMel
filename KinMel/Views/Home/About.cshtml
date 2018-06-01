@@ -1,72 +1,101 @@
 ﻿@{
     ViewData["Title"] = "Meet Our Team";
 }
-@*<h4>@ViewData["Title"]</h4>
-<h3>@ViewData["Message"]</h3>*@
-<div class="page-container" style="background: lightblue; ">
-<section  class="browse-width">
-    <h5 style="text-align: center; font-weight: bold;color: darkgreen">@ViewData["Title"]</h5>
-    <h6 style="text-align: center;font-family: italic" >@ViewData["Message"]</h6>
-    <div>
-        @*<div class="card-header">Team M</div>*@
-        <div class="card "></div>
-        <div class="main-content-cards align-middle ">
-            <div>
-                <div class="card ">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="circle responsive-img" src="https://scontent-arn2-1.xx.fbcdn.net/v/t1.0-9/31693225_1879470285438712_2844649057383612416_n.jpg?_nc_cat=0&oh=527fb8d938c5e545ad833cd3a5f48f0d&oe=5B95C993">
-                    </div>
-                </div>
-                <ul style="text-align: center; font-family: elephant;color:firebrick">
-                    <li>Muskan Shrestha</li>
-                    <li>Back-End Master</li>
-                </ul>
-               
-            </div>
-            <div>
-                <div class="card ">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="circle responsive-img activator" src="https://media.licdn.com/dms/image/C4E03AQEMnrrhvpu2iA/profile-displayphoto-shrink_800_800/0?e=1531958400&v=beta&t=3xfw3NgL0RX1uGI8s3avKY_Jl6NnRbaahShtvniJ3qo">
-                    </div>
-                </div>
-                <ul style="text-align: center;font-family: elephant;color:firebrick">
-                    <li>Yogesh Bhattarai</li>
-                    <li>Front-End Master</li>
-                </ul>                   
-            </div>
-            <div>
-                <div class="card ">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="circle responsive-img activator" src="https://media.licdn.com/dms/image/C4D03AQEd6Iut3jUWiA/profile-displayphoto-shrink_800_800/0?e=1531958400&v=beta&t=QtffoYwvkTEt7SRLzdggzbuLqvlPR1Fi3HPLEvXWynY">
-                    </div>
-                </div>
-                <ul style="text-align: center;font-family: elephant;color:firebrick">
-                    <li >Bipin rai </li>
-                    <li>Ekdum Kada Master</li>
-                </ul>
-            </div>
-            <div>
-                <div class="card ">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="circle responsive-img activator" src="https://media.licdn.com/dms/image/C5603AQFjZyJsRC4UzQ/profile-displayphoto-shrink_800_800/0?e=1531958400&v=beta&t=mCMcvXbAZh5DcGVupDrCQ0_BZ_x8WvkrBWxIAOqYhHQ">
+<style>
+    .aboutus-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 1em;
+    }
+</style>
+
+<div class="page-container">
+        <section class="browse-width  ">
+            <div class="center-align">
+                <h5 class="center green-text text-darken-3">@ViewData["Title"]</h5>
+                <h6 class="center dfn">@ViewData["Message"]</h6>
+                <section class="aboutus-grid ">
+
+                    <div class="row m-0">
+                        <div class="card ">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="circle responsive-img" src="https://scontent-arn2-1.xx.fbcdn.net/v/t1.0-9/31693225_1879470285438712_2844649057383612416_n.jpg?_nc_cat=0&oh=527fb8d938c5e545ad833cd3a5f48f0d&oe=5B95C993">
+                            </div>
+                        </div>
+                        <ul style="text-align: center; font-family: elephant; color: firebrick">
+                            <li>Muskan Shrestha</li>
+                            <li>Back-End Master</li>
+                        </ul>
+
                     </div>
 
-                </div>
-                <ul style="text-align: center;font-family: elephant;color:firebrick">
-                    <li>Mr.Gautam </li>
-                    <li>Khatra Programmer</li>
-                </ul>
+                    <div class="card ">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="circle responsive-img activator" src="https://media.licdn.com/dms/image/C4E03AQEMnrrhvpu2iA/profile-displayphoto-shrink_800_800/0?e=1531958400&v=beta&t=3xfw3NgL0RX1uGI8s3avKY_Jl6NnRbaahShtvniJ3qo">
+                        </div>
+
+                        <ul style="text-align: center; font-family: elephant; color: firebrick">
+                            <li>Yogesh Bhattarai</li>
+                            <li>Front-End Master</li>
+
+                        </ul>
+                    </div>
+
+                </section>
+                <section class="aboutus-grid">
+
+                    <div>
+                        <div class="card ">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="circle responsive-img activator" src="https://media.licdn.com/dms/image/C4D03AQEd6Iut3jUWiA/profile-displayphoto-shrink_800_800/0?e=1531958400&v=beta&t=QtffoYwvkTEt7SRLzdggzbuLqvlPR1Fi3HPLEvXWynY">
+                            </div>
+                        </div>
+                        <ul style="text-align: center; font-family: elephant; color: firebrick">
+                            <li>Bipin rai </li>
+                            <li>Ekdum Kada Master</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="card ">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <img class="circle responsive-img activator" src="https://media.licdn.com/dms/image/C5603AQFjZyJsRC4UzQ/profile-displayphoto-shrink_800_800/0?e=1531958400&v=beta&t=mCMcvXbAZh5DcGVupDrCQ0_BZ_x8WvkrBWxIAOqYhHQ">
+                            </div>
+
+                        </div>
+                        <ul style="text-align: center; font-family: elephant; color: firebrick">
+                            <li>Mr.Gautam </li>
+                            <li>Khatra Programmer</li>
+                        </ul>
+                    </div>
+
+                </section>
+                <section class="left-align">
+                    <P >
+
+                        The startup company KinMel is a small company with no financial backings and very limited human resource.
+                        Organization’s most important and foremost effort is to step in the market introducing somewhat new features
+                        and assisting the clients by reducing the gap between the technology and Product. Organization will mainly be
+                        focusing on the usability and flexibility.
+                        The rapidly growing digital market and its users motivated the team to establish this KinMel organization.
+                        Marketing prospect of this platform is bright analyzing the potentiality of market. The flexibility and some
+                        uncommon features in the product makes it promising over the existing competitors. The problems and opportunities
+                        of our organization with the specific solution-oriented analysis will be discussed clinically below.
+                        he startup company KinMel is a small company with no financial backings and very limited human resource.
+                        Organization’s most important and foremost effort is to step in the market introducing somewhat new features
+                        and assisting the clients by reducing the gap between the technology and Product. Organization will mainly be focusing on the usability and flexibility.
+                        The rapidly growing digital market and its users motivated the team to establish this KinMel organization. Ma
+                        rketing prospect of this platform is bright analyzing the potentiality of market. The flexibility and some uncommon features in the product makes it promising over the existing competitors. The problems and opportunities of our organization with the specific solution-oriented analysis will be discussed clinically below.
+
+
+                    </P>
+
+                </section>
             </div>
-        </div>
+
+            <h5>In this Section</h5>
+            <ul>
+                <li><a asp-controller="Home" asp-action="WorkProcess">How Does It Works</a></li>
+                <li><a asp-controller="Home" asp-action="Policy">Our Policy</a></li>
+            </ul>
+        </section>
     </div>
-</section>
-
-<div class="card-content">
-    <P>The startup company KinMel is a small company with no financial backings and very limited human resource. Organization’s most important and foremost effort is to step in the market introducing somewhat new features and assisting the clients by reducing the gap between the technology and Product. Organization will mainly be focusing on the usability and flexibility.
-        The rapidly growing digital market and its users motivated the team to establish this KinMel organization. Marketing prospect of this platform is bright analyzing the potentiality of market. The flexibility and some uncommon features in the product makes it promising over the existing competitors. The problems and opportunities of our organization with the specific solution-oriented analysis will be discussed clinically below.
-        he startup company KinMel is a small company with no financial backings and very limited human resource. Organization’s most important and foremost effort is to step in the market introducing somewhat new features and assisting the clients by reducing the gap between the technology and Product. Organization will mainly be focusing on the usability and flexibility.
-        The rapidly growing digital market and its users motivated the team to establish this KinMel organization. Marketing prospect of this platform is bright analyzing the potentiality of market. The flexibility and some uncommon features in the product makes it promising over the existing competitors. The problems and opportunities of our organization with the specific solution-oriented analysis will be discussed clinically below.
-    </P>
-</div>
-</div>
-

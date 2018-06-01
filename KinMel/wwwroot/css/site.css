@@ -147,35 +147,35 @@ nav .sidenav-trigger {
         padding: 0;
     }
 
-    #output_image {
-        width: 240px;
-        height: 240px;
-        object-fit: cover;
-    }
+#output_image {
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+}
 
-    .nav-pills > .active > a {
-        color: #222222;
-    }
+.nav-pills > .active > a {
+    color: #222222;
+}
 
-    .notification-container{
-        max-width: 768px;
-        margin: 0 auto;
-    }
+.notification-container {
+    max-width: 768px;
+    margin: 0 auto;
+}
 
 .collection .collection-item.avatar {
     min-height: 72px !important;
 }
-    
-    .collection > li > a > .content-username {
-        position: absolute;
-        overflow: hidden;
-        vertical-align: middle;
-        display: inline-block;
-        width: 72px;
-        left: 0px;
-        top: 50px;
-        text-align: center;
-    }
+
+.collection > li > a > .content-username {
+    position: absolute;
+    overflow: hidden;
+    vertical-align: middle;
+    display: inline-block;
+    width: 72px;
+    left: 0px;
+    top: 50px;
+    text-align: center;
+}
 
 .collection > li > a > img {
     object-fit: cover;
@@ -185,7 +185,7 @@ nav .sidenav-trigger {
     font-size: 16px;
 }
 
-#notificationdropdown{
+#notificationdropdown {
     width: 100% !important;
     max-width: 500px !important;
 }
@@ -518,9 +518,9 @@ nav .sidenav-trigger {
             margin-right: 2.1vw;
         }
 
-        .notification-container > .collection {
-            margin: 0px;
-        }
+    .notification-container > .collection {
+        margin: 0px;
+    }
 
     /***floating-button***/
     .btn-floating.btn-large {
@@ -543,24 +543,24 @@ nav .sidenav-trigger {
             font-size: 3.3vw;
         }
 
-    .sorting-grid > div > .select-wrapper {
-        width: 34vw;
-    }
-
-        .sorting-grid > div > .select-wrapper .caret {
-            width: 5vw;
-            height: 5vw;
-            right: 0;
-            top: 0;
-            bottom: 1vw;
+        .sorting-grid > div > .select-wrapper {
+            width: 34vw;
         }
 
-        .sorting-grid > div > .select-wrapper .dropdown-content li > a,
-        .sorting-grid > div > .select-wrapper .dropdown-content li > span {
-            font-size: 3.4vw;
-            line-height: 22px;
-            padding: 14px 16px;
-        }
+            .sorting-grid > div > .select-wrapper .caret {
+                width: 5vw;
+                height: 5vw;
+                right: 0;
+                top: 0;
+                bottom: 1vw;
+            }
+
+            .sorting-grid > div > .select-wrapper .dropdown-content li > a,
+            .sorting-grid > div > .select-wrapper .dropdown-content li > span {
+                font-size: 3.4vw;
+                line-height: 22px;
+                padding: 14px 16px;
+            }
 
     .footer a {
         font-size: 3.6vw;
@@ -768,7 +768,7 @@ nav .sidenav-trigger {
     }
 }
 
-@media (max-width: 350px){
+@media (max-width: 350px) {
     #output_image {
         width: 85vw;
         height: 85vw;
@@ -832,7 +832,7 @@ nav .sidenav-trigger {
     float: none !important;
 }
 
-.btn-small{
+.btn-small {
     height: 30px !important;
     line-height: 30px !important;
     font-size: 12px;
@@ -931,13 +931,20 @@ nav .sidenav-trigger {
 }
 /******************End*******************/
 /****************Details*****************/
+
+.shadow-1p {
+    -webkit-box-shadow: 1px 1px 1px 1px #ccc; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: 1px 1px 1px 1px #ccc; /* Firefox 3.5 - 3.6 */
+    box-shadow: 1px 1px 1px 1px #ccc; /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
 .details-title {
-    font-size: 18px;
+    font-size: 1.5em;
     font-weight: bold;
 }
 
 .details-price {
-    font-size: 14px;
+    font-size: 2em;
     color: darkgreen;
     font-weight: bold;
 }
@@ -951,6 +958,16 @@ nav .sidenav-trigger {
     color: #fff;
     font-size: 16px;
     padding: 8px 20px;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.details-header > .explain {
+    flex-grow: 1;
+    border-left: 1px solid rgba(101,108,115,0.42);
+    margin-left: 4px;
+    padding: 4px 4px 2px;
 }
 
 .card-profile-image {
@@ -976,10 +993,18 @@ nav .sidenav-trigger {
     width: 100%;
     height: 300px;
     object-fit: contain;
-    vertical-align: center;
+    vertical-align:middle;
 }
 
-@media only screen and (min-width: 992px) {
+.details-createdby-img {
+    max-height: 142px;
+    max-width: 142px;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 15px;
+}
+
+/*@media only screen and (min-width: 992px) {
     #details-header {
         display: flex;
     }
@@ -989,12 +1014,16 @@ nav .sidenav-trigger {
     #details-map-carousel-div {
         display: flex;
     }
-}
+}*/
 
 #details-map-div {
     background-image: url("/images/map-placeholder.png");
     height: 300px;
     max-height: 300px;
+}
+
+#details-carousel {
+    padding: 5px;
 }
 
 #details-header > .card-panel {
