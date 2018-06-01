@@ -120,26 +120,26 @@ namespace KinMel.Controllers
 
         }
 
-        // GET: Notifications/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: Notifications/Details/5
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var notification = await _context.Notification
-                .Include(n => n.NotificationFrom)
-                .Include(n => n.NotificationTo)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (notification == null)
-            {
-                return NotFound();
-            }
+        //    var notification = await _context.Notification
+        //        .Include(n => n.NotificationFrom)
+        //        .Include(n => n.NotificationTo)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (notification == null)
+        //    {
+        //        return NotFound();
+        //    }
 
           
-            return View(notification);
-        }
+        //    return View(notification);
+        //}
 
         // GET: Notifications/Create
         public IActionResult Create()

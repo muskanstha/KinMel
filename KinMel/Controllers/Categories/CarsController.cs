@@ -117,7 +117,10 @@ namespace KinMel.Controllers.Categories
                     {
                         car.ImageUrls = await BlobStorageUploader.UploadBlobs(slug, imageFiles);
                     }
-
+                    else
+                    {
+                        car.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    }
 
                     await _context.SaveChangesAsync();
 
