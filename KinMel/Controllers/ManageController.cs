@@ -198,9 +198,10 @@ namespace KinMel.Controllers
                 {
                     throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
                 }
+                BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
 
                 string profilePictureUrl =
-                    await BlobStorageUploader.UploadProfilePictureBlob(user.Id, profilePicture);
+                    await blobStorageUploader.UploadProfilePictureBlob(user.Id, profilePicture);
                 user.ProfilePictureUrl = profilePictureUrl;
                 await _userManager.UpdateAsync(user);
                 StatusMessage = "Your profile picture has been changed.";

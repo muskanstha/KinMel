@@ -114,9 +114,9 @@ namespace KinMel.Controllers.Categories
 
                     camera.Slug = slug;
 
-                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
+                    BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
 
-                    camera.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    camera.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

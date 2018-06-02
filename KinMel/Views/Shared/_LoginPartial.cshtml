@@ -33,10 +33,19 @@
 
             <li class="divider"></li>
             <li>
+                <a asp-area="" asp-controller="Account" asp-action="UserProfile" asp-route-id="@user.UserName" title="Manage">My Profile</a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Edit Profile</a>
+            </li>
+            <li>
                 <button type="submit" class="waves-effect waves-light btn-large" style="width: 100%">Log out</button>
             </li>
         </ul>
-        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <a href="#" data-target="nav-mobile" class="sidenav-trigger">
+            <img src="@userProfileImageUrl" class="navbar-image">
+            <i class="material-icons right m-0">arrow_drop_down</i>
+        </a>
 
         <ul class="right">
             <!-- Notification Dropdown Trigger -->
@@ -48,9 +57,14 @@
                     <span id="notificationCount"></span>
                 </a>
             </li>
+
             <!-- Dropdown Trigger -->
-            <li class="hide-on-small-and-down">
-                <a class="dropdown-trigger" href="#!" data-target="navbardropdown">Hello @UserManager.GetUserName(User)!<i class="material-icons right">arrow_drop_down</i></a>
+            <li class="hide-on-med-and-down">
+                <a class="dropdown-trigger" href="#" data-target="navbardropdown">
+                    <img src="@userProfileImageUrl" class="navbar-image">
+                    Hello @UserManager.GetUserName(User)!
+                    <i class="material-icons right m-0">arrow_drop_down</i>
+                </a>
             </li>
         </ul>
         <ul class="right hide-on-med-and-down">
@@ -63,6 +77,9 @@
     </form>
 
     <ul id="navbardropdown" class="dropdown-content">
+        <li>
+            <a asp-area="" asp-controller="Account" asp-action="UserProfile" asp-route-id="@UserManager.GetUserName(User)" title="Manage">My Profile</a>
+        </li>
         <li>
             <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Edit Profile</a>
         </li>

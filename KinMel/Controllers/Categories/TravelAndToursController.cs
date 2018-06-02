@@ -111,9 +111,9 @@ namespace KinMel.Controllers.Categories
 
                     travelAndTours.Slug = slug;
 
-                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
+                    BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
 
-                    travelAndTours.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    travelAndTours.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

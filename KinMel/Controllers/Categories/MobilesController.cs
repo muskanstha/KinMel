@@ -114,9 +114,9 @@ namespace KinMel.Controllers.Categories
                     mobile.Slug = slug;
 
 
-                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
+                    BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
 
-                    mobile.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    mobile.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
 
 
                     await _context.SaveChangesAsync();
