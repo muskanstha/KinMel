@@ -8,11 +8,32 @@
 {
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
         <ul id="nav-mobile" class="sidenav">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="https://picsum.photos/1000/400?image=0">
+                    </div>
+                    <a>
+                        @{
+                            var user = await UserManager.GetUserAsync(User);
+                            string userProfileImageUrl = user.ProfilePictureUrl;
+                            <img class="circle" src="@userProfileImageUrl">
+                        }
+                    </a>
+                    <a>
+                        <span class="white-text name">Hello @UserManager.GetUserName(User)!</span>
+                    </a>
+                    <a>
+                        <span class="white-text email">@user.Email</span>
+                    </a>
+                </div>
+            </li>
             <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Search">Filter Ads</a></li>
             <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
-            <!-- Dropdown Trigger -->
+
+            <li class="divider"></li>
             <li>
-                <a class="dropdown-trigger" href="#!" data-target="navbardropdown">Hello @UserManager.GetUserName(User)!<i class="material-icons right">arrow_drop_down</i></a>
+                <button type="submit" class="waves-effect waves-light btn-large" style="width: 100%">Log out</button>
             </li>
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -57,6 +78,8 @@
 }
 else
 {
+    <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
     <ul class="right hide-on-med-and-down">
         <li><a asp-area="" asp-controller="ClassifiedAds" asp-action="Index">Browse Ads</a></li>
         <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
