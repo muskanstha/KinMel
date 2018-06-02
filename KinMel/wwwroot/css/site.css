@@ -1013,6 +1013,7 @@ nav .sidenav-trigger {
     display: inline-block;
     vertical-align: middle;
     padding: 15px;
+    object-fit: cover;
 }
 
 /*@media only screen and (min-width: 992px) {
