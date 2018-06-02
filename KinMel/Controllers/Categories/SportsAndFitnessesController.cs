@@ -111,9 +111,9 @@ namespace KinMel.Controllers.Categories.Categories
 
                     sportsAndFitness.Slug = slug;
 
-                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
+                    BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
 
-                    sportsAndFitness.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    sportsAndFitness.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

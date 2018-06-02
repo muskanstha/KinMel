@@ -55,6 +55,17 @@ nav .sidenav-trigger {
         background: linear-gradient(to bottom, #006064, #0097a7);
     }
 
+.navbar-image {
+    width: 25px;
+    height: 25px;
+    background: #FFFFFF;
+    margin: auto;
+    -moz-border-radius: 60px;
+    -ms-border-radius: 100px;
+    border-radius: 100px;
+    vertical-align: middle;
+}
+
 .card {
     margin-bottom: 0px !important;
 }

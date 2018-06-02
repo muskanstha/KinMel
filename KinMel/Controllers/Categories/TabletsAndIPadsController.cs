@@ -112,9 +112,9 @@ namespace KinMel.Controllers.Categories
 
                     tabletsAndIPads.Slug = slug;
 
-                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
+                    BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
 
-                    tabletsAndIPads.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    tabletsAndIPads.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
