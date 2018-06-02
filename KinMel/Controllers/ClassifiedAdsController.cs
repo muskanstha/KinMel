@@ -188,7 +188,7 @@ namespace KinMel.Controllers
         //    }
         //}
 
-        // GET: ClassifiedAds/Details/5
+        // GET: ClassifiedAds/slug
         [HttpGet("/ClassifiedAds/{id}")]
         public async Task<IActionResult> Details(string id)
         {

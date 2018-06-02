@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace KinMel.Models
 {
-    public static class Slug
+    // remember to move to extensions folder later
+    public static class SlugGenerator
     {
         public static string GenerateSlug(this string phrase)
         {

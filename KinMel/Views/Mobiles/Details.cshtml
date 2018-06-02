@@ -1,86 +1,56 @@
 ﻿@model KinMel.Models.Mobile
 
 @{
+    Layout = "/Views/Shared/_detailsLayout.cshtml";
+
     ViewData["Title"] = "Details";
 }
-<!--Breadcrumbs-->
-<div class="page-container grey lighten-3">
-    <div class="container grey lighten-3">
-        <a asp-controller="Home" asp-action="Index" class="breadcrumb">Home</a>
-        <a asp-controller="Mobiles" asp-action="Index" class="breadcrumb">Mobiles</a>
-        <a asp-controller="Mobiles" asp-action="Details" asp-route-id="@Model.Id" class="breadcrumb">@Html.DisplayFor(model => model.Title)</a>
+<div class="col s12 m6">
+    <div class="fields-list">
+        <ul>
+            <li>
+                <label asp-for="@Model.Brand"></label>
+                <p> @Html.DisplayFor(m => m.Brand)</p>
+            </li>
+            <li>
+                <label asp-for="@Model.Model"></label>
+                <p> @Html.DisplayFor(m => m.Model)</p>
+            </li>
+            <li>
+                <label asp-for="@Model.Color"></label>
+                <p> @Html.DisplayFor(m => m.Color)</p>
+            </li>
+            <li>
+                <label asp-for="@Model.Storage"></label>
+                <p> @Html.DisplayFor(m => m.Storage)</p>
+            </li>
+            <li>
+                <label asp-for="@Model.Ram"></label>
+                <p> @Html.DisplayFor(m => m.Ram)</p>
+            </li>
+        </ul>
     </div>
 </div>
 
-<!--Main-Content-->
-<div class="page-container">
-    <div class="row">
-        <div class="table-striped card-panel card-panel-large z-depth-4">
-            <div>
-                <div class="details-title">
-                    <i class="material-icons align-middle cyan-text">title</i>
-                    @Html.DisplayFor(model => model.Title)
-                </div>
-                <div class="details-description">
-                    <i class="material-icons align-middle cyan-text">description</i>
-                    @Html.DisplayNameFor(model => model.Description)
-                    <div>@Html.DisplayFor(model => model.Description)</div>
-                </div>
-                <div>
-                    @foreach (var item in Model.ImageUrlList)
-                    {
-                        <div>
-                            <img style="max-width:250px" src="@item" />
-                        </div>
-                    }
-                </div>
-                @Html.DisplayNameFor(model => model.Brand)
-                @Html.DisplayFor(model => model.Brand)
-                @Html.DisplayNameFor(model => model.Model)
-                @Html.DisplayFor(model => model.Model)
-                @Html.DisplayNameFor(model => model.Color)
-                @Html.DisplayFor(model => model.Color)
-                @Html.DisplayNameFor(model => model.Storage)
-                @Html.DisplayFor(model => model.Storage)
-                @Html.DisplayNameFor(model => model.Ram)
-                @Html.DisplayFor(model => model.Ram)
-                @Html.DisplayNameFor(model => model.FrontCamera)
-                @Html.DisplayFor(model => model.FrontCamera)
-                @Html.DisplayNameFor(model => model.BackCamera)
-                @Html.DisplayFor(model => model.BackCamera)
-                @Html.DisplayNameFor(model => model.PhoneOs)
-                @Html.DisplayFor(model => model.PhoneOs)
-                @Html.DisplayNameFor(model => model.ScreenSize)
-                @Html.DisplayFor(model => model.ScreenSize)
-                @Html.DisplayNameFor(model => model.Features)
-                @Html.DisplayFor(model => model.Features)
-                @Html.DisplayNameFor(model => model.Condition)
-                @Html.DisplayFor(model => model.Condition)
-                @Html.DisplayNameFor(model => model.Price)
-                @Html.DisplayFor(model => model.Price)
-                @Html.DisplayNameFor(model => model.PriceNegotiable)
-                @Html.DisplayFor(model => model.PriceNegotiable)
-                @Html.DisplayNameFor(model => model.Delivery)
-                @Html.DisplayFor(model => model.Delivery)
-                @Html.DisplayNameFor(model => model.DateCreated)
-                @Html.DisplayFor(model => model.DateCreated)
-                @Html.DisplayNameFor(model => model.IsSold)
-                @Html.DisplayFor(model => model.IsSold)
-                @Html.DisplayNameFor(model => model.IsActive)
-                @Html.DisplayFor(model => model.IsActive)
-                @Html.DisplayNameFor(model => model.Slug)
-                @Html.DisplayFor(model => model.Slug)
-                @Html.DisplayNameFor(model => model.Discriminator)
-                @Html.DisplayFor(model => model.Discriminator)
-                @Html.DisplayNameFor(model => model.CreatedByUser)
-                @Html.DisplayFor(model => model.CreatedByUser.Id)
-                @Html.DisplayNameFor(model => model.SubCategory)
-                @Html.DisplayFor(model => model.SubCategory.Id)
-            </div>
-        </div>
+<div class="col s12 m6">
+    <div class="fields-list">
+        <ul>
+            <li>
+                <label asp-for="@Model.FrontCamera"></label>
+                <p> @Html.DisplayFor(m => m.FrontCamera)</p>
+            </li>
+            <li>
+                <label asp-for="@Model.BackCamera"></label>
+                <p> @Html.DisplayFor(m => m.BackCamera)</p>
+            </li>
+            <li>
+                <label asp-for="@Model.PhoneOs"></label>
+                <p> @Html.DisplayFor(m => m.PhoneOs)</p>
+            </li>
+            <li>
+                <label asp-for="@Model.ScreenSize"></label>
+                <p> @Html.DisplayFor(m => m.ScreenSize)</p>
+            </li>
+        </ul>
     </div>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>
