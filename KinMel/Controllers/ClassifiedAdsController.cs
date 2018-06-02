@@ -189,7 +189,7 @@ namespace KinMel.Controllers
         //}
 
         // GET: ClassifiedAds/Details/5
-        [HttpGet("/Ads/{id}")]
+        [HttpGet("/ClassifiedAds/{id}")]
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
