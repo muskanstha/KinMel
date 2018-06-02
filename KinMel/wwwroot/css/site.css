@@ -1008,8 +1008,8 @@ nav .sidenav-trigger {
 }
 
 .details-createdby-img {
-    max-height: 142px;
-    max-width: 142px;
+    height: 142px;
+    width: 142px;
     display: inline-block;
     vertical-align: middle;
     padding: 15px;
