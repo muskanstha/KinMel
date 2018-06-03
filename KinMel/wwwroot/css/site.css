@@ -1023,7 +1023,7 @@ nav .sidenav-trigger {
 /*.materialboxed.active {
     cursor: pointer;
 }*/
-#materialbox-overlay {
+#materialbox-overlay, .lightboxOverlay {
     cursor: zoom-out;
     cursor: -webkit-zoom-out;
 }

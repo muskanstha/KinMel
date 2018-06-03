@@ -58,15 +58,17 @@
                 }
 
             </div>
-            @*<div id="details-carousel" class="col s12 m12 l7 grey lighten-4 shadow-1p">
+            @*<div id="details-carousel" class="col s12 m12 l7 carousel carousel-slider grey lighten-4 shadow-1p">
                 @if (Model.ImageUrlList.Any())
                 {
                     foreach (var item in Model.ImageUrlList)
                     {
-                        <a><img src="@item"></a>
+                        <a href="@item" data-lightbox="adImages" id="details-carousel-item" class="carousel-item"><img src="@item"></a>
                     }
                 }
-                </div>            *@
+
+            </div>*@
+
             <div class="col s12 m6 l5">
                 <div id="details-header">
                     <div class="row m-0">

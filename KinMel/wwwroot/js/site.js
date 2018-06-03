@@ -23,7 +23,16 @@ $(document).ready(function () {
         fullWidth: true,
         indicators: true,
         //noWrap: true
-});
+    });
+
+
+    lightbox.option({
+        'resizeDuration': 200,
+        'fadeDuration': 200,
+        'imageFadeDuration': 200,
+        'wrapAround': true,
+        'disableScrolling': true
+    });
 
     //var count = JSON.parse($.getJSON("notifications/notificationcount/"));
     console.log(1);
