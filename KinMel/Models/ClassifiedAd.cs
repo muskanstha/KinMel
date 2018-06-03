@@ -75,7 +75,7 @@ namespace KinMel.Models
 
         public string City { get; set; }
         public string Address { get; set; }
-
+        [DisplayFormat(NullDisplayText = "-")]
         public string UsedFor { get; set; }
 
         public double DeliveryCharges { get; set; }

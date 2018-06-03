@@ -54,119 +54,86 @@
                 {
                     foreach (var item in Model.ImageUrlList)
                     {
-                        <a class="carousel-item"><img src="@item"></a>
+                        <a id="details-carousel-item" class="carousel-item"><img src="@item"></a>
                     }
                 }
 
             </div>
-            @*<div style="padding: 10px 5px 10px 5px;" class="hide-on-med-and-down">
-                    <div class="cyan" style="width: 5px; height: 100%"></div>
-                </div>*@
-            <div id="details-map-div" class="col s12 m12 l5 shadow-1p">
-            </div>
-        </div>
-    </section>
-    <div class="divider"></div>
+            <div class="col s12 m6 l5">
+                <div id="details-header">
+                    <div class="row m-0">
+                        <div class="card-panel p-0">
+                            <div class="row m-0 valign-wrapper">
+                                <div class="col s4">
+                                    <img src="@Model.CreatedByUser.ProfilePictureUrl" alt="" class="details-createdby-img circle">
+                                </div>
+                                <div class="details-card-info col s8">
+                                    <p class="right-align">
+                                        <label>Created By</label>
+                                    </p>
+                                    <p class="right-align">
+                                        <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@Model.CreatedByUser.UserName">
+                                            <i class="material-icons align-middle">account_circle</i>
+                                            @Model.CreatedByUser.UserName
+                                        </a>
+                                    </p>
+                                    <p class="right-align">
+                                        <i class="material-icons align-middle">date_range</i>
+                                        @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
 
-    <section>
-        <div class="row m-0">
-            <div class="col s12">
-                <div id="details-header" class="row m-0">
-                    <div class="card-panel col s12 m12 l6">
-                        <div class="row m-0 valign-wrapper">
-                            <div class="col s4">
-                                <img src="@Model.CreatedByUser.ProfilePictureUrl" alt="" class="details-createdby-img circle">
-                            </div>
-                            <div class="col s8">
-                                <p class="right-align">
-                                    <label>Created By</label>
-
-                                </p>
-                                <p class="right-align">
-                                    <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@Model.CreatedByUser.UserName">
-                                        <i class="material-icons align-middle">account_circle</i>
-                                        @Model.CreatedByUser.UserName
-                                    </a>
-                                </p>
-                                <p class="right-align">
-                                    <i class="material-icons align-middle">date_range</i>
-                                    @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
-
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row m-0">
+                        <div class="col s12 m6 fields-list">
+                            <ul class="row m-0">
+                                <li>
+                                    <label asp-for="@Model.Condition"></label>
+                                    <p class="escape-float"> @Html.DisplayFor(m => m.Condition)</p>
+                                </li>
 
-                    <div class="explain col s12 m6 l3">
-                        <table>
-                            @*<thead>
-                                    <tr>
-                                        <th colspan="2"><label class="">Created By</label></th>
-                                    </tr>
-                                </thead>*@
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <label asp-for="@Model.PriceNegotiable"></label>
-                                    </td>
-                                    <td class="right-align">
+                            </ul>
+                        </div>
+                        <div class="col s12 m6 fields-list">
+                            <ul class="row m-0">
+                                <li>
+                                    <label asp-for="@Model.UsedFor"></label>
+                                    <p class="escape-float"> @Html.DisplayFor(m => m.UsedFor) </p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col s12 m12 fields-list">
+                            <ul class="row m-0">
+                                <li>
+                                    <label>Negotiable Price</label>
+                                    <p>
                                         @Html.Raw(@Model.PriceNegotiable ? "Yes" : "No")
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label asp-for="@Model.Condition"></label>
-
-                                    </td>
-                                    <td class="right-align">
-                                        @Html.DisplayFor(m => m.Condition)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label asp-for="@Model.UsedFor"></label>
-                                    </td>
-                                    <td class="right-align">
-                                        @Html.DisplayFor(m => m.UsedFor)
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="explain col s12 m6 l3">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <label asp-for="@Model.Address"></label>
-                                    </td>
-                                    <td class="right-align">
-                                        @Html.DisplayFor(m => m.Address)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label asp-for="@Model.City"></label>
-
-                                    </td>
-                                    <td class="right-align">
-                                        @Html.DisplayFor(m => m.City)
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label asp-for="@Model.City"></label>
-                                    </td>
-                                    <td class="right-align">
-                                        @Html.DisplayFor(m => m.City)
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </p>
+                                </li>
+                                <li>
+                                    <label asp-for="@Model.Address"></label>
+                                    <p class="escape-float">
+                                        @Html.DisplayFor(m => m.Address), @Html.DisplayFor(m => m.City)
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <div class="divider col l12 hide-on-med-and-down mt-10"></div>
+
+            <div class="col s12 m6 l12 shadow-1p details-map-div"></div>
+            @*<div style="padding: 10px 5px 10px 5px;" class="hide-on-med-and-down">
+                    <div class="cyan" style="width: 5px; height: 100%"></div>
+                </div>*@
+
         </div>
     </section>
+
     <div class="divider"></div>
 
     <section>
