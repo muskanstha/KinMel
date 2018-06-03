@@ -23,7 +23,7 @@ $(document).ready(function () {
         fullWidth: true,
         indicators: true,
         //noWrap: true
-    });
+});
 
     //var count = JSON.parse($.getJSON("notifications/notificationcount/"));
     console.log(1);
