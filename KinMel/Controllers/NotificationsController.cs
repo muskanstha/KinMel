@@ -22,7 +22,7 @@ namespace KinMel.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        private IHubContext<NotificationHub> _notificationHubContext;
+        private readonly IHubContext<NotificationHub> _notificationHubContext;
 
 
         public NotificationsController(ApplicationDbContext context,
@@ -38,7 +38,7 @@ namespace KinMel.Controllers
         public async Task<IActionResult> Index()
         {
             var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
-            var applicationDbContext = _context.Notification.Where(n => n.NotificationToId.Equals(currentUser.Id)).Include(n => n.NotificationFrom).Include(n => n.NotificationTo);
+            var applicationDbContext = _context.Notification.Where(n => n.NotificationToId.Equals(currentUser.Id)).Include(n => n.NotificationFrom).Include(n => n.NotificationTo).OrderByDescending(n => n.Date);
             return View(await applicationDbContext.ToListAsync());
         }
         // GET: NotificationsCount
@@ -92,6 +92,8 @@ namespace KinMel.Controllers
                 new { id = notification.ActionId });
         }
 
+
+        // GET: Notifications/Delete/5
         public async Task<string> Delete(int? id)
         {
             if (id == null)
