@@ -64,6 +64,7 @@ nav .sidenav-trigger {
     -ms-border-radius: 100px;
     border-radius: 100px;
     vertical-align: middle;
+    object-fit: cover;
 }
 
 .card {
