@@ -48,8 +48,7 @@
 
     <section>
         <div id="details-map-carousel-div" class="row">
-            <div id="details-carousel" class="col s12 m12 l7 carousel carousel-slider grey lighten-4 shadow-1p">
-                @*<a class="carousel-item"><img src="@Model.PrimaryImageUrl"></a>*@
+            <div id="details-carousel" class="col s12 m12 l7 carousel carousel-slider materialboxed grey lighten-4 shadow-1p">
                 @if (Model.ImageUrlList.Any())
                 {
                     foreach (var item in Model.ImageUrlList)
@@ -59,6 +58,17 @@
                 }
 
             </div>
+            @*<div id="details-carousel" class="col s12 m12 l7 carousel carousel-slider grey lighten-4 shadow-1p">
+                @if (Model.ImageUrlList.Any())
+                {
+                    foreach (var item in Model.ImageUrlList)
+                    {
+                        <a href="@item" data-lightbox="adImages" id="details-carousel-item" class="carousel-item"><img src="@item"></a>
+                    }
+                }
+
+            </div>*@
+
             <div class="col s12 m6 l5">
                 <div id="details-header">
                     <div class="row m-0">
@@ -225,19 +235,17 @@
                 <h6 class="blue-text">Couldn't find the answer to what you were looking for?</h6>
                 <form asp-area="" asp-controller="Questions" asp-action="Create" method="post">
                     <div class="row m-0">
-                        <div class="input-field col m12 l9">
+                        <div class="input-field col s12 m12 l9">
                             <label class="active" for="Text">Post a new question</label>
                             <input id="Text" name="Text" required />
                         </div>
-                        <div class="input-field col m12 l3">
+                        <div class="input-field col s12 m12 l3">
                             <input name="ClassifiedAdId" hidden value="@Model.Id" />
                             <button type="submit" value="Create" class="btn">Submit Question</button>
                         </div>
                     </div>
-
                 </form>
             </div>
         </div>
     </section>
-
 </div>

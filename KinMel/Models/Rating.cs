@@ -19,15 +19,6 @@ namespace KinMel.Models
         public string RatedById { get; set; }
         public virtual ApplicationUser RatedBy { get; set; }
 
-        [Display(Name = "Rated by")]
-        public string RateByFirstName {
-            get
-            {
-                string dspName =
-                    string.IsNullOrWhiteSpace(this.RatedBy.FirstName) ? "" : this.RatedBy.FirstName;
-                return dspName;
-            } }
-
         [Range(1, 5)]
         public int Stars { get; set; }
 

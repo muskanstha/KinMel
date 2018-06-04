@@ -12,7 +12,8 @@ const connection = new signalR.HubConnectionBuilder()
 
 connection.on("Receivecount", (count) => {
     document.getElementById("notificationCount").innerHTML = count;
-    M.toast({ html: count, classes: 'rounded' });
+    var toastHTML = '<span>You have ' + count + ' unread notifications!</span><a href="/notifications" class="btn-flat toast-action">Show</a>';
+    M.toast({ html: toastHTML,  classes: 'rounded' });
 
     var container = $("#notificationdropdown");
     $.get("/Notifications/NotificationViewComponent", function (data) {
