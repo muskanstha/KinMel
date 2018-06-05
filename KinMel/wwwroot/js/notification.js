@@ -12,7 +12,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 connection.on("Receivecount", (count) => {
     document.getElementById("notificationCount").innerHTML = count;
-    var toastHTML = '<span>You have ' + count + ' unread notifications!</span><a href="/notifications" class="btn-flat toast-action">Show</a>';
+    var toastHTML = '<span>You have ' + count + ' unread notifications!</span><a href="/notifications" class="btn-flat toast-action">Show All</a>';
     M.toast({ html: toastHTML,  classes: 'rounded' });
 
     var container = $("#notificationdropdown");
@@ -23,7 +23,7 @@ connection.on("Receivecount", (count) => {
     });
 });
 
-
+connection.start().catch(err => console.error(err.toString()));
 //document.getElementById("sendButton").addEventListener("click", event => {
 //    const user = document.getElementById("userInput").value;
 //    const message = document.getElementById("messageInput").value;
@@ -41,4 +41,3 @@ connection.on("Receivecount", (count) => {
 //    connection.invoke("NotificationCount").catch(err => console.error(err.toString()));
 //    event.preventDefault();
 //});
-connection.start().catch(err => console.error(err.toString()));
