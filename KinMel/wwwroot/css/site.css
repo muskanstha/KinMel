@@ -131,8 +131,9 @@ nav .sidenav-trigger {
     }
 
 .card .card-content .card-title {
-    line-height: 24px !important;
-    margin-bottom: 4px !important;
+    height: 20px !important;
+    line-height: 12px !important;
+    /*margin-bottom: 4px !important;*/
 }
 
 .card .card-reveal {
@@ -200,6 +201,18 @@ nav .sidenav-trigger {
 #notificationdropdown {
     width: 100% !important;
     max-width: 500px !important;
+}
+
+.chip {
+    height: 20px !important;
+    line-height: 16px !important;
+    padding: 0 10px !important;
+    margin: 0px !important;
+}
+
+.chip > img {
+    height: 20px !important;
+    width: 20px !important;
 }
 
 /**************GRID**************/
@@ -903,7 +916,7 @@ nav .sidenav-trigger {
 }
 
 .content-username {
-    font-size: 11px;
+    font-size: 10px;
     color: #00acc1;
 }
 
@@ -912,15 +925,19 @@ nav .sidenav-trigger {
     }
 
 .content-datecreated {
-    font-size: 12px;
+    font-size: 10px;
     color: grey;
     margin: 0px;
 }
 
 .content-price {
-    font-size: 16px;
-    font-weight: bold;
-    margin: 0px;
+    padding: 2px 4px !important;
+    font-weight: 600 !important;
+    font-size: 0.8rem !important;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    background-clip: padding-box;
 }
 
 .content-condition {
@@ -935,7 +952,6 @@ nav .sidenav-trigger {
     border-radius: 50%;
     padding: 0;
     z-index: 1;
-    cursor: default;
 }
 
 .content-condition-list {
