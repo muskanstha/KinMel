@@ -15,23 +15,6 @@
 }
 
 /*************************
- Basic margin padding
-*************************/
-.m-0 {
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-}
-
-.p-0 {
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-}
-
-/*************************
      Margin
 *************************/
 .m-0 {
@@ -110,7 +93,7 @@
     Padding
 *************************/
 .p-0 {
-    padding: 0 !important
+    padding: 0px !important
 }
 
 .p-5 {
