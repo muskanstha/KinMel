@@ -5,7 +5,9 @@
 }
 @foreach (var item in Model)
 {
-    <li class="collection-item avatar">
+    <li class="collection-item avatar" onmouseover="toggleScaleClass(@item.Id)" onmouseout="toggleScaleClass(@item.Id)">
+        <a id="delNotification-@item.Id" class="scale-out scale-transition" onclick="DeleteNotification(@item.Id)" style="float: right; text-decoration: none;"><i class="material-icons m-0 p-5">delete_forever</i></a>
+
         <a class="center p-0" asp-controller="Account" asp-action="UserProfile" asp-route-id="@item.NotificationFrom.UserName">
             <img class="circle" src="@item.NotificationFrom.ProfilePictureUrl" />
             <strong class="content-username">@item.NotificationFrom.UserName</strong>
@@ -24,5 +26,9 @@
 <script type="text/javascript">
     function DeleteNotification(id) {
         $.getJSON("notifications/Delete/" + id);
+    };
+    function toggleScaleClass(id) {
+        var textrow = document.getElementById('delNotification-' + id);
+        textrow.classList.toggle("scale-in");
     };
 </script>
