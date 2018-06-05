@@ -41,19 +41,12 @@ namespace KinMel.Models
         }
 
         private string _imageUrls;
-        public string ImageUrls
-        {
-            get => _imageUrls;
-            set => _imageUrls = value;
-        }
+        public string ImageUrls { get => _imageUrls; set => _imageUrls = value; }
         public List<string> ImageUrlList
         {
             get
             {
-                if (this._imageUrls == null)
-                {
-                    return new List<string>() {};
-                }
+                if (this._imageUrls == null) { return new List<string>() { }; }
                 return JsonConvert.DeserializeObject<List<string>>(this._imageUrls).OrderByDescending(url => url).ToList();
             }
         }
