@@ -866,10 +866,27 @@ nav .sidenav-trigger {
 .cke_1 {
     margin-top: 10px !important;
 }
+
+.dropdown-content li {
+     min-height: 0px; 
+}
+
+    .dropdown-content li > a, .dropdown-content li > span {
+        padding: 10px;
+    }
+
+@media (max-width: 450px) {
+    .sorting-grid > div > .select-wrapper .dropdown-content li > a, .sorting-grid > div > .select-wrapper .dropdown-content li > span {
+        font-size: 3.4vw;
+        line-height: 22px;
+        padding: 10px;
+    }
+}
 /******************END********************/
 /****************Content*****************/
 .contents-list {
     padding-left: 10px;
+    width: 100%;
 }
 
 .content-image-grid {
