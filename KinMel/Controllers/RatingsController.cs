@@ -216,8 +216,12 @@ namespace KinMel.Controllers
                         var user = _notificationHubContext.Clients.User(originalRating.RatedForId);
                         await user.SendAsync("Receivecount", notificationCount);
                     }
-                    ViewBag.Message = "Yo are not authorized to edit this rating!";
-                    return View("Info");
+                    else
+                    {
+                        ViewBag.Message = "Yo are not authorized to edit this rating!";
+                        return View("Info");
+                    }
+                
                 }
                 catch (DbUpdateConcurrencyException)
                 {

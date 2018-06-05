@@ -23,7 +23,7 @@ connection.on("Receivecount", (count) => {
     });
 });
 
-
+connection.start().catch(err => console.error(err.toString()));
 //document.getElementById("sendButton").addEventListener("click", event => {
 //    const user = document.getElementById("userInput").value;
 //    const message = document.getElementById("messageInput").value;
@@ -41,4 +41,3 @@ connection.on("Receivecount", (count) => {
 //    connection.invoke("NotificationCount").catch(err => console.error(err.toString()));
 //    event.preventDefault();
 //});
-connection.start().catch(err => console.error(err.toString()));

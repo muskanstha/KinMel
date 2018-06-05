@@ -35,7 +35,6 @@ $(document).ready(function () {
     });
 
     //var count = JSON.parse($.getJSON("notifications/notificationcount/"));
-    console.log(1);
     $.getJSON("/notifications/notificationcount/",
         function (data) {
             document.getElementById("notificationCount").innerHTML = data;
