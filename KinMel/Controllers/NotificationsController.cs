@@ -70,9 +70,9 @@ namespace KinMel.Controllers
                     _context.Update(notification);
                     await _context.SaveChangesAsync();
 
-                    int notificationCount = NotificationCount(notification.NotificationToId);
-                    var user = _notificationHubContext.Clients.User(notification.NotificationToId);
-                    await user.SendAsync("Receivecount", notificationCount);
+                    //int notificationCount = NotificationCount(notification.NotificationToId);
+                    //var user = _notificationHubContext.Clients.User(notification.NotificationToId);
+                    //await user.SendAsync("Receivecount", notificationCount);
 
                 }
                 catch (DbUpdateConcurrencyException)
@@ -113,9 +113,9 @@ namespace KinMel.Controllers
                 _context.Notification.Remove(notification);
                 await _context.SaveChangesAsync();
 
-                //int notificationCount = NotificationCount(notification.NotificationToId);
-                //var user = _notificationHubContext.Clients.User(notification.NotificationToId);
-                //await user.SendAsync("Receivecount", notificationCount);
+                int notificationCount = NotificationCount(notification.NotificationToId);
+                var user = _notificationHubContext.Clients.User(notification.NotificationToId);
+                await user.SendAsync("NotificationDeleted", notificationCount);
 
             }
             return "Ok";
