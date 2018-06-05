@@ -1,8 +1,7 @@
 ﻿
-/*p {
+p {
     margin: 0px;
-    line-height: 1rem;
-}*/
+}
 
 html {
     height: 100%;
@@ -132,7 +131,7 @@ nav .sidenav-trigger {
 
 .card .card-content .card-title {
     height: 20px !important;
-    line-height: 12px !important;
+    line-height: 20px !important;
     /*margin-bottom: 4px !important;*/
 }
 
@@ -215,6 +214,14 @@ nav .sidenav-trigger {
     width: 20px !important;
 }
 
+.card .card-reveal .card-title {
+    display: flex;
+}
+
+.card .card-reveal .card-title > i {
+    margin-left: 0px !important;
+}
+
 /**************GRID**************/
 .page-container-grid {
     display: grid;
@@ -256,8 +263,6 @@ nav .sidenav-trigger {
 
 .cover-image {
     display: grid;
-    grid-column: 1/17;
-    grid-row: 1/4;
     background: linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0, .8));
     position: relative;
 }
@@ -906,6 +911,10 @@ nav .sidenav-trigger {
     font-size: 14px;
     color: #00acc1;
     font-weight: bold;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
     .content-title:hover {
