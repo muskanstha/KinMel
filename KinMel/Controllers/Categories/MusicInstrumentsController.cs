@@ -113,9 +113,9 @@ namespace KinMel.Controllers.Categories
 
                     musicInstruments.Slug = slug;
 
-                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
+                    BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
 
-                    musicInstruments.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    musicInstruments.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

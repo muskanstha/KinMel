@@ -109,10 +109,10 @@ namespace KinMel.Controllers.Categories
                     string slug = forSlug.GenerateSlug();
 
                     apparelsAndAccessories.Slug = slug;
+                    BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
 
-                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
 
-                    apparelsAndAccessories.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    apparelsAndAccessories.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

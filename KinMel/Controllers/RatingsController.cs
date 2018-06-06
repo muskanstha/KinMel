@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
+using KinMel.Hubs;
 using KinMel.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
 
 namespace KinMel.Controllers
 {
@@ -17,12 +19,16 @@ namespace KinMel.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IHubContext<NotificationHub> _notificationHubContext;
 
         public RatingsController(ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IHubContext<NotificationHub> notificationHub)
         {
             _context = context;
             _userManager = userManager;
+            _notificationHubContext = notificationHub;
+
         }
 
         // GET: Ratings
@@ -105,16 +111,38 @@ namespace KinMel.Controllers
                 string currentUserId = _userManager.GetUserId(User);
                 if (currentUserId.Equals(id))
                 {
-                    ViewBag.Message = "We will provide error info later!";
+                    ViewBag.Message = "Yo cannot rate yourself!";
                     return View("Info");
                 }
                 rating.RatedById = currentUserId;
 
                 _context.Add(rating);
                 await _context.SaveChangesAsync();
+
+                Notification newNotification = new Notification()
+                {
+                    Action = "Details",
+                    ActionController = "Ratings",
+                    ActionId = rating.Id,
+                    Date = DateTime.Now,
+                    NotificationFromId = currentUserId,
+                    NotificationToId = rating.RatedForId,
+                    NotificationText = $"{User.Identity.Name} left a {rating.Stars} star(s) rating on your profile!"
+                };
+                _context.Add(newNotification);
+                await _context.SaveChangesAsync();
+
+                int notificationCount = NotificationCount(rating.RatedForId);
+                var user = _notificationHubContext.Clients.User(rating.RatedForId);
+                await user.SendAsync("Receivecount", notificationCount);
+
                 return RedirectToAction("Details", new { id = rating.Id });
             }
             return View(rating);
+        }
+        private int NotificationCount(string id)
+        {
+            return _context.Notification.Count(n => n.NotificationToId.Equals(id) && !n.IsRead);
         }
 
         // GET: Ratings/Edit/5
@@ -126,13 +154,21 @@ namespace KinMel.Controllers
                 return View("Info");
             }
 
+
             var rating = await _context.Rating.SingleOrDefaultAsync(m => m.Id == id);
             if (rating == null)
             {
                 ViewBag.Message = "We will provide error info later!";
                 return View("Info");
             }
-            return View(rating);
+
+            string currentUserId = _userManager.GetUserId(User);
+            if (currentUserId.Equals(rating.RatedById))
+            {
+                return View(rating);
+            }
+            ViewBag.Message = "Yo cannot edit this rating!";
+            return View("Info");
         }
 
         // POST: Ratings/Edit/5
@@ -153,10 +189,39 @@ namespace KinMel.Controllers
                 try
                 {
                     Rating originalRating = await _context.Rating.SingleOrDefaultAsync(r => r.Id.Equals(id));
-                    originalRating.Stars = rating.Stars;
-                    originalRating.Review = rating.Review;
-                    _context.Update(originalRating);
-                    await _context.SaveChangesAsync();
+
+                    string currentUserId = _userManager.GetUserId(User);
+                    if (currentUserId.Equals(originalRating.RatedById))
+                    {
+
+                        originalRating.Stars = rating.Stars;
+                        originalRating.Review = rating.Review;
+                        _context.Update(originalRating);
+                        await _context.SaveChangesAsync();
+
+                        Notification newNotification = new Notification()
+                        {
+                            Action = "UserProfile",
+                            ActionController = "Ratings",
+                            ActionId = originalRating.Id,
+                            Date = DateTime.Now,
+                            NotificationFromId = originalRating.RatedById,
+                            NotificationToId = originalRating.RatedForId,
+                            NotificationText = $"{User.Identity.Name} edited their ratings with {originalRating.Stars} star(s) on your profile!"
+                        };
+                        _context.Add(newNotification);
+                        await _context.SaveChangesAsync();
+
+                        int notificationCount = NotificationCount(originalRating.RatedForId);
+                        var user = _notificationHubContext.Clients.User(originalRating.RatedForId);
+                        await user.SendAsync("Receivecount", notificationCount);
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Yo are not authorized to edit this rating!";
+                        return View("Info");
+                    }
+                
                 }
                 catch (DbUpdateConcurrencyException)
                 {

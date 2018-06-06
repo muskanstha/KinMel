@@ -14,31 +14,26 @@ namespace KinMel.Services
 {
     public class BlobStorageUploader
     {
-        //private static CloudStorageAccount storageAccount = new CloudStorageAccount(
-        //    new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
-        //        "kinmelstorage",
-        //        "oP0l/YwDAH3A3vK7A91MunMomfX574OuqvHWc5KMevPmIOgHSVMxQqlp5RmJaTXTnvBhgfD6NPnFO9fzOxzSXw=="), true);
+        private CloudStorageAccount storageAccount;
 
-        //// Create a blob client.
-        //private static CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
+        // Create a blob client.
+        private static CloudBlobClient blobClient;
 
-        //// Get a reference to a container named "mycontainer."
-        //private static CloudBlobContainer container = blobClient.GetContainerReference("kinmel");
+        // Get a reference to a container named "mycontainer."
+        private static CloudBlobContainer container;
 
-
-        public static async Task<string> UploadBlobs(string slug, List<IFormFile> imageFiles)
+        public BlobStorageUploader()
         {
-            CloudStorageAccount storageAccount = new CloudStorageAccount(
-              new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
-                  "kinmelstorage",
-                  "oP0l/YwDAH3A3vK7A91MunMomfX574OuqvHWc5KMevPmIOgHSVMxQqlp5RmJaTXTnvBhgfD6NPnFO9fzOxzSXw=="), true);
-
-            // Create a blob client.
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-
-            // Get a reference to a container named "mycontainer."
-            CloudBlobContainer container = blobClient.GetContainerReference("kinmel");
-
+            storageAccount = new CloudStorageAccount(
+                new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
+                    "kinmelstorage",
+                    "oP0l/YwDAH3A3vK7A91MunMomfX574OuqvHWc5KMevPmIOgHSVMxQqlp5RmJaTXTnvBhgfD6NPnFO9fzOxzSXw=="), true);
+            blobClient  = storageAccount.CreateCloudBlobClient();
+            container = blobClient.GetContainerReference("kinmel");
+        }
+        public  async Task<string> UploadBlobs(string slug, List<IFormFile> imageFiles)
+        {
+            
 
             //var filePath = Path.GetTempFileName();
 
@@ -70,20 +65,9 @@ namespace KinMel.Services
             return await ListBlobsFolder(slug);
         }
 
-        public static async Task<string> UploadMainBlob(string slug, IFormFile imageFile)
+        public  async Task<string> UploadMainBlob(string slug, IFormFile imageFile)
         {
-            CloudStorageAccount storageAccount = new CloudStorageAccount(
-                new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
-                    "kinmelstorage",
-                    "oP0l/YwDAH3A3vK7A91MunMomfX574OuqvHWc5KMevPmIOgHSVMxQqlp5RmJaTXTnvBhgfD6NPnFO9fzOxzSXw=="), true);
-
-            // Create a blob client.
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-
-            // Get a reference to a container named "mycontainer."
-            CloudBlobContainer container = blobClient.GetContainerReference("kinmel");
-
-
+            
             string[] imageTypes = imageFile.ContentType.Split('/');
 
             // Get a reference to a blob named "myblob".
@@ -107,19 +91,9 @@ namespace KinMel.Services
             return blockBlob.Uri.ToString();
 
         }
-        public static async Task<string> UploadProfilePictureBlob(string id, IFormFile imageFile)
+        public  async Task<string> UploadProfilePictureBlob(string id, IFormFile imageFile)
         {
-            CloudStorageAccount storageAccount = new CloudStorageAccount(
-                new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
-                    "kinmelstorage",
-                    "oP0l/YwDAH3A3vK7A91MunMomfX574OuqvHWc5KMevPmIOgHSVMxQqlp5RmJaTXTnvBhgfD6NPnFO9fzOxzSXw=="), true);
-
-            // Create a blob client.
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-
-            // Get a reference to a container named "mycontainer."
-            CloudBlobContainer container = blobClient.GetContainerReference("kinmel");
-
+           
 
             string[] imageTypes = imageFile.ContentType.Split('/');
 
@@ -158,20 +132,9 @@ namespace KinMel.Services
         //    }
         //}
 
-        public static async Task<string> ListBlobsFolder(string slug)
+        public  async Task<string> ListBlobsFolder(string slug)
         {
-            CloudStorageAccount storageAccount = new CloudStorageAccount(
-                new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
-                    "kinmelstorage",
-                    "oP0l/YwDAH3A3vK7A91MunMomfX574OuqvHWc5KMevPmIOgHSVMxQqlp5RmJaTXTnvBhgfD6NPnFO9fzOxzSXw=="), true);
-
-            // Create a blob client.
-            CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
-
-            // Get a reference to a container named "mycontainer."
-            CloudBlobContainer container = blobClient.GetContainerReference("kinmel");
-
-
+           
             List<string> uris = new List<string>();
 
             BlobContinuationToken blobContinuationToken = null;

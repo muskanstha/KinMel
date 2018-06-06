@@ -110,9 +110,9 @@ namespace KinMel.Controllers.Categories
 
                     jobs.Slug = slug;
 
-                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
+                    BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
 
-                    jobs.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
+                    jobs.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

@@ -110,14 +110,18 @@ namespace KinMel.Controllers.Categories
 
                     car.Slug = slug;
 
-                    car.PrimaryImageUrl = await BlobStorageUploader.UploadMainBlob(slug, primaryImage);
+                    BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
+                    car.PrimaryImageUrl = await blobStorageUploader.UploadMainBlob(slug, primaryImage);
 
                     long? imageFilesLength = imageFiles?.Sum(f => f.Length);
                     if (imageFilesLength > 0)
                     {
-                        car.ImageUrls = await BlobStorageUploader.UploadBlobs(slug, imageFiles);
+                        car.ImageUrls = await blobStorageUploader.UploadBlobs(slug, imageFiles);
                     }
-
+                    else
+                    {
+                        car.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
+                    }
 
                     await _context.SaveChangesAsync();
 

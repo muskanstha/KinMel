@@ -6,6 +6,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Inflector;
 using KinMel.Data;
+using KinMel.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -198,9 +199,10 @@ namespace KinMel.Controllers
                 {
                     throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
                 }
+                BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
 
                 string profilePictureUrl =
-                    await BlobStorageUploader.UploadProfilePictureBlob(user.Id, profilePicture);
+                    await blobStorageUploader.UploadProfilePictureBlob(user.Id, profilePicture);
                 user.ProfilePictureUrl = profilePictureUrl;
                 await _userManager.UpdateAsync(user);
                 StatusMessage = "Your profile picture has been changed.";

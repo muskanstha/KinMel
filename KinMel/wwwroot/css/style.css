@@ -1,18 +1,17 @@
-﻿/*************************
- Basic margin padding
+﻿
+
+/*************************
+ For images
 *************************/
-.m-0 {
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
+.object-fit-cover {
+    object-fit: cover;
 }
 
-.p-0 {
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
+/*************************
+ Custom classes
+*************************/
+.display-webkitbox{
+    display: -webkit-box;
 }
 
 /*************************
@@ -94,7 +93,7 @@
     Padding
 *************************/
 .p-0 {
-    padding: 0 !important
+    padding: 0px !important
 }
 
 .p-5 {
@@ -172,6 +171,10 @@
     margin-top: 0 !important;
 }
 
+.mt-5 {
+    margin-top: 5px !important;
+}
+
 .mt-10 {
     margin-top: 10px !important;
 }
@@ -240,7 +243,11 @@
     Margin right
 *************************/
 .mr-0 {
-    margin-right: 0 !important
+    margin-right: 0 !important;
+}
+
+.mr-5 {
+    margin-right: 5px !important;
 }
 
 .mr-10 {
@@ -311,7 +318,11 @@
     Margin bottom
 *************************/
 .mb-0 {
-    margin-bottom: 0 !important
+    margin-bottom: 0 !important;
+}
+
+.mb-5 {
+    margin-bottom: 5px !important;
 }
 
 .mb-10 {
@@ -382,7 +393,11 @@
     Margin left
 *************************/
 .ml-0 {
-    margin-left: 0 !important
+    margin-left: 0 !important;
+}
+
+.ml-5 {
+    margin-left: 5px !important;
 }
 
 .ml-10 {
@@ -453,7 +468,11 @@
     Padding top
 *************************/
 .pt-0 {
-    padding-top: 0 !important
+    padding-top: 0 !important;
+}
+
+.pt-5 {
+    padding-top: 5px !important;
 }
 
 .pt-10 {
@@ -524,7 +543,11 @@
     Padding right
 *************************/
 .pr-0 {
-    padding-right: 0 !important
+    padding-right: 0 !important;
+}
+
+.pr-5 {
+    padding-right: 5px !important;
 }
 
 .pr-10 {
@@ -591,7 +614,11 @@
     Padding bottom
 *************************/
 .pb-0 {
-    padding-bottom: 0 !important
+    padding-bottom: 0 !important;
+}
+
+.pb-5 {
+    padding-bottom: 5px !important;
 }
 
 .pb-10 {
@@ -662,7 +689,11 @@
     Padding left
 *************************/
 .pl-0 {
-    padding-left: 0 !important
+    padding-left: 0 !important;
+}
+
+.pl-5 {
+    padding-left: 5px !important;
 }
 
 .pl-10 {

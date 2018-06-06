@@ -25,7 +25,6 @@ namespace KinMel.ViewComponents
         }
         private async Task<List<Question>> GetQuestions(int id)
         {
-            var username = User.Identity.Name;
             return await _context.Question.AsNoTracking().Where(q => q.ClassifiedAdId.Equals(id)).Include(q => q.Answers).ThenInclude(a => a.CreatedBy).Include(q => q.CreatedBy).OrderByDescending(q => q.DateCreated).ToListAsync();
         }
     }

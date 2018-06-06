@@ -41,19 +41,12 @@ namespace KinMel.Models
         }
 
         private string _imageUrls;
-        public string ImageUrls
-        {
-            get => _imageUrls;
-            set => _imageUrls = value;
-        }
+        public string ImageUrls { get => _imageUrls; set => _imageUrls = value; }
         public List<string> ImageUrlList
         {
             get
             {
-                if (this._imageUrls == null)
-                {
-                    return new List<string>() {};
-                }
+                if (this._imageUrls == null) { return new List<string>() { }; }
                 return JsonConvert.DeserializeObject<List<string>>(this._imageUrls).OrderByDescending(url => url).ToList();
             }
         }
@@ -75,7 +68,7 @@ namespace KinMel.Models
 
         public string City { get; set; }
         public string Address { get; set; }
-
+        [DisplayFormat(NullDisplayText = "-")]
         public string UsedFor { get; set; }
 
         public double DeliveryCharges { get; set; }

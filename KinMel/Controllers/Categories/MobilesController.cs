@@ -94,15 +94,15 @@ namespace KinMel.Controllers.Categories
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Brand,Model,Color,Storage,Ram,FrontCamera,BackCamera,PhoneOs,ScreenSize,Features,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] Mobile mobile, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Brand,Model,Color,Storage,Ram,FrontCamera,BackCamera,PhoneOs,ScreenSize,Features,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] Mobile mobile, List<IFormFile> imageFiles, IFormFile primaryImage)
         {
             if (ModelState.IsValid)
             {
-                long size = imageFiles.Sum(f => f.Length);
-                if (size > 0)
+                long? primaryImageLength = primaryImage?.Length;
+                if (primaryImageLength > 0)
                 {
-                    var currentUserID = _userManager.GetUserId(this.User);
-                    mobile.CreatedByUserId = currentUserID;
+                    var currentUserId = _userManager.GetUserId(this.User);
+                    mobile.CreatedByUserId = currentUserId;
 
                     mobile.DateCreated = DateTime.Now;
                     _context.Add(mobile);
@@ -113,11 +113,18 @@ namespace KinMel.Controllers.Categories
 
                     mobile.Slug = slug;
 
+                    BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
+                    mobile.PrimaryImageUrl = await blobStorageUploader.UploadMainBlob(slug, primaryImage);
 
-                    await BlobStorageUploader.UploadBlobs(slug, imageFiles);
-
-                    mobile.ImageUrls = await BlobStorageUploader.ListBlobsFolder(slug);
-
+                    long? imageFilesLength = imageFiles?.Sum(f => f.Length);
+                    if (imageFilesLength > 0)
+                    {
+                        mobile.ImageUrls = await blobStorageUploader.UploadBlobs(slug, imageFiles);
+                    }
+                    else
+                    {
+                        mobile.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
+                    }
 
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });

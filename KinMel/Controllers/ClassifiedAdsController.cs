@@ -13,7 +13,6 @@ using KinMel.Models;
 using KinMel.Services;
 using Microsoft.EntityFrameworkCore.Design;
 using System.IO;
-using System.Net;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
@@ -24,7 +23,7 @@ namespace KinMel.Controllers
     public class ClassifiedAdsController : Controller
     {
         private readonly ApplicationDbContext _context;
-       
+
         public ClassifiedAdsController(ApplicationDbContext context)
         {
             _context = context;
@@ -39,56 +38,62 @@ namespace KinMel.Controllers
         [HttpGet()]
         public ActionResult Search()
         {
-           
-           ClassifiedAdLogic repo = new ClassifiedAdLogic(_context);
-           ClassifiedAdSearchModel m = new ClassifiedAdSearchModel();
-           m.PropertyResults = repo.GetAll();
-           return View(m);
+
+            ClassifiedAdSearchModel m = new ClassifiedAdSearchModel
+            {
+                PropertyResults = _context.ClassifiedAd.ToList()
+            };
+            return View(m);
 
         }
 
         [HttpPost()]
         public ActionResult Search(ClassifiedAdSearchModel m)
         {
-            
+
             if (ModelState.IsValid)
             {
-                
-                ClassifiedAdLogic rep = new ClassifiedAdLogic(_context);          
-                var properties = rep.GetAll();
+                var properties = _context.ClassifiedAd.ToList();
+
+                ////paxi thapeko
+                //if (m.PriceFrom != null && m.PriceTo == null && m.PriceTo != null && m.PriceFrom == null)
+                //{
+                //    ViewBag.MyMessageToUsers = "please input both range";
+                //    return View();
+                //}
 
                 if (m != null)
                 {
-                    
+
                     //city
                     if (m.City != null && m.PriceFrom == null && m.PriceTo == null && m.Condition == null)
                     {
                         properties = properties.Where(k => k.City == m.City).ToList();
                         m.PropertyResults = properties;
-                        
+
                     }
                     //condition
                     if (m.Condition != null && m.City == null && m.PriceFrom == null && m.PriceTo == null)
                     {
                         properties = properties.Where(k => k.Condition == m.Condition).ToList();
                         m.PropertyResults = properties;
-                      
+
                     }
 
                     //price
-                    if (m.PriceFrom != null && m.PriceTo !=null && m.City == null && m.Condition == null)
+                    if (m.PriceFrom != null && m.PriceTo != null && m.City == null && m.Condition == null)
                     {
                         properties = properties.Where(k => k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
                         m.PropertyResults = properties;
-                      
+
                     }
 
                     //sabai
-                    if (m.Condition != null && m.City !=null && m.PriceFrom !=null && m.PriceTo !=null)
+                    if (m.Condition != null && m.City != null && m.PriceFrom != null && m.PriceTo != null)
                     {
-                        properties = properties.Where(k => k.Condition == m.Condition & k.City ==m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo) .ToList();
+                        properties = properties.Where(k => k.Condition == m.Condition & k.City == m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
                         m.PropertyResults = properties;
-                      
+
                     }
 
                     //city ra price
@@ -96,7 +101,7 @@ namespace KinMel.Controllers
                     {
                         properties = properties.Where(k => k.Price >= m.PriceFrom & k.Price <= m.PriceTo & k.City == m.City).ToList();
                         m.PropertyResults = properties;
-                       
+
                     }
 
                     //city ra condition
@@ -104,7 +109,7 @@ namespace KinMel.Controllers
                     {
                         properties = properties.Where(k => k.Condition == m.Condition & k.City == m.City).ToList();
                         m.PropertyResults = properties;
-                        
+
                     }
 
                     //price ra condition
@@ -112,13 +117,13 @@ namespace KinMel.Controllers
                     {
                         properties = properties.Where(k => k.Condition == m.Condition & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
                         m.PropertyResults = properties;
-                       
+
                     }
 
-                 
+
                     m.PropertyResults = properties;
                 }
-           
+
             }
 
             return View(m);
@@ -183,7 +188,8 @@ namespace KinMel.Controllers
         //    }
         //}
 
-        // GET: ClassifiedAds/Details/5
+        // GET: ClassifiedAds/slug
+        [HttpGet("/ClassifiedAds/{id}")]
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -193,7 +199,7 @@ namespace KinMel.Controllers
 
             var classifiedAd = await _context.ClassifiedAd
                 .Include(c => c.SubCategory).
-                Include(c=> c.SubCategory.Category)
+                Include(c => c.SubCategory.Category)
                 .SingleOrDefaultAsync(m => m.Slug == id);
             if (classifiedAd == null)
             {
@@ -338,8 +344,6 @@ namespace KinMel.Controllers
                     return View("Error");
             }
         }
-
-
 
 
         //// GET: ClassifiedAds/Create

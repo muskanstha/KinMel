@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using KinMel.Data;
+using KinMel.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -478,7 +479,7 @@ namespace KinMel.Controllers
 
         [AllowAnonymous]
         // GET: Account/Index/5
-        [HttpGet("/UserProfile/{id}")]
+        [HttpGet("/Profile/{id}")]
         public async Task<IActionResult> UserProfile(string id)
         {
             ApplicationUser user = await _context.Users.Include(u => u.Ratings).ThenInclude(r => r.RatedBy).Include(u=> u.ClassifiedAds)
