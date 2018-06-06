@@ -36,7 +36,6 @@ namespace KinMel.Controllers
         }
 
         [HttpGet("/ClassifiedAds/Search")]
-
         public ActionResult Search()
         {
 
