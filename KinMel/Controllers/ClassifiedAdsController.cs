@@ -35,7 +35,8 @@ namespace KinMel.Controllers
             return View();
         }
 
-        [HttpGet()]
+        [HttpGet("/ClassifiedAds/Search")]
+
         public ActionResult Search()
         {
 
@@ -47,7 +48,7 @@ namespace KinMel.Controllers
 
         }
 
-        [HttpPost()]
+        [HttpPost("/ClassifiedAds/Search")]
         public ActionResult Search(ClassifiedAdSearchModel m)
         {
 
