@@ -41,9 +41,9 @@ namespace KinMel.Controllers
         {
            
            ClassifiedAdLogic repo = new ClassifiedAdLogic(_context);
-            ClassifiedAdSearchModel m = new ClassifiedAdSearchModel();
-            m.PropertyResults = repo.GetAll();
-            return View(m);
+           ClassifiedAdSearchModel m = new ClassifiedAdSearchModel();
+           m.PropertyResults = repo.GetAll();
+           return View(m);
 
         }
 
@@ -56,13 +56,6 @@ namespace KinMel.Controllers
                 
                 ClassifiedAdLogic rep = new ClassifiedAdLogic(_context);          
                 var properties = rep.GetAll();
-
-                ////paxi thapeko
-                //if (m.PriceFrom != null && m.PriceTo == null && m.PriceTo != null && m.PriceFrom == null)
-                //{
-                //    ViewBag.MyMessageToUsers = "please input both range";
-                //    return View();
-                //}
 
                 if (m != null)
                 {
@@ -345,6 +338,8 @@ namespace KinMel.Controllers
                     return View("Error");
             }
         }
+
+
 
 
         //// GET: ClassifiedAds/Create

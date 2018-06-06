@@ -13,12 +13,13 @@ namespace KinMel.Models
     {
         private ApplicationDbContext _context;
 
-     
+
         public ClassifiedAdLogic(ApplicationDbContext context) : base(context)
         {
             _context = context;
         }
-        
+
+
         //public IQueryable<ClassifiedAd> GetProducts(ClassifiedAdSearchModel searchModel)
         //{
         //    var result = _context.ClassifiedAd.AsQueryable();
@@ -35,8 +36,9 @@ namespace KinMel.Models
         //        if (searchModel.Price !=null)
         //            result = result.Where(x => x.Price <= searchModel.Price);
         //    }
-           
+
         //    return result;
+        // "Ae hora? hasta Namaskar :D :p :) "
         //}
 
         public List<ClassifiedAd> GetAll()
