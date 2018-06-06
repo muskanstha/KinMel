@@ -31,8 +31,8 @@ namespace KinMel.ViewComponents
             {
                 case "Latest Ads":
                     return _context.ClassifiedAd.Include(c => c.CreatedByUser).OrderByDescending(c => c.DateCreated).Take(10).ToListAsync();
-                case "name":
-                    return _context.ClassifiedAd.Include(c => c.CreatedByUser).OrderByDescending(c => c.Title).Take(10).ToListAsync();
+                case "Popular Ads":
+                    return _context.ClassifiedAd.Include(c => c.CreatedByUser).OrderByDescending(c => c.Questions.Count).Take(10).ToListAsync();
                 case "Free Ads":
                     return _context.ClassifiedAd.Include(c => c.CreatedByUser).Where(c => c.Price.Equals(0)).OrderByDescending(c => c.DateCreated).Take(10).ToListAsync();
                 default:
