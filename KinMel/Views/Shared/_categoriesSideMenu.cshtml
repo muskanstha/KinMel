@@ -8,7 +8,7 @@
         Categories
     </div>
     <div class="card-content">
-        <form onsubmit="Search" >
+        <form asp-controller="ClassifiedAds" asp-action="Search">
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 
@@ -49,29 +49,6 @@
                 </button>
             </div>
         </form>
-
-        <script type="text/javascript">
-            function Search() {
-
-                var container = $("#maincontent");
-                $.get("/ClassifiedAds/Search",
-                    function(data) {
-
-                    });
-                $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("ClassifiedAds", "Search")',
-                    contentType: "application/json; charset=utf-8",
-                    data :@Html.Raw(Json.Serialize(pro)),
-                    dataType: "json",
-                    success: function (result) {
-                        container.empty();
-                        container.html(data);
-                    }
-                });
-            }
-
-        </script>
         @*<ul class="m-0">
                 <li><a asp-controller="ApparelsAndAccessories" asp-action="Index"><i class="material-icons align-middle p-5">store</i>Apparels & Accessories</a></li>
                 <li><a asp-controller="BeautyAndHealths" asp-action="Index"><i class="material-icons align-middle p-5">local_florist</i>Beauty & Health</a></li>
