@@ -52,10 +52,10 @@
                         <label asp-for="Condition"></label>
                         @{
                             var conditionlist = new SelectList(new List<SelectListItem>
-                            {
-                                new SelectListItem { Value = "NEW", Text = "NEW" },
-                                new SelectListItem { Value = "USED", Text = "USED" },
-                            }, "Value", "Text", Context.Request.Query["conditionlist"]);
+                                            {
+                                                new SelectListItem { Value = "NEW", Text = "NEW" },
+                                                new SelectListItem { Value = "USED", Text = "USED" },
+                                            }, "Value", "Text", Context.Request.Query["conditionlist"]);
                         }
                         <select asp-for="Condition" asp-items="@conditionlist"></select>
                         <span asp-validation-for="Condition" class="red-text"></span>
@@ -85,20 +85,17 @@
                         <input asp-for="AdDuration" />
                         <span asp-validation-for="AdDuration" class="red-text"></span>
                     </div>
-                    <div class="input-field col s12 m6", id="autocomplete">
-                        <label asp-for="City"></label>
-                        <input asp-for="City" />
+                    <div class="input-field col s12 m6">
+                        <label asp-for="City" ></label>
+                        <input asp-for="City" id="autocomplete"/>
                         <span asp-validation-for="City" class="red-text"></span>
                     </div>
 
-                    @*<div class="input-field" id="autocomplete">
-                        @Html.LabelFor(m => m.City)
-                        @Html.TextBoxFor(m=>m.City, new { id = "autocomplete", placeholder="Thau" })                  
-                    </div>*@
+                    
 
                     <div class="input-field col s12 m6">
                         <label asp-for="Address"></label>
-                        <input asp-for="Address" />
+                        <input asp-for="Address" id="autocomplete" />
                         <span asp-validation-for="Address" class="red-text"></span>
                     </div>
                     @RenderBody()
@@ -158,6 +155,7 @@
     </div>
 </div>
 
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI&libraries=places" async defer></script>
 <script>
     google.maps.event.addDomListener(window, 'load', function () {
@@ -165,7 +163,7 @@
             //types: ['(cities)'],
             componentRestrictions: { country: "NP" }
         };
-        var input = document.getElementById('autocomplete');
+        var input = document.getElementById('autocompletes');
         var places = new new google.maps.places.Autocomplete(input, options);
 
     });
@@ -188,21 +186,5 @@
         }
         CKEDITOR.replace('placeholder', config);
     </script>
-    
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI&libraries=places" async defer></script>
-    <script>
-        google.maps.event.addDomListener(window, 'load', function () {
-            var options = {
-                //types: ['(cities)'],
-                componentRestrictions: { country: "NP" }
-            };
-            var input = document.getElementById('<%=autocomplete.ClientID%>');
-           
-            var places = new new google.maps.places.Autocomplete(input, options);
-
-        });
-    </script>
-
 
 }
-

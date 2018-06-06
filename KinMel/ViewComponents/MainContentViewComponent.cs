@@ -18,12 +18,70 @@ namespace KinMel.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string sortOrder, string category)
+        public async Task<IViewComponentResult> InvokeAsync(string sortOrder, string category, ClassifiedAdSearchModel m)
         {
             if (!String.IsNullOrWhiteSpace(category))
             {
                 var categoryItems = await GetSortedAdsAsync(sortOrder, category);
                 return View(categoryItems);
+            }
+            if (m != null)
+            {
+                var properties = from c in _context.ClassifiedAd
+                    select c;
+                
+
+                //city
+                if (m.City != null && m.PriceFrom == null && m.PriceTo == null && m.Condition == null)
+                    {
+                        properties = properties.Where(k => k.City == m.City);
+
+                    }
+                    //condition
+                    if (m.Condition != null && m.City == null && m.PriceFrom == null && m.PriceTo == null)
+                    {
+                        properties = properties.Include(c => c.CreatedByUser).Include(c => c.SubCategory).Where(k => k.Condition == m.Condition);
+
+                    }
+
+                    //price
+                    if (m.PriceFrom != null && m.PriceTo != null && m.City == null && m.Condition == null)
+                    {
+                        properties = properties.Where(k => k.Price >= m.PriceFrom & k.Price <= m.PriceTo);
+
+                    }
+
+                    //sabai
+                    if (m.Condition != null && m.City != null && m.PriceFrom != null && m.PriceTo != null)
+                    {
+                        properties = properties.Where(k => k.Condition == m.Condition & k.City == m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo);
+
+                    }
+
+                    //city ra price
+                    if (m.City != null && m.PriceFrom != null && m.PriceTo != null)
+                    {
+                        properties = properties.Where(k => k.Price >= m.PriceFrom & k.Price <= m.PriceTo & k.City == m.City);
+
+                    }
+
+                    //city ra condition
+                    if (m.City != null && m.Condition != null && m.PriceFrom == null && m.PriceTo == null)
+                    {
+                        properties = properties.Where(k => k.Condition == m.Condition & k.City == m.City);
+
+                    }
+
+                    //price ra condition
+                    if (m.PriceFrom != null && m.PriceTo != null && m.Condition != null)
+                    {
+                        properties = properties.Where(k => k.Condition == m.Condition & k.Price >= m.PriceFrom & k.Price <= m.PriceTo);
+
+                    }
+
+
+                return View(properties.ToList());
+
             }
             var items = await GetSortedAdsAsync(sortOrder);
             return View(items);

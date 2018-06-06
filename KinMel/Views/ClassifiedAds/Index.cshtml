@@ -1,4 +1,7 @@
-﻿
+﻿@using KinMel.Models
+@model KinMel.Models.ClassifiedAdSearchModel
+
+
 @{
     ViewData["Title"] = "Classified Ads";
 }
@@ -8,8 +11,8 @@
         <a asp-controller="Home" asp-action="Index" class="breadcrumb">Home</a>
         <a asp-controller="ClassifiedAds" asp-action="Search" class="breadcrumb">Filter Ads</a>
         <a asp-controller="ClassifiedAds" asp-action="Index" class="breadcrumb">Browse Ads</a>
-
     </div>
 </div>
+<partial name="_categoriesSideMenu" for="@Model"/>
 
 @await Component.InvokeAsync("MainContent", new { sortOrder = Context.Request.Query["sortOrder"].ToString() })

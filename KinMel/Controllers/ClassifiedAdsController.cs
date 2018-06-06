@@ -35,7 +35,7 @@ namespace KinMel.Controllers
             return View();
         }
 
-        [HttpGet("/ClassifiedAds/Search")]
+        //[HttpGet("/ClassifiedAds/Search")]
         public ActionResult Search()
         {
 
@@ -43,12 +43,14 @@ namespace KinMel.Controllers
             {
                 PropertyResults = _context.ClassifiedAd.ToList()
             };
+
             return View(m);
 
         }
 
-        [HttpPost("/ClassifiedAds/Search")]
-        public ActionResult Search(ClassifiedAdSearchModel m)
+        //[HttpPost("/ClassifiedAds/Search")]
+        [HttpPost]
+        public IActionResult Search(ClassifiedAdSearchModel m)
         {
 
             if (ModelState.IsValid)
@@ -122,12 +124,12 @@ namespace KinMel.Controllers
 
 
                     m.PropertyResults = properties;
+                    return ViewComponent("MainContent", new { m});
                 }
 
             }
 
-            return View(m);
-
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -189,7 +191,7 @@ namespace KinMel.Controllers
         //}
 
         // GET: ClassifiedAds/slug
-        [HttpGet("/ClassifiedAds/{id}")]
+        //[HttpGet("/ClassifiedAds/{id}")]
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
