@@ -118,12 +118,12 @@ namespace KinMel.Controllers
 
                 _context.Add(rating);
                 await _context.SaveChangesAsync();
-
+                _context.Entry(rating).Reference(r => r.RatedFor).Load();
                 Notification newNotification = new Notification()
                 {
-                    Action = "Details",
-                    ActionController = "Ratings",
-                    ActionId = rating.Id,
+                    Action = "UserProfile",
+                    ActionController = "Account",
+                    ActionId = rating.RatedFor.UserName,
                     Date = DateTime.Now,
                     NotificationFromId = currentUserId,
                     NotificationToId = rating.RatedForId,
@@ -188,7 +188,7 @@ namespace KinMel.Controllers
             {
                 try
                 {
-                    Rating originalRating = await _context.Rating.SingleOrDefaultAsync(r => r.Id.Equals(id));
+                    Rating originalRating = await _context.Rating.Include(r => r.RatedFor).SingleOrDefaultAsync(r => r.Id.Equals(id));
 
                     string currentUserId = _userManager.GetUserId(User);
                     if (currentUserId.Equals(originalRating.RatedById))
@@ -202,8 +202,8 @@ namespace KinMel.Controllers
                         Notification newNotification = new Notification()
                         {
                             Action = "UserProfile",
-                            ActionController = "Ratings",
-                            ActionId = originalRating.Id,
+                            ActionController = "Account",
+                            ActionId = originalRating.RatedFor.UserName,
                             Date = DateTime.Now,
                             NotificationFromId = originalRating.RatedById,
                             NotificationToId = originalRating.RatedForId,

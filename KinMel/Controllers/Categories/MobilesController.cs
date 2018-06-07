@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Maps.Geocoding;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -103,8 +104,16 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     mobile.CreatedByUserId = currentUserId;
-
                     mobile.DateCreated = DateTime.Now;
+
+                    var locationRequest = new GeocodingRequest { Address = $"{mobile.Address}, {mobile.City}" };
+                    var locationResponse = new GeocodingService().GetResponse(locationRequest);
+                    if (locationResponse.Results.Length > 0)
+                    {
+                        mobile.Latitude = locationResponse.Results.First().Geometry.Location.Latitude;
+                        mobile.Longitude = locationResponse.Results.First().Geometry.Location.Longitude;
+                    }
+
                     _context.Add(mobile);
                     await _context.SaveChangesAsync();
 

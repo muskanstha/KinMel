@@ -49,7 +49,7 @@ namespace KinMel.Controllers
             return Json(notificationCount);
         }
         // GET: Notifications/ReadNotification/5
-        public async Task<ActionResult> ReadNotification(int? id)
+        public async Task<ActionResult> Read(int? id)
         {
             if (id == null)
             {

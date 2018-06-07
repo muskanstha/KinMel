@@ -16,6 +16,7 @@ using System.IO;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using Google.Maps.Geocoding;
 using Microsoft.IdentityModel.Protocols;
 
 namespace KinMel.Controllers
@@ -38,6 +39,15 @@ namespace KinMel.Controllers
         [HttpPost]
         public IActionResult Index(ClassifiedAdSearchModel searchModel)
         {
+
+            //var locationRequest = new GeocodingRequest { Address = $"{searchModel.City}" };
+            //var locationResponse = new GeocodingService().GetResponse(locationRequest);
+            //if (locationResponse.Results.Length > 0)
+            //{
+            //    var Latitude = locationResponse.Results.First().Geometry.Location.Latitude;
+            //    var Longitude = locationResponse.Results.First().Geometry.Location.Longitude;
+            //}
+
             return View("Index", searchModel);
         }
 
