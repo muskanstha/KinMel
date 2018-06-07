@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Maps;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,8 @@ namespace KinMel
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            GoogleSigned.AssignAllServices(new GoogleSigned("AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI"));
+
         }
 
         public IConfiguration Configuration { get; }

@@ -12,10 +12,14 @@
             <img class="circle" src="@item.NotificationFrom.ProfilePictureUrl" />
             <strong class="content-username">@item.NotificationFrom.UserName</strong>
         </a>
-        <span class="title p-0 grey-text text-darken-2">
-            @Html.DisplayFor(modelItem => item.NotificationText)
-        </span>
-        <p class="content-datecreated grey-text">@Html.DisplayFor(modelItem => item.Date)</p>
+        <a asp-controller="Notifications" asp-action="Read" asp-route-id="@item.Id">
+            <span class="title p-0 grey-text text-darken-2">
+                @Html.DisplayFor(modelItem => item.NotificationText)
+            </span>
+            <p class="content-datecreated grey-text">
+                @Html.DisplayFor(modelItem => item.Date)
+            </p>
+        </a>
     </li>
 }
 <li class="collection-item p-0">

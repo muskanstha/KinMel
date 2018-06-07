@@ -24,14 +24,12 @@ namespace KinMel.Models
 
         public virtual ApplicationUser NotificationFrom { get; set; }
 
-        public string NotificationFromName => this.NotificationFrom?.FirstName;
-
         public string NotificationText { get; set; }
 
         // notification action binding
         public string ActionController { get; set; }
         public string Action { get; set; }
-        public int ActionId { get; set; }
+        public string ActionId { get; set; }
 
         public bool IsRead { get; set; }
 

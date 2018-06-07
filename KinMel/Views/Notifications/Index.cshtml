@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<KinMel.Models.Notification>
 
-@{ 
+@{
     ViewData["Title"] = "Notifications";
 }
 
@@ -9,15 +9,27 @@
         <li class="collection-header"><h5>Notifications</h5></li>
         @foreach (var item in Model)
         {
-            <li class="collection-item avatar">
+
+            <li class="collection-item avatar"  onmouseover="toggleScaleClassfull(@item.Id)" onmouseout="toggleScaleClassfull(@item.Id)">
+                <a id="delNotificationfull-@item.Id" class="scale-out scale-transition" onclick="DeleteNotification(@item.Id)" style="float: right; text-decoration: none;"><i class="material-icons m-0 p-5">delete_forever</i></a>
                 <a class="center" asp-controller="Account" asp-action="UserProfile" asp-route-id="@item.NotificationFrom.UserName">
-                    <img class="circle" src="@item.NotificationFrom.ProfilePictureUrl" />
+                    <img class="circle" src="@item.NotificationFrom.ProfilePictureUrl"/>
                     <strong class="content-username">@item.NotificationFrom.UserName</strong>
                 </a>
-                <span class="title">
-                    @Html.DisplayFor(modelItem => item.NotificationText)
-                </span>
-                <p class="content-datecreated grey-text">@Html.DisplayFor(modelItem => item.Date)</p>
+                <a asp-controller="Notifications" asp-action="Read" asp-route-id="@item.Id">
+                    <span class="title">
+                        @Html.DisplayFor(modelItem => item.NotificationText)
+                        @if (item.IsRead)
+                        {
+                            <i class="material-icons right">check</i>
+                        }
+                        else
+                        {
+                            <i class="material-icons right">announcement</i>
+                        }
+                    </span>
+                    <p class="content-datecreated grey-text">@Html.DisplayFor(modelItem => item.Date)</p>
+                </a>
             </li>
             @*<td>
                     @Html.DisplayFor(modelItem => item.IsRead)
@@ -30,5 +42,9 @@
 <script type="text/javascript">
     function DeleteNotification(id) {
         $.getJSON("notifications/Delete/" + id);
+    };
+    function toggleScaleClassfull(id) {
+        var textrow = document.getElementById('delNotificationfull-' + id);
+        textrow.classList.toggle("scale-in");
     };
 </script>
