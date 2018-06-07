@@ -35,6 +35,12 @@ namespace KinMel.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Index(ClassifiedAdSearchModel searchModel)
+        {
+            return View("Index", searchModel);
+        }
+
         //[HttpGet("/ClassifiedAds/Search")]
         public ActionResult Search()
         {
