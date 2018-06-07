@@ -54,16 +54,11 @@ namespace KinMel.Models
 
         [InverseProperty("RatedFor")]
         public virtual ICollection<Rating> Ratings { get; set; }
-
         public double AverageStars
         {
             get
             {
-                if (Ratings?.Count > 0)
-                {
-                    return Ratings.Average(r => r.Stars);
-                }
-
+                if (Ratings?.Count > 0) { return Ratings.Average(r => r.Stars); }
                 return 0;
             }
         }

@@ -1022,7 +1022,7 @@ nav .sidenav-trigger {
     }
 
 #details-carousel {
-    height: 275px;
+    /*height: 275px;*/
 }
 
 #details-carousel-item {
@@ -1050,8 +1050,8 @@ nav .sidenav-trigger {
     width: 142px;
     display: inline-block;
     vertical-align: middle;
-    padding: 15px;
-    object-fit: cover;*/
+    padding: 15px;*/
+    object-fit: cover;
     width: 80px;
     height: 80px;
     background: #FFFFFF;
@@ -1061,6 +1061,9 @@ nav .sidenav-trigger {
     border-radius: 100px;
     vertical-align: middle;
     padding: 5px;
+}
+.collection-item > img {
+    object-fit: cover;
 }
 
 /*@media only screen and (min-width: 992px) {

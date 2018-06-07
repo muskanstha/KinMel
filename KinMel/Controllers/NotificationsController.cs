@@ -48,19 +48,13 @@ namespace KinMel.Controllers
             int notificationCount = NotificationCount(currentUser.Id);
             return Json(notificationCount);
         }
-        // GET: Notifications/ReadNotification/5
+        // GET: Notifications/Read/5
         public async Task<ActionResult> Read(int? id)
         {
-            if (id == null)
-            {
-                return View("Info");
-            }
+            if (id == null) { return View("Info"); }
 
             Notification notification = _context.Notification.Find(id);
-            if (notification == null)
-            {
-                return View("Info");
-            }
+            if (notification == null) { return View("Info"); }
 
             if (!notification.IsRead)
             {
@@ -77,19 +71,11 @@ namespace KinMel.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NotificationExists(notification.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!NotificationExists(notification.Id)) { return NotFound(); } else { throw; }
                 }
             }
-
             return RedirectToAction(notification.Action, notification.ActionController,
-                new { id = notification.ActionId });
+                                new { id = notification.ActionId });
         }
 
 
@@ -98,7 +84,7 @@ namespace KinMel.Controllers
         {
             if (id == null)
             {
-               return "Ok";
+                return "Ok";
             }
 
             var notification = await _context.Notification
@@ -139,7 +125,7 @@ namespace KinMel.Controllers
         //        return NotFound();
         //    }
 
-          
+
         //    return View(notification);
         //}
 

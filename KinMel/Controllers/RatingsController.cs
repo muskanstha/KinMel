@@ -136,7 +136,7 @@ namespace KinMel.Controllers
                 var user = _notificationHubContext.Clients.User(rating.RatedForId);
                 await user.SendAsync("Receivecount", notificationCount);
 
-                return RedirectToAction("Details", new { id = rating.Id });
+                return RedirectToAction("UserProfile", "Account", new { id = rating.RatedFor.UserName });
             }
             return View(rating);
         }
@@ -167,7 +167,7 @@ namespace KinMel.Controllers
             {
                 return View(rating);
             }
-            ViewBag.Message = "Yo cannot edit this rating!";
+            ViewBag.Message = "You cannot edit this rating!";
             return View("Info");
         }
 
@@ -215,13 +215,14 @@ namespace KinMel.Controllers
                         int notificationCount = NotificationCount(originalRating.RatedForId);
                         var user = _notificationHubContext.Clients.User(originalRating.RatedForId);
                         await user.SendAsync("Receivecount", notificationCount);
+
+                        return RedirectToAction("UserProfile", "Account", new { id = originalRating.RatedFor.UserName });
+
                     }
-                    else
-                    {
-                        ViewBag.Message = "Yo are not authorized to edit this rating!";
-                        return View("Info");
-                    }
-                
+
+                    ViewBag.Message = "Yo are not authorized to edit this rating!";
+                    return View("Info");
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -230,12 +231,9 @@ namespace KinMel.Controllers
                         ViewBag.Message = "We will provide error info later!";
                         return View("Info");
                     }
-                    else
-                    {
-                        throw;
-                    }
+                    ViewBag.Message = "We will provide error info later!";
+                    return View("Info");
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(rating);
         }
