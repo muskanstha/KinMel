@@ -910,6 +910,7 @@ nav .sidenav-trigger {
     color: #00acc1;
     font-weight: bold;
     overflow: hidden;
+    display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
