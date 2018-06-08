@@ -120,27 +120,18 @@
                         <input asp-for="WarrantyPeriod" />
                         <span asp-validation-for="WarrantyPeriod" class="red-text"></span>
                     </div>
-                    <div class="col s12 m6 l3">
-                        <label asp-for="PriceNegotiable">
-                            <input asp-for="PriceNegotiable" /> @Html.DisplayNameFor(model => model.PriceNegotiable)
-                        </label>
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <div class="switch">
+                    <div class="col s12 m6 switch">
+                            <label>
+                                <input asp-for="PriceNegotiable" /> @Html.DisplayNameFor(model => model.PriceNegotiable)
+                                <span class="lever m-0"></span>
+                            </label>
+                    </div> 
+                    <div class="col s12 m6 switch">
                             <label>
                                 <input asp-for="Delivery" /> @Html.DisplayNameFor(model => model.Delivery)
                                 <span class="lever m-0"></span>
-
                             </label>
-                        </div>
                     </div>
-                    @*<div class="switch">
-                        <label asp-for="RememberMe" class="active">
-                            <input asp-for="RememberMe" />
-                            <span class="lever m-0"></span>
-                        </label>
-                        <b><label asp-for="RememberMe" class="black-text"></label></b>
-                    </div>*@
                     <div class="col s12">
                         <input type="submit" value="Create" class="btn right mt-20 mb-20" />
                     </div>

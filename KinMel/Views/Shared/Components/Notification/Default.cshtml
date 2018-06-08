@@ -6,7 +6,7 @@
 @foreach (var item in Model)
 {
     <li class="collection-item avatar" onmouseover="toggleScaleClass(@item.Id)" onmouseout="toggleScaleClass(@item.Id)">
-        <a id="delNotification-@item.Id" class="scale-out scale-transition" onclick="DeleteNotification(@item.Id)" style="float: right; text-decoration: none;"><i class="material-icons m-0 p-5">delete_forever</i></a>
+        <a id="delNotification-@item.Id" class="scale-out scale-transition" onclick="DeleteNotification(@item.Id)" style="float: right;"><i class="material-icons m-0 p-5">delete_forever</i></a>
 
         <a class="center p-0" asp-controller="Account" asp-action="UserProfile" asp-route-id="@item.NotificationFrom.UserName">
             <img class="circle" src="@item.NotificationFrom.ProfilePictureUrl" />

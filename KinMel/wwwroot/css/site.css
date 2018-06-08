@@ -209,10 +209,10 @@ nav .sidenav-trigger {
     margin: 0px !important;
 }
 
-.chip > img {
-    height: 20px !important;
-    width: 20px !important;
-}
+    .chip > img {
+        height: 20px !important;
+        width: 20px !important;
+    }
 
 .card .card-reveal .card-title {
     display: flex;
@@ -1023,7 +1023,7 @@ nav .sidenav-trigger {
 }
 
 .details-card-info > p {
-    margin: 0 0 0 0 !important;
+    margin: 4px 0 0 0 !important;
 }
 
 .card-profile-image {
@@ -1046,12 +1046,13 @@ nav .sidenav-trigger {
     }
 
 #details-carousel {
-    height: 275px;
+    /*height: 275px;*/
 }
 
 #details-carousel-item {
     min-height: 275px !important;
-    background-color: whitesmoke;
+    background-color: #b0bec5;
+    /*background-color: whitesmoke;*/
 }
 
     #details-carousel-item > img {
@@ -1059,6 +1060,7 @@ nav .sidenav-trigger {
         height: 100%;
         object-fit: contain;
         vertical-align: middle;
+
     }
 
 /*.materialboxed.active {
@@ -1074,8 +1076,8 @@ nav .sidenav-trigger {
     width: 142px;
     display: inline-block;
     vertical-align: middle;
-    padding: 15px;
-    object-fit: cover;*/
+    padding: 15px;*/
+    object-fit: cover;
     width: 80px;
     height: 80px;
     background: #FFFFFF;
@@ -1085,6 +1087,10 @@ nav .sidenav-trigger {
     border-radius: 100px;
     vertical-align: middle;
     padding: 5px;
+}
+
+.collection-item > img {
+    object-fit: cover;
 }
 
 /*@media only screen and (min-width: 992px) {
@@ -1101,13 +1107,13 @@ nav .sidenav-trigger {
 
 .details-map-div {
     background-image: url("/images/map-placeholder.png");
-    height: 140px;
+    height: 260px;
     margin-top: 10px;
 }
 
 @media only screen and (max-width: 992px) {
     .details-map-div {
-        height: 260px;
+        height: 115px;
     }
 }
 
