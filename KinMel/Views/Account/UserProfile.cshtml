@@ -200,7 +200,7 @@
                                 <div>
                                     <div>
                                         <p class="content-description-list">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Description)</p>
-                                        <p class="material-icons align-middle m-5">person_outline</p>
+                                        <p class="material-icons align-middle">person_outline</p>
                                         <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@classifiedAd.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelclassifiedAd => classifiedAd.CreatedByUser.FullName)</a>
                                     </div>
                                     <div>
