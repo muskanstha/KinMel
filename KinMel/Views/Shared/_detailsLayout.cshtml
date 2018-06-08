@@ -48,7 +48,7 @@
 
     <section>
         <div id="details-map-carousel-div" class="row">
-            <div id="details-carousel" class="col s12 m12 l7 carousel carousel-slider materialboxed grey lighten-4 shadow-1p">
+            <div id="details-carousel" class="col s12 m12 l12  carousel carousel-slider materialboxed grey lighten-4 shadow-1p">
                 @if (Model.ImageUrlList.Any())
                 {
                     foreach (var item in Model.ImageUrlList)
@@ -59,20 +59,20 @@
 
             </div>
             @*<div id="details-carousel" class="col s12 m12 l7 carousel carousel-slider grey lighten-4 shadow-1p">
-                @if (Model.ImageUrlList.Any())
-                {
-                    foreach (var item in Model.ImageUrlList)
+                    @if (Model.ImageUrlList.Any())
                     {
-                        <a href="@item" data-lightbox="adImages" id="details-carousel-item" class="carousel-item"><img src="@item"></a>
+                        foreach (var item in Model.ImageUrlList)
+                        {
+                            <a href="@item" data-lightbox="adImages" id="details-carousel-item" class="carousel-item"><img src="@item"></a>
+                        }
                     }
-                }
 
-            </div>*@
+                </div>*@
 
             <div class="col s12 m6 l5">
                 <div id="details-header">
                     <div class="row m-0">
-                        <div class="card-panel p-0">
+                        <div class="card-panel p-5">
                             <div class="row m-0 valign-wrapper">
                                 <div class="col s4">
                                     <img src="@Model.CreatedByUser.ProfilePictureUrl" alt="" class="details-createdby-img circle">
@@ -83,14 +83,28 @@
                                     </p>
                                     <p class="right-align">
                                         <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@Model.CreatedByUser.UserName">
-                                            <i class="material-icons align-middle">account_circle</i>
                                             @Model.CreatedByUser.UserName
+                                            <i class="material-icons align-middle">account_circle</i>
                                         </a>
                                     </p>
                                     <p class="right-align">
-                                        <i class="material-icons align-middle">date_range</i>
-                                        @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
+                                        @if (@Model.CreatedByUser.PhoneNumberConfirmed == true)
+                                        {
+                                            @Html.DisplayFor(model => model.CreatedByUser.PhoneNumber)
+                                            <i class="material-icons cyan-text  align-middle tooltipped" data-tooltip="Phone verified" data-position="left">verified_user</i>
+                                        }
+                                        else
+                                        {
+                                            @Html.DisplayFor(model => model.CreatedByUser.PhoneNumber)
+                                            <i class="material-icons red-text align-middle tooltipped" data-tooltip="Phone not verified" data-position="left">phonelink_erase</i>
+                                        }
+                                    </p>
 
+                                    <p class="right-align">
+                                        @Html.DisplayFor(model => model.CreatedByUser.JoinDate)                                   
+                                        <i class="material-icons align-middle">date_range</i>
+
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -134,9 +148,31 @@
                 </div>
             </div>
 
-            <div class="divider col l12 hide-on-med-and-down mt-10"></div>
+            @*<div class="divider col l12 hide-on-med-and-down mt-10"></div>*@
 
-            <div class="col s12 m6 l12 shadow-1p details-map-div"></div>
+            <div class="col s12 m6 l7 shadow-1p">
+                <div class="details-map-div"></div>
+                <div class="row m-0">
+                    <div class="col s12 m6 fields-list">
+                        <ul class="row">
+                            <li>
+                                <label asp-for="@Model.Delivery"></label>
+                                <p class="escape-float">
+                                    @Html.Raw(@Model.Delivery ? "Yes" : "No")
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col s12 m6 fields-list">
+                        <ul class="row">
+                            <li>
+                                <label asp-for="@Model.DeliveryCharges"></label>
+                                <p class="escape-float">Nrs. @Html.DisplayFor(m => m.DeliveryCharges)</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             @*<div style="padding: 10px 5px 10px 5px;" class="hide-on-med-and-down">
                     <div class="cyan" style="width: 5px; height: 100%"></div>
                 </div>*@
@@ -202,31 +238,31 @@
             </div>
         </div>
     </section>
-    <section>
-        <div class="col s12">
-            <div class="details-card-header">Delivery Details</div>
-            <div class="row m-0">
-                <div class="col s12 m6 fields-list">
-                    <ul class="row">
-                        <li>
-                            <label asp-for="@Model.Delivery"></label>
-                            <p>
-                                @Html.Raw(@Model.Delivery ? "Yes" : "No")
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col s12 m6 fields-list">
-                    <ul class="row">
-                        <li>
-                            <label asp-for="@Model.DeliveryCharges"></label>
-                            <p>Nrs. @Html.DisplayFor(m => m.DeliveryCharges)</p>
-                        </li>
-                    </ul>
+    @*<section>
+            <div class="col s12">
+                <div class="details-card-header">Delivery Details</div>
+                <div class="row m-0">
+                    <div class="col s12 m6 fields-list">
+                        <ul class="row">
+                            <li>
+                                <label asp-for="@Model.Delivery"></label>
+                                <p>
+                                    @Html.Raw(@Model.Delivery ? "Yes" : "No")
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col s12 m6 fields-list">
+                        <ul class="row">
+                            <li>
+                                <label asp-for="@Model.DeliveryCharges"></label>
+                                <p>Nrs. @Html.DisplayFor(m => m.DeliveryCharges)</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>*@
     <section>
         <div class="col s12">
             <div class="details-card-header">Questions & Answers</div>
