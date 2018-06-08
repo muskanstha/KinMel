@@ -1,8 +1,7 @@
 ﻿
-/*p {
+p {
     margin: 0px;
-    line-height: 1rem;
-}*/
+}
 
 html {
     height: 100%;
@@ -132,12 +131,12 @@ nav .sidenav-trigger {
 
 .card .card-content .card-title {
     height: 20px !important;
-    line-height: 12px !important;
+    line-height: 20px !important;
     /*margin-bottom: 4px !important;*/
 }
 
 .card .card-reveal {
-    padding: 16px;
+    padding: 10px;
 }
 
 .notifications > a {
@@ -215,6 +214,14 @@ nav .sidenav-trigger {
     width: 20px !important;
 }
 
+.card .card-reveal .card-title {
+    display: flex;
+}
+
+.card .card-reveal .card-title > i {
+    margin-left: 0px !important;
+}
+
 /**************GRID**************/
 .page-container-grid {
     display: grid;
@@ -256,8 +263,6 @@ nav .sidenav-trigger {
 
 .cover-image {
     display: grid;
-    grid-column: 1/17;
-    grid-row: 1/4;
     background: linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0, .8));
     position: relative;
 }
@@ -287,7 +292,6 @@ nav .sidenav-trigger {
         -webkit-object-fit: cover;
         object-fit: cover;
         padding: 5px;
-        ;
     }
 
 .about-me-small-grid {
@@ -685,12 +689,16 @@ nav .sidenav-trigger {
             font-size: 12px;
         }
 
+    .page-container-grid {
+        grid-template-rows: 16vw 1fr !important;
+    }
+
     .taxonomy {
         height: 16vw !important;
     }
 
-    .page-container-grid {
-        grid-template-rows: 16vw 1fr !important;
+    .taxonomy .taxonomy-sections {
+        grid-template-columns: repeat(22, 20vw) !important;
     }
 
     .taxonomy .taxonomy-sections > li {
@@ -707,10 +715,6 @@ nav .sidenav-trigger {
             font-size: 2.6vw !important;
             line-height: 3.2vw !important;
         }
-
-    .taxonomy:not(.expanded) .taxonomy-sections {
-        grid-template-columns: repeat(22, 20vw) !important;
-    }
 
     .collection > li > a > img {
         left: 21px !important;
@@ -788,7 +792,6 @@ nav .sidenav-trigger {
 
     .page-container-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: 70px 1fr;
         grid-template-areas: "sideMenu" "main";
     }
 }
@@ -866,10 +869,27 @@ nav .sidenav-trigger {
 .cke_1 {
     margin-top: 10px !important;
 }
+
+.dropdown-content li {
+     min-height: 0px; 
+}
+
+    .dropdown-content li > a, .dropdown-content li > span {
+        padding: 10px;
+    }
+
+@media (max-width: 450px) {
+    .sorting-grid > div > .select-wrapper .dropdown-content li > a, .sorting-grid > div > .select-wrapper .dropdown-content li > span {
+        font-size: 3.4vw;
+        line-height: 22px;
+        padding: 10px;
+    }
+}
 /******************END********************/
 /****************Content*****************/
 .contents-list {
     padding-left: 10px;
+    width: 100%;
 }
 
 .content-image-grid {
@@ -889,6 +909,9 @@ nav .sidenav-trigger {
     font-size: 14px;
     color: #00acc1;
     font-weight: bold;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
     .content-title:hover {
@@ -1386,28 +1409,23 @@ footer .brand-logo {
 /***************TAXONOMY****************/
 .taxonomy {
     position: relative;
-    /*-ms-flex: 0 0 auto;*/
-    /*flex: 0 0 auto;*/
     overflow: hidden;
-    /*width: 100%;*/
     background: rgba(255, 255, 255, 0.9);
     height: 70px;
-    will-change: height;
+    /*will-change: height;*/
     -webkit-transition: height 0.25s ease;
     -o-transition: height 0.25s ease;
     transition: height 0.25s ease;
     border-bottom: 1px solid #f0f0f0;
 }
 
-    .taxonomy:not(.expanded) .taxonomy-sections {
+    /*.taxonomy:not(.expanded) .taxonomy-sections {
         -ms-touch-action: auto;
         touch-action: auto;
         -ms-overflow-style: -ms-autohiding-scrollbar;
         -webkit-overflow-scrolling: touch;
         -webkit-touch-callout: none;
         -webkit-user-select: none;
-        display: grid;
-        grid-template-columns: repeat(22, 84px);
     }
 
     .taxonomy.expanded {
@@ -1419,7 +1437,7 @@ footer .brand-logo {
         transition: flex 0.3s ease-in;
         transition: flex 0.3s ease-in, -ms-flex 0.3s ease-in;
         height: 400px;
-    }
+    }*/
 
     .taxonomy ul, .taxonomy li {
         margin: 0;
@@ -1429,17 +1447,11 @@ footer .brand-logo {
 
     .taxonomy .taxonomy-sections {
         overflow-x: scroll;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        -ms-flex-align: start;
-        align-items: flex-start;
+        display: grid;
+        grid-template-columns: repeat(22, 84px);
     }
 
         .taxonomy .taxonomy-sections > li {
-            -ms-flex: 0 0 auto;
-            flex: 0 0 auto;
             width: 84px;
             padding: 0 2px 0.3em;
         }

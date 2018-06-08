@@ -13,6 +13,13 @@
         <a asp-controller="ClassifiedAds" asp-action="Index" class="breadcrumb">Browse Ads</a>
     </div>
 </div>
-<partial name="_categoriesSideMenu" for="@Model"/>
 
-@await Component.InvokeAsync("MainContent", new { sortOrder = Context.Request.Query["sortOrder"].ToString(), searchModel = Model })
+<section class="browse-width">
+    <div class="page-container-grid">
+        <!--Side-Content-->
+
+        <partial name="_categoriesSideMenu" for="@Model" />
+
+        @await Component.InvokeAsync("MainContent", new { sortOrder = Context.Request.Query["sortOrder"].ToString(), searchModel = Model })
+    </div>
+</section>

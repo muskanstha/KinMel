@@ -7,8 +7,7 @@
 <div class="card-header m-0">
     Post a new ad
 </div>
-<div class="row m-0">
-    <div class="col s12 p-20">
+    <div class="card-content">
         <form asp-action="CreateAd">
             <div asp-validation-summary="ModelOnly" class="red-text"></div>
             <label asp-for="CategoryName" class="col s12"></label>
@@ -17,7 +16,6 @@
             <input type="submit" value="Select a Category" class="btn mt-20" />
         </form>
     </div>
-</div>
 
 @section Scripts {
 

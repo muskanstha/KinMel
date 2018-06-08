@@ -56,6 +56,7 @@ namespace KinMel.Models
         public Boolean PriceNegotiable { get; set; }
         public string UsedFor { get; set; }
 
+        [DisplayName("Posted on")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
         public bool IsSold { get; set; }
