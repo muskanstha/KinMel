@@ -18,9 +18,18 @@ connection.on("Receivecount", (count) => {
     var container = $("#notificationdropdown");
     $.get("/Notifications/NotificationViewComponent", function (data) {
         container.empty();
-        console.log(data);
         container.html(data);
     });
+});
+
+connection.on("NotificationDeleted", (count) => {
+  document.getElementById("notificationCount").innerHTML = count;
+ 
+  var container = $("#notificationdropdown");
+  $.get("/Notifications/NotificationViewComponent", function (data) {
+    container.empty();
+    container.html(data);
+  });
 });
 
 connection.start().catch(err => console.error(err.toString()));

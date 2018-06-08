@@ -15,33 +15,16 @@ namespace KinMel.Controllers
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Kinmel Team is awesome";
-
-            return View();
-        }
-
+   
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
 
             return View();
         }
-      public IActionResult Policy()
-      {
-        ViewData["Message"] = "Your contact page.";
+    
 
-        return View();
-      }
-      public IActionResult WorkProcess()
-      {
-        ViewData["Message"] = "Your contact page.";
-
-        return View();
-      }
-
-    public IActionResult Error()
+        public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }

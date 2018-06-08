@@ -29,7 +29,7 @@
                           
                             <div class="input-field">
                                 @Html.LabelFor(m => m.City)
-                                @Html.TextBoxFor(m=>m.City, htmlAttributes: new { id = "autocomplete", placeholder="" })
+                                @Html.TextBoxFor(m=>m.City, new { id = "autocomplete", placeholder="" })
                                
                             </div>
 
@@ -39,7 +39,6 @@
                             </div>
 
                             <div class="input-field">
-
                                 @Html.LabelFor(m => m.PriceFrom)
                                 @Html.TextBoxFor(m => m.PriceFrom, new { type = "number", min = "0", max = "10 Thousands" })
                                 @Html.ValidationMessageFor(m => m.PriceFrom)

@@ -16,6 +16,7 @@ using System.IO;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using Google.Maps.Geocoding;
 using Microsoft.IdentityModel.Protocols;
 
 namespace KinMel.Controllers
@@ -35,20 +36,37 @@ namespace KinMel.Controllers
             return View();
         }
 
-        [HttpGet()]
+        [HttpPost]
+        public IActionResult Index(ClassifiedAdSearchModel searchModel)
+        {
+
+            //var locationRequest = new GeocodingRequest { Address = $"{searchModel.City}" };
+            //var locationResponse = new GeocodingService().GetResponse(locationRequest);
+            //if (locationResponse.Results.Length > 0)
+            //{
+            //    var Latitude = locationResponse.Results.First().Geometry.Location.Latitude;
+            //    var Longitude = locationResponse.Results.First().Geometry.Location.Longitude;
+            //}
+
+            return View("Index", searchModel);
+        }
+
+        //[HttpGet("/ClassifiedAds/Search")]
         public ActionResult Search()
         {
 
-            ClassifiedAdSearchModel m = new ClassifiedAdSearchModel
+            ClassifiedAdSearchModel searchModel = new ClassifiedAdSearchModel
             {
                 PropertyResults = _context.ClassifiedAd.ToList()
             };
-            return View(m);
+
+            return View(searchModel);
 
         }
 
-        [HttpPost()]
-        public ActionResult Search(ClassifiedAdSearchModel m)
+        //[HttpPost("/ClassifiedAds/Search")]
+        [HttpPost]
+        public IActionResult Search(ClassifiedAdSearchModel searchModel)
         {
 
             if (ModelState.IsValid)
@@ -62,72 +80,72 @@ namespace KinMel.Controllers
                 //    return View();
                 //}
 
-                if (m != null)
+                if (searchModel != null)
                 {
 
-                    //city
-                    if (m.City != null && m.PriceFrom == null && m.PriceTo == null && m.Condition == null)
-                    {
-                        properties = properties.Where(k => k.City == m.City).ToList();
-                        m.PropertyResults = properties;
+                    ////city
+                    //if (m.City != null && m.PriceFrom == null && m.PriceTo == null && m.Condition == null)
+                    //{
+                    //    properties = properties.Where(k => k.City == m.City).ToList();
+                    //    m.PropertyResults = properties;
 
-                    }
-                    //condition
-                    if (m.Condition != null && m.City == null && m.PriceFrom == null && m.PriceTo == null)
-                    {
-                        properties = properties.Where(k => k.Condition == m.Condition).ToList();
-                        m.PropertyResults = properties;
+                    //}
+                    ////condition
+                    //if (m.Condition != null && m.City == null && m.PriceFrom == null && m.PriceTo == null)
+                    //{
+                    //    properties = properties.Where(k => k.Condition == m.Condition).ToList();
+                    //    m.PropertyResults = properties;
 
-                    }
+                    //}
 
-                    //price
-                    if (m.PriceFrom != null && m.PriceTo != null && m.City == null && m.Condition == null)
-                    {
-                        properties = properties.Where(k => k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
-                        m.PropertyResults = properties;
+                    ////price
+                    //if (m.PriceFrom != null && m.PriceTo != null && m.City == null && m.Condition == null)
+                    //{
+                    //    properties = properties.Where(k => k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
+                    //    m.PropertyResults = properties;
 
-                    }
+                    //}
 
-                    //sabai
-                    if (m.Condition != null && m.City != null && m.PriceFrom != null && m.PriceTo != null)
-                    {
-                        properties = properties.Where(k => k.Condition == m.Condition & k.City == m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
-                        m.PropertyResults = properties;
+                    ////sabai
+                    //if (m.Condition != null && m.City != null && m.PriceFrom != null && m.PriceTo != null)
+                    //{
+                    //    properties = properties.Where(k => k.Condition == m.Condition & k.City == m.City & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
+                    //    m.PropertyResults = properties;
 
-                    }
+                    //}
 
-                    //city ra price
-                    if (m.City != null && m.PriceFrom != null && m.PriceTo != null)
-                    {
-                        properties = properties.Where(k => k.Price >= m.PriceFrom & k.Price <= m.PriceTo & k.City == m.City).ToList();
-                        m.PropertyResults = properties;
+                    ////city ra price
+                    //if (m.City != null && m.PriceFrom != null && m.PriceTo != null)
+                    //{
+                    //    properties = properties.Where(k => k.Price >= m.PriceFrom & k.Price <= m.PriceTo & k.City == m.City).ToList();
+                    //    m.PropertyResults = properties;
 
-                    }
+                    //}
 
-                    //city ra condition
-                    if (m.City != null && m.Condition != null && m.PriceFrom == null && m.PriceTo == null)
-                    {
-                        properties = properties.Where(k => k.Condition == m.Condition & k.City == m.City).ToList();
-                        m.PropertyResults = properties;
+                    ////city ra condition
+                    //if (m.City != null && m.Condition != null && m.PriceFrom == null && m.PriceTo == null)
+                    //{
+                    //    properties = properties.Where(k => k.Condition == m.Condition & k.City == m.City).ToList();
+                    //    m.PropertyResults = properties;
 
-                    }
+                    //}
 
-                    //price ra condition
-                    if (m.PriceFrom != null && m.PriceTo != null && m.Condition != null)
-                    {
-                        properties = properties.Where(k => k.Condition == m.Condition & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
-                        m.PropertyResults = properties;
+                    ////price ra condition
+                    //if (m.PriceFrom != null && m.PriceTo != null && m.Condition != null)
+                    //{
+                    //    properties = properties.Where(k => k.Condition == m.Condition & k.Price >= m.PriceFrom & k.Price <= m.PriceTo).ToList();
+                    //    m.PropertyResults = properties;
 
-                    }
+                    //}
 
 
-                    m.PropertyResults = properties;
+                    //m.PropertyResults = properties;
+                    return View("Index", searchModel);
                 }
 
             }
 
-            return View(m);
-
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -189,7 +207,7 @@ namespace KinMel.Controllers
         //}
 
         // GET: ClassifiedAds/slug
-        [HttpGet("/ClassifiedAds/{id}")]
+        //[HttpGet("/ClassifiedAds/{id}")]
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)

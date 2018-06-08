@@ -26,7 +26,7 @@ namespace KinMel.ViewComponents
         private async Task<List<Notification>> GetNotifications()
         {
             var username = User.Identity.Name;
-            return await  _context.Notification.AsNoTracking().Where(n=> n.NotificationTo.UserName.Equals(username)).Include(n => n.NotificationFrom).Include(n => n.NotificationTo).OrderByDescending(n=> n.Date).ToListAsync();
+            return await  _context.Notification.AsNoTracking().Where(n=> n.NotificationTo.UserName.Equals(username) && !n.IsRead).Include(n => n.NotificationFrom).Include(n => n.NotificationTo).OrderByDescending(n=> n.Date).ToListAsync();
         }
     }
 }

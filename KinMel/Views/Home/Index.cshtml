@@ -11,9 +11,8 @@
         <!--Main-Content-->
         <div class="index-content">
             <div>@await Component.InvokeAsync("HomePageAds", new { listType = "Latest Ads" })</div>
-            <div>@await Component.InvokeAsync("HomePageAds", new { listType = "name" })</div>
+            <div>@await Component.InvokeAsync("HomePageAds", new { listType = "Popular Ads" })</div>
             <div>@await Component.InvokeAsync("HomePageAds", new { listType = "Free Ads" })</div>
-            <div>@await Component.InvokeAsync("HomePageAds", new { listType = "default" })</div>
         </div>
     </div>
 </section>

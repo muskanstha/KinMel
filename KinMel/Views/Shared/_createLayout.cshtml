@@ -1,5 +1,6 @@
 ﻿@model KinMel.Models.ClassifiedAd
 
+
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
@@ -51,10 +52,10 @@
                         <label asp-for="Condition"></label>
                         @{
                             var conditionlist = new SelectList(new List<SelectListItem>
-                                                                                {
-                                                                                 new SelectListItem { Value = "NEW", Text = "NEW" },
-                                                                                 new SelectListItem { Value = "USED", Text = "USED" },
-                                                                                }, "Value", "Text", Context.Request.Query["conditionlist"]);
+                                            {
+                                                new SelectListItem { Value = "NEW", Text = "NEW" },
+                                                new SelectListItem { Value = "USED", Text = "USED" },
+                                            }, "Value", "Text", Context.Request.Query["conditionlist"]);
                         }
                         <select asp-for="Condition" asp-items="@conditionlist"></select>
                         <span asp-validation-for="Condition" class="red-text"></span>
@@ -85,13 +86,16 @@
                         <span asp-validation-for="AdDuration" class="red-text"></span>
                     </div>
                     <div class="input-field col s12 m6">
-                        <label asp-for="City"></label>
-                        <input asp-for="City" />
+                        <label asp-for="City" ></label>
+                        <input asp-for="City" id="autocomplete"/>
                         <span asp-validation-for="City" class="red-text"></span>
                     </div>
+
+                    
+
                     <div class="input-field col s12 m6">
                         <label asp-for="Address"></label>
-                        <input asp-for="Address" />
+                        <input asp-for="Address" id="autocomplete" />
                         <span asp-validation-for="Address" class="red-text"></span>
                     </div>
                     @RenderBody()
@@ -122,26 +126,21 @@
                         </label>
                     </div>
                     <div class="col s12 m6 l3">
-                        <div class="checkbox">
+                        <div class="switch">
                             <label>
                                 <input asp-for="Delivery" /> @Html.DisplayNameFor(model => model.Delivery)
+                                <span class="lever m-0"></span>
+
                             </label>
                         </div>
                     </div>
-                    <div class="col s12 m6 l3">
-                        <div class="checkbox">
-                            <label>
-                                <input asp-for="IsSold" /> @Html.DisplayNameFor(model => model.IsSold)
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <div class="checkbox">
-                            <label>
-                                <input asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
-                            </label>
-                        </div>
-                    </div>
+                    @*<div class="switch">
+                        <label asp-for="RememberMe" class="active">
+                            <input asp-for="RememberMe" />
+                            <span class="lever m-0"></span>
+                        </label>
+                        <b><label asp-for="RememberMe" class="black-text"></label></b>
+                    </div>*@
                     <div class="col s12">
                         <input type="submit" value="Create" class="btn right mt-20 mb-20" />
                     </div>
@@ -150,6 +149,20 @@
         </div>
     </div>
 </div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI&libraries=places" async defer></script>
+<script>
+    google.maps.event.addDomListener(window, 'load', function () {
+        var options = {
+            //types: ['(cities)'],
+            componentRestrictions: { country: "NP" }
+        };
+        var input = document.getElementById('autocompletes');
+        var places = new new google.maps.places.Autocomplete(input, options);
+
+    });
+</script>
 
 @section Scripts {
     @{
@@ -168,4 +181,5 @@
         }
         CKEDITOR.replace('placeholder', config);
     </script>
+
 }

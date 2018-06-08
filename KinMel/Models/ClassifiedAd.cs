@@ -54,12 +54,13 @@ namespace KinMel.Models
         public string Condition { get; set; }
         public double Price { get; set; }
         public Boolean PriceNegotiable { get; set; }
-        public Boolean Delivery { get; set; }
+        public string UsedFor { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
         public bool IsSold { get; set; }
         public bool IsActive { get; set; }
+
         public string Slug { get; set; }
         public string Discriminator { get; set; }
 
@@ -69,9 +70,12 @@ namespace KinMel.Models
         public string City { get; set; }
         public string Address { get; set; }
         [DisplayFormat(NullDisplayText = "-")]
-        public string UsedFor { get; set; }
 
-        public double DeliveryCharges { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
+        public Boolean Delivery { get; set; }
+        public double? DeliveryCharges { get; set; }
 
         public string WarrantyType { get; set; }
         public string WarrantyPeriod { get; set; }
@@ -90,14 +94,14 @@ namespace KinMel.Models
         public string Type { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }//khasai use hudaina jasto lagxa
-        public int ModelYear { get; set; }//MadeYear
+        public int? ModelYear { get; set; }//MadeYear
         public string Color { get; set; }
-        public int TotalKm { get; set; }//TravelledKm
+        public int? TotalKm { get; set; }//TravelledKm
         public string FuelType { get; set; }
-        public int DoorsNo { get; set; }
+        public int? DoorsNo { get; set; }
 
-        public int Engine { get; set; }//Engine(CC)number
-        public int Mileage { get; set; }//Mileage(km/l)
+        public int? Engine { get; set; }//Engine(CC)number
+        public int? Mileage { get; set; }//Mileage(km/l)
 
         public string Transmission { get; set; }//Gear System dropdown
         public string RegisteredDistrict { get; set; }//string dropdown
@@ -109,12 +113,12 @@ namespace KinMel.Models
         public string Type { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
-        public int ModelYear { get; set; }
+        public int? ModelYear { get; set; }
         public string Color { get; set; }
-        public int TotalKm { get; set; }//travelledKm
+        public int? TotalKm { get; set; }//travelledKm
 
-        public int Engine { get; set; }//Engine(CC)
-        public int Mileage { get; set; }//Mileage(km/l)
+        public int? Engine { get; set; }//Engine(CC)
+        public int? Mileage { get; set; }//Mileage(km/l)
 
         public string RegisteredDistrict { get; set; }//string dropdown
         public string LotNo { get; set; } //number or numbertext?
@@ -125,12 +129,12 @@ namespace KinMel.Models
         public string Brand { get; set; }
         public string Model { get; set; }
         public string Color { get; set; }
-        public double Storage { get; set; }//internal storage
-        public int Ram { get; set; }
-        public double FrontCamera { get; set; }
-        public double BackCamera { get; set; }
+        public double? Storage { get; set; }//internal storage
+        public int? Ram { get; set; }
+        public double? FrontCamera { get; set; }
+        public double? BackCamera { get; set; }
         public string PhoneOs { get; set; }
-        public double ScreenSize { get; set; }
+        public double? ScreenSize { get; set; }
     }
 
     public class TabletsAndIPads : ClassifiedAd
@@ -138,10 +142,10 @@ namespace KinMel.Models
         public string Brand { get; set; }
         public string Model { get; set; }
         public string Color { get; set; }
-        public double Storage { get; set; }//internal storage
-        public double Ram { get; set; }
-        public double FrontCamera { get; set; }
-        public double BackCamera { get; set; }
+        public double? Storage { get; set; }//internal storage
+        public double? Ram { get; set; }
+        public double? FrontCamera { get; set; }
+        public double? BackCamera { get; set; }
         public string PhoneOs { get; set; }
         public string ScreenSize { get; set; }
     }
@@ -152,27 +156,27 @@ namespace KinMel.Models
         public string Type { get; set; }//dropdown(desktop, laptop,2in1)
         public string Processor { get; set; }
         public string ProcessorGeneration { get; set; }
-        public double Ram { get; set; }
-        public double GraphicsCard { get; set; }
-        public double HDD { get; set; }
-        public double SSD { get; set; }
+        public double? Ram { get; set; }
+        public double? GraphicsCard { get; set; }
+        public double? HDD { get; set; }
+        public double? SSD { get; set; }
         public string ScreenType { get; set; }
-        public double ScreenSize { get; set; }
-        public double Battery { get; set; }
+        public double? ScreenSize { get; set; }
+        public double? Battery { get; set; }
     }
 
     public class RealState : ClassifiedAd
     {
         public string PropertyType { get; set; }//dropdown
         public string LandSize { get; set; }//(aana/dhur/m2)
-        public int Floors { get; set; }
-        public int TotalRooms { get; set; }
+        public int? Floors { get; set; }
+        public int? TotalRooms { get; set; }
         public string Furnishing { get; set; }//dropdown-full semi none
     }
 
     public class Jobs : ClassifiedAd
     {
-        public double Salary { get; set; }
+        public double? Salary { get; set; }
         public string WorkingDays { get; set; }
         public string ContractFor { get; set; }
     }

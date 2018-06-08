@@ -18,16 +18,23 @@ namespace KinMel.ViewComponents
             _context = context;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(string sortOrder, string category)
+        public async Task<IViewComponentResult> InvokeAsync(string sortOrder, string category, ClassifiedAdSearchModel searchModel)
         {
             if (!String.IsNullOrWhiteSpace(category))
             {
                 var categoryItems = await GetSortedAdsAsync(sortOrder, category);
                 return View(categoryItems);
             }
+            if (searchModel != null)
+            {
+                var searchItems = await GetFilteredNewAsync(sortOrder, searchModel);
+                return View(searchItems);
+            }
             var items = await GetSortedAdsAsync(sortOrder);
             return View(items);
         }
+
+       
         private Task<List<ClassifiedAd>> GetSortedAdsAsync(string sortOrder)
         {
             ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
@@ -78,7 +85,105 @@ namespace KinMel.ViewComponents
                     classifiedAd = classifiedAd.Where(c => c.Discriminator.Equals(category)).OrderByDescending(c => c.DateCreated);
                     break;
             }
-            return classifiedAd.AsNoTracking().Where(c => c.Discriminator.Equals(category)).Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync();
+            return classifiedAd.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync();
+        }
+        private Task<List<ClassifiedAd>> GetFilteredAsync(ClassifiedAdSearchModel searchModel)
+        {
+            var classifiedAd = from c in _context.ClassifiedAd
+                             select c;
+
+            //city
+            if (searchModel.City != null && searchModel.PriceFrom == null && searchModel.PriceTo == null && searchModel.Condition == null)
+            {
+                classifiedAd = classifiedAd.Where(k => k.City == searchModel.City);
+            }
+            //condition
+            if (searchModel.Condition != null && searchModel.City == null && searchModel.PriceFrom == null && searchModel.PriceTo == null)
+            {
+                classifiedAd = classifiedAd.Where(k => k.Condition == searchModel.Condition);
+            }
+
+            //price
+            if (searchModel.PriceFrom != null && searchModel.PriceTo != null && searchModel.City == null && searchModel.Condition == null)
+            {
+                classifiedAd = classifiedAd.Where(k => k.Price >= searchModel.PriceFrom & k.Price <= searchModel.PriceTo);
+
+            }
+
+            //sabai
+            if (searchModel.Condition != null && searchModel.City != null && searchModel.PriceFrom != null && searchModel.PriceTo != null)
+            {
+                classifiedAd = classifiedAd.Where(k => k.Condition == searchModel.Condition & k.City == searchModel.City & k.Price >= searchModel.PriceFrom & k.Price <= searchModel.PriceTo);
+            }
+
+            //city ra price
+            if (searchModel.City != null && searchModel.PriceFrom != null && searchModel.PriceTo != null)
+            {
+                classifiedAd = classifiedAd.Where(k => k.Price >= searchModel.PriceFrom & k.Price <= searchModel.PriceTo & k.City == searchModel.City);
+            }
+
+            //city ra condition
+            if (searchModel.City != null && searchModel.Condition != null && searchModel.PriceFrom == null && searchModel.PriceTo == null)
+            {
+                classifiedAd = classifiedAd.Where(k => k.Condition == searchModel.Condition & k.City == searchModel.City);
+            }
+
+            //price ra condition
+            if (searchModel.PriceFrom != null && searchModel.PriceTo != null && searchModel.Condition != null)
+            {
+                classifiedAd = classifiedAd.Where(k => k.Condition == searchModel.Condition & k.Price >= searchModel.PriceFrom & k.Price <= searchModel.PriceTo);
+            }
+
+            return classifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync();
+        }
+
+        private Task<List<ClassifiedAd>> GetFilteredNewAsync(string sortOrder, ClassifiedAdSearchModel searchModel)
+        {
+            var classifiedAd = from c in _context.ClassifiedAd
+                select c;
+            //city
+            if (searchModel.City != null)
+            {
+                classifiedAd = classifiedAd.Where(k => k.City == searchModel.City);
+            }
+            //condition
+            if (searchModel.Condition != null)
+            {
+                classifiedAd = classifiedAd.Where(k => k.Condition == searchModel.Condition);
+            }
+
+            //price
+            if (searchModel.PriceFrom != null)
+            {
+                classifiedAd = classifiedAd.Where(k => k.Price >= searchModel.PriceFrom);
+            }
+            //price
+            if ( searchModel.PriceTo != null )
+            {
+                classifiedAd = classifiedAd.Where(k => k.Price <= searchModel.PriceTo);
+            }
+
+            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            switch (sortOrder)
+            {
+                case "Price":
+                    classifiedAd = classifiedAd.OrderBy(c => c.Price);
+                    break;
+                case "price_desc":
+                    classifiedAd = classifiedAd.OrderByDescending(c => c.Price);
+                    break;
+                case "date_desc":
+                    classifiedAd = classifiedAd.OrderBy(c => c.DateCreated);
+                    break;
+                case "Date":
+                    classifiedAd = classifiedAd.OrderByDescending(c => c.DateCreated);
+                    break;
+                default:
+                    classifiedAd = classifiedAd.OrderByDescending(c => c.DateCreated);
+                    break;
+            }
+            return classifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync();
         }
     }
 }
