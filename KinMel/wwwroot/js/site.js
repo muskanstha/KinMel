@@ -2,14 +2,6 @@
 
 $(document).ready(function () {
     M.AutoInit();
-
-    //preloader
-    $(window).load(function () {
-        setTimeout(function () {
-            $("body").addClass("loaded");
-        }, 150);
-    });
-
     // Materialize Dropdown
     $('.dropdown-trigger').dropdown({
         coverTrigger: false, // Displays dropdown below the button
@@ -47,6 +39,4 @@ $(document).ready(function () {
     //    duration: 800,
     //    interval: 5000
     //});
-
-
 });
