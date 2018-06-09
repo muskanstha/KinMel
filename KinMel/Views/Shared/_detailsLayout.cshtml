@@ -28,12 +28,30 @@
         </p>
         @if (Model.IsSold)
         {
-            <span class="sold-active">This item has been sold.</span>
+            <p class="sold-active">This item has been sold.</p>
+            if (Model.CreatedByUser.UserName.Equals(User.Identity.Name))
+            {
+                <a asp-action="MarkAsUnSold" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn waves-green m-5">Mark as unsold</a>
+            }
+        }
+        else if (Model.CreatedByUser.UserName.Equals(User.Identity.Name))
+
+        {
+            <a asp-action="MarkAsSold" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn waves-red red m-5">Mark as sold</a>
         }
         @if (!Model.IsActive)
         {
-            <span class="sold-active">This ad is no longer active.</span>
+            <p class="sold-active">This ad is no longer active.</p>
+            if (Model.CreatedByUser.UserName.Equals(User.Identity.Name))
+            {
+                <a asp-action="MarkAsActive" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn waves-green m-5">Mark as active</a>
+            }
         }
+        else if (Model.CreatedByUser.UserName.Equals(User.Identity.Name))
+        {
+            <a asp-action="MarkAsInactive" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn waves-red red m-5">Mark as inactive</a>
+        }
+
     </div>
     <div class="divider"></div>
     @*<section>
@@ -85,7 +103,6 @@
                 <div id="details-map-div" class="details-map-div"></div>
                 <script>
                     var marker;
-
                     // Initialize and add the map
                     function initMap() {
                         // The location of Uluru
@@ -171,6 +188,7 @@
                                 center: theAddress,
                                 //mapTypeControl: true,
                                 gestureHandling: 'greedy',
+                                scrollwheel: false,
                                 //disableDefaultUI: true,
 
                             });

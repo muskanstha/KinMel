@@ -363,7 +363,158 @@ namespace KinMel.Controllers
             }
         }
 
+        public async Task<IActionResult> MarkAsSold(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var classifiedAd = await _context.ClassifiedAd
+                .Include(c => c.SubCategory).Include(c => c.SubCategory.Category).Include(c => c.CreatedByUser)
+                .SingleOrDefaultAsync(m => m.Slug == id);
+            if (classifiedAd.IsSold)
+            {
+                return View("Error");
+            }
+            if (classifiedAd.CreatedByUser.UserName.Equals(User.Identity.Name))
+            {
+                try
+                {
+                    classifiedAd.IsSold = true;
+                    _context.Update(classifiedAd);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ClassifiedAdExists(classifiedAd.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Details", new {id = id});
+
+            }
+            return View("Error");
+        }
+        public async Task<IActionResult> MarkAsUnSold(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var classifiedAd = await _context.ClassifiedAd
+                .Include(c => c.SubCategory).Include(c => c.SubCategory.Category).Include(c => c.CreatedByUser)
+                .SingleOrDefaultAsync(m => m.Slug == id);
+            if (!classifiedAd.IsSold)
+            {
+                return View("Error");
+            }
+            if (classifiedAd.CreatedByUser.UserName.Equals(User.Identity.Name))
+            {
+                try
+                {
+                    classifiedAd.IsSold = false;
+                    _context.Update(classifiedAd);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ClassifiedAdExists(classifiedAd.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Details", new { id = id });
+
+            }
+            return View("Error");
+        }
+        public async Task<IActionResult> MarkAsActive(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var classifiedAd = await _context.ClassifiedAd
+                .Include(c => c.SubCategory).Include(c => c.SubCategory.Category).Include(c => c.CreatedByUser)
+                .SingleOrDefaultAsync(m => m.Slug == id);
+            if (classifiedAd.IsActive)
+            {
+                return View("Error");
+            }
+            if (classifiedAd.CreatedByUser.UserName.Equals(User.Identity.Name))
+            {
+                try
+                {
+                    classifiedAd.IsActive = true;
+                    _context.Update(classifiedAd);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ClassifiedAdExists(classifiedAd.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Details", new { id = id });
+
+            }
+            return View("Error");
+        }
+        public async Task<IActionResult> MarkAsInactive(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var classifiedAd = await _context.ClassifiedAd
+                .Include(c => c.SubCategory).Include(c => c.SubCategory.Category).Include(c => c.CreatedByUser)
+                .SingleOrDefaultAsync(m => m.Slug == id);
+            if (!classifiedAd.IsActive)
+            {
+                return View("Error");
+            }
+            if (classifiedAd.CreatedByUser.UserName.Equals(User.Identity.Name))
+            {
+                try
+                {
+                    classifiedAd.IsActive = false;
+                    _context.Update(classifiedAd);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ClassifiedAdExists(classifiedAd.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("Details", new { id = id });
+
+            }
+            return View("Error");
+        }
         //// GET: ClassifiedAds/Create
         //public IActionResult Create()
         //{
@@ -498,9 +649,9 @@ namespace KinMel.Controllers
         //    return RedirectToAction(nameof(Index));
         //}
 
-        //private bool ClassifiedAdExists(int id)
-        //{
-        //    return _context.ClassifiedAd.Any(e => e.Id == id);
-        //}
+        private bool ClassifiedAdExists(int id)
+        {
+            return _context.ClassifiedAd.Any(e => e.Id == id);
+        }
     }
 }
