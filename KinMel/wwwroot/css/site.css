@@ -222,6 +222,18 @@ nav .sidenav-trigger {
     margin-left: 0px !important;
 }
 
+.content-sold {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    max-width: 100%;
+    z-index: 2;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    line-height:1;
+    padding: 3px;
+}
 /**************GRID**************/
 .page-container-grid {
     display: grid;

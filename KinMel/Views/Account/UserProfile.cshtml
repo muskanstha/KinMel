@@ -139,6 +139,10 @@
                     {
                     <div class="card hoverable m-0">
                         <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug">
+                            @if (item.IsSold)
+                            {
+                                <p class="content-sold red white-text pulse">Sold</p>
+                            }
                             <div class="card-image waves-effect waves-block grey lighten-4 waves-light">
                                 <img class="content-image-grid" src="@classifiedAd.PrimaryImageUrl" />
                                 <span class="card-title content-price green">Nrs. @Html.DisplayFor(modelclassifiedAd => classifiedAd.Price)</span>
