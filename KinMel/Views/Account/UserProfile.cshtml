@@ -139,7 +139,7 @@
                     {
                     <div class="card hoverable m-0">
                         <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug">
-                            @if (item.IsSold)
+                            @if (classifiedAd.IsSold)
                             {
                                 <p class="content-sold red white-text pulse">Sold</p>
                             }
