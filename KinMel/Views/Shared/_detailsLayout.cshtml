@@ -19,12 +19,21 @@
         </p>
         <p class="details-price m-0">
             Nrs. @Model.Price
+
             <span class="right-align" style="float:right">
                 <label>
                     <i class="material-icons align-middle">access_time</i> @Html.DisplayFor(m => m.DateCreated)
                 </label>
             </span>
         </p>
+        @if (Model.IsSold)
+        {
+            <span class="sold-active">This item has been sold.</span>
+        }
+        @if (!Model.IsActive)
+        {
+            <span class="sold-active">This ad is no longer active.</span>
+        }
     </div>
     <div class="divider"></div>
     @*<section>
@@ -81,7 +90,7 @@
                     function initMap() {
                         // The location of Uluru
                         var theAddress = { lat: @Model.Latitude, lng: @Model.Longitude };
-                        // mapt style
+                        // map style
                         var styledMapType = new google.maps.StyledMapType([
                                 {
                                     "featureType": "landscape.natural",

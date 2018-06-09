@@ -1093,6 +1093,10 @@ nav .sidenav-trigger {
     object-fit: cover;
 }
 
+.sold-active {
+    font-size: 1.3em;
+    color: red;
+}
 /*@media only screen and (min-width: 992px) {
     #details-header {
         display: flex;
@@ -1104,9 +1108,8 @@ nav .sidenav-trigger {
         display: flex;
     }
 }*/
-
 .details-map-div {
-    background-image: url("/images/map-placeholder.png");
+    /*background-image: url("/images/map-placeholder.png");*/
     height: 280px;
     margin-top: 10px;
 }

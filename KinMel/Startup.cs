@@ -37,7 +37,7 @@ namespace KinMel
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultUI()
+                //.AddDefaultUI()
                 .AddDefaultTokenProviders();
 
             // Add application services.
