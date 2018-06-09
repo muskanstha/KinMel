@@ -5,7 +5,7 @@
 
 <div class="card side-content z-depth-3 hide-on-med-and-down">
     <div class="card-header mb-0">
-        Categories
+        Filters
     </div>
     <div class="card-content">
         <form asp-controller="ClassifiedAds" asp-action="Index">
@@ -15,7 +15,6 @@
             <div class="input-field">
                 @Html.LabelFor(m => m.City)
                 @Html.TextBoxFor(m => m.City, new { id = "autocomplete", placeholder = "" })
-
             </div>
 
             <div class="input-field">
@@ -27,19 +26,16 @@
                 @Html.LabelFor(m => m.PriceFrom)
                 @Html.TextBoxFor(m => m.PriceFrom, new { type = "number", min = "0", max = "10 Thousands" })
                 @Html.ValidationMessageFor(m => m.PriceFrom)
-
             </div>
 
             <div class="input-field">
-
                 @Html.LabelFor(m => m.PriceTo)
                 @Html.TextBoxFor(m => m.PriceTo, new { type = "number", min = "1", max = "10 crore" })
                 @Html.ValidationMessageFor(m => m.PriceTo)
-
             </div>
 
             <div class="container">
-                <button class="btn waves-effect waves-light green btn-small" type="submit" style="margin-bottom: 5px;">
+                <button class="btn waves-effect waves-light green btn-small mb-5" type="submit">
                     Filter
                     <i class="material-icons right">send</i>
                 </button>
