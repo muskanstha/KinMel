@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Maps.Geocoding;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -101,17 +102,26 @@ namespace KinMel.Controllers.Categories
         public async Task<IActionResult> Create(
             [Bind(
                 "Brand,Model,Color,Engine,Mileage,TotalKm,Features,Id,SubCategoryId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes,Type,ModelYear,RegisteredDistrict,LotNo")]
-            Motorcycle motorcycle, List<IFormFile> imageFiles)
+            Motorcycle motorcycle, List<IFormFile> imageFiles, IFormFile primaryImage)
         {
             if (ModelState.IsValid)
             {
-                long size = imageFiles.Sum(f => f.Length);
-                if (size > 0)
+                long? primaryImageLength = primaryImage?.Length;
+                if (primaryImageLength > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     motorcycle.CreatedByUserId = currentUserId;
-
                     motorcycle.DateCreated = DateTime.Now;
+
+
+                    var locationRequest = new GeocodingRequest { Address = $"{motorcycle.Address}, {motorcycle.City}" };
+                    var locationResponse = new GeocodingService().GetResponse(locationRequest);
+                    if (locationResponse.Results.Length > 0)
+                    {
+                        motorcycle.Latitude = locationResponse.Results.First().Geometry.Location.Latitude;
+                        motorcycle.Longitude = locationResponse.Results.First().Geometry.Location.Longitude;
+                    }
+
                     _context.Add(motorcycle);
                     await _context.SaveChangesAsync();
 
@@ -121,12 +131,23 @@ namespace KinMel.Controllers.Categories
                     motorcycle.Slug = slug;
 
                     BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
+                    motorcycle.PrimaryImageUrl = await blobStorageUploader.UploadMainBlob(slug, primaryImage);
 
-                    motorcycle.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
+                    long? imageFilesLength = imageFiles?.Sum(f => f.Length);
+                    if (imageFilesLength > 0)
+                    {
+                        motorcycle.ImageUrls = await blobStorageUploader.UploadBlobs(slug, imageFiles);
+                    }
+                    else
+                    {
+                        motorcycle.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
+                    }
 
                     await _context.SaveChangesAsync();
+
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
+
             }
 
             ViewData["SubCategoryId"] =

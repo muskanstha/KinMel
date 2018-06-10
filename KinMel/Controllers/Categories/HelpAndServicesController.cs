@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Maps.Geocoding;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
 using KinMel.Models;
+using KinMel.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -90,13 +92,52 @@ namespace KinMel.Controllers.Categories
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] HelpAndServices helpAndServices, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] HelpAndServices helpAndServices, List<IFormFile> imageFiles, IFormFile primaryImage)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(helpAndServices);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                long? primaryImageLength = primaryImage?.Length;
+                if (primaryImageLength > 0)
+                {
+                    var currentUserId = _userManager.GetUserId(this.User);
+                    helpAndServices.CreatedByUserId = currentUserId;
+                    helpAndServices.DateCreated = DateTime.Now;
+
+
+                    var locationRequest = new GeocodingRequest { Address = $"{helpAndServices.Address}, {helpAndServices.City}" };
+                    var locationResponse = new GeocodingService().GetResponse(locationRequest);
+                    if (locationResponse.Results.Length > 0)
+                    {
+                        helpAndServices.Latitude = locationResponse.Results.First().Geometry.Location.Latitude;
+                        helpAndServices.Longitude = locationResponse.Results.First().Geometry.Location.Longitude;
+                    }
+
+                    _context.Add(helpAndServices);
+                    await _context.SaveChangesAsync();
+
+                    string forSlug = helpAndServices.Id + " " + String.Join(" ", helpAndServices.Title.Split().Take(4));
+                    string slug = forSlug.GenerateSlug();
+
+                    helpAndServices.Slug = slug;
+
+                    BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
+                    helpAndServices.PrimaryImageUrl = await blobStorageUploader.UploadMainBlob(slug, primaryImage);
+
+                    long? imageFilesLength = imageFiles?.Sum(f => f.Length);
+                    if (imageFilesLength > 0)
+                    {
+                        helpAndServices.ImageUrls = await blobStorageUploader.UploadBlobs(slug, imageFiles);
+                    }
+                    else
+                    {
+                        helpAndServices.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
+                    }
+
+                    await _context.SaveChangesAsync();
+
+                    return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
+                }
+
             }
             ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("HelpAndServices")), "Id", "Name", helpAndServices.SubCategoryId);
             return View(helpAndServices);
