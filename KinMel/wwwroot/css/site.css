@@ -154,9 +154,10 @@ nav .sidenav-trigger {
         top: 15px;
         left: 26px;
         background: #ff0057;
-        display: block;
+        /*display: block;*/
         border-radius: 10px;
         padding: 0;
+        display: none;
     }
 
 #output_image {

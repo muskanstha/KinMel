@@ -173,7 +173,7 @@ namespace KinMel.Models
         public double? Battery { get; set; }
     }
 
-    public class RealState : ClassifiedAd
+    public class RealEstate : ClassifiedAd
     {
         public string PropertyType { get; set; }//dropdown
         public string LandSize { get; set; }//(aana/dhur/m2)

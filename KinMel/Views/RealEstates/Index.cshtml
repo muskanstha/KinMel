@@ -1,0 +1,15 @@
+﻿@model IEnumerable<KinMel.Models.RealEstate>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!--Breadcrumbs-->
+<div class="page-container grey lighten-3">
+    <div class="row browse-width mb-0 p-5 grey lighten-3">
+        <a asp-controller="Home" asp-action="Index" class="breadcrumb">Home</a>
+        <a asp-controller="RealEstates" asp-action="Index" class="breadcrumb">RealState</a>
+    </div>
+</div>
+
+@await Component.InvokeAsync("MainContent", new { sortOrder = Context.Request.Query["sortOrder"].ToString(), category = "RealEstate" })

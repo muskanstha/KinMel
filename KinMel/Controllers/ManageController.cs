@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Inflector;
 using KinMel.Data;
 using KinMel.Extensions;
 using Microsoft.AspNetCore.Authentication;
@@ -152,7 +151,32 @@ namespace KinMel.Controllers
         // GET: Manage/Create
         public IActionResult CreateAd()
         {
-            ViewData["CategoryName"] = new SelectList(_context.Set<Category>().OrderBy(c => c.Name), "Name", "Name");
+            //ViewData["CategoryName"] = new SelectList(_context.Set<Category>().OrderBy(c => c.Name), "Name", "Name");
+            ViewData["CategoryName"] = new SelectList(new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Car", Value = "Cars"},
+                new SelectListItem {Text = "Mobile", Value = "Mobiles"},
+                new SelectListItem {Text = "Motorcycle", Value = "Motorcycles"},
+                new SelectListItem {Text = "Real Estate", Value = "RealEstates"},
+                new SelectListItem {Text = "Computer", Value = "Computers"},
+                new SelectListItem {Text = "Jobs", Value = "Jobs"},
+                new SelectListItem {Text = "Beauty And Health", Value = "BeautyAndHealth"},
+                new SelectListItem {Text = "Books And Learning", Value = "BooksAndLearning"},
+                new SelectListItem {Text = "Electronics", Value = "Electronics"},
+                new SelectListItem {Text = "Furnitures", Value = "Furnitures"},
+                new SelectListItem {Text = "Camera", Value = "Cameras"},
+                new SelectListItem {Text = "Music Instruments", Value = "MusicInstruments"},
+                new SelectListItem {Text = "Pets And Petcare", Value = "PetsAndPetcares"},
+                new SelectListItem {Text = "Sports And Fitness", Value = "SportsAndFitnesses"},
+                new SelectListItem {Text = "Tablets And iPads", Value = "TabletsAndIPads"},
+                new SelectListItem {Text = "Toys And Games", Value = "ToysAndGames"},
+                new SelectListItem {Text = "Travel And Tours", Value = "TravelAndTours"},
+                new SelectListItem {Text = "Help And Services", Value = "HelpAndServices"},
+                new SelectListItem {Text = "Mobile Accessories", Value = "MobileAccessories"},
+                new SelectListItem {Text = "Computer Parts", Value = "ComputerParts"},
+                new SelectListItem {Text = "Apparels And Accessories", Value = "ApparelsAndAccessories"},
+                new SelectListItem {Text = "Vehicle Parts", Value = "VehicleParts"}
+            }, "Value", "Text");
             return View();
         }
 
@@ -165,10 +189,34 @@ namespace KinMel.Controllers
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Create", model.CategoryName.Pluralize());
+                return RedirectToAction("Create", model.CategoryName);
             }
-            ViewData["CategoryName"] = new SelectList(_context.Set<Category>().OrderBy(c => c.Name), "Name", "Name", model.CategoryName);
-
+            //ViewData["CategoryName"] = new SelectList(_context.Set<Category>().OrderBy(c => c.Name), "Name", "Name", model.CategoryName);
+            ViewData["CategoryName"] = new SelectList(new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Car", Value = "Cars"},
+                new SelectListItem {Text = "Mobile", Value = "Mobiles"},
+                new SelectListItem {Text = "Motorcycle", Value = "Motorcycles"},
+                new SelectListItem {Text = "Real Estate", Value = "RealEstates"},
+                new SelectListItem {Text = "Computer", Value = "Computers"},
+                new SelectListItem {Text = "Jobs", Value = "Jobs"},
+                new SelectListItem {Text = "Beauty And Health", Value = "BeautyAndHealth"},
+                new SelectListItem {Text = "Books And Learning", Value = "BooksAndLearning"},
+                new SelectListItem {Text = "Electronics", Value = "Electronics"},
+                new SelectListItem {Text = "Furnitures", Value = "Furnitures"},
+                new SelectListItem {Text = "Camera", Value = "Cameras"},
+                new SelectListItem {Text = "Music Instruments", Value = "MusicInstruments"},
+                new SelectListItem {Text = "Pets And Petcare", Value = "PetsAndPetcares"},
+                new SelectListItem {Text = "Sports And Fitness", Value = "SportsAndFitnesses"},
+                new SelectListItem {Text = "Tablets And iPads", Value = "TabletsAndIPads"},
+                new SelectListItem {Text = "Toys And Games", Value = "ToysAndGames"},
+                new SelectListItem {Text = "Travel And Tours", Value = "TravelAndTours"},
+                new SelectListItem {Text = "Help And Services", Value = "HelpAndServices"},
+                new SelectListItem {Text = "Mobile Accessories", Value = "MobileAccessories"},
+                new SelectListItem {Text = "Computer Parts", Value = "ComputerParts"},
+                new SelectListItem {Text = "Apparels And Accessories", Value = "ApparelsAndAccessories"},
+                new SelectListItem {Text = "Vehicle Parts", Value = "VehicleParts"}
+            }, "Value", "Text");
             return View(model);
         }
         [HttpGet]

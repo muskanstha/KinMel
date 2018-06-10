@@ -16,11 +16,11 @@ using Microsoft.AspNetCore.Identity;
 namespace KinMel.Controllers.Categories
 {
     [Authorize]
-    public class RealStatesController : Controller
+    public class RealEstatesController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        public RealStatesController(ApplicationDbContext context,
+        public RealEstatesController(ApplicationDbContext context,
             UserManager<ApplicationUser> userManager)
         {
             _context = context;
@@ -83,7 +83,7 @@ namespace KinMel.Controllers.Categories
         // GET: RealStates/Create
         public IActionResult Create()
         {
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Realstate")), "Id", "Name");
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("RealEstate")), "Id", "Name");
             return View();
         }
 
@@ -92,7 +92,7 @@ namespace KinMel.Controllers.Categories
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PropertyType,LandSize,Floors,TotalRooms,Furnishing,Features,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] RealState realState, List<IFormFile> imageFiles, IFormFile primaryImage)
+        public async Task<IActionResult> Create([Bind("PropertyType,LandSize,Floors,TotalRooms,Furnishing,Features,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] RealEstate realEstate, List<IFormFile> imageFiles, IFormFile primaryImage)
         {
             if (ModelState.IsValid)
             {
@@ -100,37 +100,37 @@ namespace KinMel.Controllers.Categories
                 if (primaryImageLength > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
-                    realState.CreatedByUserId = currentUserId;
-                    realState.DateCreated = DateTime.Now;
+                    realEstate.CreatedByUserId = currentUserId;
+                    realEstate.DateCreated = DateTime.Now;
 
 
-                    var locationRequest = new GeocodingRequest { Address = $"{realState.Address}, {realState.City}" };
+                    var locationRequest = new GeocodingRequest { Address = $"{realEstate.Address}, {realEstate.City}" };
                     var locationResponse = new GeocodingService().GetResponse(locationRequest);
                     if (locationResponse.Results.Length > 0)
                     {
-                        realState.Latitude = locationResponse.Results.First().Geometry.Location.Latitude;
-                        realState.Longitude = locationResponse.Results.First().Geometry.Location.Longitude;
+                        realEstate.Latitude = locationResponse.Results.First().Geometry.Location.Latitude;
+                        realEstate.Longitude = locationResponse.Results.First().Geometry.Location.Longitude;
                     }
 
-                    _context.Add(realState);
+                    _context.Add(realEstate);
                     await _context.SaveChangesAsync();
 
-                    string forSlug = realState.Id + " " + String.Join(" ", realState.Title.Split().Take(4));
+                    string forSlug = realEstate.Id + " " + String.Join(" ", realEstate.Title.Split().Take(4));
                     string slug = forSlug.GenerateSlug();
 
-                    realState.Slug = slug;
+                    realEstate.Slug = slug;
 
                     BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
-                    realState.PrimaryImageUrl = await blobStorageUploader.UploadMainBlob(slug, primaryImage);
+                    realEstate.PrimaryImageUrl = await blobStorageUploader.UploadMainBlob(slug, primaryImage);
 
                     long? imageFilesLength = imageFiles?.Sum(f => f.Length);
                     if (imageFilesLength > 0)
                     {
-                        realState.ImageUrls = await blobStorageUploader.UploadBlobs(slug, imageFiles);
+                        realEstate.ImageUrls = await blobStorageUploader.UploadBlobs(slug, imageFiles);
                     }
                     else
                     {
-                        realState.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
+                        realEstate.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
                     }
 
                     await _context.SaveChangesAsync();
@@ -139,8 +139,8 @@ namespace KinMel.Controllers.Categories
                 }
 
             }
-            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Realstate")), "Id", "Name", realState.SubCategoryId);
-            return View(realState);
+            ViewData["SubCategoryId"] = new SelectList(_context.Set<SubCategory>().Where(sc => sc.Category.Name.Equals("Realstate")), "Id", "Name", realEstate.SubCategoryId);
+            return View(realEstate);
         }
 
         //// GET: RealStates/Edit/5

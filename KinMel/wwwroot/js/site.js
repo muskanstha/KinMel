@@ -28,8 +28,13 @@ $(document).ready(function () {
 
     //var count = JSON.parse($.getJSON("notifications/notificationcount/"));
     $.getJSON("/notifications/notificationcount/",
-        function (data) {
-            document.getElementById("notificationCount").innerHTML = data;
+        function (count) {
+            var notificationCount = $("#notificationCount");
+            notificationCount.empty();
+            if (count > 0) {
+                notificationCount.css("display", "block");
+                notificationCount.html(count);
+            }
         });
 
     ////carousel
