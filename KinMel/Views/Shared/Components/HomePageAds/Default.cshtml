@@ -61,20 +61,21 @@
                 </a>
             </div>
             <div class="contents-list">
-                <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
-                @if (@item.Condition == "NEW")
-                {
-                    <a class="content-condition-list red-text darken-1">(@Html.DisplayFor(modelItem => item.Condition))</a>
-                }
-                else
-                {
-                    <a class="content-condition-list cyan-text darken-3">(@Html.DisplayFor(modelItem => item.Condition))</a>
-                }
-
+                <div>
+                    <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
+                    @if (@item.Condition == "NEW")
+                    {
+                        <a class="content-condition-list red-text darken-1">(@Html.DisplayFor(modelItem => item.Condition))</a>
+                    }
+                    else
+                    {
+                        <a class="content-condition-list grey-text text-darken-3">(@Html.DisplayFor(modelItem => item.Condition))</a>
+                    }
+                </div>
                 <div>
                     <div>
                         <p class="content-description-list">@Html.DisplayFor(modelItem => item.Description)</p>
-                        <p class="material-icons align-middle m-5">person_outline</p>
+                        <p class="material-icons align-middle">person_outline</p>
                         <a asp-action="UserProfile" asp-controller="Account" asp-route-id="@item.CreatedByUser.UserName" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
                     </div>
                     <div>

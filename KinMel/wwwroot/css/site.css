@@ -224,12 +224,11 @@ nav .sidenav-trigger {
 
 .content-sold {
     position: absolute;
-    bottom: 5px;
+    top: 5px;
     right: 5px;
     max-width: 100%;
     z-index: 2;
     font-size: 16px;
-    font-weight: 500;
     border-radius: 5px;
     line-height: 1;
     padding: 3px;
@@ -602,10 +601,6 @@ nav .sidenav-trigger {
                 padding: 14px 16px;
             }
 
-    .footer a {
-        font-size: 3.6vw;
-    }
-
     footer .brand-logo {
         font-size: 6.6vw !important;
     }
@@ -882,6 +877,10 @@ nav .sidenav-trigger {
     width: 100%;
 }
 
+.contents-list > div:first-child{
+    display: flex;
+}
+
 .content-image-grid {
     height: 150px;
     -webkit-object-fit: cover;
@@ -941,7 +940,7 @@ nav .sidenav-trigger {
 .content-datecreated {
     font-size: 10px;
     color: grey;
-    margin: 0px;
+    margin: auto 0;
 }
 
 .content-price {
@@ -970,6 +969,7 @@ nav .sidenav-trigger {
 
 .content-condition-list {
     font-size: 10px;
+    line-height: 2.5;
 }
 /******************End*******************/
 /****************Details*****************/
