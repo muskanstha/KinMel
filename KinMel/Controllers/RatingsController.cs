@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace KinMel.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class RatingsController : Controller
     {
         private readonly ApplicationDbContext _context;

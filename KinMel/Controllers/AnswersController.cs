@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KinMel.Data;
 using KinMel.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 namespace KinMel.Controllers
 {
+    [Authorize]
     public class AnswersController : Controller
     {
         private readonly ApplicationDbContext _context;
