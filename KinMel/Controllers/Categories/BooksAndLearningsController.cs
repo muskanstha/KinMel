@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Maps.Geocoding;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -91,17 +92,26 @@ namespace KinMel.Controllers.Categories
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Author,Isbn,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] BooksAndLearning booksAndLearning, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Author,Isbn,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] BooksAndLearning booksAndLearning, List<IFormFile> imageFiles, IFormFile primaryImage)
         {
             if (ModelState.IsValid)
             {
-                long size = imageFiles.Sum(f => f.Length);
-                if (size > 0)
+                long? primaryImageLength = primaryImage?.Length;
+                if (primaryImageLength > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     booksAndLearning.CreatedByUserId = currentUserId;
-
                     booksAndLearning.DateCreated = DateTime.Now;
+
+
+                    var locationRequest = new GeocodingRequest { Address = $"{booksAndLearning.Address}, {booksAndLearning.City}" };
+                    var locationResponse = new GeocodingService().GetResponse(locationRequest);
+                    if (locationResponse.Results.Length > 0)
+                    {
+                        booksAndLearning.Latitude = locationResponse.Results.First().Geometry.Location.Latitude;
+                        booksAndLearning.Longitude = locationResponse.Results.First().Geometry.Location.Longitude;
+                    }
+
                     _context.Add(booksAndLearning);
                     await _context.SaveChangesAsync();
 
@@ -111,10 +121,20 @@ namespace KinMel.Controllers.Categories
                     booksAndLearning.Slug = slug;
 
                     BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
+                    booksAndLearning.PrimaryImageUrl = await blobStorageUploader.UploadMainBlob(slug, primaryImage);
 
-                    booksAndLearning.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
+                    long? imageFilesLength = imageFiles?.Sum(f => f.Length);
+                    if (imageFilesLength > 0)
+                    {
+                        booksAndLearning.ImageUrls = await blobStorageUploader.UploadBlobs(slug, imageFiles);
+                    }
+                    else
+                    {
+                        booksAndLearning.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
+                    }
 
                     await _context.SaveChangesAsync();
+
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 

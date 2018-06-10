@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Maps.Geocoding;
 using KinMel.Data;
 using KinMel.Models;
 using KinMel.Services;
@@ -92,17 +93,26 @@ namespace KinMel.Controllers.Categories.Categories
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] SportsAndFitness sportsAndFitness, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,CreatedByUserId,Title,Description,ImageUrls,Condition,Price,PriceNegotiable,Delivery,DateCreated,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] SportsAndFitness sportsAndFitness, List<IFormFile> imageFiles, IFormFile primaryImage)
         {
             if (ModelState.IsValid)
             {
-                long size = imageFiles.Sum(f => f.Length);
-                if (size > 0)
+                long? primaryImageLength = primaryImage?.Length;
+                if (primaryImageLength > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     sportsAndFitness.CreatedByUserId = currentUserId;
-
                     sportsAndFitness.DateCreated = DateTime.Now;
+
+
+                    var locationRequest = new GeocodingRequest { Address = $"{sportsAndFitness.Address}, {sportsAndFitness.City}" };
+                    var locationResponse = new GeocodingService().GetResponse(locationRequest);
+                    if (locationResponse.Results.Length > 0)
+                    {
+                        sportsAndFitness.Latitude = locationResponse.Results.First().Geometry.Location.Latitude;
+                        sportsAndFitness.Longitude = locationResponse.Results.First().Geometry.Location.Longitude;
+                    }
+
                     _context.Add(sportsAndFitness);
                     await _context.SaveChangesAsync();
 
@@ -112,10 +122,20 @@ namespace KinMel.Controllers.Categories.Categories
                     sportsAndFitness.Slug = slug;
 
                     BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
+                    sportsAndFitness.PrimaryImageUrl = await blobStorageUploader.UploadMainBlob(slug, primaryImage);
 
-                    sportsAndFitness.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
+                    long? imageFilesLength = imageFiles?.Sum(f => f.Length);
+                    if (imageFilesLength > 0)
+                    {
+                        sportsAndFitness.ImageUrls = await blobStorageUploader.UploadBlobs(slug, imageFiles);
+                    }
+                    else
+                    {
+                        sportsAndFitness.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
+                    }
 
                     await _context.SaveChangesAsync();
+
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 
