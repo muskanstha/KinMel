@@ -31,7 +31,7 @@ namespace KinMel.Data
 
         public DbSet<KinMel.Models.Motorcycle> Motorcycle { get; set; }
 
-        public DbSet<KinMel.Models.RealState> RealState { get; set; }
+        public DbSet<KinMel.Models.RealEstate> RealState { get; set; }
 
         public DbSet<KinMel.Models.Computer> Computer { get; set; }
 
