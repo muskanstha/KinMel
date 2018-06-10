@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Maps.Geocoding;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -91,17 +92,26 @@ namespace KinMel.Controllers.Categories
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] BeautyAndHealth beautyAndHealth, List<IFormFile> imageFiles)
+        public async Task<IActionResult> Create([Bind("Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes")] BeautyAndHealth beautyAndHealth, List<IFormFile> imageFiles,  IFormFile primaryImage)
         {
             if (ModelState.IsValid)
             {
-                long size = imageFiles.Sum(f => f.Length);
-                if (size > 0)
+                long? primaryImageLength = primaryImage?.Length;
+                if (primaryImageLength > 0)
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     beautyAndHealth.CreatedByUserId = currentUserId;
-
                     beautyAndHealth.DateCreated = DateTime.Now;
+
+
+                    var locationRequest = new GeocodingRequest { Address = $"{beautyAndHealth.Address}, {beautyAndHealth.City}" };
+                    var locationResponse = new GeocodingService().GetResponse(locationRequest);
+                    if (locationResponse.Results.Length > 0)
+                    {
+                        beautyAndHealth.Latitude = locationResponse.Results.First().Geometry.Location.Latitude;
+                        beautyAndHealth.Longitude = locationResponse.Results.First().Geometry.Location.Longitude;
+                    }
+
                     _context.Add(beautyAndHealth);
                     await _context.SaveChangesAsync();
 
@@ -111,10 +121,20 @@ namespace KinMel.Controllers.Categories
                     beautyAndHealth.Slug = slug;
 
                     BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
+                    beautyAndHealth.PrimaryImageUrl = await blobStorageUploader.UploadMainBlob(slug, primaryImage);
 
-                    beautyAndHealth.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
+                    long? imageFilesLength = imageFiles?.Sum(f => f.Length);
+                    if (imageFilesLength > 0)
+                    {
+                        beautyAndHealth.ImageUrls = await blobStorageUploader.UploadBlobs(slug, imageFiles);
+                    }
+                    else
+                    {
+                        beautyAndHealth.ImageUrls = await blobStorageUploader.ListBlobsFolder(slug);
+                    }
 
                     await _context.SaveChangesAsync();
+
                     return RedirectToAction("Details", "ClassifiedAds", new { id = slug });
                 }
 

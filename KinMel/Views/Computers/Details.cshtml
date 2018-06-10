@@ -1,174 +1,60 @@
 ﻿@model KinMel.Models.Computer
 
 @{
+    Layout = "/Views/Shared/_detailsLayout.cshtml";
+
     ViewData["Title"] = "Details";
 }
-
-<h2>Details</h2>
-
-<div>
-    <h4>Computer</h4>
-    <hr />
-    <div>
-        @foreach (var item in Model.ImageUrlList)
-        {
-            <img src="@item" />
-        }
+<div class="col s12 m6">
+    <div class="fields-list">
+        <ul>
+            <li>
+                <label asp-for="@Model.Type"></label>
+                <p> @Html.DisplayFor(m => m.Type)</p>
+            </li>
+            <li>
+                <label asp-for="@Model.Processor"></label>
+                <p> @Html.DisplayFor(m => m.Processor)</p>
+            </li>
+            <li>
+                <label asp-for="@Model.ProcessorGeneration"></label>
+                <p> @Html.DisplayFor(m => m.ProcessorGeneration)</p>
+            </li>
+            <li>
+                <label asp-for="@Model.GraphicsCard"></label>
+                <p> @Html.DisplayFor(m => m.GraphicsCard) GB</p>
+            </li>
+            <li>
+                <label asp-for="@Model.Ram"></label>
+                <p> @Html.DisplayFor(m => m.Ram) GB</p>
+            </li>
+        </ul>
     </div>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Processor)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Processor)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ProcessorGeneration)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ProcessorGeneration)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Ram)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Ram)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.GraphicsCard)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.GraphicsCard)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.HDD)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.HDD)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SSD)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SSD)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ScreenType)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ScreenType)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ScreenSize)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ScreenSize)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Battery)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Battery)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Features)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Features)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageUrls)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ImageUrls)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Condition)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Condition)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PriceNegotiable)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PriceNegotiable)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Delivery)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Delivery)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DateCreated)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsSold)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsSold)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IsActive)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Slug)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Slug)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Discriminator)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Discriminator)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedByUser)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CreatedByUser.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SubCategory)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SubCategory.Id)
-        </dd>
-    </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="col s12 m6">
+    <div class="fields-list">
+        <ul>
+            <li>
+                <label asp-for="@Model.HDD"></label>
+                <p> @Html.DisplayFor(m => m.HDD) GB</p>
+            </li>
+            <li>
+                <label asp-for="@Model.SSD"></label>
+                <p> @Html.DisplayFor(m => m.SSD) GB</p>
+            </li>
+            <li>
+                <label asp-for="@Model.Battery"></label>
+                <p> @Html.DisplayFor(m => m.Battery)</p>
+            </li>
+            <li>
+                <label asp-for="@Model.ScreenType"></label>
+                <p> @Html.DisplayFor(m => m.ScreenType)</p>
+            </li>
+            <li>
+                <label asp-for="@Model.ScreenSize"></label>
+                <p> @Html.DisplayFor(m => m.ScreenSize) Inches</p>
+            </li>
+        </ul>
+    </div>
 </div>

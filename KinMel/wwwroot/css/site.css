@@ -218,9 +218,9 @@ nav .sidenav-trigger {
     display: flex;
 }
 
-.card .card-reveal .card-title > i {
-    margin-left: 0px !important;
-}
+    .card .card-reveal .card-title > i {
+        margin-left: 0px !important;
+    }
 
 .content-sold {
     position: absolute;
@@ -231,7 +231,7 @@ nav .sidenav-trigger {
     font-size: 16px;
     font-weight: 500;
     border-radius: 5px;
-    line-height:1;
+    line-height: 1;
     padding: 3px;
 }
 /**************GRID**************/
@@ -708,24 +708,24 @@ nav .sidenav-trigger {
         height: 16vw !important;
     }
 
-    .taxonomy .taxonomy-sections {
-        grid-template-columns: repeat(22, 20vw) !important;
-    }
-
-    .taxonomy .taxonomy-sections > li {
-        width: 20vw !important;
-    }
-
-        .taxonomy .taxonomy-sections > li a i {
-            height: 7.2vw !important;
-            font-size: 7.2vw !important;
-            line-height: 7.2vw !important;
+        .taxonomy .taxonomy-sections {
+            grid-template-columns: repeat(22, 20vw) !important;
         }
 
-        .taxonomy .taxonomy-sections > li a span {
-            font-size: 2.6vw !important;
-            line-height: 3.2vw !important;
-        }
+            .taxonomy .taxonomy-sections > li {
+                width: 20vw !important;
+            }
+
+                .taxonomy .taxonomy-sections > li a i {
+                    height: 7.2vw !important;
+                    font-size: 7.2vw !important;
+                    line-height: 7.2vw !important;
+                }
+
+                .taxonomy .taxonomy-sections > li a span {
+                    font-size: 2.6vw !important;
+                    line-height: 3.2vw !important;
+                }
 
     .collection > li > a > img {
         left: 21px !important;
@@ -981,14 +981,23 @@ nav .sidenav-trigger {
 }
 
 .details-title {
-    font-size: 1.5em;
+    font-size: 20px;
     font-weight: bold;
 }
 
 .details-price {
-    font-size: 2em;
+    font-size: 22px;
     color: darkgreen;
     font-weight: bold;
+}
+
+.details-price-pulse {
+    font-size: 14px !important;
+    padding: 5px;
+    margin-left: 5px;
+    float: right;
+    text-align: right;
+    color: white;
 }
 
 .details-description {
@@ -1050,7 +1059,6 @@ nav .sidenav-trigger {
         height: 100%;
         object-fit: contain;
         vertical-align: middle;
-
     }
 
 /*.materialboxed.active {
