@@ -114,9 +114,9 @@
     <div class="grey lighten-4 card-content">
         <b>About me!</b>
         <p>
-            Hi I am from Kathmandu, currently studying Computer Science in Denmark. 
+            Hi I am from Kathmandu, currently studying Computer Science in Denmark.
             I just love using different trending gadgets.
-            I usually buy electronics and gadgets online and I think buying used items can sometimes be economic. 
+            I usually buy electronics and gadgets online and I think buying used items can sometimes be economic.
             I encourage everyone to try buying used items responsibly.
         </p>
         <a class="pink-text text-darken-3">Read more<i class="material-icons align-middle">arrow_forward</i></a>
@@ -137,49 +137,49 @@
                 <div class="main-content-cards hide-on-small-and-down p-5">
                     @foreach (ClassifiedAd classifiedAd in Model.ClassifiedAds)
                     {
-                    <div class="card hoverable m-0">
-                        <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug">
-                            @if (classifiedAd.IsSold)
-                            {
-                                <p class="content-sold red white-text pulse">Sold</p>
-                            }
-                            <div class="card-image waves-effect waves-block grey lighten-4 waves-light">
-                                <img class="content-image-grid" src="@classifiedAd.PrimaryImageUrl" />
-                                <span class="card-title content-price green">Nrs. @Html.DisplayFor(modelclassifiedAd => classifiedAd.Price)</span>
-                            </div>
-                            <div class="card-content pt-5">
-                                <p class="content-datecreated">Posted on: @Html.DisplayFor(modelclassifiedAd => classifiedAd.DateCreated)</p>
-                                <span class="card-title grey-text text-darken-4 mb-0">
-                                    <b class="content-title">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Title)</b>
-                                </span>
-                                @if (@classifiedAd.Condition == "NEW")
+                        <div class="card hoverable m-0">
+                            <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug">
+                                @if (classifiedAd.IsSold)
                                 {
-                                    <a class="content-condition btn-large red darken-1 activator">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Condition)</a>
+                                    <p class="content-sold red white-text pulse">Sold</p>
                                 }
-                                else
-                                {
-                                    <a class="content-condition btn-large cyan darken-3 activator">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Condition)</a>
-                                }
-                                <div class="chip">
-                                    <img src="@classifiedAd.CreatedByUser.ProfilePictureUrl" alt="" class="object-fit-cover" />
-                                    <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@classifiedAd.CreatedByUser.UserName class="content-username"> @Html.DisplayFor(modelclassifiedAd => classifiedAd.CreatedByUser.FullName)</a>
+                                <div class="card-image waves-effect waves-block grey lighten-4 waves-light">
+                                    <img class="content-image-grid" src="@classifiedAd.PrimaryImageUrl" />
+                                    <span class="card-title content-price green">Nrs. @Html.DisplayFor(modelclassifiedAd => classifiedAd.Price)</span>
                                 </div>
-                            </div>
-                            <div class="card-reveal">
-                                <span class="card-title grey-text text-darken-4">
-                                    <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">@Html.DisplayFor(modelItem => classifiedAd.Title)</a>
-                                    <i class="material-icons right">close</i>
-                                </span>
-                                <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.UsedFor): @Html.DisplayFor(modelItem => classifiedAd.UsedFor)</p>
-                                <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.PriceNegotiable): @Html.DisplayFor(modelItem => classifiedAd.PriceNegotiable)</p>
-                                <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.Address): @Html.DisplayFor(modelItem => classifiedAd.Address)</p>
-                                <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.City): @Html.DisplayFor(modelItem => classifiedAd.City)</p>
-                                <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.Delivery): @Html.DisplayFor(modelItem => classifiedAd.Delivery)</p>
-                                <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.DeliveryCharges): @Html.DisplayFor(modelItem => classifiedAd.DeliveryCharges)</p>
-                                <p class="content-datecreated">@Html.LabelFor(modelItem => classifiedAd.DateCreated): @Html.DisplayFor(modelItem => classifiedAd.DateCreated)</p>
-                            </div>
-                        </a>
-                    </div>
+                                <div class="card-content pt-5">
+                                    <p class="content-datecreated">Posted on: @Html.DisplayFor(modelclassifiedAd => classifiedAd.DateCreated)</p>
+                                    <span class="card-title grey-text text-darken-4 mb-0">
+                                        <b class="content-title">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Title)</b>
+                                    </span>
+                                    @if (@classifiedAd.Condition == "NEW")
+                                    {
+                                        <a class="content-condition btn-large red darken-1 activator">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Condition)</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="content-condition btn-large cyan darken-3 activator">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Condition)</a>
+                                    }
+                                    <div class="chip">
+                                        <img src="@classifiedAd.CreatedByUser.ProfilePictureUrl" alt="" class="object-fit-cover" />
+                                        <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@classifiedAd.CreatedByUser.UserName class="content-username"> @Html.DisplayFor(modelclassifiedAd => classifiedAd.CreatedByUser.FullName)</a>
+                                    </div>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4">
+                                        <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">@Html.DisplayFor(modelItem => classifiedAd.Title)</a>
+                                        <i class="material-icons right">close</i>
+                                    </span>
+                                    <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.UsedFor): @Html.DisplayFor(modelItem => classifiedAd.UsedFor)</p>
+                                    <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.PriceNegotiable): @Html.DisplayFor(modelItem => classifiedAd.PriceNegotiable)</p>
+                                    <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.Address): @Html.DisplayFor(modelItem => classifiedAd.Address)</p>
+                                    <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.City): @Html.DisplayFor(modelItem => classifiedAd.City)</p>
+                                    <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.Delivery): @Html.DisplayFor(modelItem => classifiedAd.Delivery)</p>
+                                    <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.DeliveryCharges): @Html.DisplayFor(modelItem => classifiedAd.DeliveryCharges)</p>
+                                    <p class="content-datecreated">@Html.LabelFor(modelItem => classifiedAd.DateCreated): @Html.DisplayFor(modelItem => classifiedAd.DateCreated)</p>
+                                </div>
+                            </a>
+                        </div>
                     }
                 </div>
 
@@ -194,16 +194,17 @@
                                 </a>
                             </div>
                             <div class="contents-list">
-                                <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Title)</a>
-                                @if (@classifiedAd.Condition == "NEW")
-                                {
-                                    <a class="content-condition-list red-text darken-1">(@Html.DisplayFor(modelclassifiedAd => classifiedAd.Condition))</a>
-                                }
-                                else
-                                {
-                                    <a class="content-condition-list cyan-text darken-3">(@Html.DisplayFor(modelclassifiedAd => classifiedAd.Condition))</a>
-                                }
-
+                                <div>
+                                    <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Title)</a>
+                                    @if (@classifiedAd.Condition == "NEW")
+                                    {
+                                        <a class="content-condition-list red-text darken-1">(@Html.DisplayFor(modelclassifiedAd => classifiedAd.Condition))</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="content-condition-list grey-text text-darken-3">(@Html.DisplayFor(modelclassifiedAd => classifiedAd.Condition))</a>
+                                    }
+                                </div>
                                 <div>
                                     <div>
                                         <p class="content-description-list">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Description)</p>
