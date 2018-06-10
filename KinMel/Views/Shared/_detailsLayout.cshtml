@@ -16,42 +16,61 @@
     <div class="col s12">
         <p class="details-title mt-10 mb-10">
             @Model.Title
-        </p>
-        <p class="details-price m-0">
-            Nrs. @Model.Price
-
             <span class="right-align" style="float:right">
                 <label>
                     <i class="material-icons align-middle">access_time</i> @Html.DisplayFor(m => m.DateCreated)
                 </label>
             </span>
         </p>
-        @if (Model.IsSold)
-        {
-            <p class="sold-active">This item has been sold.</p>
-            if (Model.CreatedByUser.UserName.Equals(User.Identity.Name))
+        <p class="details-price m-0">
+            Nrs. @Model.Price
+            @if (Model.CreatedByUser.UserName.Equals(User.Identity.Name))
             {
-                <a asp-action="MarkAsUnSold" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn waves-green m-5">Mark as unsold</a>
-            }
-        }
-        else if (Model.CreatedByUser.UserName.Equals(User.Identity.Name))
+                <a class="dropdown-trigger" href="#" data-target="editAdDropdown">
+                    <i class="material-icons m-0">edit</i>
+                </a>
+                <ul id="editAdDropdown" class="dropdown-content" style="min-width: 400px;">
+                    @if (Model.IsSold)
+                    {
+                        <li>
+                            <a asp-action="MarkAsUnSold" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn white-text waves-green m-5">Mark as unsold</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-action="MarkAsSold" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn white-text waves-red red m-5">Mark as sold</a>
+                        </li>
+                    }
+                    @if (Model.IsActive)
+                    {
+                        <li>
+                            <a asp-action="MarkAsInactive" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn white-text waves-red red m-5">Mark as inactive</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a asp-action="MarkAsActive" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn white-text waves-green m-5">Mark as active</a>
+                        </li>
+                    }
 
-        {
-            <a asp-action="MarkAsSold" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn waves-red red m-5">Mark as sold</a>
-        }
-        @if (!Model.IsActive)
-        {
-            <p class="sold-active">This ad is no longer active.</p>
-            if (Model.CreatedByUser.UserName.Equals(User.Identity.Name))
+                </ul>
+            }
+
+
+            @if (!Model.IsActive)
             {
-                <a asp-action="MarkAsActive" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn waves-green m-5">Mark as active</a>
+                <span class="details-price-pulse grey pulse">Inactive</span>
             }
-        }
-        else if (Model.CreatedByUser.UserName.Equals(User.Identity.Name))
-        {
-            <a asp-action="MarkAsInactive" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn waves-red red m-5">Mark as inactive</a>
-        }
+            @if (Model.IsSold)
+            {
+                <span class="details-price-pulse red pulse">Sold</span>
 
+            }
+        </p>
+
+      
     </div>
     <div class="divider"></div>
     @*<section>
@@ -423,18 +442,25 @@
             @await Component.InvokeAsync("Questions", new { id = Model.Id })
             <div class="col s12">
                 <h6 class="blue-text">Couldn't find the answer to what you were looking for?</h6>
-                <form asp-area="" asp-controller="Questions" asp-action="Create" method="post">
-                    <div class="row m-0">
-                        <div class="input-field col s12 m12 l9">
-                            <label class="active" for="Text">Post a new question</label>
-                            <input id="Text" name="Text" required />
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-area="" asp-controller="Questions" asp-action="Create" method="post">
+                        <div class="row m-0">
+                            <div class="input-field col s12 m12 l9">
+                                <label class="active" for="Text">Post a new question</label>
+                                <input id="Text" name="Text" required />
+                            </div>
+                            <div class="input-field col s12 m12 l3">
+                                <input name="ClassifiedAdId" hidden value="@Model.Id" />
+                                <button type="submit" value="Create" class="btn">Submit Question</button>
+                            </div>
                         </div>
-                        <div class="input-field col s12 m12 l3">
-                            <input name="ClassifiedAdId" hidden value="@Model.Id" />
-                            <button type="submit" value="Create" class="btn">Submit Question</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                }
+                else
+                {
+                    <p class="m-5 p-5"> Please <a asp-controller="Account" asp-action="Login" class="btn">Login</a> or <a asp-controller="Account" asp-action="Register" class="btn">Register</a> to post a question.</p>
+                }
             </div>
         </div>
     </section>

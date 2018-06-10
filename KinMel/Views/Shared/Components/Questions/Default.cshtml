@@ -15,7 +15,7 @@
                 @Html.DisplayFor(modelItem => item.Text)
                 <br />
                 <label class="">
-                   Asked at @Html.DisplayFor(modelItem => item.DateCreated)
+                    Asked at @Html.DisplayFor(modelItem => item.DateCreated)
                 </label>
             </p>
             @*<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>*@
@@ -38,7 +38,7 @@
                                     @Html.DisplayFor(modelItem => answer.Text)
                                     <br />
                                     <label class="">
-                                       Answered at @Html.DisplayFor(modelItem => item.DateCreated)
+                                        Answered at @Html.DisplayFor(modelItem => item.DateCreated)
                                     </label>
                                 </p>
                                 @*<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>*@
@@ -53,16 +53,19 @@
                 <div class="col s1">
                 </div>
                 <div class="col s11">
-                    <form asp-area="" asp-controller="Answers" asp-action="Create" method="post">
-                        <div class="input-field col s12 m9">
-                            <label class="active" for="Text">Post your answer</label>
-                            <input id="Text" name="Text" required />
-                        </div>
-                        <div class="input-field col s12 m3">
-                            <input name="QuestionId" hidden value="@item.Id" />
-                            <button type="submit" value="Create" class="btn">Answer Question</button>
-                        </div>
-                    </form>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form asp-area="" asp-controller="Answers" asp-action="Create" method="post">
+                            <div class="input-field col s12 m9">
+                                <label class="active" for="Text">Post your answer</label>
+                                <input id="Text" name="Text" required />
+                            </div>
+                            <div class="input-field col s12 m3">
+                                <input name="QuestionId" hidden value="@item.Id" />
+                                <button type="submit" value="Create" class="btn">Answer Question</button>
+                            </div>
+                        </form>
+                    }
                 </div>
             </div>
         </li>
