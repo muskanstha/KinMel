@@ -121,7 +121,7 @@ nav .sidenav-trigger {
 .sorting-grid > div > .select-wrapper input.select-dropdown {
     height: 1.5em;
     padding-left: 5px;
-    color: #111111;
+    color: #fff;
     margin: 0px;
 }
 
@@ -580,6 +580,7 @@ nav .sidenav-trigger {
 
         .sorting-grid > div > .select-wrapper input.select-dropdown {
             font-size: 3.3vw;
+            height: 5vw !important;
         }
 
         .sorting-grid > div > .select-wrapper {
