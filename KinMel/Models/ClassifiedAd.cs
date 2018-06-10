@@ -64,7 +64,7 @@ namespace KinMel.Models
         public string UsedFor { get; set; }
 
         [DisplayName("Posted on")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd MMMM, yyyy hh:mm}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
         public bool IsSold { get; set; }
         public bool IsActive { get; set; }

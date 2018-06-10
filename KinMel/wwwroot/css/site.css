@@ -991,15 +991,20 @@ nav .sidenav-trigger {
     font-weight: bold;
 }
 
-.details-price-pulse {
+.details-price-tag {
     font-size: 14px !important;
     padding: 5px;
     margin-left: 5px;
-    float: right;
+    /*float: right;*/
     text-align: right;
     color: white;
 }
 
+#editAdDropdown {
+    font-size: 14px !important;
+    min-width: 150px;
+    font-weight: normal;
+}
 .details-description {
     font-size: 16px;
 }

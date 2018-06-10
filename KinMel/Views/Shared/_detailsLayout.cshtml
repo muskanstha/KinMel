@@ -16,62 +16,59 @@
     <div class="col s12">
         <p class="details-title mt-10 mb-10">
             @Model.Title
-            <span class="right-align" style="float:right">
+            <a class="right-align right">
                 <label>
                     <i class="material-icons align-middle">access_time</i> @Html.DisplayFor(m => m.DateCreated)
                 </label>
-            </span>
+            </a>
         </p>
         <p class="details-price m-0">
             Nrs. @Model.Price
+            @if (!Model.IsActive)
+            {
+                <a class="details-price-tag grey">Inactive</a>
+            }
+            @if (Model.IsSold)
+            {
+                <a class="details-price-tag red">Sold</a>
+
+            }
             @if (Model.CreatedByUser.UserName.Equals(User.Identity.Name))
             {
-                <a class="dropdown-trigger" href="#" data-target="editAdDropdown">
+                <a class="dropdown-trigger waves-effect waves-circle waves-light btn-floating secondary-content" href="#" data-target="editAdDropdown">
                     <i class="material-icons m-0">edit</i>
                 </a>
-                <ul id="editAdDropdown" class="dropdown-content" style="min-width: 400px;">
+                <ul id="editAdDropdown" class="dropdown-content">
                     @if (Model.IsSold)
                     {
                         <li>
-                            <a asp-action="MarkAsUnSold" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn white-text waves-green m-5">Mark as unsold</a>
+                            <a asp-action="MarkAsUnSold" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug>Mark as unsold</a>
                         </li>
                     }
                     else
                     {
                         <li>
-                            <a asp-action="MarkAsSold" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn white-text waves-red red m-5">Mark as sold</a>
+                            <a asp-action="MarkAsSold" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug>Mark as sold</a>
                         </li>
                     }
+                    <li class="divider" tabindex="-1"></li>
                     @if (Model.IsActive)
                     {
                         <li>
-                            <a asp-action="MarkAsInactive" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn white-text waves-red red m-5">Mark as inactive</a>
+                            <a asp-action="MarkAsInactive" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug>Mark as inactive</a>
                         </li>
                     }
                     else
                     {
                         <li>
-                            <a asp-action="MarkAsActive" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug class="btn white-text waves-green m-5">Mark as active</a>
+                            <a asp-action="MarkAsActive" asp-controller="ClassifiedAds" asp-route-id=@Model.Slug>Mark as active</a>
                         </li>
                     }
 
                 </ul>
             }
-
-
-            @if (!Model.IsActive)
-            {
-                <span class="details-price-pulse grey pulse">Inactive</span>
-            }
-            @if (Model.IsSold)
-            {
-                <span class="details-price-pulse red pulse">Sold</span>
-
-            }
-        </p>
-
-      
-    </div>
+            </p>
+        </div>
     <div class="divider"></div>
     @*<section>
             <div class="slider">
