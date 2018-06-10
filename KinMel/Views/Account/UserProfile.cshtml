@@ -139,6 +139,10 @@
                     {
                     <div class="card hoverable m-0">
                         <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug">
+                            @if (classifiedAd.IsSold)
+                            {
+                                <p class="content-sold red white-text pulse">Sold</p>
+                            }
                             <div class="card-image waves-effect waves-block grey lighten-4 waves-light">
                                 <img class="content-image-grid" src="@classifiedAd.PrimaryImageUrl" />
                                 <span class="card-title content-price green">Nrs. @Html.DisplayFor(modelclassifiedAd => classifiedAd.Price)</span>
@@ -163,11 +167,16 @@
                             </div>
                             <div class="card-reveal">
                                 <span class="card-title grey-text text-darken-4">
-                                    <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Title)</a>
+                                    <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@classifiedAd.Slug" class="content-title">@Html.DisplayFor(modelItem => classifiedAd.Title)</a>
                                     <i class="material-icons right">close</i>
                                 </span>
-                                <p class="content-description">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Description)</p>
-                                <p class="content-datecreated">@Html.DisplayFor(modelclassifiedAd => classifiedAd.DateCreated)</p>
+                                <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.UsedFor): @Html.DisplayFor(modelItem => classifiedAd.UsedFor)</p>
+                                <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.PriceNegotiable): @Html.DisplayFor(modelItem => classifiedAd.PriceNegotiable)</p>
+                                <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.Address): @Html.DisplayFor(modelItem => classifiedAd.Address)</p>
+                                <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.City): @Html.DisplayFor(modelItem => classifiedAd.City)</p>
+                                <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.Delivery): @Html.DisplayFor(modelItem => classifiedAd.Delivery)</p>
+                                <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.DeliveryCharges): @Html.DisplayFor(modelItem => classifiedAd.DeliveryCharges)</p>
+                                <p class="content-datecreated">@Html.LabelFor(modelItem => classifiedAd.DateCreated): @Html.DisplayFor(modelItem => classifiedAd.DateCreated)</p>
                             </div>
                         </a>
                     </div>
