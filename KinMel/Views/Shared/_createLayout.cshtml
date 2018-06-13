@@ -87,7 +87,7 @@
                     </div>
                     <div class="input-field col s12 m6">
                         <label asp-for="City" ></label>
-                        <input asp-for="City" id="autocomplete"/>
+                        <input id="autocompletes" placeholder = ""  asp-for="City" />
                         <span asp-validation-for="City" class="red-text"></span>
                     </div>
 
@@ -95,7 +95,7 @@
 
                     <div class="input-field col s12 m6">
                         <label asp-for="Address"></label>
-                        <input asp-for="Address" id="autocomplete" />
+                        <input asp-for="Address" />
                         <span asp-validation-for="Address" class="red-text"></span>
                     </div>
                     @RenderBody()
@@ -142,18 +142,7 @@
 </div>
 
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI&libraries=places" async defer></script>
-<script>
-    google.maps.event.addDomListener(window, 'load', function () {
-        var options = {
-            //types: ['(cities)'],
-            componentRestrictions: { country: "NP" }
-        };
-        var input = document.getElementById('autocompletes');
-        var places = new new google.maps.places.Autocomplete(input, options);
 
-    });
-</script>
 
 @section Scripts {
     @{
@@ -171,6 +160,25 @@
             extraPlugins: 'confighelper'
         }
         CKEDITOR.replace('placeholder', config);
-    </script>
 
+    </script>
+    
 }
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI&libraries=places" async defer></script>
+<script>
+    
+        google.maps.event.addDomListener(window, 'load', function () {
+            var options = {
+                types: ['(cities)'],
+                types: ['geocode'],
+                componentRestrictions: { country: "NP" }
+            };
+            var input = document.getElementById('autocompletes');
+            var places = new new google.maps.places.Autocomplete(input, options);
+
+        });
+ 
+    
+</script>
