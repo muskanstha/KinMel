@@ -59,6 +59,7 @@ namespace KinMel.Models
         }
         [Required]
         public string Condition { get; set; }
+        [Required]
         public double Price { get; set; }
         public Boolean PriceNegotiable { get; set; }
         public string UsedFor { get; set; }
@@ -75,6 +76,7 @@ namespace KinMel.Models
         [DisplayName("Run ad for following days")]
         public int AdDuration { get; set; }
 
+        [Required]
         public string City { get; set; }
         public string Address { get; set; }
         [DisplayFormat(NullDisplayText = "-")]
@@ -184,7 +186,9 @@ namespace KinMel.Models
 
     public class Jobs : ClassifiedAd
     {
+        [Required]
         public double? Salary { get; set; }
+        [Required]
         public string WorkingDays { get; set; }
         public string ContractFor { get; set; }
     }
@@ -193,6 +197,7 @@ namespace KinMel.Models
 
     public class BooksAndLearning : ClassifiedAd
     {
+        [Required]
         public string Author { get; set; }
         public string Isbn { get; set; }
 

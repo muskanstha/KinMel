@@ -176,7 +176,7 @@ namespace KinMel.Controllers
                 new SelectListItem {Text = "Computer Parts", Value = "ComputerParts"},
                 new SelectListItem {Text = "Apparels And Accessories", Value = "ApparelsAndAccessories"},
                 new SelectListItem {Text = "Vehicle Parts", Value = "VehicleParts"}
-            }, "Value", "Text");
+            }, "Value", "Text").OrderBy(s => s.Text);
             return View();
         }
 
@@ -216,7 +216,7 @@ namespace KinMel.Controllers
                 new SelectListItem {Text = "Computer Parts", Value = "ComputerParts"},
                 new SelectListItem {Text = "Apparels And Accessories", Value = "ApparelsAndAccessories"},
                 new SelectListItem {Text = "Vehicle Parts", Value = "VehicleParts"}
-            }, "Value", "Text");
+            }, "Value", "Text").OrderBy(s => s.Text);
             return View(model);
         }
         [HttpGet]

@@ -5,72 +5,125 @@
     ViewData["Title"] = "Details";
 }
 
-<div class="col s12 m6">
-    <div class="fields-list">
-        <ul>
+
+<div class="fields-list">
+    @if (!String.IsNullOrWhiteSpace(@Model.Brand))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.Brand"></label>
                 <p> @Html.DisplayFor(m => m.Brand)</p>
             </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.Model))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.Model"></label>
                 <p> @Html.DisplayFor(m => m.Model)</p>
             </li>
+        </ul>
+    }
+
+    @if (@Model.ModelYear != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.ModelYear"></label>
                 <p> @Html.DisplayFor(m => m.ModelYear)</p>
             </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.Type))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.Type"></label>
                 <p> @Html.DisplayFor(m => m.Type)</p>
             </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.Color))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.Color"></label>
                 <p> @Html.DisplayFor(m => m.Color)</p>
             </li>
+        </ul>
+    }
+    @if (@Model.Engine != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
+            <li>
+                <label asp-for="@Model.Engine"></label>
+                <p> @Html.DisplayFor(m => m.Engine) CC</p>
+            </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.Transmission))
+    {
+        <ul class="col s12 m6 m-0 p-5">
+            <li>
+                <label asp-for="@Model.Transmission"></label>
+                <p> @Html.DisplayFor(m => m.Transmission)</p>
+            </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.FuelType))
+    {
+        <ul class="col s12 m6 m-0 p-5">
+            <li>
+                <label asp-for="@Model.FuelType"></label>
+                <p> @Html.DisplayFor(m => m.FuelType)</p>
+            </li>
+
+        </ul>
+    }
+    @if (@Model.DoorsNo != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
+            <li>
+                <label asp-for="@Model.DoorsNo"></label>
+                <p> @Html.DisplayFor(m => m.DoorsNo)</p>
+            </li>
+        </ul>
+    }
+    @if (@Model.Mileage != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
+            <li>
+                <label asp-for="@Model.Mileage"></label>
+                <p> @Html.DisplayFor(m => m.Mileage) KM/L</p>
+            </li>
+        </ul>
+    }
+    @if (@Model.TotalKm != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
+            <li>
+                <label asp-for="@Model.TotalKm"></label>
+                <p> @Html.DisplayFor(m => m.TotalKm) KM</p>
+            </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.LotNo))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.LotNo"></label>
                 <p> @Html.DisplayFor(m => m.LotNo)</p>
             </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.RegisteredDistrict))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.RegisteredDistrict"></label>
                 <p> @Html.DisplayFor(m => m.RegisteredDistrict)</p>
             </li>
         </ul>
-    </div>
-</div>
-
-<div class="col s12 m6">
-    <div class="fields-list">
-        <ul>
-            <li>
-                <label asp-for="@Model.Engine"></label>
-                <p> @Html.DisplayFor(m => m.Engine)</p>
-            </li>
-            <li>
-                <label asp-for="@Model.Transmission"></label>
-                <p> @Html.DisplayFor(m => m.Transmission)</p>
-            </li>
-            <li>
-                <label asp-for="@Model.Mileage"></label>
-                <p> @Html.DisplayFor(m => m.Mileage)</p>
-            </li>
-            <li>
-                <label asp-for="@Model.TotalKm"></label>
-                <p> @Html.DisplayFor(m => m.TotalKm)</p>
-            </li>
-            <li>
-                <label asp-for="@Model.FuelType"></label>
-                <p> @Html.DisplayFor(m => m.FuelType)</p>
-            </li>
-            <li>
-                <label asp-for="@Model.DoorsNo"></label>
-                <p> @Html.DisplayFor(m => m.DoorsNo)</p>
-            </li>
-            <li>
-                <label asp-for="@Model.DoorsNo"></label>
-                <p> @Html.DisplayFor(m => m.DoorsNo)</p>
-            </li>
-        </ul>
-    </div>
+    }
 </div>
