@@ -2,39 +2,61 @@
 
 @{
     Layout = "/Views/Shared/_detailsLayout.cshtml";
-
-    ViewData["Title"] = "Details";
 }
-<div class="col s12 m6">
-    <div class="fields-list">
-        <ul>
+<div class="fields-list">
+    @if (!String.IsNullOrWhiteSpace(@Model.PropertyType))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.PropertyType"></label>
                 <p> @Html.DisplayFor(m => m.PropertyType)</p>
             </li>
+        </ul>
+    }  
+    @if (!String.IsNullOrWhiteSpace(@Model.LandSize))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.LandSize"></label>
                 <p> @Html.DisplayFor(m => m.LandSize)</p>
             </li>
+        </ul>
+    } 
+    @if (!String.IsNullOrWhiteSpace(@Model.LandSize))
+    {
+        <ul class="col s12 m6 m-0 p-5">
+            <li>
+                <label asp-for="@Model.LandSize"></label>
+                <p> @Html.DisplayFor(m => m.LandSize)</p>
+            </li>
+        </ul>
+    }
+    @if (@Model.Floors != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.Floors"></label>
                 <p> @Html.DisplayFor(m => m.Floors)</p>
             </li>
         </ul>
-    </div>
-</div>
-
-<div class="col s12 m6">
-    <div class="fields-list">
-        <ul>
+    }
+       @if (@Model.TotalRooms != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.TotalRooms"></label>
                 <p> @Html.DisplayFor(m => m.TotalRooms)</p>
             </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.Furnishing))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.Furnishing"></label>
                 <p> @Html.DisplayFor(m => m.Furnishing)</p>
             </li>
         </ul>
-    </div>
+    }
+
 </div>
