@@ -2,59 +2,98 @@
 
 @{
     Layout = "/Views/Shared/_detailsLayout.cshtml";
-
-    ViewData["Title"] = "Details";
 }
-<div class="col s12 m6">
-    <div class="fields-list">
-        <ul>
+<div class="fields-list">
+    @if (!String.IsNullOrWhiteSpace(@Model.Type))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.Type"></label>
                 <p> @Html.DisplayFor(m => m.Type)</p>
             </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.Processor))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.Processor"></label>
                 <p> @Html.DisplayFor(m => m.Processor)</p>
             </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.ProcessorGeneration))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.ProcessorGeneration"></label>
                 <p> @Html.DisplayFor(m => m.ProcessorGeneration)</p>
             </li>
+        </ul>
+    }
+
+    @if (@Model.GraphicsCard != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.GraphicsCard"></label>
                 <p> @Html.DisplayFor(m => m.GraphicsCard) GB</p>
             </li>
+        </ul>
+    }
+    @if (@Model.Ram != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.Ram"></label>
                 <p> @Html.DisplayFor(m => m.Ram) GB</p>
             </li>
         </ul>
-    </div>
-</div>
+    }
 
-<div class="col s12 m6">
-    <div class="fields-list">
-        <ul>
-            <li>
-                <label asp-for="@Model.HDD"></label>
-                <p> @Html.DisplayFor(m => m.HDD) GB</p>
-            </li>
+    @if (@Model.SSD != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.SSD"></label>
                 <p> @Html.DisplayFor(m => m.SSD) GB</p>
             </li>
+        </ul>
+    }
+    @if (@Model.HDD != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
+            <li>
+                <label asp-for="@Model.SSD"></label>
+                <p> @Html.DisplayFor(m => m.HDD) GB</p>
+            </li>
+        </ul>
+    }
+    @if (@Model.Battery != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.Battery"></label>
-                <p> @Html.DisplayFor(m => m.Battery)</p>
+                <p> @Html.DisplayFor(m => m.Battery) HRS</p>
             </li>
+        </ul>
+    }
+    @if (!String.IsNullOrWhiteSpace(@Model.ScreenType))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.ScreenType"></label>
                 <p> @Html.DisplayFor(m => m.ScreenType)</p>
             </li>
+        </ul>
+    }
+    @if (@Model.ScreenSize != null)
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.ScreenSize"></label>
-                <p> @Html.DisplayFor(m => m.ScreenSize) Inches</p>
+                <p> @Html.DisplayFor(m => m.ScreenSize) "</p>
             </li>
         </ul>
-    </div>
+    }
 </div>

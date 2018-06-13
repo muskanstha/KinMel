@@ -2,27 +2,22 @@
 
 @{
     Layout = "/Views/Shared/_detailsLayout.cshtml";
-
-    ViewData["Title"] = "Details";
 }
-<div class="col s12 m6">
-    <div class="fields-list">
-        <ul>
-            <li>
-                <label asp-for="@Model.Author"></label>
-                <p> @Html.DisplayFor(m => m.Author)</p>
-            </li>
-        </ul>
-    </div>
-</div>
 
-<div class="col s12 m6">
-    <div class="fields-list">
-        <ul>
+<div class="fields-list">
+    <ul class="col s12 m6 m-0 p-5">
+        <li>
+            <label asp-for="@Model.Author"></label>
+            <p> @Html.DisplayFor(m => m.Author)</p>
+        </li>
+    </ul>
+    @if (!String.IsNullOrWhiteSpace(@Model.Isbn))
+    {
+        <ul class="col s12 m6 m-0 p-5">
             <li>
                 <label asp-for="@Model.Isbn"></label>
                 <p> @Html.DisplayFor(m => m.Isbn)</p>
             </li>
         </ul>
-    </div>
-</div>>
+    }
+</div>
