@@ -52,10 +52,10 @@
                         <label asp-for="Condition"></label>
                         @{
                             var conditionlist = new SelectList(new List<SelectListItem>
-                                            {
-                                                new SelectListItem { Value = "NEW", Text = "NEW" },
-                                                new SelectListItem { Value = "USED", Text = "USED" },
-                                            }, "Value", "Text", Context.Request.Query["conditionlist"]);
+                                                                            {
+                                                                                new SelectListItem { Value = "NEW", Text = "NEW" },
+                                                                                new SelectListItem { Value = "USED", Text = "USED" },
+                                                                            }, "Value", "Text", Context.Request.Query["conditionlist"]);
                         }
                         <select asp-for="Condition" asp-items="@conditionlist"></select>
                         <span asp-validation-for="Condition" class="red-text"></span>
@@ -86,12 +86,10 @@
                         <span asp-validation-for="AdDuration" class="red-text"></span>
                     </div>
                     <div class="input-field col s12 m6">
-                        <label asp-for="City" ></label>
-                        <input id="autocompletes" placeholder = ""  asp-for="City" />
+                        <label asp-for="City"></label>
+                        <input placeholder="" asp-for="City" />
                         <span asp-validation-for="City" class="red-text"></span>
                     </div>
-
-                    
 
                     <div class="input-field col s12 m6">
                         <label asp-for="Address"></label>
@@ -121,16 +119,16 @@
                         <span asp-validation-for="WarrantyPeriod" class="red-text"></span>
                     </div>
                     <div class="col s12 m6 switch">
-                            <label>
-                                <input asp-for="PriceNegotiable" /> @Html.DisplayNameFor(model => model.PriceNegotiable)
-                                <span class="lever m-0"></span>
-                            </label>
-                    </div> 
+                        <label>
+                            <input asp-for="PriceNegotiable" /> @Html.DisplayNameFor(model => model.PriceNegotiable)
+                            <span class="lever m-0"></span>
+                        </label>
+                    </div>
                     <div class="col s12 m6 switch">
-                            <label>
-                                <input asp-for="Delivery" /> @Html.DisplayNameFor(model => model.Delivery)
-                                <span class="lever m-0"></span>
-                            </label>
+                        <label>
+                            <input asp-for="Delivery" /> @Html.DisplayNameFor(model => model.Delivery)
+                            <span class="lever m-0"></span>
+                        </label>
                     </div>
                     <div class="col s12">
                         <input type="submit" value="Create" class="btn right mt-20 mb-20" />
@@ -162,23 +160,25 @@
         CKEDITOR.replace('placeholder', config);
 
     </script>
-    
+
 }
 
-
-@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkVZYQFe4YYva_g5ulymGDt9EBoVjjZJ8&libraries=places" async defer></script>*@
 <script>
-    
-        google.maps.event.addDomListener(window, 'load', function () {
-            var options = {
-                types: ['(cities)'],
-                types: ['geocode'],
-                componentRestrictions: { country: "NP" }
-            };
-            var input = document.getElementById('autocompletes');
-            var places = new new google.maps.places.Autocomplete(input, options);
+    function initMap() {
+        var options = {
+            //types: ['(cities)'],
+            types: ['(cities)'],
+            componentRestrictions: { country: "NP" }
+        };
 
+        var inputCity = document.getElementById('City');
+        var autocompleteCity = new google.maps.places.Autocomplete(inputCity, options);
+
+        google.maps.event.addDomListener(inputCity, 'keydown', function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+            }
         });
- 
-    
+    };
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkVZYQFe4YYva_g5ulymGDt9EBoVjjZJ8&libraries=places&callback=initMap" async defer></script>

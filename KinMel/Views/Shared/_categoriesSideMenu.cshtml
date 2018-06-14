@@ -14,7 +14,7 @@
 
             <div class="input-field">
                 @Html.LabelFor(m => m.City)
-                @Html.TextBoxFor(m => m.City, new { id = "autocomplete", placeholder = "" })
+                @Html.TextBoxFor(m => m.City, new { placeholder = "" })
             </div>
 
             <div class="input-field">
@@ -98,17 +98,22 @@
         <li><a asp-controller="VehiclesParts" asp-action="Index"><i class="material-icons align-middle">settings</i><span>Vehicle Parts</span></a></li>
     </ul>
 </div>
-
-@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkVZYQFe4YYva_g5ulymGDt9EBoVjjZJ8&libraries=places" async defer></script>*@
 <script>
-    google.maps.event.addDomListener(window, 'load', function () {
+    function initMap() {
         var options = {
             //types: ['(cities)'],
-            types: ['geocode'],
+            types: ['(cities)'],
             componentRestrictions: { country: "NP" }
         };
-        var input = document.getElementById('autocomplete');
-        var places = new new google.maps.places.Autocomplete(input, options);
 
-    });
+        var inputCity = document.getElementById('City');
+        var autocompleteCity = new google.maps.places.Autocomplete(inputCity, options);
+
+        google.maps.event.addDomListener(inputCity, 'keydown', function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+            }
+        });
+    };
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkVZYQFe4YYva_g5ulymGDt9EBoVjjZJ8&libraries=places&callback=initMap" async defer></script>
