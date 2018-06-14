@@ -120,121 +120,7 @@
 
             <div class="col s12 m6 l5 shadow-1p">
                 <div id="details-map-div" class="details-map-div"></div>
-                <script>
-                    var marker;
-                    // Initialize and add the map
-                    function initMap() {
-                        // The location of Uluru
-                        var theAddress = { lat: @Model.Latitude, lng: @Model.Longitude };
-                        // map style
-                        var styledMapType = new google.maps.StyledMapType([
-                                {
-                                    "featureType": "landscape.natural",
-                                    "elementType": "geometry.fill",
-                                    "stylers": [
-                                        {
-                                            "visibility": "on"
-                                        },
-                                        {
-                                            "color": "#e0efef"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "featureType": "poi",
-                                    "elementType": "geometry.fill",
-                                    "stylers": [
-                                        {
-                                            "visibility": "on"
-                                        },
-                                        {
-                                            "hue": "#1900ff"
-                                        },
-                                        {
-                                            "color": "#c0e8e8"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "featureType": "road",
-                                    "elementType": "geometry",
-                                    "stylers": [
-                                        {
-                                            "lightness": 100
-                                        },
-                                        {
-                                            "visibility": "simplified"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "featureType": "road",
-                                    "elementType": "labels",
-                                    "stylers": [
-                                        {
-                                            "visibility": "off"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "featureType": "transit.line",
-                                    "elementType": "geometry",
-                                    "stylers": [
-                                        {
-                                            "visibility": "on"
-                                        },
-                                        {
-                                            "lightness": 700
-                                        }
-                                    ]
-                                },
-                                {
-                                    "featureType": "water",
-                                    "elementType": "all",
-                                    "stylers": [
-                                        {
-                                            "color": "#7dcdcd"
-                                        }
-                                    ]
-                                }
-                            ],
-                            {name: 'Styled Map'});
-                        // The map, centered at Uluru
-                        var map = new google.maps.Map(
-                            document.getElementById('details-map-div'),
-                            {
-                                zoom: 14,
-                                center: theAddress,
-                                //mapTypeControl: true,
-                                gestureHandling: 'greedy',
-                                scrollwheel: false,
-                                //disableDefaultUI: true,
 
-                            });
-                        //Associate the styled map with the MapTypeId and set it to display.
-                        map.mapTypes.set('styled_map', styledMapType);
-                        map.setMapTypeId('styled_map');
-                        // The marker, positioned at Uluru
-                        marker = new google.maps.Marker({
-                            map: map,
-                            position: theAddress,
-                            animation: google.maps.Animation.DROP,
-                        });
-                        marker.addListener('click', toggleBounce);
-                    }
-
-                    function toggleBounce() {
-                        if (marker.getAnimation() !== null) {
-                            marker.setAnimation(null);
-                        } else {
-                            marker.setAnimation(google.maps.Animation.BOUNCE);
-                        }
-                    }
-                </script>
-
-                <script async defer
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkVZYQFe4YYva_g5ulymGDt9EBoVjjZJ8&sensor=false&callback=initMap">
-                </script> 
                 <div class="row m-0">
                     <div class="col s12 m12 fields-list">
                         <ul class="row m-0">
@@ -437,48 +323,48 @@
     @*<div class="divider"></div>*@
 
     @*<section>
-        <div class="col s12">
-            <div class="details-card-header">Warranty Details</div>
-            <div class="row m-0">
-                @if (!String.IsNullOrWhiteSpace(@Model.WarrantyType))
-                {
-                    <div class="col s12 m6 fields-list">
-                        <ul class="row">
-                            <li>
-                                <label asp-for="@Model.WarrantyType"></label>
-                                <p> @Html.DisplayFor(m => m.WarrantyType)</p>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="col s12">
+                <div class="details-card-header">Warranty Details</div>
+                <div class="row m-0">
+                    @if (!String.IsNullOrWhiteSpace(@Model.WarrantyType))
+                    {
+                        <div class="col s12 m6 fields-list">
+                            <ul class="row">
+                                <li>
+                                    <label asp-for="@Model.WarrantyType"></label>
+                                    <p> @Html.DisplayFor(m => m.WarrantyType)</p>
+                                </li>
+                            </ul>
+                        </div>
 
-                }
-                @if (!String.IsNullOrWhiteSpace(@Model.WarrantyPeriod))
-                {
-                    <div class="col s12 m6 fields-list">
-                        <ul class="row">
-                            <li>
-                                <label asp-for="@Model.WarrantyPeriod"></label>
-                                <p> @Html.DisplayFor(m => m.WarrantyPeriod)</p>
-                            </li>
-                        </ul>
-                    </div>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.WarrantyPeriod))
+                    {
+                        <div class="col s12 m6 fields-list">
+                            <ul class="row">
+                                <li>
+                                    <label asp-for="@Model.WarrantyPeriod"></label>
+                                    <p> @Html.DisplayFor(m => m.WarrantyPeriod)</p>
+                                </li>
+                            </ul>
+                        </div>
 
-                }
-                @if (!String.IsNullOrWhiteSpace(@Model.WarrantyIncludes))
-                {
-                    <div class="col s12 m12 fields-list">
-                        <ul class="row m-0">
-                            <li>
-                                <label asp-for="@Model.WarrantyIncludes"></label>
-                                <p class="escape-float"> @Html.DisplayFor(m => m.WarrantyIncludes)</p>
-                            </li>
-                        </ul>
-                    </div>
+                    }
+                    @if (!String.IsNullOrWhiteSpace(@Model.WarrantyIncludes))
+                    {
+                        <div class="col s12 m12 fields-list">
+                            <ul class="row m-0">
+                                <li>
+                                    <label asp-for="@Model.WarrantyIncludes"></label>
+                                    <p class="escape-float"> @Html.DisplayFor(m => m.WarrantyIncludes)</p>
+                                </li>
+                            </ul>
+                        </div>
 
-                }
+                    }
+                </div>
             </div>
-        </div>
-    </section>*@
+        </section>*@
 
     <section>
         <div class="col s12">
@@ -509,3 +395,114 @@
         </div>
     </section>
 </div>
+<script>
+    var marker;
+    // Initialize and add the map
+    function initMap() {
+        // The location of Uluru
+        var theAddress = { lat: @Model.Latitude, lng: @Model.Longitude };
+        // map style
+        var styledMapType = new google.maps.StyledMapType([
+                {
+                    "featureType": "landscape.natural",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "visibility": "on"
+                        },
+                        {
+                            "color": "#e0efef"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "visibility": "on"
+                        },
+                        {
+                            "hue": "#1900ff"
+                        },
+                        {
+                            "color": "#c0e8e8"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "lightness": 100
+                        },
+                        {
+                            "visibility": "simplified"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "labels",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.line",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "visibility": "on"
+                        },
+                        {
+                            "lightness": 700
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "color": "#7dcdcd"
+                        }
+                    ]
+                }
+            ],
+            {name: 'Styled Map'});
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('details-map-div'),
+            {
+                zoom: 14,
+                center: theAddress,
+                //mapTypeControl: true,
+                gestureHandling: 'greedy',
+                scrollwheel: false,
+                //disableDefaultUI: true,
+
+            });
+        //Associate the styled map with the MapTypeId and set it to display.
+        map.mapTypes.set('styled_map', styledMapType);
+        map.setMapTypeId('styled_map');
+        // The marker, positioned at Uluru
+        marker = new google.maps.Marker({
+            map: map,
+            position: theAddress,
+            animation: google.maps.Animation.DROP,
+        });
+        marker.addListener('click', toggleBounce);
+    }
+
+    function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    }
+</script>
