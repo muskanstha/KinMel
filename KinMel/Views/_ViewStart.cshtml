@@ -1,3 +1,17 @@
 ﻿@{
     Layout = "_Layout";
 }
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKQX3cyZ7pVKmBwE8wiowivW9qH62AVk8&libraries=places" async defer></script>
+    <script>
+        google.maps.event.addDomListener(window, 'load', function () {
+            var options = {
+                //types: ['(cities)'],
+                types: ['geocode'],
+                componentRestrictions: { country: "NP" }
+            };
+            var input = document.getElementById('autocomplete');
+            var places = new new google.maps.places.Autocomplete(input, options);
+
+        });
+    </script>
