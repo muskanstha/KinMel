@@ -895,6 +895,13 @@ nav .sidenav-trigger {
     -webkit-object-fit: scale-down;
     object-fit: scale-down;
 }
+.content-image-list-infowindow {
+    width: 100px;
+    height: 100%;
+    vertical-align: middle;
+    -webkit-object-fit: scale-down;
+    object-fit: scale-down;
+}
 
 .content-title {
     font-size: 14px;
