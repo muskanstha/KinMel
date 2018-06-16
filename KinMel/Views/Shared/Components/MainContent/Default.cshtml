@@ -11,8 +11,8 @@
     <!--sorting-->
     <partial name="_sortingPartial" />
     <ul class="tabs  hide-on-small-and-down">
-        <li class="tab col s1"><a href="#gridView">Grid</a></li>
-        <li class="tab col s1"><a class="active" href="#mapView">Map</a></li>
+        <li class="tab col s1"><a class="active" href="#gridView">Grid</a></li>
+        <li class="tab col s1"><a href="#mapView">Map</a></li>
     </ul>
     <!--grid-view-->
     <div id="gridView">
@@ -44,7 +44,7 @@
                             }
                             <div class="chip">
                                 <img src="@item.CreatedByUser.ProfilePictureUrl" alt="" class="object-fit-cover" />
-                                <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUser.UserName class="content-username"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
+                                <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUser.UserName class="content-username"> @Html.DisplayFor(modelItem => item.CreatedByUser.UserName)</a>
                             </div>
                         </div>
                         <div class="card-reveal">
@@ -89,9 +89,10 @@
                     </div>
                     <div>
                         <div>
-                            <p class="content-description-list">@Html.DisplayFor(modelItem => item.Description)</p>
+                            <p class="content-description">@Html.LabelFor(modelItem => item.UsedFor): @Html.DisplayFor(modelItem => item.UsedFor)</p>
+                            <p class="content-description">@Html.LabelFor(modelItem => item.Address): @Html.DisplayFor(modelItem => item.Address), @Html.DisplayFor(modelItem => item.City)</p>
                             <p class="material-icons align-middle">person_outline</p>
-                            <a asp-action="UserProfile" asp-controller="Account" asp-route-id="@item.CreatedByUser.UserName" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
+                            <a asp-action="UserProfile" asp-controller="Account" asp-route-id="@item.CreatedByUser.UserName" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.UserName)</a>
                         </div>
                         <div>
                             <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
@@ -223,9 +224,9 @@
 
                         markers = locations.map(function (location, i) {
                             var marker = new google.maps.Marker({
-                                position: { lat: location.lat, lng: location.lng },
+                                position: { lat: location.latitude, lng: location.longitude },
                                 label: labels[i % labels.length],
-                              
+
                                 //icon: {
                                 //    url: location.primaryImageUrl, // url
                                 //    scaledSize: new google.maps.Size(50, 50), // scaled size
@@ -233,21 +234,22 @@
                                 //    anchor: new google.maps.Point(0, 0) // anchor
                                 //}
                             });
-                            google.maps.event.addListener(marker,
-                                'click',
-                                function (evt) {
-                                    //infoWin.setContent('<a href="/ClassifiedAds/Details/'+ location.slug + '">' + location.title + '</a>');
-                                    infoWin.setContent('' +
-                                        '<div class="display-flex"><div class="image-container-list"><a href="/ClassifiedAds/Details/' + location.slug + '">' +
-                                        '<img class="content-image-list-infowindow" src="' + location.primaryImageUrl + '"></a></div><div class="contents-list"><div>' +
-                                        '<a class="content-title" href="/ClassifiedAds/Details/' + location.slug + '">' + location.title + '</a></div><div><div>' +
-                                        '<p class="content-price m-0"> Nrs. ' + location.price + '  (' + location.condition + ') </p>' +
-                                        '<p class="content-price m-0">' + location.address + ', ' + location.city + '</p>' +
-                                        '<p class="material-icons align-middle">person_outline</p><a class="content-username align-middle" href="/Profile/' + location.createdBy + '"> ' +
-                                        location.createdBy + '</a></div><div></div></div></div></div>'
-                                    );
-                                    infoWin.open(map, marker);
-                                });
+
+
+                            google.maps.event.addListener(marker, 'click', function (evt) {
+
+                                //infoWin.setContent('<a href="/ClassifiedAds/Details/'+ location.slug + '">' + location.title + '</a>');
+                                infoWin.setContent('' +
+                                    '<div class="display-flex"><div class="image-container-list"><a href="/ClassifiedAds/Details/' + location.slug + '">' +
+                                    '<img class="content-image-list-infowindow" src="' + location.primaryImageUrl + '"></a></div><div class="contents-list"><div>' +
+                                    '<a class="content-title" href="/ClassifiedAds/Details/' + location.slug + '">' + location.title + '</a></div><div><div>' +
+                                    '<p class="content-price m-0"> Nrs. ' + location.price + '  (' + location.condition + ') </p>' +
+                                    '<p class="content-address m-0">' + location.address + ', ' + location.city + '</p>' +
+                                    '<p class="material-icons align-middle">person_outline</p><a class="content-username align-middle" href="/Profile/' + location.createdBy + '"> ' +
+                                    location.createdBy + '</a></div><div></div></div></div></div>'
+                                );
+                                infoWin.open(map, marker);
+                            });
                             return marker;
                         });
 

@@ -127,7 +127,7 @@
     <div></div>
     <div class="profile-ads">
         <div class="card-header">
-            Latest Ads from @Model.FirstName | @Model.ClassifiedAds.Count |
+            Latest Ads from @Model.UserName | @Model.ClassifiedAds.Count |
         </div>
         @if (Model.ClassifiedAds != null)
         {
@@ -162,7 +162,7 @@
                                     }
                                     <div class="chip">
                                         <img src="@classifiedAd.CreatedByUser.ProfilePictureUrl" alt="" class="object-fit-cover" />
-                                        <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@classifiedAd.CreatedByUser.UserName class="content-username"> @Html.DisplayFor(modelclassifiedAd => classifiedAd.CreatedByUser.FullName)</a>
+                                        <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@classifiedAd.CreatedByUser.UserName class="content-username"> @Html.DisplayFor(modelclassifiedAd => classifiedAd.CreatedByUser.UserName)</a>
                                     </div>
                                 </div>
                                 <div class="card-reveal">
@@ -207,13 +207,14 @@
                                 </div>
                                 <div>
                                     <div>
-                                        <p class="content-description-list">@Html.DisplayFor(modelclassifiedAd => classifiedAd.Description)</p>
+                                        <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.UsedFor): @Html.DisplayFor(modelItem => classifiedAd.UsedFor)</p>
+                                        <p class="content-description">@Html.LabelFor(modelItem => classifiedAd.Address): @Html.DisplayFor(modelItem => classifiedAd.Address), @Html.DisplayFor(modelItem => classifiedAd.City)</p>
                                         <p class="material-icons align-middle">person_outline</p>
-                                        <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@classifiedAd.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelclassifiedAd => classifiedAd.CreatedByUser.FullName)</a>
+                                        <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@classifiedAd.CreatedByUserId class="content-username align-middle"> @Html.DisplayFor(modelclassifiedAd => classifiedAd.CreatedByUser.UserName)</a>
                                     </div>
                                     <div>
                                         <p class="content-datecreated">@Html.DisplayFor(modelclassifiedAd => classifiedAd.DateCreated)</p>
-                                        <p class="content-price">Rs. @Html.DisplayFor(modelclassifiedAd => classifiedAd.Price)</p>
+                                        <p class="content-price right-align">Rs. @Html.DisplayFor(modelclassifiedAd => classifiedAd.Price)</p>
                                     </div>
                                 </div>
                             </div>

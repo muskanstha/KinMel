@@ -149,10 +149,10 @@ namespace KinMel.Controllers
 
         public JsonResult MapClusterData()
         {
-            var classifiedAd = _context.ClassifiedAd.Include(c=>c.CreatedByUser).Select(c => new
+            var classifiedAd = _context.ClassifiedAd.Include(c=>c.CreatedByUser).Where(c => c.IsActive && !c.IsSold).Select(c => new
             {
-                lat = c.Latitude,
-                lng = c.Longitude,
+                c.Latitude,
+                c.Longitude,
                 c.Slug,
                 c.Address,
                 c.City,
