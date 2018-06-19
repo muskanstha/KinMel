@@ -23,7 +23,7 @@ namespace KinMel
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            GoogleSigned.AssignAllServices(new GoogleSigned("AIzaSyDk60GebdmOQVTmp1EdDwK2Hvycq68sIRI"));
+            GoogleSigned.AssignAllServices(new GoogleSigned("AIzaSyCkVZYQFe4YYva_g5ulymGDt9EBoVjjZJ8"));
 
         }
 
