@@ -20,5 +20,6 @@
         <partial name="_categoriesSideMenu" for="@Model" />
 
         @await Component.InvokeAsync("MainContent", new { sortOrder = Context.Request.Query["sortOrder"].ToString(), searchModel = Model })
+       
     </div>
 </section>

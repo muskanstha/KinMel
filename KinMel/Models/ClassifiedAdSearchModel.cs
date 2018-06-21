@@ -18,10 +18,10 @@ namespace KinMel.Models
         
         [Range(1, 100000000, ErrorMessage = "Price must be between 1 and 10 crore")]
         public int? PriceTo { get; set; }
-        //public string FirstName { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
-      
-       
+
+        public string Category { get; set; }
         public string Condition { get; set; }
 
         public Boolean PriceNegotiable { get; set; }
@@ -49,6 +49,7 @@ namespace KinMel.Models
             Price = null;
             PriceFrom = null;
             PriceTo = null;
+            Category = "";
             PropertyResults = new List<ClassifiedAd>(); 
 
         }
