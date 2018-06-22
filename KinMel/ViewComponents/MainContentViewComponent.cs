@@ -169,10 +169,10 @@ namespace KinMel.ViewComponents
                 classifiedAd = classifiedAd.Where(k => k.Price <= searchModel.PriceTo);
             }
 
+            //Category
             if (searchModel.Category != null)
             {
                 classifiedAd = classifiedAd.Include(c => c.SubCategory).ThenInclude(c => c.Category).Where(k => k.SubCategory.Category.Name == searchModel.Category);
-
             }
 
             ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
