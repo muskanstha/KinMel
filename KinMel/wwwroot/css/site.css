@@ -65,6 +65,10 @@ nav .sidenav-trigger {
     vertical-align: middle;
     object-fit: cover;
 }
+.kinmelLogo {
+  height: 60px;
+  vertical-align: middle;
+}
 
 .card {
     margin-bottom: 0px !important;
