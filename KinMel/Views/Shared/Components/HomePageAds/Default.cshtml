@@ -2,7 +2,7 @@
 
 <div class="card-header z-depth-2">@ViewData["ComponentTitle"]</div>
 <!--grid-view-->
-<div class="main-content-cards hide-on-med-and-down">
+<div class="main-content-cards hide-on-small-and-down">
     @foreach (var item in Model)
     {
         <div class="card hoverable m-0">
@@ -30,7 +30,7 @@
                     }
                     <div class="chip">
                         <img src="@item.CreatedByUser.ProfilePictureUrl" alt="" class="object-fit-cover" />
-                        <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUser.UserName class="content-username"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
+                        <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUser.UserName class="content-username"> @Html.DisplayFor(modelItem => item.CreatedByUser.UserName)</a>
                     </div>
                 </div>
                 <div class="card-reveal">
@@ -51,7 +51,7 @@
     }
 </div>
 
-<div class="hide-on-large-only">
+<div class="hide-on-med-and-up">
     @foreach (var item in Model.Take(3))
     {
         <div class="display-flex hoverable">
@@ -74,13 +74,14 @@
                 </div>
                 <div>
                     <div>
-                        <p class="content-description-list">@Html.DisplayFor(modelItem => item.Description)</p>
+                        <p class="content-description">@Html.LabelFor(modelItem => item.UsedFor): @Html.DisplayFor(modelItem => item.UsedFor)</p>
+                        <p class="content-description">@Html.LabelFor(modelItem => item.Address): @Html.DisplayFor(modelItem => item.Address), @Html.DisplayFor(modelItem => item.City)</p>
                         <p class="material-icons align-middle">person_outline</p>
-                        <a asp-action="UserProfile" asp-controller="Account" asp-route-id="@item.CreatedByUser.UserName" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
+                        <a asp-action="UserProfile" asp-controller="Account" asp-route-id="@item.CreatedByUser.UserName" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.UserName)</a>
                     </div>
                     <div>
                         <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
-                        <p class="content-price m-0">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
+                        <p class="content-price m-0 right-align">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
                     </div>
                 </div>
             </div>

@@ -147,6 +147,24 @@ namespace KinMel.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public JsonResult MapClusterData()
+        {
+            var classifiedAd = _context.ClassifiedAd.Include(c=>c.CreatedByUser).Where(c => c.IsActive && !c.IsSold).Select(c => new
+            {
+                c.Latitude,
+                c.Longitude,
+                c.Slug,
+                c.Address,
+                c.City,
+                c.Title,
+                c.Price,
+                c.Condition,
+                c.PrimaryImageUrl,
+                createdBy = c.CreatedByUser.UserName,
+                c.DateCreated
+            });
+            return Json(classifiedAd);
+        }
 
         //cordinate finding
         //protected void Page_Load(object sender, EventArgs e)
@@ -395,7 +413,7 @@ namespace KinMel.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction("Details", new {id = id});
+                return RedirectToAction("Details", new { id = id });
 
             }
             return View("Error");
