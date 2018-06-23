@@ -11,7 +11,8 @@
         <form asp-controller="ClassifiedAds" asp-action="Index">
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
-
+            
+          
             <div class="input-field">
                 @Html.LabelFor(m => m.City)
                 @Html.TextBoxFor(m => m.City, new { placeholder = "" })
@@ -34,14 +35,15 @@
                 @Html.ValidationMessageFor(m => m.PriceTo)
             </div>
             <div class="card-header mb-0">
-                Categories
+                Categories & Sort
             </div>
-            <div class="input-field">
+
+            @*<div class="input-field">
                 @Html.LabelFor(m => m.Category, new {onfocus="this.placeholder = ''",
-                onblur="this.placeholder = 'enter your text'"})
-                <br/>
-               
-                @*@Html.TextBoxFor(m => m.Category)*@
+                    onblur="this.placeholder = 'enter your text'"})
+                <br />
+
+              
                 <select name="Category" size="3">
                     <option value="Car">Cars</option>
                     <option value="Mobile">Mobile</option>
@@ -51,7 +53,6 @@
                     <option value="Jobs">Jobs</option>
                     <option value="BeautyAndHealth">Beauty & Health</option>
                     <option value="Electronics">Books & Learning</option>
-                    <option value="audi">Electronics</option>
                     <option value="Furnitures">Furnitures</option>
                     <option value="Camera">Camera</option>
                     <option value="MusicInstruments">Musical Instruments</option>
@@ -67,6 +68,109 @@
                     <option value="VehicleParts">Vehicle Parts</option>
 
                 </select>
+            </div>*@
+            
+          
+                @*<label asp-for="FirstName"></label>
+                <input asp-for="FirstName" placeholder="Your name goes here"/>
+                <input type="submit" />*@
+          
+
+            <!--categories-->
+            <div class="input-field">
+                @*@Html.LabelFor(m => m.Category)*@
+                
+                <br />
+                <div class="form-group">
+                    <label asp-for="Category"></label>
+                    <select asp-for="Category" class="form-control">
+                        <option value="">Select</option>
+                        <option value="Car">Cars</option>
+                        <option value="Mobile">Mobile</option>
+                        <option value="Motorcycle">Motorcycle</option>
+                        <option value="RealEstate">Real Estate</option>
+                        <option value="Computer">Computer</option>
+                        <option value="Jobs">Jobs</option>
+                        <option value="BeautyAndHealth">Beauty & Health</option>
+                        <option value="Electronics">Books & Learning</option>
+                        <option value="Furnitures">Furnitures</option>
+                        <option value="Camera">Camera</option>
+                        <option value="MusicInstruments">Musical Instruments</option>
+                        <option value="PetsAndPetcare">Pets & Petcare</option>
+                        <option value="SportsAndFitness">Sport & Fitness</option>
+                        <option value="TabletsAndiPads">Tablets & iPads</option>
+                        <option value="ToysAndGames">Toys & Games</option>
+                        <option value="TravelAndTours">Travel & Tours</option>
+                        <option value="HelpAndServices">Help & Services</option>
+                        <option value="MobileAccessories">Mobile Accessories</option>
+                        <option value="ComputerParts">Computer Parts</option>
+                        <option value="ApparelsAndAccessories">Apparels & Accessories</option>
+                        <option value="VehicleParts">Vehicle Parts</option>
+                    </select>
+                </div>
+                
+              
+            
+             
+                @*@{
+                    var catList = new SelectList(new List<SelectListItem>
+                                    {
+                                        new SelectListItem {Value = "", Text = "Select"},
+                                        new SelectListItem {Value = "Car", Text = "Car"},
+                                        new SelectListItem {Value = "Mobile", Text = "Mobile"},
+                                        new SelectListItem {Value = "Motorcycle", Text = "Motorcycle"},
+                                        new SelectListItem {Value = "RealEstate", Text = "Real Estate"},
+                                        new SelectListItem {Value = "Computer", Text = "Computer"},
+                                        new SelectListItem {Value = "Jobs", Text = "Jobs"},
+                                        new SelectListItem {Value = "BeautyAndHealth", Text = "Beauty & Health"},
+                                        new SelectListItem {Value = "Electronics", Text = "Electronics"},
+                                        new SelectListItem {Value = "Furnitures", Text = "Furnitures"},
+                                        new SelectListItem {Value = "Camera", Text = "Camera"},
+                                        new SelectListItem {Value = "MusicInstruments", Text = "Musical Instruments"},
+                                        new SelectListItem {Value = "PetsAndPetcare", Text = "Pets & Care"},
+                                        new SelectListItem {Value = "SportsAndFitness", Text = "Sports & Fitness"},
+                                        new SelectListItem {Value = "TabletsAndiPads", Text = "Tablets & iPads"},
+                                        new SelectListItem {Value = "ToysAndGames", Text = "Toys & Games"},
+                                        new SelectListItem {Value = "TravelAndTours", Text = "Travel & Tours"},
+                                        new SelectListItem {Value = "HelpAndServices", Text = "Help & Services"},
+                                        new SelectListItem {Value = "MobileAccessories", Text = "Mobile Accessories"},
+                                        new SelectListItem {Value = "ComputerParts", Text = "Computer Parts"},
+                                        new SelectListItem {Value = "ApparelsAndAccessories", Text = "Apparels & Accessories"},
+                                        new SelectListItem {Value = "VehicleParts", Text = "Vehicle Parts"},
+                                    }, "Value", "Text", Context.Request.Query["sortOrder"]);
+                }
+                <select id="Category" name="Category" asp-items="@catList"></select>*@
+
+            </div>
+
+            <!--sorting-->
+            <div class="input-field">
+                @*@Html.LabelFor(m => m.SortBy)*@
+                <br />
+                <div class="form-group">
+                    <label asp-for="SortBy"></label>
+                    <select asp-for="SortBy" class="form-control">
+                        <option value="">Select</option>
+                        <option value="Date">Latest Ads</option>
+                        <option value="date_desc">Older Ads First</option>
+                        <option value="Price">Price: Low to High</option>
+                        <option value="price_desc">Price: High to Low</option>
+                    </select>
+                </div>
+
+             
+                @*@{
+                    var sortList = new SelectList(new List<SelectListItem>
+                                    {
+                                        new SelectListItem {Value = "", Text = "Select"},
+                                        new SelectListItem {Value = "Date", Text = "Latest Ads"},
+                                        new SelectListItem {Value = "date_desc", Text = "Older Ads First"},
+                                        new SelectListItem {Value = "Price", Text = "Price: Low to High"},
+                                        new SelectListItem {Value = "price_desc", Text = "Price: High to Low"},
+                                    }, "Value", "Text", Context.Request.Query["sortOrder"]);
+                }
+                <select id="SortBy" name="SortBy" asp-items="@sortList"></select>*@
+
             </div>
 
             <div class="container">
@@ -138,7 +242,7 @@
         var options = {
             types: ['(cities)'],
             //types: ["address"],
-           // types: ["geocode"],
+            // types: ["geocode"],
             componentRestrictions: { country: "NP" }
         };
 

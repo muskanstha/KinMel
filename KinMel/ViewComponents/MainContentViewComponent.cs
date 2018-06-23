@@ -18,19 +18,21 @@ namespace KinMel.ViewComponents
         {
             _context = context;
         }
-
+        
         public async Task<IViewComponentResult> InvokeAsync(string sortOrder, string category, ClassifiedAdSearchModel searchModel)
         {
             if (!String.IsNullOrWhiteSpace(category))
             {
-                var categoryItems = await GetSortedAdsAsync(sortOrder, category);
+                var categoryItems = await GetSortedAdsAsync(searchModel.SortBy, category);
                 return View(categoryItems);
             }
             if (searchModel != null)
             {
-                var searchItems = await GetFilteredNewAsync(sortOrder, searchModel);
+                //var searchItems = await GetFilteredNewAsync(searchModel.SortBy, searchModel.Category);
+                var searchItems = await GetFilteredNewAsync("random String", searchModel);
                 return View(searchItems);
             }
+
             var items = await GetSortedAdsAsync(sortOrder);
             return View(items);
         }
@@ -143,6 +145,7 @@ namespace KinMel.ViewComponents
         //    return classifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync();
         //}
 
+        //private Task<List<ClassifiedAd>> GetFilteredNewAsync(string sortOrder, ClassifiedAdSearchModel searchModel)
         private Task<List<ClassifiedAd>> GetFilteredNewAsync(string sortOrder, ClassifiedAdSearchModel searchModel)
         {
             var classifiedAd = from c in _context.ClassifiedAd
@@ -175,26 +178,52 @@ namespace KinMel.ViewComponents
                 classifiedAd = classifiedAd.Include(c => c.SubCategory).ThenInclude(c => c.Category).Where(k => k.SubCategory.Category.Name == searchModel.Category);
             }
 
-            ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
-            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
-            switch (sortOrder)
+            if (searchModel.SortBy != null)
             {
-                case "Price":
-                    classifiedAd = classifiedAd.OrderBy(c => c.Price);
-                    break;
-                case "price_desc":
-                    classifiedAd = classifiedAd.OrderByDescending(c => c.Price);
-                    break;
-                case "date_desc":
-                    classifiedAd = classifiedAd.OrderBy(c => c.DateCreated);
-                    break;
-                case "Date":
-                    classifiedAd = classifiedAd.OrderByDescending(c => c.DateCreated);
-                    break;
-                default:
-                    classifiedAd = classifiedAd.OrderByDescending(c => c.DateCreated);
-                    break;
+                ViewData["DateSortParm"] = searchModel.SortBy == "date_desc" ? "Date" : "date_desc";
+                ViewData["PriceSortParm"] = searchModel.SortBy == "Price" ? "price_desc" : "Price";
+               
+                switch (searchModel.SortBy)
+                {
+                    case "Price":
+                        classifiedAd = classifiedAd.OrderBy(c => c.Price);
+                        break;
+                    case "price_desc":
+                        classifiedAd = classifiedAd.OrderByDescending(c => c.Price);
+                        break;
+                    case "date_desc":
+                        classifiedAd = classifiedAd.OrderBy(c => c.DateCreated);
+                        break;
+                    case "Date":
+                        classifiedAd = classifiedAd.OrderByDescending(c => c.DateCreated);
+                        break;
+                    default:
+                        classifiedAd = classifiedAd.OrderByDescending(c => c.DateCreated);
+                        break;
+                }
+                //return classifiedAd.AsNoTracking().Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync();
             }
+
+            //ViewData["DateSortParm"] = sortOrder == "date_desc" ? "Date" : "date_desc";
+            //ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            //switch (sortOrder)
+            //{
+            //    case "Price":
+            //        classifiedAd = classifiedAd.OrderBy(c => c.Price);
+            //        break;
+            //    case "price_desc":
+            //        classifiedAd = classifiedAd.OrderByDescending(c => c.Price);
+            //        break;
+            //    case "date_desc":
+            //        classifiedAd = classifiedAd.OrderBy(c => c.DateCreated);
+            //        break;
+            //    case "Date":
+            //        classifiedAd = classifiedAd.OrderByDescending(c => c.DateCreated);
+            //        break;
+            //    default:
+            //        classifiedAd = classifiedAd.OrderByDescending(c => c.DateCreated);
+            //        break;
+            //}
             return classifiedAd.Include(c => c.CreatedByUser).Include(c => c.SubCategory).ToListAsync();
         }
     }

@@ -22,6 +22,7 @@ namespace KinMel.Models
         public string LastName { get; set; }
 
         public string Category { get; set; }
+        //public ClassifiedAdSearchModel Category { get; set; }
         public string Condition { get; set; }
 
         public Boolean PriceNegotiable { get; set; }
@@ -31,7 +32,9 @@ namespace KinMel.Models
         public bool IsActive { get; set; }
        
         public string City { get; set; }
-     
+
+        public string SortBy { get; set; }
+       
         public double DeliveryCharges { get; set; }
 
         public string WarrantyType { get; set; }
@@ -50,6 +53,7 @@ namespace KinMel.Models
             PriceFrom = null;
             PriceTo = null;
             Category = "";
+            SortBy = "";
             PropertyResults = new List<ClassifiedAd>(); 
 
         }
