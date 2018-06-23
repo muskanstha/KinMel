@@ -89,28 +89,28 @@ namespace XUnitTestProject
 
         }
 
-        [Fact]
-        public void TestAdsCreate()
-        {
-            //ClassifiedAdCreateViewModel cm = new ClassifiedAdCreateViewModel();
-            //cm.CategoryName = "Cars";
-            _car = new Car()
-            {
-                 Type = "Test",
-                 Brand = "",
-                 Color = "Test",
-                 Condition =   "USED"
-            };
-            // Model,ModelYear,Color,TotalKm,FuelType,Features,DoorsNo,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,Engine,Mileage,Transmission,RegisteredDistrict,LotNo,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes
+        //[Fact]
+        //public void TestAdsCreate()
+        //{
+        //    //ClassifiedAdCreateViewModel cm = new ClassifiedAdCreateViewModel();
+        //    //cm.CategoryName = "Cars";
+        //    _car = new Car()
+        //    {
+        //         Type = "Test",
+        //         Brand = "",
+        //         Color = "Test",
+        //         Condition =   "USED"
+        //    };
+        //    // Model,ModelYear,Color,TotalKm,FuelType,Features,DoorsNo,Id,SubCategoryId,Title,Description,Condition,Price,PriceNegotiable,Delivery,IsSold,IsActive,Engine,Mileage,Transmission,RegisteredDistrict,LotNo,AdDuration,City,Address,UsedFor,DeliveryCharges,WarrantyType,WarrantyPeriod,WarrantyIncludes
 
-            // Act
+        //    // Act
 
-            var result = _carsController.Create(_car, imageFiles, image);
+        //    var result = _carsController.Create(_car, imageFiles, image);
 
-            //Assert
-            var feedback = _context.ClassifiedAd.First();
-            Assert.True(feedback.Discriminator == result);
+        //    //Assert
+        //    var feedback = _context.ClassifiedAd.First();
+        //    Assert.True(feedback.Discriminator == result);
 
-        }
+        //}
     }
 }
