@@ -35,7 +35,10 @@ namespace KinMel
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("HostedConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+                {
+                    options.Password.RequireNonAlphanumeric = false;
+                })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 //.AddDefaultUI()
                 .AddDefaultTokenProviders();

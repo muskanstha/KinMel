@@ -14,7 +14,7 @@ namespace KinMel.Models.ManageViewModels
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,128}$", ErrorMessage = "The {0} must be at least 6 aphanumeric characters including at least one uppercase letter, one lowercase letter and one number.")]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }
