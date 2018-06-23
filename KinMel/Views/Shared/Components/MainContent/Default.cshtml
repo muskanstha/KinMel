@@ -1,4 +1,5 @@
-﻿@model IEnumerable<KinMel.Models.ClassifiedAd>
+﻿@using Google.Maps
+@model IEnumerable<KinMel.Models.ClassifiedAd>
 
 @{
     ViewData["Title"] = "Default";
@@ -9,55 +10,60 @@
 
     <!--sorting-->
     <partial name="_sortingPartial" />
-
+    <ul class="tabs  hide-on-small-and-down">
+        <li class="tab col s1"><a class="active" href="#gridView">Grid</a></li>
+        <li class="tab col s1"><a href="#mapView">Map</a></li>
+    </ul>
     <!--grid-view-->
-    <div class="main-content-cards hide-on-small-and-down">
-        @foreach (var item in Model)
-        {
-            <div class="card hoverable m-0">
-                <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug">
-                    @if (item.IsSold)
-                    {
-                        <p class="content-sold red white-text pulse">Sold</p>
-                    }
-                    <div class="card-image waves-effect waves-block grey lighten-4 waves-light">
-                        <img class="content-image-grid" src="@item.PrimaryImageUrl" />
-                        <span class="card-title content-price green">Nrs. @Html.DisplayFor(modelItem => item.Price)</span>
-                    </div>
-                    <div class="card-content pt-5">
-                        <p class="content-datecreated">@Html.LabelFor(modelItem => item.DateCreated): @Html.DisplayFor(modelItem => item.DateCreated)</p>
-                        <span class="card-title grey-text text-darken-4 mb-0">
-                            <b class="content-title">@Html.DisplayFor(modelItem => item.Title)</b>
-                        </span>
-                        @if (@item.Condition == "NEW")
+    <div id="gridView">
+        <div class="main-content-cards hide-on-small-and-down">
+            @foreach (var item in Model)
+            {
+                <div class="card hoverable m-0">
+                    <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug">
+                        @if (item.IsSold)
                         {
-                            <a class="content-condition btn-large red darken-1 activator">@Html.DisplayFor(modelItem => item.Condition)</a>
+                            <p class="content-sold red white-text pulse">Sold</p>
                         }
-                        else
-                        {
-                            <a class="content-condition btn-large cyan darken-3 activator">@Html.DisplayFor(modelItem => item.Condition)</a>
-                        }
-                        <div class="chip">
-                            <img src="@item.CreatedByUser.ProfilePictureUrl" alt="" class="object-fit-cover" />
-                            <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUser.UserName class="content-username"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
+                        <div class="card-image waves-effect waves-block grey lighten-4 waves-light">
+                            <img class="content-image-grid" src="@item.PrimaryImageUrl" />
+                            <span class="card-title content-price green">Nrs. @Html.DisplayFor(modelItem => item.Price)</span>
                         </div>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">
-                            <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
-                            <i class="material-icons right">close</i>
-                        </span>
-                        <p class="content-description">@Html.LabelFor(modelItem => item.UsedFor): @Html.DisplayFor(modelItem => item.UsedFor)</p>
-                        <p class="content-description">@Html.LabelFor(modelItem => item.PriceNegotiable): @Html.DisplayFor(modelItem => item.PriceNegotiable)</p>
-                        <p class="content-description">@Html.LabelFor(modelItem => item.Address): @Html.DisplayFor(modelItem => item.Address)</p>
-                        <p class="content-description">@Html.LabelFor(modelItem => item.City): @Html.DisplayFor(modelItem => item.City)</p>
-                        <p class="content-description">@Html.LabelFor(modelItem => item.Delivery): @Html.DisplayFor(modelItem => item.Delivery)</p>
-                        <p class="content-description">@Html.LabelFor(modelItem => item.DeliveryCharges): @Html.DisplayFor(modelItem => item.DeliveryCharges)</p>
-                        <p class="content-datecreated">@Html.LabelFor(modelItem => item.DateCreated): @Html.DisplayFor(modelItem => item.DateCreated)</p>
-                    </div>
-                </a>
-            </div>
-        }
+                        <div class="card-content pt-5">
+                            <p class="content-datecreated">@Html.LabelFor(modelItem => item.DateCreated): @Html.DisplayFor(modelItem => item.DateCreated)</p>
+                            <span class="card-title grey-text text-darken-4 mb-0">
+                                <b class="content-title">@Html.DisplayFor(modelItem => item.Title)</b>
+                            </span>
+                            @if (@item.Condition == "NEW")
+                            {
+                                <a class="content-condition btn-large red darken-1 activator">@Html.DisplayFor(modelItem => item.Condition)</a>
+                            }
+                            else
+                            {
+                                <a class="content-condition btn-large cyan darken-3 activator">@Html.DisplayFor(modelItem => item.Condition)</a>
+                            }
+                            <div class="chip">
+                                <img src="@item.CreatedByUser.ProfilePictureUrl" alt="" class="object-fit-cover" />
+                                <a asp-action="UserProfile" asp-controller="Account" asp-route-id=@item.CreatedByUser.UserName class="content-username"> @Html.DisplayFor(modelItem => item.CreatedByUser.UserName)</a>
+                            </div>
+                        </div>
+                        <div class="card-reveal">
+                            <span class="card-title grey-text text-darken-4">
+                                <a asp-action="Details" asp-controller="ClassifiedAds" asp-route-id="@item.Slug" class="content-title">@Html.DisplayFor(modelItem => item.Title)</a>
+                                <i class="material-icons right">close</i>
+                            </span>
+                            <p class="content-description">@Html.LabelFor(modelItem => item.UsedFor): @Html.DisplayFor(modelItem => item.UsedFor)</p>
+                            <p class="content-description">@Html.LabelFor(modelItem => item.PriceNegotiable): @Html.DisplayFor(modelItem => item.PriceNegotiable)</p>
+                            <p class="content-description">@Html.LabelFor(modelItem => item.Address): @Html.DisplayFor(modelItem => item.Address)</p>
+                            <p class="content-description">@Html.LabelFor(modelItem => item.City): @Html.DisplayFor(modelItem => item.City)</p>
+                            <p class="content-description">@Html.LabelFor(modelItem => item.Delivery): @Html.DisplayFor(modelItem => item.Delivery)</p>
+                            <p class="content-description">@Html.LabelFor(modelItem => item.DeliveryCharges): @Html.DisplayFor(modelItem => item.DeliveryCharges)</p>
+                            <p class="content-datecreated">@Html.LabelFor(modelItem => item.DateCreated): @Html.DisplayFor(modelItem => item.DateCreated)</p>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
     </div>
     <!--list-view-->
     <div class="hide-on-med-and-up">
@@ -83,9 +89,10 @@
                     </div>
                     <div>
                         <div>
-                            <p class="content-description-list">@Html.DisplayFor(modelItem => item.Description)</p>
+                            <p class="content-description">@Html.LabelFor(modelItem => item.UsedFor): @Html.DisplayFor(modelItem => item.UsedFor)</p>
+                            <p class="content-description">@Html.LabelFor(modelItem => item.Address): @Html.DisplayFor(modelItem => item.Address), @Html.DisplayFor(modelItem => item.City)</p>
                             <p class="material-icons align-middle">person_outline</p>
-                            <a asp-action="UserProfile" asp-controller="Account" asp-route-id="@item.CreatedByUser.UserName" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.FullName)</a>
+                            <a asp-action="UserProfile" asp-controller="Account" asp-route-id="@item.CreatedByUser.UserName" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.UserName)</a>
                         </div>
                         <div>
                             <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
@@ -97,4 +104,164 @@
             <hr />
         }
     </div>
+
+    @*Map*@
+
+    <div id="mapView" class="hide-on-small-and-down">
+        <div id="mapClusterDiv" style="height: 600px;"></div>
+        @*<script>
+                // Initialize and add the map
+                function initMap() {
+                    // The location of Uluru
+                    var uluru = { lat: -25.344, lng: 131.036 };
+                    // The map, centered at Uluru
+                    var map = new google.maps.Map(
+                        document.getElementById('mapDiv'), { zoom: 4, center: uluru });
+                    // The marker, positioned at Uluru
+                    var marker = new google.maps.Marker({ position: uluru, map: map });
+                }
+            </script>*@
+        <script>
+            // Initialize and add the map
+            function initMap() {
+                // The location of Uluru
+                var theAddress = { lat: 27.700769, lng: 85.300140 };
+                // map style
+                var styledMapType = new google.maps.StyledMapType([
+                    {
+                        "featureType": "landscape.natural",
+                        "elementType": "geometry.fill",
+                        "stylers": [{ "visibility": "on" }, { "color": "#e0efef" }]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "geometry.fill",
+                        "stylers": [{ "visibility": "on" }, { "hue": "#1900ff" }, { "color": "#c0e8e8" }]
+                    },
+                    {
+                        "featureType": "road",
+                        "elementType": "geometry",
+                        "stylers": [{ "lightness": 100 }, { "visibility": "simplified" }]
+                    },
+                    { "featureType": "road", "elementType": "labels", "stylers": [{ "visibility": "off" }] },
+                    {
+                        "featureType": "transit.line",
+                        "elementType": "geometry",
+                        "stylers": [{ "visibility": "on" }, { "lightness": 700 }]
+                    },
+                    { "featureType": "water", "elementType": "all", "stylers": [{ "color": "#7dcdcd" }] }
+                ],
+                    { name: 'Styled Map' });
+                // The map, centered at Uluru
+                var map = new google.maps.Map(
+                    document.getElementById('mapClusterDiv'),
+                    {
+                        zoom: 13,
+                        center: theAddress,
+                        //mapTypeControl: true,
+                        gestureHandling: 'greedy',
+                        scrollwheel: false,
+                        //disableDefaultUI: true,
+
+                    });
+                //Associate the styled map with the MapTypeId and set it to display.
+                map.mapTypes.set('styled_map', styledMapType);
+                map.setMapTypeId('styled_map');
+                //var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+                var infoWindow = new google.maps.InfoWindow;
+                var markers;
+
+                //var userMarker;
+                //// Try HTML5 geolocation.
+                //if (navigator.geolocation) {
+                //    navigator.geolocation.getCurrentPosition(function (position) {
+                //        var pos = {
+                //            lat: position.coords.latitude,
+                //            lng: position.coords.longitude
+                //        };
+
+                //        infoWindow.setPosition(pos);
+
+                //        userMarker = new google.maps.Marker({
+                //            position: pos,
+                //            map: map,
+                //            icon: '/images/blue-marker.png'
+                //            //icon: {
+                //            //    url: '/images/blue-marker.png', // url
+                //            //    scaledSize: new google.maps.Size(55, 55), // scaled size
+                //            //    origin: new google.maps.Point(0,0), // origin
+                //            //    anchor: new google.maps.Point(0, 0) // anchor
+                //            //}
+                //        });
+                //        google.maps.event.addListener(userMarker, 'click', function (evt) {
+                //            infoWindow.setContent('You are here!.');
+                //            infoWindow.open(map, userMarker);
+                //        });
+                //        map.setCenter(pos);
+                //    },
+                //        function () {
+                //            handleLocationError(true, infoWindow, map.getCenter());
+                //        });
+                //} else {
+                //    // Browser doesn't support Geolocation
+                //    handleLocationError(false, infoWindow, map.getCenter());
+                //}
+
+
+
+                $.getJSON("/ClassifiedAds/MapClusterData/",
+                    function (locations) {
+
+                        markers = locations.map(function (location, i) {
+                            var marker = new google.maps.Marker({
+                                position: { lat: location.latitude, lng: location.longitude },
+                                //label: labels[i % labels.length],
+                                //icon: {
+                                //    url: location.primaryImageUrl, // url
+                                //    scaledSize: new google.maps.Size(50, 50), // scaled size
+                                //    origin: new google.maps.Point(0,0), // origin
+                                //    anchor: new google.maps.Point(0, 0) // anchor
+                                //}
+                            });
+
+                            google.maps.event.addListener(marker, 'click', function (evt) {
+
+                                //infoWin.setContent('<a href="/ClassifiedAds/Details/'+ location.slug + '">' + location.title + '</a>');
+                                infoWindow.setContent('' +
+                                    '<div class="display-flex"><div class="image-container-list"><a href="/ClassifiedAds/Details/' + location.slug + '">' +
+                                    '<img class="content-image-list-infowindow" src="' + location.primaryImageUrl + '"></a></div><div class="contents-list"><div>' +
+                                    '<a class="content-title" href="/ClassifiedAds/Details/' + location.slug + '">' + location.title + '</a></div><div><div>' +
+                                    '<p class="content-price m-0"> Nrs. ' + location.price + '  (' + location.condition + ') </p>' +
+                                    '<p class="content-address m-0">' + location.address + ', ' + location.city + '</p>' +
+                                    '<p class="material-icons align-middle">person_outline</p><a class="content-username align-middle" href="/Profile/' + location.createdBy + '"> ' +
+                                    location.createdBy + '</a></div><div></div></div></div></div>'
+                                );
+                                infoWindow.open(map, marker);
+                            });
+                            return marker;
+                        });
+
+                        var markerCluster = new MarkerClusterer(map, markers,
+                            {
+                                imagePath: '/images/m',
+                                maxZoom: 15,
+                            });
+                    });
+
+            }
+
+            //function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            //    infoWindow.setPosition(pos);
+            //    infoWindow.setContent(browserHasGeolocation
+            //        ? 'Error: The Geolocation service failed.'
+            //        : 'Error: Your browser doesn\'t support geolocation.');
+            //    infoWindow.open(map);
+            //}
+        </script>
+        <script src="~/js/markerclusterer.js">
+        </script>
+
+    </div>
 </div>
+

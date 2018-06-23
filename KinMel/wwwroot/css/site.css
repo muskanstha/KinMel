@@ -65,6 +65,10 @@ nav .sidenav-trigger {
     vertical-align: middle;
     object-fit: cover;
 }
+.kinmelLogo {
+  height: 60px;
+  vertical-align: middle;
+}
 
 .card {
     margin-bottom: 0px !important;
@@ -895,6 +899,13 @@ nav .sidenav-trigger {
     -webkit-object-fit: scale-down;
     object-fit: scale-down;
 }
+.content-image-list-infowindow {
+    width: 100px;
+    height: 100%;
+    vertical-align: middle;
+    -webkit-object-fit: scale-down;
+    object-fit: scale-down;
+}
 
 .content-title {
     font-size: 14px;
@@ -948,6 +959,15 @@ nav .sidenav-trigger {
 .content-price {
     padding: 2px 4px !important;
     font-weight: 600 !important;
+    font-size: 0.8rem !important;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 0px 10px 10px 0px;
+    background-clip: padding-box;
+}
+
+.content-address {
+    padding: 2px 4px !important;
     font-size: 0.8rem !important;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
