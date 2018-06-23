@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace KinMel.Models.AccountViewModels
 {
@@ -10,7 +11,7 @@ namespace KinMel.Models.AccountViewModels
     {
         [Required]
         [Display(Name = "Username")]
-        [RegularExpression("^[-0-9A-Za-z_]{5,15}$")]
+        [RegularExpression("^[-0-9A-Za-z_]{5,15}$", ErrorMessage = "The username needs to be 5-15 characters long and can only contain numbers and alphabets.")]
         public string UserName { get; set; }
 
         [Required]
@@ -37,7 +38,8 @@ namespace KinMel.Models.AccountViewModels
 
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        //[StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,128}$", ErrorMessage = "The {0} must be at least 6 aphanumeric characters including at least one uppercase letter, one lowercase letter and one number.")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

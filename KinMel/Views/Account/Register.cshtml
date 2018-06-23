@@ -7,7 +7,7 @@
     <div class="row">
         <div class="card-panel card-panel-small z-depth-4">
             <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-                @*<div asp-validation-summary="All" class="text-danger"></div>*@
+                <div asp-validation-summary="ModelOnly" class="red-text"></div>
                 <div class="input-field">
                     <h4 class="center">Register</h4>
                     <p class="center">Join our community now!</p>
@@ -16,49 +16,49 @@
                     <i class="material-icons prefix">account_circle</i>
                     <label asp-for="UserName"></label>
                     <input asp-for="UserName" />
-                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <span asp-validation-for="UserName" class="red-text"></span>
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">person_outline</i>
                     <label asp-for="FirstName"></label>
                     <input asp-for="FirstName" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <span asp-validation-for="FirstName" class="red-text"></span>
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">person_outline</i>
                     <label asp-for="LastName"></label>
                     <input asp-for="LastName" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
+                    <span asp-validation-for="LastName" class="red-text"></span>
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">location_on</i>
                     <label asp-for="Address"></label>
                     <input asp-for="Address" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
+                    <span asp-validation-for="Address" class="red-text"></span>
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">location_on</i>
                     <label asp-for="City"></label>
                     <input asp-for="City" />
-                    <span asp-validation-for="City" class="text-danger"></span>
+                    <span asp-validation-for="City" class="red-text"></span>
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">mail_outline</i>
                     <label asp-for="Email"></label>
                     <input asp-for="Email" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <span asp-validation-for="Email" class="red-text"></span>
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">lock_outline</i>
                     <label asp-for="Password"></label>
                     <input asp-for="Password" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <span asp-validation-for="Password" class="red-text"></span>
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">lock_outline</i>
                     <label asp-for="ConfirmPassword"></label>
                     <input asp-for="ConfirmPassword" />
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    <span asp-validation-for="ConfirmPassword" class="red-text"></span>
                 </div>
                 <div class="input-field">
                     <div class="switch">
@@ -68,6 +68,8 @@
                         </label>
                         <b><label asp-for="AcceptedTerms" class="black-text"></label></b>
                     </div>
+                    <span asp-validation-for="AcceptedTerms" class="red-text"></span>
+
                 </div>
                 <div class="input-field">
                     <button type="submit" class="btn waves-effect waves-light col s12">Register</button>
