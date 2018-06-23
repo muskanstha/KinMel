@@ -34,16 +34,13 @@
                 @Html.TextBoxFor(m => m.PriceTo, new { type = "number", min = "1", max = "10 crore" })
                 @Html.ValidationMessageFor(m => m.PriceTo)
             </div>
-            <div class="card-header mb-0">
+            <div class="card-header">
                 Categories & Sort
             </div>
 
             @*<div class="input-field">
                 @Html.LabelFor(m => m.Category, new {onfocus="this.placeholder = ''",
-                    onblur="this.placeholder = 'enter your text'"})
-                <br />
-
-              
+                    onblur="this.placeholder = 'enter your text'"})           
                 <select name="Category" size="3">
                     <option value="Car">Cars</option>
                     <option value="Mobile">Mobile</option>
@@ -69,8 +66,7 @@
 
                 </select>
             </div>*@
-            
-          
+                  
                 @*<label asp-for="FirstName"></label>
                 <input asp-for="FirstName" placeholder="Your name goes here"/>
                 <input type="submit" />*@
@@ -80,7 +76,7 @@
             <div class="input-field">
                 @*@Html.LabelFor(m => m.Category)*@
                 
-                <br />
+           
                 <div class="form-group">
                     <label asp-for="Category"></label>
                     <select asp-for="Category" class="form-control">
