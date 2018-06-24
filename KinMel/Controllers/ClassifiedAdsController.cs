@@ -29,6 +29,11 @@ namespace KinMel.Controllers
             _context = context;
         }
 
+        //public ClassifiedAdsController()
+        //{
+
+        //}
+
         // GET: ClassifiedAds
         public IActionResult Index(string sortOrder)
         {

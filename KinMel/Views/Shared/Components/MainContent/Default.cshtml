@@ -9,11 +9,12 @@
 <div class="main-content">
 
     <!--sorting-->
-    <partial name="_sortingPartial" />
+    @*<partial name="_sortingPartial" />*@
     <ul class="tabs  hide-on-small-and-down">
         <li class="tab col s1"><a class="active" href="#gridView">Grid</a></li>
         <li class="tab col s1"><a href="#mapView">Map</a></li>
     </ul>
+    <div id="adsList">
     <!--grid-view-->
     <div id="gridView">
         <div class="main-content-cards hide-on-small-and-down">
@@ -104,10 +105,10 @@
             <hr />
         }
     </div>
-
+    </div>
     @*Map*@
 
-    <div id="mapView" class="hide-on-small-and-down">
+    <div id="mapView">
         <div id="mapClusterDiv" style="height: 600px;"></div>
         @*<script>
                 // Initialize and add the map

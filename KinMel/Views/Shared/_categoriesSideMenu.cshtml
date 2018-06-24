@@ -12,14 +12,67 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary(true)
 
+            <!--categories-->
             <div class="input-field">
-                @Html.LabelFor(m => m.City)
-                @Html.TextBoxFor(m => m.City, new { placeholder = "" })
+                @*@Html.LabelFor(m => m.Category)*@
+
+
+                <div class="form-group">
+                    <label asp-for="Category"></label>
+                    <select asp-for="Category" class="form-control">
+                        <option value="">All</option>
+                        <option value="Car">Cars</option>
+                        <option value="Mobile">Mobile</option>
+                        <option value="Motorcycle">Motorcycle</option>
+                        <option value="RealEstate">Real Estate</option>
+                        <option value="Computer">Computer</option>
+                        <option value="Jobs">Jobs</option>
+                        <option value="BeautyAndHealth">Beauty & Health</option>
+                        <option value="Electronics">Books & Learning</option>
+                        <option value="Furnitures">Furnitures</option>
+                        <option value="Camera">Camera</option>
+                        <option value="MusicInstruments">Musical Instruments</option>
+                        <option value="PetsAndPetcare">Pets & Petcare</option>
+                        <option value="SportsAndFitness">Sport & Fitness</option>
+                        <option value="TabletsAndiPads">Tablets & iPads</option>
+                        <option value="ToysAndGames">Toys & Games</option>
+                        <option value="TravelAndTours">Travel & Tours</option>
+                        <option value="HelpAndServices">Help & Services</option>
+                        <option value="MobileAccessories">Mobile Accessories</option>
+                        <option value="ComputerParts">Computer Parts</option>
+                        <option value="ApparelsAndAccessories">Apparels & Accessories</option>
+                        <option value="VehicleParts">Vehicle Parts</option>
+                    </select>
+                </div>
+            </div>
+
+            <!--sorting-->
+            <div class="input-field">
+                @*@Html.LabelFor(m => m.SortBy)*@
+                <div class="form-group">
+                    <label asp-for="SortBy"></label>
+                    <select asp-for="SortBy" class="form-control">
+                        <option value="Date">Latest Ads</option>
+                        <option value="date_desc">Older Ads First</option>
+                        <option value="Price">Price: Low to High</option>
+                        <option value="price_desc">Price: High to Low</option>
+                    </select>
+                </div>
             </div>
 
             <div class="input-field">
-                @Html.LabelFor(m => m.Condition)
-                @Html.TextBoxFor(m => m.Condition)
+                @Html.LabelFor(m => m.City)
+                @Html.TextBoxFor(m => m.City)
+            </div>
+
+            <div class="input-field">
+                <div>
+                    <label asp-for="Condition"></label>
+                    <select asp-for="Condition">
+                        <option value="NEW">NEW</option>
+                        <option value="USED">USED</option>
+                    </select>
+                </div>
             </div>
 
             <div class="input-field">
@@ -34,12 +87,13 @@
                 @Html.ValidationMessageFor(m => m.PriceTo)
             </div>
 
+
             <div class="container">
                 <button class="btn waves-effect waves-light green btn-small mb-5" type="submit">
                     Filter
                     <i class="material-icons right">send</i>
                 </button>
-                <button class="btn waves-effect waves-light red btn-small" type="submit">
+                <button class="btn waves-effect waves-light red btn-small" type="reset">
                     Clear
                     <i class="material-icons right">cancel</i>
                 </button>
@@ -72,47 +126,52 @@
     </div>
 </div>
 
-<div class="taxonomy hide-on-large-only">
-    <ul class="taxonomy-sections">
-        <li><a asp-controller="ApparelsAndAccessories" asp-action="Index"><i class="material-icons align-middle">store</i><span>Apparels & Accessories</span></a></li>
-        <li><a asp-controller="BeautyAndHealths" asp-action="Index"><i class="material-icons align-middle">local_florist</i><span>Beauty & Health</span></a></li>
-        <li><a asp-controller="BooksAndLearnings" asp-action="Index"><i class="material-icons align-middle">book</i><span>Books & Learning</span></a></li>
-        <li><a asp-controller="Cameras" asp-action="Index"><i class="material-icons align-middle">photo_camera</i><span>Cameras</span></a></li>
-        <li><a asp-controller="Cars" asp-action="Index"><i class="material-icons align-middle">directions_car</i><span>Cars</span></a></li>
-        <li><a asp-controller="Computers" asp-action="Index"><i class="material-icons align-middle">computer</i><span>Computers</span></a></li>
-        <li><a asp-controller="ComputerParts" asp-action="Index"><i class="material-icons align-middle">developer_board</i><span>Computer Parts</span></a></li>
-        <li><a asp-controller="Electronics" asp-action="Index"><i class="material-icons align-middle">scanner</i><span>Electronics</span></a></li>
-        <li><a asp-controller="Furnitures" asp-action="Index"><i class="material-icons align-middle">weekend</i><span>Furnitures</span></a></li>
-        <li><a asp-controller="HelpAndServices" asp-action="Index"><i class="material-icons align-middle">build</i><span>Help & Services</span></a></li>
-        <li><a asp-controller="Jobs" asp-action="Index"><i class="material-icons align-middle">work</i><span>Jobs</span></a></li>
-        <li><a asp-controller="Mobiles" asp-action="Index"><i class="material-icons align-middle">smartphone</i><span>Mobiles</span></a></li>
-        <li><a asp-controller="MobileAccessories" asp-action="Index"><i class="material-icons align-middle">headset</i><span>Mobile Accessories</span></a></li>
-        <li><a asp-controller="Motorcycles" asp-action="Index"><i class="material-icons align-middle">motorcycle</i><span>Motorcycles</span></a></li>
-        <li><a asp-controller="MusicInstruments" asp-action="Index"><i class="material-icons align-middle">music_note</i><span>Musical Instruments</span></a></li>
-        <li><a asp-controller="PetsAndPetCares" asp-action="Index"><i class="material-icons align-middle">pets</i><span>Pets & Petcare</span></a></li>
-        <li><a asp-controller="RealEstates" asp-action="Index"><i class="material-icons align-middle">account_balance</i><span>RealState</span></a></li>
-        <li><a asp-controller="SportsAndFitnesses" asp-action="Index"><i class="material-icons align-middle">fitness_center</i><span>Sports & Fitness</span></a></li>
-        <li><a asp-controller="TabletsAndIPads" asp-action="Index"><i class="material-icons align-middle">tablet_mac</i><span>Tablets & iPads</span></a></li>
-        <li><a asp-controller="ToysAndGames" asp-action="Index"><i class="material-icons align-middle">toys</i><span>Toys & Games</span></a></li>
-        <li><a asp-controller="TravelAndTours" asp-action="Index"><i class="material-icons align-middle">flight</i><span>Travel & Tours</span></a></li>
-        <li><a asp-controller="VehiclesParts" asp-action="Index"><i class="material-icons align-middle">settings</i><span>Vehicle Parts</span></a></li>
+<div class="taxonomy hide-on-med-and-up">
+    <ul class="tabs">
+        <li class="tab col s1"><a class="active" href="#adsList">List</a></li>
+        <li class="tab col s1"><a href="#mapView">Map</a></li>
     </ul>
+    @*<ul class="taxonomy-sections">
+            <li><a asp-controller="ApparelsAndAccessories" asp-action="Index"><i class="material-icons align-middle">store</i><span>Apparels & Accessories</span></a></li>
+            <li><a asp-controller="BeautyAndHealths" asp-action="Index"><i class="material-icons align-middle">local_florist</i><span>Beauty & Health</span></a></li>
+            <li><a asp-controller="BooksAndLearnings" asp-action="Index"><i class="material-icons align-middle">book</i><span>Books & Learning</span></a></li>
+            <li><a asp-controller="Cameras" asp-action="Index"><i class="material-icons align-middle">photo_camera</i><span>Cameras</span></a></li>
+            <li><a asp-controller="Cars" asp-action="Index"><i class="material-icons align-middle">directions_car</i><span>Cars</span></a></li>
+            <li><a asp-controller="Computers" asp-action="Index"><i class="material-icons align-middle">computer</i><span>Computers</span></a></li>
+            <li><a asp-controller="ComputerParts" asp-action="Index"><i class="material-icons align-middle">developer_board</i><span>Computer Parts</span></a></li>
+            <li><a asp-controller="Electronics" asp-action="Index"><i class="material-icons align-middle">scanner</i><span>Electronics</span></a></li>
+            <li><a asp-controller="Furnitures" asp-action="Index"><i class="material-icons align-middle">weekend</i><span>Furnitures</span></a></li>
+            <li><a asp-controller="HelpAndServices" asp-action="Index"><i class="material-icons align-middle">build</i><span>Help & Services</span></a></li>
+            <li><a asp-controller="Jobs" asp-action="Index"><i class="material-icons align-middle">work</i><span>Jobs</span></a></li>
+            <li><a asp-controller="Mobiles" asp-action="Index"><i class="material-icons align-middle">smartphone</i><span>Mobiles</span></a></li>
+            <li><a asp-controller="MobileAccessories" asp-action="Index"><i class="material-icons align-middle">headset</i><span>Mobile Accessories</span></a></li>
+            <li><a asp-controller="Motorcycles" asp-action="Index"><i class="material-icons align-middle">motorcycle</i><span>Motorcycles</span></a></li>
+            <li><a asp-controller="MusicInstruments" asp-action="Index"><i class="material-icons align-middle">music_note</i><span>Musical Instruments</span></a></li>
+            <li><a asp-controller="PetsAndPetCares" asp-action="Index"><i class="material-icons align-middle">pets</i><span>Pets & Petcare</span></a></li>
+            <li><a asp-controller="RealEstates" asp-action="Index"><i class="material-icons align-middle">account_balance</i><span>RealState</span></a></li>
+            <li><a asp-controller="SportsAndFitnesses" asp-action="Index"><i class="material-icons align-middle">fitness_center</i><span>Sports & Fitness</span></a></li>
+            <li><a asp-controller="TabletsAndIPads" asp-action="Index"><i class="material-icons align-middle">tablet_mac</i><span>Tablets & iPads</span></a></li>
+            <li><a asp-controller="ToysAndGames" asp-action="Index"><i class="material-icons align-middle">toys</i><span>Toys & Games</span></a></li>
+            <li><a asp-controller="TravelAndTours" asp-action="Index"><i class="material-icons align-middle">flight</i><span>Travel & Tours</span></a></li>
+            <li><a asp-controller="VehiclesParts" asp-action="Index"><i class="material-icons align-middle">settings</i><span>Vehicle Parts</span></a></li>
+        </ul>*@
 </div>
 @*<script>
-    function initMap() {
-        var options = {
-            //types: ['(cities)'],
-            types: ['(cities)'],
-            componentRestrictions: { country: "NP" }
+        function initMap() {
+            var options = {
+                types: ['(cities)'],
+                //types: ["address"],
+                // types: ["geocode"],
+                componentRestrictions: { country: "NP" }
+            };
+
+            var inputCity = document.getElementById('City');
+            var autocompleteCity = new google.maps.places.Autocomplete(inputCity, options);
+
+            google.maps.event.addDomListener(inputCity, 'keydown', function (event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                }
+            });
         };
-
-        var inputCity = document.getElementById('City');
-        var autocompleteCity = new google.maps.places.Autocomplete(inputCity, options);
-
-        google.maps.event.addDomListener(inputCity, 'keydown', function (event) {
-            if (event.keyCode === 13) {
-                event.preventDefault();
-            }
-        });
-    };
-</script>*@
+    </script>*@

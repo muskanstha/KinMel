@@ -16,7 +16,7 @@ namespace KinMel.Models
 
         public int SubCategoryId { get; set; }
         public virtual SubCategory SubCategory { get; set; }
-
+        //public string Category { get; set; }
         public string CreatedByUserId { get; set; }
         public virtual ApplicationUser CreatedByUser { get; set; }
 

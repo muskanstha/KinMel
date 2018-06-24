@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-KinMel-12194E04-3FC6-4270-BBC3-949A6A0C1CF2</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="wwwroot\css\extra\**" />
+    <Content Remove="wwwroot\css\extra\**" />
+    <EmbeddedResource Remove="wwwroot\css\extra\**" />
+    <None Remove="wwwroot\css\extra\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="gmaps-api-net" Version="0.22.0" />
@@ -12,6 +19,8 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" PrivateAssets="All" />
+    <PackageReference Include="Moq" Version="4.8.3" />
+    <PackageReference Include="xunit" Version="2.3.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,10 +37,6 @@
     <Content Update="wwwroot\lib\revolution\assets\1c8fc-slider-bg.jpg">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\css\extra\" />
   </ItemGroup>
 
 </Project>
