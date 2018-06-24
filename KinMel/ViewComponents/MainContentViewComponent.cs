@@ -21,16 +21,17 @@ namespace KinMel.ViewComponents
         
         public async Task<IViewComponentResult> InvokeAsync(string sortOrder, string category, ClassifiedAdSearchModel searchModel)
         {
-            if (!String.IsNullOrWhiteSpace(category))
-            {
-                var categoryItems = await GetSortedAdsAsync(searchModel.SortBy, category);
-                return View(categoryItems);
-            }
+            
             if (searchModel != null)
             {
                 //var searchItems = await GetFilteredNewAsync(searchModel.SortBy, searchModel.Category);
                 var searchItems = await GetFilteredNewAsync("random String", searchModel);
                 return View(searchItems);
+            }
+            else if(!String.IsNullOrWhiteSpace(category))
+            {
+                var categoryItems = await GetSortedAdsAsync(sortOrder, category);
+                return View(categoryItems);
             }
 
             var items = await GetSortedAdsAsync(sortOrder);
