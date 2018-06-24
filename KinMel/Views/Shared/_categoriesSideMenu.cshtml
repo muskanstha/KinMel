@@ -66,8 +66,13 @@
             </div>
 
             <div class="input-field">
-                @Html.LabelFor(m => m.Condition)
-                @Html.TextBoxFor(m => m.Condition)
+                <div>
+                    <label asp-for="Condition"></label>
+                    <select asp-for="Condition">
+                        <option value="NEW">NEW</option>
+                        <option value="USED">USED</option>
+                    </select>
+                </div>
             </div>
 
             <div class="input-field">
