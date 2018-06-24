@@ -160,8 +160,8 @@ namespace KinMel.Controllers
                 new SelectListItem {Text = "Real Estate", Value = "RealEstates"},
                 new SelectListItem {Text = "Computer", Value = "Computers"},
                 new SelectListItem {Text = "Jobs", Value = "Jobs"},
-                new SelectListItem {Text = "Beauty And Health", Value = "BeautyAndHealth"},
-                new SelectListItem {Text = "Books And Learning", Value = "BooksAndLearning"},
+                new SelectListItem {Text = "Beauty And Health", Value = "BeautyAndHealths"},
+                new SelectListItem {Text = "Books And Learning", Value = "BooksAndLearnings"},
                 new SelectListItem {Text = "Electronics", Value = "Electronics"},
                 new SelectListItem {Text = "Furnitures", Value = "Furnitures"},
                 new SelectListItem {Text = "Camera", Value = "Cameras"},
@@ -175,7 +175,7 @@ namespace KinMel.Controllers
                 new SelectListItem {Text = "Mobile Accessories", Value = "MobileAccessories"},
                 new SelectListItem {Text = "Computer Parts", Value = "ComputerParts"},
                 new SelectListItem {Text = "Apparels And Accessories", Value = "ApparelsAndAccessories"},
-                new SelectListItem {Text = "Vehicle Parts", Value = "VehicleParts"}
+                new SelectListItem {Text = "Vehicle Parts", Value = "VehiclesParts"}
             }, "Value", "Text").OrderBy(s => s.Text);
             return View();
         }
@@ -200,8 +200,8 @@ namespace KinMel.Controllers
                 new SelectListItem {Text = "Real Estate", Value = "RealEstates"},
                 new SelectListItem {Text = "Computer", Value = "Computers"},
                 new SelectListItem {Text = "Jobs", Value = "Jobs"},
-                new SelectListItem {Text = "Beauty And Health", Value = "BeautyAndHealth"},
-                new SelectListItem {Text = "Books And Learning", Value = "BooksAndLearning"},
+                new SelectListItem {Text = "Beauty And Health", Value = "BeautyAndHealths"},
+                new SelectListItem {Text = "Books And Learning", Value = "BooksAndLearnings"},
                 new SelectListItem {Text = "Electronics", Value = "Electronics"},
                 new SelectListItem {Text = "Furnitures", Value = "Furnitures"},
                 new SelectListItem {Text = "Camera", Value = "Cameras"},
@@ -215,7 +215,7 @@ namespace KinMel.Controllers
                 new SelectListItem {Text = "Mobile Accessories", Value = "MobileAccessories"},
                 new SelectListItem {Text = "Computer Parts", Value = "ComputerParts"},
                 new SelectListItem {Text = "Apparels And Accessories", Value = "ApparelsAndAccessories"},
-                new SelectListItem {Text = "Vehicle Parts", Value = "VehicleParts"}
+                new SelectListItem {Text = "Vehicle Parts", Value = "VehiclesParts"}
             }, "Value", "Text").OrderBy(s => s.Text);
             return View(model);
         }
