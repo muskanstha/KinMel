@@ -8,10 +8,8 @@
         Filters
     </div>
     <div class="card-content p-20">
-        <form asp-controller="ClassifiedAds" asp-action="Index">
-            @Html.AntiForgeryToken()
+        <form asp-controller="ClassifiedAds" asp-action="Index" method="get">
             @Html.ValidationSummary(true)
-
             <!--categories-->
             <div class="input-field">
                 @*@Html.LabelFor(m => m.Category)*@
@@ -51,7 +49,7 @@
                 @*@Html.LabelFor(m => m.SortBy)*@
                 <div class="form-group">
                     <label asp-for="SortBy"></label>
-                    <select asp-for="SortBy" class="form-control">
+                    <select asp-for="SortBy" class="form-control" onchange="this.form.submit()">
                         <option value="Date">Latest Ads</option>
                         <option value="date_desc">Older Ads First</option>
                         <option value="Price">Price: Low to High</option>
@@ -68,7 +66,7 @@
             <div class="input-field">
                 <div>
                     <label asp-for="Condition"></label>
-                    <select asp-for="Condition">
+                    <select asp-for="Condition" onchange="this.form.submit()">
                         <option value="">Any</option>
                         <option value="NEW">NEW</option>
                         <option value="USED">USED</option>
@@ -129,29 +127,31 @@
 
 <div class="taxonomy hide-on-med-and-up">
     <ul class="taxonomy-sections">
-            <li><a asp-controller="ApparelsAndAccessories" asp-action="Index"><i class="material-icons align-middle">store</i><span>Apparels & Accessories</span></a></li>
-            <li><a asp-controller="BeautyAndHealths" asp-action="Index"><i class="material-icons align-middle">local_florist</i><span>Beauty & Health</span></a></li>
-            <li><a asp-controller="BooksAndLearnings" asp-action="Index"><i class="material-icons align-middle">book</i><span>Books & Learning</span></a></li>
-            <li><a asp-controller="Cameras" asp-action="Index"><i class="material-icons align-middle">photo_camera</i><span>Cameras</span></a></li>
-            <li><a asp-controller="Cars" asp-action="Index"><i class="material-icons align-middle">directions_car</i><span>Cars</span></a></li>
-            <li><a asp-controller="Computers" asp-action="Index"><i class="material-icons align-middle">computer</i><span>Computers</span></a></li>
-            <li><a asp-controller="ComputerParts" asp-action="Index"><i class="material-icons align-middle">developer_board</i><span>Computer Parts</span></a></li>
-            <li><a asp-controller="Electronics" asp-action="Index"><i class="material-icons align-middle">scanner</i><span>Electronics</span></a></li>
-            <li><a asp-controller="Furnitures" asp-action="Index"><i class="material-icons align-middle">weekend</i><span>Furnitures</span></a></li>
-            <li><a asp-controller="HelpAndServices" asp-action="Index"><i class="material-icons align-middle">build</i><span>Help & Services</span></a></li>
-            <li><a asp-controller="Jobs" asp-action="Index"><i class="material-icons align-middle">work</i><span>Jobs</span></a></li>
-            <li><a asp-controller="Mobiles" asp-action="Index"><i class="material-icons align-middle">smartphone</i><span>Mobiles</span></a></li>
-            <li><a asp-controller="MobileAccessories" asp-action="Index"><i class="material-icons align-middle">headset</i><span>Mobile Accessories</span></a></li>
-            <li><a asp-controller="Motorcycles" asp-action="Index"><i class="material-icons align-middle">motorcycle</i><span>Motorcycles</span></a></li>
-            <li><a asp-controller="MusicInstruments" asp-action="Index"><i class="material-icons align-middle">music_note</i><span>Musical Instruments</span></a></li>
-            <li><a asp-controller="PetsAndPetCares" asp-action="Index"><i class="material-icons align-middle">pets</i><span>Pets & Petcare</span></a></li>
-            <li><a asp-controller="RealEstates" asp-action="Index"><i class="material-icons align-middle">account_balance</i><span>RealState</span></a></li>
-            <li><a asp-controller="SportsAndFitnesses" asp-action="Index"><i class="material-icons align-middle">fitness_center</i><span>Sports & Fitness</span></a></li>
-            <li><a asp-controller="TabletsAndIPads" asp-action="Index"><i class="material-icons align-middle">tablet_mac</i><span>Tablets & iPads</span></a></li>
-            <li><a asp-controller="ToysAndGames" asp-action="Index"><i class="material-icons align-middle">toys</i><span>Toys & Games</span></a></li>
-            <li><a asp-controller="TravelAndTours" asp-action="Index"><i class="material-icons align-middle">flight</i><span>Travel & Tours</span></a></li>
-            <li><a asp-controller="VehiclesParts" asp-action="Index"><i class="material-icons align-middle">settings</i><span>Vehicle Parts</span></a></li>
-        </ul>
+        @*<li><a  href="/ClassifiedAds?Category=ApparelsAndAccessories"><i class="material-icons align-middle">store</i><span>Apparels & Accessories</span></a></li>*@
+
+        <li><a asp-controller="ApparelsAndAccessories" asp-action="Index"><i class="material-icons align-middle">store</i><span>Apparels & Accessories</span></a></li>
+        <li><a asp-controller="BeautyAndHealths" asp-action="Index"><i class="material-icons align-middle">local_florist</i><span>Beauty & Health</span></a></li>
+        <li><a asp-controller="BooksAndLearnings" asp-action="Index"><i class="material-icons align-middle">book</i><span>Books & Learning</span></a></li>
+        <li><a asp-controller="Cameras" asp-action="Index"><i class="material-icons align-middle">photo_camera</i><span>Cameras</span></a></li>
+        <li><a asp-controller="Cars" asp-action="Index"><i class="material-icons align-middle">directions_car</i><span>Cars</span></a></li>
+        <li><a asp-controller="Computers" asp-action="Index"><i class="material-icons align-middle">computer</i><span>Computers</span></a></li>
+        <li><a asp-controller="ComputerParts" asp-action="Index"><i class="material-icons align-middle">developer_board</i><span>Computer Parts</span></a></li>
+        <li><a asp-controller="Electronics" asp-action="Index"><i class="material-icons align-middle">scanner</i><span>Electronics</span></a></li>
+        <li><a asp-controller="Furnitures" asp-action="Index"><i class="material-icons align-middle">weekend</i><span>Furnitures</span></a></li>
+        <li><a asp-controller="HelpAndServices" asp-action="Index"><i class="material-icons align-middle">build</i><span>Help & Services</span></a></li>
+        <li><a asp-controller="Jobs" asp-action="Index"><i class="material-icons align-middle">work</i><span>Jobs</span></a></li>
+        <li><a asp-controller="Mobiles" asp-action="Index"><i class="material-icons align-middle">smartphone</i><span>Mobiles</span></a></li>
+        <li><a asp-controller="MobileAccessories" asp-action="Index"><i class="material-icons align-middle">headset</i><span>Mobile Accessories</span></a></li>
+        <li><a asp-controller="Motorcycles" asp-action="Index"><i class="material-icons align-middle">motorcycle</i><span>Motorcycles</span></a></li>
+        <li><a asp-controller="MusicInstruments" asp-action="Index"><i class="material-icons align-middle">music_note</i><span>Musical Instruments</span></a></li>
+        <li><a asp-controller="PetsAndPetCares" asp-action="Index"><i class="material-icons align-middle">pets</i><span>Pets & Petcare</span></a></li>
+        <li><a asp-controller="RealEstates" asp-action="Index"><i class="material-icons align-middle">account_balance</i><span>RealState</span></a></li>
+        <li><a asp-controller="SportsAndFitnesses" asp-action="Index"><i class="material-icons align-middle">fitness_center</i><span>Sports & Fitness</span></a></li>
+        <li><a asp-controller="TabletsAndIPads" asp-action="Index"><i class="material-icons align-middle">tablet_mac</i><span>Tablets & iPads</span></a></li>
+        <li><a asp-controller="ToysAndGames" asp-action="Index"><i class="material-icons align-middle">toys</i><span>Toys & Games</span></a></li>
+        <li><a asp-controller="TravelAndTours" asp-action="Index"><i class="material-icons align-middle">flight</i><span>Travel & Tours</span></a></li>
+        <li><a asp-controller="VehiclesParts" asp-action="Index"><i class="material-icons align-middle">settings</i><span>Vehicle Parts</span></a></li>
+    </ul>
 </div>
 @*<script>
         function initMap() {

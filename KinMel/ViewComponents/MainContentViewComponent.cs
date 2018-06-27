@@ -152,12 +152,12 @@ namespace KinMel.ViewComponents
             var classifiedAd = from c in _context.ClassifiedAd
                                select c;
             //city
-            if (searchModel.City != null)
+            if (!String.IsNullOrWhiteSpace(searchModel.City))
             {
                 classifiedAd = classifiedAd.Where(k => k.City == searchModel.City);
             }
             //condition
-            if (searchModel.Condition != null)
+            if (!String.IsNullOrWhiteSpace(searchModel.Condition))
             {
                 classifiedAd = classifiedAd.Where(k => k.Condition == searchModel.Condition);
             }
@@ -174,7 +174,7 @@ namespace KinMel.ViewComponents
             }
 
             //Category
-            if (searchModel.Category != null)
+            if (!String.IsNullOrWhiteSpace(searchModel.Category))
             {
                 classifiedAd = classifiedAd.Include(c => c.SubCategory).ThenInclude(c => c.Category).Where(k => k.SubCategory.Category.Name == searchModel.Category);
             }
