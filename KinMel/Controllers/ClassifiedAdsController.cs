@@ -35,12 +35,11 @@ namespace KinMel.Controllers
         //}
 
         // GET: ClassifiedAds
-        public IActionResult Index(string sortOrder)
-        {
-            return View();
-        }
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
-        [HttpPost]
         public IActionResult Index(ClassifiedAdSearchModel searchModel)
         {
 
@@ -51,8 +50,7 @@ namespace KinMel.Controllers
             //    var Latitude = locationResponse.Results.First().Geometry.Location.Latitude;
             //    var Longitude = locationResponse.Results.First().Geometry.Location.Longitude;
             //}
-
-            return View("Index", searchModel);
+            return View(searchModel);
         }
 
         //[HttpGet("/ClassifiedAds/Search")]
@@ -154,7 +152,7 @@ namespace KinMel.Controllers
 
         public JsonResult MapClusterData()
         {
-            var classifiedAd = _context.ClassifiedAd.Include(c=>c.CreatedByUser).Where(c => c.IsActive && !c.IsSold).Select(c => new
+            var classifiedAd = _context.ClassifiedAd.Include(c => c.CreatedByUser).Where(c => c.IsActive && !c.IsSold).Select(c => new
             {
                 c.Latitude,
                 c.Longitude,
