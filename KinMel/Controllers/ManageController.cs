@@ -250,7 +250,7 @@ namespace KinMel.Controllers
                 BlobStorageUploader blobStorageUploader = new BlobStorageUploader();
 
                 string profilePictureUrl =
-                    await blobStorageUploader.UploadProfilePictureBlob(user.Id, profilePicture);
+                    await blobStorageUploader.UploadProfilePictureBlob(user.UserName, profilePicture);
                 user.ProfilePictureUrl = profilePictureUrl;
                 await _userManager.UpdateAsync(user);
                 StatusMessage = "Your profile picture has been changed.";
