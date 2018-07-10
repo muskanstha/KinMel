@@ -19,8 +19,8 @@
     <div class="col s12">
         <p class="details-title mt-10 mb-10">
             @Model.Title
-            <a class="right-align right">
-                <label>
+            <a data-tooltip="@Model.DateCreated" class="right-align right tooltipped">
+                <label id="dateCreated">
                     <i class="material-icons align-middle">access_time</i> @Html.DisplayFor(m => m.DateCreated)
                 </label>
             </a>
@@ -206,8 +206,9 @@
                                     </p>
 
                                     <p class="right-align">
+
                                         @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
-                                        <i class="material-icons align-middle">date_range</i>
+                                        <i class="material-icons align-middle ">date_range</i>
 
                                     </p>
                                 </div>
@@ -441,4 +442,12 @@
             marker.setAnimation(google.maps.Animation.BOUNCE);
         }
     }
+</script>
+
+<script>
+        console.log(12);
+    var dateCreated = moment("@Model.DateCreated", "DD-MMM-YY HH:mm:ss");
+        document.getElementById('dateCreated').innerHTML =
+            '<i class="material-icons align-middle">access_time</i> ' + dateCreated.fromNow();
+        console.log(dateCreated.fromNow());
 </script>
