@@ -102,6 +102,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     apparelsAndAccessories.CreatedByUserId = currentUserId;
                     apparelsAndAccessories.DateCreated = DateTime.Now;
+                    apparelsAndAccessories.IsActive = true;
 
 
                     var locationRequest = new GeocodingRequest { Address = $"{apparelsAndAccessories.Address}, {apparelsAndAccessories.City}" };

@@ -102,6 +102,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     booksAndLearning.CreatedByUserId = currentUserId;
                     booksAndLearning.DateCreated = DateTime.Now;
+                    booksAndLearning.IsActive = true;
 
 
                     var locationRequest = new GeocodingRequest { Address = $"{booksAndLearning.Address}, {booksAndLearning.City}" };

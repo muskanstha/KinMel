@@ -102,6 +102,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     toysAndGames.CreatedByUserId = currentUserId;
                     toysAndGames.DateCreated = DateTime.Now;
+                    toysAndGames.IsActive = true;
 
 
                     var locationRequest = new GeocodingRequest { Address = $"{toysAndGames.Address}, {toysAndGames.City}" };

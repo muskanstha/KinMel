@@ -16,7 +16,7 @@
                     <span class="card-title content-price green">Nrs. @Html.DisplayFor(modelItem => item.Price)</span>
                 </div>
                 <div class="card-content pt-5">
-                    <p class="content-datecreated">Posted on: @Html.DisplayFor(modelItem => item.DateCreated)</p>
+                    <p class="content-datecreated">Posted on: @Html.DisplayFor(modelItem => item.DateCreatedRelative)</p>
                     <span class="card-title grey-text text-darken-4 mb-0">
                         <b class="content-title">@Html.DisplayFor(modelItem => item.Title)</b>
                     </span>
@@ -80,7 +80,7 @@
                         <a asp-action="UserProfile" asp-controller="Account" asp-route-id="@item.CreatedByUser.UserName" class="content-username align-middle"> @Html.DisplayFor(modelItem => item.CreatedByUser.UserName)</a>
                     </div>
                     <div>
-                        <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                        <p class="content-datecreated">@Html.DisplayFor(modelItem => item.DateCreatedRelative)</p>
                         <p class="content-price m-0 right-align">Rs. @Html.DisplayFor(modelItem => item.Price)</p>
                     </div>
                 </div>

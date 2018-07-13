@@ -126,13 +126,13 @@ namespace KinMel.Services
                 var memoryStream = new MemoryStream();
                 image.Mutate(i =>
                 {
-                    if (image.Height > image.Width && image.Height > 1080)
+                    if (image.Height > image.Width && image.Height > 720)
                     {
-                        i.Resize(0, 1080);
+                        i.Resize(0, 720);
                     }
-                    else if (image.Width > image.Height && image.Width > 1920)
+                    else if (image.Width > image.Height && image.Width > 1366)
                     {
-                        i.Resize(1920, 0);
+                        i.Resize(1366, 0);
                     }
                     image.SaveAsJpeg(memoryStream, new JpegEncoder()
                     {

@@ -112,6 +112,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     motorcycle.CreatedByUserId = currentUserId;
                     motorcycle.DateCreated = DateTime.Now;
+                    motorcycle.IsActive = true;
 
 
                     var locationRequest = new GeocodingRequest { Address = $"{motorcycle.Address}, {motorcycle.City}" };

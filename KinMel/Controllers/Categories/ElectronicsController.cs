@@ -104,6 +104,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     electronics.CreatedByUserId = currentUserId;
                     electronics.DateCreated = DateTime.Now;
+                    electronics.IsActive = true;
 
 
                     var locationRequest = new GeocodingRequest { Address = $"{electronics.Address}, {electronics.City}" };
