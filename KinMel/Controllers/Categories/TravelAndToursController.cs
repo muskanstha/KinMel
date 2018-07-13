@@ -103,6 +103,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     travelAndTours.CreatedByUserId = currentUserId;
                     travelAndTours.DateCreated = DateTime.Now;
+                    travelAndTours.IsActive = true;
 
 
                     var locationRequest = new GeocodingRequest { Address = $"{travelAndTours.Address}, {travelAndTours.City}" };

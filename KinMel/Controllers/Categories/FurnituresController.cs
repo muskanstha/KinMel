@@ -104,6 +104,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     furnitures.CreatedByUserId = currentUserId;
                     furnitures.DateCreated = DateTime.Now;
+                    furnitures.IsActive = true;
 
 
                     var locationRequest = new GeocodingRequest { Address = $"{furnitures.Address}, {furnitures.City}" };

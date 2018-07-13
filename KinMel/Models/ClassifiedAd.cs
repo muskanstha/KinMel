@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using KinMel.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -65,8 +66,12 @@ namespace KinMel.Models
         public string UsedFor { get; set; }
 
         [DisplayName("Posted on")]
-        [DisplayFormat(DataFormatString = "{0:dd MMMM, yyyy hh:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MMMM-yyyy hh:mm}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
+
+        [NotMapped]
+        public string DateCreatedRelative => this.DateCreated.GetRelativeDate();
+
         public bool IsSold { get; set; }
         public bool IsActive { get; set; }
 

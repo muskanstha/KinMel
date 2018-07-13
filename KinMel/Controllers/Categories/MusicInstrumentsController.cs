@@ -105,6 +105,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     musicInstruments.CreatedByUserId = currentUserId;
                     musicInstruments.DateCreated = DateTime.Now;
+                    musicInstruments.IsActive = true;
 
 
                     var locationRequest = new GeocodingRequest { Address = $"{musicInstruments.Address}, {musicInstruments.City}" };

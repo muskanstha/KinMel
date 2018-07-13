@@ -8,6 +8,16 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using SixLabors.Fonts;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Processing.Quantization;
+using SixLabors.ImageSharp.Processing.Text;
+using SixLabors.ImageSharp.Processing.Transforms;
+using SixLabors.Shapes;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace KinMel.Services
@@ -28,137 +38,141 @@ namespace KinMel.Services
                 new Microsoft.WindowsAzure.Storage.Auth.StorageCredentials(
                     "kinmelstorage",
                     "oP0l/YwDAH3A3vK7A91MunMomfX574OuqvHWc5KMevPmIOgHSVMxQqlp5RmJaTXTnvBhgfD6NPnFO9fzOxzSXw=="), true);
-            blobClient  = storageAccount.CreateCloudBlobClient();
+            blobClient = storageAccount.CreateCloudBlobClient();
             container = blobClient.GetContainerReference("kinmel");
         }
-        public  async Task<string> UploadBlobs(string slug, List<IFormFile> imageFiles)
+        public async Task<string> UploadBlobs(string slug, List<IFormFile> imageFiles)
         {
-            
-
-            //var filePath = Path.GetTempFileName();
-
-            //var filePath = Path.GetTempPath();
-            //var filename = Path.GetRandomFileName();
-
 
             foreach (IFormFile imageFile in imageFiles)
 
             {
-                string[] imageTypes = imageFile.ContentType.Split('/');
-
-                // Get a reference to a blob named "myblob".
-                CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + slug + "-" + imageFiles.IndexOf(imageFile) + "." + imageTypes[1]);
-                //CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + imageFile.FileName);
-
-                // Create or overwrite the "myblob" blob with the contents of a local file
-                // named "myfile".
-
-
-                //await blockBlob.UploadFromStreamAsync(imageFile.OpenReadStream());
+                CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + slug + "-" + imageFiles.IndexOf(imageFile) + ".jpg");
 
                 using (var fileStream = imageFile.OpenReadStream())
                 {
-                    blockBlob.Properties.ContentType = imageFile.ContentType;
-                    await blockBlob.UploadFromStreamAsync(fileStream);
+                    var image = Image.Load(fileStream);
+
+                    var memoryStream = new MemoryStream();
+                    image.Mutate(i =>
+                    {
+                        if (image.Height > image.Width && image.Height > 1080)
+                        {
+                            i.Resize(0, 1080);
+                        }
+                        else if (image.Width > image.Height && image.Width > 1920)
+                        {
+                            i.Resize(1920, 0);
+                        }
+                        image.SaveAsJpeg(memoryStream, new JpegEncoder()
+                        {
+                            Quality = 90
+                        });
+                    });
+
+                    blockBlob.Properties.ContentType = "image/jpeg";
+                    memoryStream.Position = 0;
+                    await blockBlob.UploadFromStreamAsync(memoryStream);
                 }
             }
             return await ListBlobsFolder(slug);
         }
 
-        public  async Task<string> UploadMainBlob(string slug, IFormFile imageFile)
+        public async Task<string> UploadMainBlob(string slug, IFormFile imageFile)
         {
-            
-            string[] imageTypes = imageFile.ContentType.Split('/');
-
-            // Get a reference to a blob named "myblob".
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + slug + "-main." + imageTypes[1]);
-            //CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + imageFile.FileName);
-
-            // Create or overwrite the "myblob" blob with the contents of a local file
-            // named "myfile".
 
 
-            //await blockBlob.UploadFromStreamAsync(imageFile.OpenReadStream());
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + slug + "-main.jpg");
 
             using (var fileStream = imageFile.OpenReadStream())
             {
-                blockBlob.Properties.ContentType = imageFile.ContentType;
+                var image = Image.Load(fileStream);
 
-                await blockBlob.UploadFromStreamAsync(fileStream);
+                var memoryStream = new MemoryStream();
+                image.Mutate(i =>
+                {
+                    if (image.Height > image.Width && image.Height > 1080)
+                    {
+                        i.Resize(0, 1080);
+                    }
+                    else if (image.Width > image.Height && image.Width > 1920)
+                    {
+                        i.Resize(1920, 0);
+                    }
+                    image.SaveAsJpeg(memoryStream, new JpegEncoder()
+                    {
+                        Quality = 90
+                    });
+                });
+
+                blockBlob.Properties.ContentType = "image/jpeg";
+                memoryStream.Position = 0;
+                await blockBlob.UploadFromStreamAsync(memoryStream);
             }
 
 
             return blockBlob.Uri.ToString();
 
         }
-        public  async Task<string> UploadProfilePictureBlob(string id, IFormFile imageFile)
+        public async Task<string> UploadProfilePictureBlob(string username, IFormFile imageFile)
         {
-           
 
-            string[] imageTypes = imageFile.ContentType.Split('/');
-
-            // Get a reference to a blob named "myblob".
-            CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/profiles/" + id + "/profile-picture." + imageTypes[1]);
-            //CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/classifiedads/" + slug + "/" + imageFile.FileName);
-
-            // Create or overwrite the "myblob" blob with the contents of a local file
-            // named "myfile".
-
-
-            //await blockBlob.UploadFromStreamAsync(imageFile.OpenReadStream());
+            CloudBlockBlob blockBlob = container.GetBlockBlobReference("images/profiles/" + username + "/profile-picture.jpg");
 
             using (var fileStream = imageFile.OpenReadStream())
             {
-                blockBlob.Properties.ContentType = imageFile.ContentType;
+                var image = Image.Load(fileStream);
 
-                await blockBlob.UploadFromStreamAsync(fileStream);
+                var memoryStream = new MemoryStream();
+                image.Mutate(i =>
+                {
+                    if (image.Height > image.Width && image.Height > 720)
+                    {
+                        i.Resize(0, 720);
+                    }
+                    else if (image.Width > image.Height && image.Width > 1366)
+                    {
+                        i.Resize(1366, 0);
+                    }
+                    image.SaveAsJpeg(memoryStream, new JpegEncoder()
+                    {
+                        Quality = 90
+                    });
+                });
+
+                blockBlob.Properties.ContentType = "image/jpeg";
+                memoryStream.Position = 0;
+                await blockBlob.UploadFromStreamAsync(memoryStream);
             }
 
 
             return blockBlob.Uri.ToString();
 
         }
-        
 
-        //public static async void DownloadBlob()
-        //{
-        //    // Get a reference to a blob named "photo1.jpg".
-        //    CloudBlockBlob blockBlob = container.GetBlockBlobReference("photo1.jpg");
 
-        //    // Save the blob contents to a file named "myfile".
-        //    using (var fileStream = System.IO.File.OpenWrite(@"path\myfile"))
-        //    {
-        //        await blockBlob.DownloadToStreamAsync(fileStream);
-        //    }
-        //}
-
-        public  async Task<string> ListBlobsFolder(string slug)
+        public async Task<string> ListBlobsFolder(string slug)
         {
-           
+
             List<string> uris = new List<string>();
 
             BlobContinuationToken blobContinuationToken = null;
             do
             {
-                //var results = await container.ListBlobsSegmentedAsync("1-test", blobContinuationToken);
                 var directory = container.GetDirectoryReference("images/classifiedads/" + slug);
                 var results = await directory.ListBlobsSegmentedAsync(blobContinuationToken);
 
-                // Get the value of the continuation token returned by the listing call.
                 blobContinuationToken = results.ContinuationToken;
 
                 foreach (IListBlobItem item in results.Results)
                 {
                     uris.Add(item.Uri.ToString());
-
-                    //Console.WriteLine(item.Uri);
                 }
 
                 blobContinuationToken = results.ContinuationToken;
-            } while (blobContinuationToken != null); // Loop while the continuation token is not null. 
+            } while (blobContinuationToken != null);
 
             string uriJson = JsonConvert.SerializeObject(uris);
-            //var fromJson = JsonConvert.DeserializeObject(uriJson);
 
             return uriJson;
         }

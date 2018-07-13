@@ -102,7 +102,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     vehiclesParts.CreatedByUserId = currentUserId;
                     vehiclesParts.DateCreated = DateTime.Now;
-
+                    vehiclesParts.IsActive = true;
 
                     var locationRequest = new GeocodingRequest { Address = $"{vehiclesParts.Address}, {vehiclesParts.City}" };
                     var locationResponse = new GeocodingService().GetResponse(locationRequest);

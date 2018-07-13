@@ -1,4 +1,5 @@
-﻿@model KinMel.Models.ClassifiedAd
+﻿@using System.Globalization
+@model KinMel.Models.ClassifiedAd
 
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
@@ -19,9 +20,9 @@
     <div class="col s12">
         <p class="details-title mt-10 mb-10">
             @Model.Title
-            <a class="right-align right">
-                <label>
-                    <i class="material-icons align-middle">access_time</i> @Html.DisplayFor(m => m.DateCreated)
+            <a data-tooltip="@Model.DateCreated.ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture)" class="right-align right tooltipped">
+                <label id="dateCreated">
+                    <i class="material-icons align-middle">access_time</i> @Html.DisplayFor(m => m.DateCreatedRelative)
                 </label>
             </a>
         </p>
@@ -206,8 +207,9 @@
                                     </p>
 
                                     <p class="right-align">
+
                                         @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
-                                        <i class="material-icons align-middle">date_range</i>
+                                        <i class="material-icons align-middle ">date_range</i>
 
                                     </p>
                                 </div>
@@ -442,3 +444,9 @@
         }
     }
 </script>
+
+@*<script>
+            var dateCreated = moment("@Model.DateCreated.ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture)", "DD-MMMM-YYYY HH:mm");
+            document.getElementById('dateCreated').innerHTML ='<i class="material-icons align-middle">access_time</i> ' + dateCreated.fromNow();
+            console.log(dateCreated.fromNow());
+    </script>*@

@@ -106,6 +106,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     petsAndPetCare.CreatedByUserId = currentUserId;
                     petsAndPetCare.DateCreated = DateTime.Now;
+                    petsAndPetCare.IsActive = true;
 
 
                     var locationRequest = new GeocodingRequest { Address = $"{petsAndPetCare.Address}, {petsAndPetCare.City}" };
