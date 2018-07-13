@@ -105,6 +105,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     mobile.CreatedByUserId = currentUserId;
                     mobile.DateCreated = DateTime.Now;
+                    mobile.IsActive = true;
 
                     var locationRequest = new GeocodingRequest { Address = $"{mobile.Address}, {mobile.City}" };
                     var locationResponse = new GeocodingService().GetResponse(locationRequest);

@@ -106,6 +106,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     camera.CreatedByUserId = currentUserId;
                     camera.DateCreated = DateTime.Now;
+                    camera.IsActive = true;
 
 
                     var locationRequest = new GeocodingRequest { Address = $"{camera.Address}, {camera.City}" };

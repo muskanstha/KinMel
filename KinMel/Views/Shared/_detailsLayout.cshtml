@@ -22,7 +22,7 @@
             @Model.Title
             <a data-tooltip="@Model.DateCreated.ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture)" class="right-align right tooltipped">
                 <label id="dateCreated">
-                    <i class="material-icons align-middle">access_time</i> @Html.DisplayFor(m => m.DateCreated)
+                    <i class="material-icons align-middle">access_time</i> @Html.DisplayFor(m => m.DateCreatedRelative)
                 </label>
             </a>
         </p>
@@ -445,8 +445,8 @@
     }
 </script>
 
-<script>
-        var dateCreated = moment("@Model.DateCreated.ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture)", "DD-MMMM-YYYY HH:mm");
-        document.getElementById('dateCreated').innerHTML ='<i class="material-icons align-middle">access_time</i> ' + dateCreated.fromNow();
-        console.log(dateCreated.fromNow());
-</script>
+@*<script>
+            var dateCreated = moment("@Model.DateCreated.ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture)", "DD-MMMM-YYYY HH:mm");
+            document.getElementById('dateCreated').innerHTML ='<i class="material-icons align-middle">access_time</i> ' + dateCreated.fromNow();
+            console.log(dateCreated.fromNow());
+    </script>*@

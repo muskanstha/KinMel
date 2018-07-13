@@ -102,6 +102,7 @@ namespace KinMel.Controllers.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     jobs.CreatedByUserId = currentUserId;
                     jobs.DateCreated = DateTime.Now;
+                    jobs.IsActive = true;
 
 
                     var locationRequest = new GeocodingRequest { Address = $"{jobs.Address}, {jobs.City}" };

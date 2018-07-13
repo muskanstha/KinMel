@@ -103,6 +103,7 @@ namespace KinMel.Controllers.Categories.Categories
                     var currentUserId = _userManager.GetUserId(this.User);
                     sportsAndFitness.CreatedByUserId = currentUserId;
                     sportsAndFitness.DateCreated = DateTime.Now;
+                    sportsAndFitness.IsActive = true;
 
 
                     var locationRequest = new GeocodingRequest { Address = $"{sportsAndFitness.Address}, {sportsAndFitness.City}" };
