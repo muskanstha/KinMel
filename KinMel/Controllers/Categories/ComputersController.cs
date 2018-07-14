@@ -101,7 +101,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     computer.CreatedByUserId = currentUserId;
-                    computer.DateCreated = DateTime.Now;
+                    computer.DateCreated = DateTimeOffset.UtcNow;
                     computer.IsActive = true;
 
 

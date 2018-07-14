@@ -34,7 +34,7 @@ namespace KinMel.Models
         public bool IsRead { get; set; }
 
         // notification date
-        public DateTime Date { get; set; }
+        public DateTimeOffset Date { get; set; }
 
     }
 }

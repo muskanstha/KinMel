@@ -101,7 +101,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     vehiclesParts.CreatedByUserId = currentUserId;
-                    vehiclesParts.DateCreated = DateTime.Now;
+                    vehiclesParts.DateCreated = DateTimeOffset.UtcNow;
                     vehiclesParts.IsActive = true;
 
                     var locationRequest = new GeocodingRequest { Address = $"{vehiclesParts.Address}, {vehiclesParts.City}" };

@@ -124,7 +124,7 @@ namespace KinMel.Controllers
                     Action = "UserProfile",
                     ActionController = "Account",
                     ActionId = rating.RatedFor.UserName,
-                    Date = DateTime.Now,
+                    Date = DateTimeOffset.UtcNow,
                     NotificationFromId = currentUserId,
                     NotificationToId = rating.RatedForId,
                     NotificationText = $"{User.Identity.Name} left a {rating.Stars} star(s) rating on your profile!"
@@ -204,7 +204,7 @@ namespace KinMel.Controllers
                             Action = "UserProfile",
                             ActionController = "Account",
                             ActionId = originalRating.RatedFor.UserName,
-                            Date = DateTime.Now,
+                            Date = DateTimeOffset.UtcNow,
                             NotificationFromId = originalRating.RatedById,
                             NotificationToId = originalRating.RatedForId,
                             NotificationText = $"{User.Identity.Name} edited their ratings with {originalRating.Stars} star(s) on your profile!"

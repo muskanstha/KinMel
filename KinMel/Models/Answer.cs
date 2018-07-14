@@ -17,6 +17,6 @@ namespace KinMel.Models
         public string CreatedById { get; set; }
         public virtual ApplicationUser CreatedBy { get; set; }
 
-        public DateTime DateCreated { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
     }
 }

@@ -101,7 +101,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     realEstate.CreatedByUserId = currentUserId;
-                    realEstate.DateCreated = DateTime.Now;
+                    realEstate.DateCreated = DateTimeOffset.UtcNow;
                     realEstate.IsActive = true;
 
 

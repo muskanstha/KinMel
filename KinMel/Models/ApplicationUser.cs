@@ -65,7 +65,7 @@ namespace KinMel.Models
 
         public bool AcceptedTerms { get; set; }
         [DisplayFormat(DataFormatString = "{0:MMMM, yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime JoinDate { get; set; }
+        public DateTimeOffset JoinDate { get; set; }
     }
 
     public class AccountDTO
@@ -91,6 +91,6 @@ namespace KinMel.Models
 
         public double AverageStars { get; set; }
         [DisplayFormat(DataFormatString = "{0:MMMM, yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime JoinDate { get; set; }
+        public DateTimeOffset JoinDate { get; set; }
     }
 }

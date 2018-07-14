@@ -70,7 +70,7 @@ namespace KinMel.Controllers
             if (ModelState.IsValid)
             {
 
-                answer.DateCreated = DateTime.Now;
+                answer.DateCreated = DateTimeOffset.UtcNow;
 
                 string currentUserId = _userManager.GetUserId(User);
                 answer.CreatedById = currentUserId;

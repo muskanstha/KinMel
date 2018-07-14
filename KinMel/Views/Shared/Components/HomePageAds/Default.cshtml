@@ -45,7 +45,7 @@
                     <p class="content-description">@Html.LabelFor(modelItem => item.City): @Html.DisplayFor(modelItem => item.City)</p>
                     <p class="content-description">@Html.LabelFor(modelItem => item.Delivery): @Html.DisplayFor(modelItem => item.Delivery)</p>
                     <p class="content-description">@Html.LabelFor(modelItem => item.DeliveryCharges): @Html.DisplayFor(modelItem => item.DeliveryCharges)</p>
-                    <p class="content-datecreated">@Html.LabelFor(modelItem => item.DateCreated): @item.DateCreated.ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture)</p>
+                    <p class="content-datecreated">@Html.LabelFor(modelItem => item.DateCreated): @item.DateCreated.ToLocalTime().ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture)</p>
                 </div>
             </a>
         </div>

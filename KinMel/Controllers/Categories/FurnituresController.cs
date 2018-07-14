@@ -103,7 +103,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     furnitures.CreatedByUserId = currentUserId;
-                    furnitures.DateCreated = DateTime.Now;
+                    furnitures.DateCreated = DateTimeOffset.UtcNow;
                     furnitures.IsActive = true;
 
 

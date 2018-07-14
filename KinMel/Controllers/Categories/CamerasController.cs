@@ -105,7 +105,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     camera.CreatedByUserId = currentUserId;
-                    camera.DateCreated = DateTime.Now;
+                    camera.DateCreated = DateTimeOffset.UtcNow;
                     camera.IsActive = true;
 
 
