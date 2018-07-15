@@ -4,7 +4,7 @@ $(document).ready(function () {
     M.AutoInit();
     // Materialize Dropdown
     $('.dropdown-trigger').dropdown({
-        coverTrigger: false, // Displays dropdown below the button
+        coverTrigger: false // Displays dropdown below the button
     });
 
     //Tooltip
@@ -18,13 +18,13 @@ $(document).ready(function () {
     });
 
 
-    lightbox.option({
-        'resizeDuration': 200,
-        'fadeDuration': 200,
-        'imageFadeDuration': 200,
-        'wrapAround': true,
-        'disableScrolling': true
-    });
+    //lightbox.option({
+    //    'resizeDuration': 200,
+    //    'fadeDuration': 200,
+    //    'imageFadeDuration': 200,
+    //    'wrapAround': true,
+    //    'disableScrolling': true
+    //});
 
     //var count = JSON.parse($.getJSON("notifications/notificationcount/"));
     $.getJSON("/notifications/notificationcount/",

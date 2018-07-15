@@ -101,7 +101,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     helpAndServices.CreatedByUserId = currentUserId;
-                    helpAndServices.DateCreated = DateTime.Now;
+                    helpAndServices.DateCreated = DateTimeOffset.UtcNow;
                     helpAndServices.IsActive = true;
 
 

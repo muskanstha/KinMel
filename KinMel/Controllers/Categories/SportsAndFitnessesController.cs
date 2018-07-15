@@ -102,7 +102,7 @@ namespace KinMel.Controllers.Categories.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     sportsAndFitness.CreatedByUserId = currentUserId;
-                    sportsAndFitness.DateCreated = DateTime.Now;
+                    sportsAndFitness.DateCreated = DateTimeOffset.UtcNow;
                     sportsAndFitness.IsActive = true;
 
 

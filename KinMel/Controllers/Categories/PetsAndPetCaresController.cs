@@ -105,7 +105,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     petsAndPetCare.CreatedByUserId = currentUserId;
-                    petsAndPetCare.DateCreated = DateTime.Now;
+                    petsAndPetCare.DateCreated = DateTimeOffset.UtcNow;
                     petsAndPetCare.IsActive = true;
 
 

@@ -67,7 +67,7 @@ namespace KinMel.Models
 
         [DisplayName("Posted on")]
         [DisplayFormat(DataFormatString = "{0:dd-MMMM-yyyy hh:mm}", ApplyFormatInEditMode = true)]
-        public DateTime DateCreated { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
 
         [NotMapped]
         public string DateCreatedRelative => this.DateCreated.GetRelativeDate();

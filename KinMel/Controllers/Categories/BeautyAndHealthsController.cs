@@ -101,7 +101,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     beautyAndHealth.CreatedByUserId = currentUserId;
-                    beautyAndHealth.DateCreated = DateTime.Now;
+                    beautyAndHealth.DateCreated = DateTimeOffset.UtcNow;
                     beautyAndHealth.IsActive = true;
 
 

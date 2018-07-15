@@ -101,7 +101,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     mobileAccessories.CreatedByUserId = currentUserId;
-                    mobileAccessories.DateCreated = DateTime.Now;
+                    mobileAccessories.DateCreated = DateTimeOffset.UtcNow;
                     mobileAccessories.IsActive = true;
 
 

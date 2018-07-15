@@ -104,7 +104,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     musicInstruments.CreatedByUserId = currentUserId;
-                    musicInstruments.DateCreated = DateTime.Now;
+                    musicInstruments.DateCreated = DateTimeOffset.UtcNow;
                     musicInstruments.IsActive = true;
 
 

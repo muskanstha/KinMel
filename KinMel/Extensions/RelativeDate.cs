@@ -8,7 +8,7 @@ namespace KinMel.Extensions
     public static class RelativeDate
     {
   
-        public static string GetRelativeDate(this DateTime theDate)
+        public static string GetRelativeDate(this DateTimeOffset theDate)
         {
             const int SECOND = 1;
             const int MINUTE = 60 * SECOND;
@@ -16,7 +16,7 @@ namespace KinMel.Extensions
             const int DAY = 24 * HOUR;
             const int MONTH = 30 * DAY;
 
-            var ts = new TimeSpan(DateTime.UtcNow.Ticks - theDate.Ticks);
+            var ts = new TimeSpan(DateTimeOffset.UtcNow.Ticks - theDate.Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
 
             if (delta < 1 * MINUTE)

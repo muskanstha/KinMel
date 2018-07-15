@@ -236,7 +236,7 @@ namespace KinMel.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     AcceptedTerms = model.AcceptedTerms,
-                    JoinDate = DateTime.Now
+                    JoinDate = DateTimeOffset.UtcNow
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

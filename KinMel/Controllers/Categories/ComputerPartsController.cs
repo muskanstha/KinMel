@@ -102,7 +102,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     computerParts.CreatedByUserId = currentUserId;
-                    computerParts.DateCreated = DateTime.Now;
+                    computerParts.DateCreated = DateTimeOffset.UtcNow;
                     computerParts.IsActive = true;
 
 
