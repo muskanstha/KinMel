@@ -101,7 +101,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     toysAndGames.CreatedByUserId = currentUserId;
-                    toysAndGames.DateCreated = DateTime.Now;
+                    toysAndGames.DateCreated = DateTimeOffset.UtcNow;
                     toysAndGames.IsActive = true;
 
 

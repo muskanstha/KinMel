@@ -103,7 +103,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     tabletsAndIPads.CreatedByUserId = currentUserId;
-                    tabletsAndIPads.DateCreated = DateTime.Now;
+                    tabletsAndIPads.DateCreated = DateTimeOffset.UtcNow;
                     tabletsAndIPads.IsActive = true;
 
 

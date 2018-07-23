@@ -101,7 +101,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     apparelsAndAccessories.CreatedByUserId = currentUserId;
-                    apparelsAndAccessories.DateCreated = DateTime.Now;
+                    apparelsAndAccessories.DateCreated = DateTimeOffset.UtcNow;
                     apparelsAndAccessories.IsActive = true;
 
 

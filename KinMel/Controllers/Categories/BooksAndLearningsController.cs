@@ -101,7 +101,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     booksAndLearning.CreatedByUserId = currentUserId;
-                    booksAndLearning.DateCreated = DateTime.Now;
+                    booksAndLearning.DateCreated = DateTimeOffset.UtcNow;
                     booksAndLearning.IsActive = true;
 
 

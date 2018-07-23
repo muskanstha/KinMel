@@ -1,4 +1,5 @@
-﻿@model IEnumerable<KinMel.Models.Question>
+﻿@using System.Globalization
+@model IEnumerable<KinMel.Models.Question>
 
 @{
     ViewData["Title"] = "Default";
@@ -15,7 +16,7 @@
                 @Html.DisplayFor(modelItem => item.Text)
                 <br />
                 <label class="">
-                    Asked at @Html.DisplayFor(modelItem => item.DateCreated)
+                    Asked at @item.DateCreated.ToLocalTime().ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture)
                 </label>
             </p>
             @*<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>*@
@@ -38,7 +39,7 @@
                                     @Html.DisplayFor(modelItem => answer.Text)
                                     <br />
                                     <label class="">
-                                        Answered at @Html.DisplayFor(modelItem => item.DateCreated)
+                                        Answered at @item.DateCreated.ToLocalTime().ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture)
                                     </label>
                                 </p>
                                 @*<a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>*@

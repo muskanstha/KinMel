@@ -102,7 +102,7 @@ namespace KinMel.Controllers.Categories
                 {
                     var currentUserId = _userManager.GetUserId(this.User);
                     travelAndTours.CreatedByUserId = currentUserId;
-                    travelAndTours.DateCreated = DateTime.Now;
+                    travelAndTours.DateCreated = DateTimeOffset.UtcNow;
                     travelAndTours.IsActive = true;
 
 
