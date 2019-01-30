@@ -22,14 +22,14 @@
 <div class="browse-width index-content">
     <!--Title-->
     <div class="col s12">
-        <p class="details-title">
+        <h5 class="bold">
             @Model.Title
             <a data-tooltip="@Model.DateCreated.ToLocalTime().ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture)" class="right-align right tooltipped">
                 <label id="dateCreated">
                     <i class="material-icons align-middle">access_time</i> @Html.DisplayFor(m => m.DateCreatedRelative)
                 </label>
             </a>
-        </p>
+        </h5>
         <p class="details-price m-0">
             Nrs. @Model.Price
             @if (!Model.IsActive)
@@ -39,7 +39,6 @@
             @if (Model.IsSold)
             {
                 <a class="details-price-tag red">Sold</a>
-
             }
             @if (Model.CreatedByUser.UserName.Equals(User.Identity.Name))
             {
@@ -289,7 +288,12 @@
             </div>
         </div>
     </section>
+    <!--Similar-ads-->
+    <section>
+        <h5 class="bold m-0">Similar Ads</h5>
+    </section>
 </div>
+
 <script>
     var marker;
     // Initialize and add the map
@@ -337,9 +341,3 @@
         }
     }
 </script>
-
-@*<script>
-            var dateCreated = moment("@Model.DateCreated.ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture)", "DD-MMMM-YYYY HH:mm");
-            document.getElementById('dateCreated').innerHTML ='<i class="material-icons align-middle">access_time</i> ' + dateCreated.fromNow();
-            console.log(dateCreated.fromNow());
-    </script>*@
