@@ -1060,11 +1060,6 @@ nav .sidenav-trigger {
         }
     }
 
-.details-title {
-    font-size: 20px;
-    font-weight: bold;
-}
-
 .details-price {
     font-size: 22px;
     color: darkgreen;
@@ -1424,3 +1419,33 @@ footer .brand-logo {
                     line-height: 1.4em;
                 }
 /*****************END*******************/
+
+/************Ads-Details-Map************/
+section.details_top-grid >
+div.card >
+div#details-map-div.details-map-div >
+div >
+div.gm-style >
+div >
+a >
+div {
+    display: none;
+}
+section.details_top-grid >
+div.card >
+div#details-map-div.details-map-div >
+div >
+div.gm-style >
+div.gmnoprint >
+div.gm-style-cc {
+    display: none;
+}
+section.details_top-grid >
+div.card >
+div#details-map-div.details-map-div >
+div >
+div.gm-style >
+div.gmnoprint.gm-style-cc {
+    display: none;
+}
+/*****************END******************/
