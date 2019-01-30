@@ -6,7 +6,7 @@
 <div class="fields-list">
     @if (@Model.Salary != null)
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.Salary"></label>
                 <p> @Html.DisplayFor(m => m.Salary) "</p>
@@ -15,7 +15,7 @@
     }
     @if (!String.IsNullOrWhiteSpace(@Model.WorkingDays))
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.WorkingDays"></label>
                 <p> @Html.DisplayFor(m => m.WorkingDays)</p>
@@ -24,7 +24,7 @@
     }
     @if (!String.IsNullOrWhiteSpace(@Model.ContractFor))
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.ContractFor"></label>
                 <p> @Html.DisplayFor(m => m.ContractFor)</p>

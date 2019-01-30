@@ -23,6 +23,7 @@ namespace KinMel.Models
 
         [Required]
         public string Title { get; set; }
+
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 

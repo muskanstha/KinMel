@@ -70,10 +70,6 @@ nav .sidenav-trigger {
   vertical-align: middle;
 }
 
-.card {
-    margin-bottom: 0px !important;
-}
-
 .card-content {
     padding: 10px 14px 10px 12px !important;
 }
@@ -994,12 +990,11 @@ nav .sidenav-trigger {
     line-height: 2.5;
 }
 /******************End*******************/
-/****************Details*****************/
 
-.shadow-1p {
-    -webkit-box-shadow: 1px 1px 1px 1px #ccc; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    -moz-box-shadow: 1px 1px 1px 1px #ccc; /* Firefox 3.5 - 3.6 */
-    box-shadow: 1px 1px 1px 1px #ccc; /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+/****************Details*****************/
+.details_top-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .details-title {
@@ -1036,9 +1031,6 @@ nav .sidenav-trigger {
     color: #fff;
     font-size: 16px;
     padding: 8px 20px;
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
 }
 
 .details-header > .explain {
@@ -1061,8 +1053,7 @@ nav .sidenav-trigger {
 }
 
 .fields-list > ul > li {
-    padding: 10px 10px;
-    margin: 0;
+    padding: 5px 5px;
     border-bottom: 1px solid #e0e0e0;
 }
 
@@ -1071,14 +1062,10 @@ nav .sidenav-trigger {
         float: right;
     }
 
-#details-carousel {
-    /*height: 275px;*/
-}
 
 #details-carousel-item {
     min-height: 275px !important;
     background-color: #b0bec5;
-    /*background-color: whitesmoke;*/
 }
 
     #details-carousel-item > img {
@@ -1088,20 +1075,12 @@ nav .sidenav-trigger {
         vertical-align: middle;
     }
 
-/*.materialboxed.active {
-    cursor: pointer;
-}*/
 #materialbox-overlay, .lightboxOverlay {
     cursor: zoom-out;
     cursor: -webkit-zoom-out;
 }
 
 .details-createdby-img {
-    /*height: 142px;
-    width: 142px;
-    display: inline-block;
-    vertical-align: middle;
-    padding: 15px;*/
     object-fit: cover;
     width: 80px;
     height: 80px;
@@ -1122,37 +1101,13 @@ nav .sidenav-trigger {
     font-size: 1.3em;
     color: red;
 }
-/*@media only screen and (min-width: 992px) {
-    #details-header {
-        display: flex;
-    }
-}
 
-@media only screen and (min-width: 600px) {
-    #details-map-carousel-div {
-        display: flex;
-    }
-}*/
 .details-map-div {
-    /*background-image: url("/images/map-placeholder.png");*/
     height: 280px;
-    margin-top: 10px;
 }
 
-@media only screen and (max-width: 992px) {
-    .details-map-div {
-        height: 130px;
-    }
-}
-
-
-#details-carousel {
-    padding: 5px;
-}
-
-#details-header > .card-panel {
-}
 /******************End*******************/
+
 /****************FOOTER*****************/
 .footer {
     color: white;

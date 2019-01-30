@@ -5,7 +5,7 @@
 }
 
 <div class="fields-list">
-    <ul class="col s12 m6 m-0 p-5">
+    <ul class="col s12 m6 m-0">
         <li>
             <label asp-for="@Model.Author"></label>
             <p> @Html.DisplayFor(m => m.Author)</p>
@@ -13,7 +13,7 @@
     </ul>
     @if (!String.IsNullOrWhiteSpace(@Model.Isbn))
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.Isbn"></label>
                 <p> @Html.DisplayFor(m => m.Isbn)</p>

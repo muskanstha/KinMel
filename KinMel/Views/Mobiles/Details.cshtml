@@ -6,7 +6,7 @@
 <div class="fields-list">
     @if (!String.IsNullOrWhiteSpace(@Model.Brand))
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.Brand"></label>
                 <p> @Html.DisplayFor(m => m.Brand)</p>
@@ -15,7 +15,7 @@
     }
     @if (!String.IsNullOrWhiteSpace(@Model.Model))
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.Model"></label>
                 <p> @Html.DisplayFor(m => m.Model)</p>
@@ -24,7 +24,7 @@
     }
     @if (!String.IsNullOrWhiteSpace(@Model.Color))
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.Color"></label>
                 <p> @Html.DisplayFor(m => m.Color)</p>
@@ -33,7 +33,7 @@
     }
     @if (@Model.Storage != null)
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.Storage"></label>
                 <p> @Html.DisplayFor(m => m.Storage) GB</p>
@@ -42,7 +42,7 @@
     }
     @if (@Model.Ram != null)
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.Ram"></label>
                 <p> @Html.DisplayFor(m => m.Ram) GB</p>
@@ -52,7 +52,7 @@
 
     @if (@Model.FrontCamera != null)
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.FrontCamera"></label>
                 <p> @Html.DisplayFor(m => m.FrontCamera) MP</p>
@@ -61,7 +61,7 @@
     }
     @if (@Model.BackCamera != null)
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.BackCamera"></label>
                 <p> @Html.DisplayFor(m => m.BackCamera) MP</p>
@@ -69,7 +69,7 @@
         </ul>
     }        @if (@Model.ScreenSize != null)
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.ScreenSize"></label>
                 <p> @Html.DisplayFor(m => m.ScreenSize) "</p>
@@ -78,7 +78,7 @@
     }
     @if (!String.IsNullOrWhiteSpace(@Model.PhoneOs))
     {
-        <ul class="col s12 m6 m-0 p-5">
+        <ul class="col s12 m6 m-0">
             <li>
                 <label asp-for="@Model.PhoneOs"></label>
                 <p> @Html.DisplayFor(m => m.PhoneOs)</p>
