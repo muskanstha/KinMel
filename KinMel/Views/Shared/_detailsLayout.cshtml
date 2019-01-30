@@ -73,25 +73,6 @@
             }
         </p>
     </div>
-    <div class="divider"></div>
-    @*<section>
-            <div class="slider">
-                <ul class="slides">
-                    <li>
-                        <img src="@Model.PrimaryImageUrl"> <!-- random image -->
-                    </li>
-                    @if (Model.ImageUrlList.Any())
-                    {
-                        foreach (var item in Model.ImageUrlList)
-                        {
-                            <li>
-                                <img src="@item"> <!-- random image -->
-                            </li>}
-                    }
-                </ul>
-            </div>
-        </section>
-        <div class="divider"></div>*@
 
     <section>
         <div id="details-map-carousel-div" class="row m-0">
@@ -105,19 +86,6 @@
                 }
 
             </div>
-            @*<div id="details-carousel" class="col s12 m12 l7 carousel carousel-slider grey lighten-4 shadow-1p">
-                    @if (Model.ImageUrlList.Any())
-                    {
-                        foreach (var item in Model.ImageUrlList)
-                        {
-                            <a href="@item" data-lightbox="adImages" id="details-carousel-item" class="carousel-item"><img src="@item"></a>
-                        }
-                    }
-
-                </div>*@
-
-
-
 
             <div class="col s12 m6 l5 shadow-1p">
                 <div id="details-map-div" class="details-map-div"></div>
@@ -164,8 +132,6 @@
                                 </ul>
                             </div>
                         }
-
-
                     </div>
                 </div>
             </div>
@@ -203,14 +169,11 @@
                                                 <i class="material-icons red-text align-middle tooltipped" data-tooltip="Phone not verified" data-position="left">phonelink_erase</i>
                                             }
                                         }
-
                                     </p>
 
                                     <p class="right-align">
-
                                         @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
                                         <i class="material-icons align-middle ">date_range</i>
-
                                     </p>
                                 </div>
                             </div>
@@ -226,7 +189,6 @@
                                 <label asp-for="@Model.Condition"></label>
                                 <p class="escape-float"> @Html.DisplayFor(m => m.Condition)</p>
                             </li>
-
                         </ul>
                     </div>
                     @if (!String.IsNullOrWhiteSpace(@Model.UsedFor))
@@ -241,7 +203,6 @@
                         </div>
                     }
 
-
                     <div class="col s12 m12 fields-list">
                         <ul class="row m-0">
                             <li>
@@ -250,16 +211,12 @@
                                     @Html.Raw(@Model.PriceNegotiable ? "Yes" : "No")
                                 </p>
                             </li>
-
                         </ul>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
-
-    <div class="divider"></div>
 
     <section>
         <div class="details-card-header">Description</div>
@@ -293,7 +250,6 @@
                         </li>
                     </ul>
                 </div>
-
             }
             @if (!String.IsNullOrWhiteSpace(@Model.WarrantyPeriod))
             {
@@ -305,7 +261,6 @@
                         </li>
                     </ul>
                 </div>
-
             }
             @if (!String.IsNullOrWhiteSpace(@Model.WarrantyIncludes))
             {
@@ -317,56 +272,9 @@
                         </li>
                     </ul>
                 </div>
-
             }
         </div>
     </section>
-
-    @*<div class="divider"></div>*@
-
-    @*<section>
-            <div class="col s12">
-                <div class="details-card-header">Warranty Details</div>
-                <div class="row m-0">
-                    @if (!String.IsNullOrWhiteSpace(@Model.WarrantyType))
-                    {
-                        <div class="col s12 m6 fields-list">
-                            <ul class="row">
-                                <li>
-                                    <label asp-for="@Model.WarrantyType"></label>
-                                    <p> @Html.DisplayFor(m => m.WarrantyType)</p>
-                                </li>
-                            </ul>
-                        </div>
-
-                    }
-                    @if (!String.IsNullOrWhiteSpace(@Model.WarrantyPeriod))
-                    {
-                        <div class="col s12 m6 fields-list">
-                            <ul class="row">
-                                <li>
-                                    <label asp-for="@Model.WarrantyPeriod"></label>
-                                    <p> @Html.DisplayFor(m => m.WarrantyPeriod)</p>
-                                </li>
-                            </ul>
-                        </div>
-
-                    }
-                    @if (!String.IsNullOrWhiteSpace(@Model.WarrantyIncludes))
-                    {
-                        <div class="col s12 m12 fields-list">
-                            <ul class="row m-0">
-                                <li>
-                                    <label asp-for="@Model.WarrantyIncludes"></label>
-                                    <p class="escape-float"> @Html.DisplayFor(m => m.WarrantyIncludes)</p>
-                                </li>
-                            </ul>
-                        </div>
-
-                    }
-                </div>
-            </div>
-        </section>*@
 
     <section>
         <div class="col s12">
