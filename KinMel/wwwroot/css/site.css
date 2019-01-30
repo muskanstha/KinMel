@@ -1015,7 +1015,7 @@ nav .sidenav-trigger {
 /****************Details*****************/
 .details_top-grid{
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 2fr 1fr;
     grid-gap: 5px;
 }
 
@@ -1023,6 +1023,13 @@ nav .sidenav-trigger {
     .details_top-grid {
         grid-template-columns: 1fr;
         grid-gap: 5px;
+    }
+    .details_top1-grid > div:nth-child(1) > div {
+        height: 300px !important;
+    }
+
+    .details-map-div {
+        height: 300px !important;
     }
 }
 
@@ -1035,17 +1042,7 @@ nav .sidenav-trigger {
         grid-column-start: 1;
         grid-column-end: 3;
     }
-
-@media (max-width: 768px) {
-    .details_top1-grid > div:nth-child(1) > div {
-        height: 300px !important;
-    }
-
-    .details-map-div {
-        height: 300px !important;
-    }
-}
-
+    
     @media (max-width: 520px){
         .details_top1-grid {
             grid-template-columns: 1fr;
