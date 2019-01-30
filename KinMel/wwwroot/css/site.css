@@ -3,6 +3,10 @@ p {
     margin: 0px;
 }
 
+ul {
+    margin: 0px;
+}
+
 html {
     height: 100%;
 }
@@ -34,7 +38,6 @@ hr {
 
 .page-container {
     height: 100%;
-    width: 100%;
     vertical-align: middle;
 }
 
@@ -66,8 +69,14 @@ nav .sidenav-trigger {
     object-fit: cover;
 }
 .kinmelLogo {
-  height: 60px;
-  vertical-align: middle;
+    height: 64px;
+    vertical-align: top;
+}
+
+@media (max-width: 600px){
+    .kinmelLogo {
+        height: 56px;
+    }
 }
 
 .card-content {
@@ -859,6 +868,18 @@ nav .sidenav-trigger {
     margin: 0 auto;
 }
 
+@media (max-width: 1300px){
+    .browse-width {
+        margin: 0 20px;
+    }
+}
+
+@media (max-width: 425px) {
+    .browse-width {
+        margin: 0 10px;
+    }
+}
+
 .escape-float {
     float: none !important;
 }
@@ -994,8 +1015,37 @@ nav .sidenav-trigger {
 /****************Details*****************/
 .details_top-grid{
     display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-gap: 5px;
+}
+
+@media (max-width: 900px){
+    .details_top-grid {
+        grid-template-columns: 1fr;
+        grid-gap: 5px;
+    }
+}
+
+.details_top1-grid {
+    display: grid;
     grid-template-columns: 1fr 1fr;
 }
+
+    .details_top1-grid > div:nth-child(1) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    @media (max-width: 520px){
+        .details_top1-grid {
+            grid-template-columns: 1fr;
+            grid-gap: 5px;
+        }
+            .details_top1-grid > div:nth-child(1) {
+                grid-column-start: 1;
+                grid-column-end: 2;
+            }
+    }
 
 .details-title {
     font-size: 20px;
@@ -1103,7 +1153,7 @@ nav .sidenav-trigger {
 }
 
 .details-map-div {
-    height: 280px;
+    height: 400px;
 }
 
 /******************End*******************/

@@ -19,10 +19,10 @@
     </div>
 </div>
 
-<div class="container index-content">
+<div class="browse-width index-content">
     <!--Title-->
     <div class="col s12">
-        <p class="details-title mt-10 mb-10">
+        <p class="details-title">
             @Model.Title
             <a data-tooltip="@Model.DateCreated.ToLocalTime().ToString("dd-MMMM-yyyy HH:mm", CultureInfo.InvariantCulture)" class="right-align right tooltipped">
                 <label id="dateCreated">
@@ -70,42 +70,118 @@
     </div>
 
     <section class="details_top-grid">
-        <!--carousel-->
-        <div class="card m-0 carousel carousel-slider materialboxed">
-            @if (Model.ImageUrlList.Any())
-            {
-                foreach (var item in Model.ImageUrlList)
+        <div class="details_top1-grid">
+            <!--carousel-->
+            <div class="card m-0 carousel carousel-slider materialboxed">
+                @if (Model.ImageUrlList.Any())
                 {
-                    <a id="details-carousel-item" class="carousel-item"><img src="@item"></a>
+                    foreach (var item in Model.ImageUrlList)
+                    {
+                        <a id="details-carousel-item" class="carousel-item"><img src="@item"></a>
+                    }
                 }
-            }
-        </div>
+            </div>
+            <!--user-info-->
+            <div class="card m-0">
+                <div class="p-5 m-0">
+                    <div class="row m-0 valign-wrapper">
+                        <div class="col s4">
+                            <img src="@Model.CreatedByUser.ProfilePictureUrl" alt="" class="details-createdby-img circle">
+                        </div>
+                        <div class="details-card-info col s8">
+                            <p class="right-align">
+                                <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@Model.CreatedByUser.UserName">
+                                    @Model.CreatedByUser.UserName
+                                    <i class="material-icons align-middle">account_circle</i>
+                                </a>
+                            </p>
+                            <p class="right-align">
+                                @if (@Model.CreatedByUser.PhoneNumber != null)
+                                {
+                                    if (@Model.CreatedByUser.PhoneNumberConfirmed == true)
+                                    {
+                                        @Html.DisplayFor(model => model.CreatedByUser.PhoneNumber)
+                                        <i class="material-icons cyan-text  align-middle tooltipped" data-tooltip="Phone verified" data-position="left">verified_user</i>
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(model => model.CreatedByUser.PhoneNumber)
+                                        <i class="material-icons red-text align-middle tooltipped" data-tooltip="Phone not verified" data-position="left">phonelink_erase</i>
+                                    }
+                                }
+                            </p>
 
+                            <p class="right-align">
+                                @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
+                                <i class="material-icons align-middle ">date_range</i>
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--basic-info-->
+            <div class="card m-0">
+                <div class="col s12 fields-list">
+                    <ul class="row m-0">
+                        <li>
+                            <label asp-for="@Model.Condition"></label>
+                            <p> @Html.DisplayFor(m => m.Condition)</p>
+                        </li>
+
+                    </ul>
+                </div>
+                @if (!String.IsNullOrWhiteSpace(@Model.UsedFor))
+                {
+                    <div class="col s12 fields-list">
+                        <ul class="row m-0">
+                            <li>
+                                <label asp-for="@Model.UsedFor"></label>
+                                <p> @Html.DisplayFor(m => m.UsedFor) </p>
+                            </li>
+                        </ul>
+                    </div>
+                }
+
+                <div class="col s12 fields-list">
+                    <ul class="row m-0">
+                        <li>
+                            <label>Negotiable Price</label>
+                            <p>
+                                @Html.Raw(@Model.PriceNegotiable ? "Yes" : "No")
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <!--map-->
         <div class="card m-0">
             <div id="details-map-div" class="details-map-div"></div>
-            <div>
+            <!--map-details-->
+            <div class="fields-list">
                 <ul>
                     <li>
                         <label asp-for="@Model.Address"></label>
                         @{
                             var mapLink = "https://maps.google.com/maps?&q=" + @Model.Address + " " + @Model.City;
                         }
-                        <a class="escape-float" href="@mapLink">
-                            @if (!String.IsNullOrWhiteSpace(@Model.Address))
-                            {
-                                @Html.DisplayFor(m => m.Address);
-                            }
-                            @Html.DisplayFor(m => m.City)
-                        </a>
+                        <p>
+                            <a href="@mapLink">
+                                @if (!String.IsNullOrWhiteSpace(@Model.Address))
+                                {
+                                    @Html.DisplayFor(m => m.Address);
+                                },
+                                @Html.DisplayFor(m => m.City)
+                            </a>
+
+                        </p>
                     </li>
                 </ul>
                 <ul>
                     <li>
                         <label asp-for="@Model.Delivery"></label>
-                        <p class="escape-float">
-                            @Html.Raw(@Model.Delivery ? "Yes" : "No")
-                        </p>
+                        <p>@Html.Raw(@Model.Delivery ? "Yes" : "No")</p>
                     </li>
 
                 </ul>
@@ -114,82 +190,10 @@
                     <ul>
                         <li>
                             <label asp-for="@Model.DeliveryCharges"></label>
-                            <p class="escape-float">Nrs. @Html.DisplayFor(m => m.DeliveryCharges)</p>
+                            <p>Nrs. @Html.DisplayFor(m => m.DeliveryCharges)</p>
                         </li>
                     </ul>
                 }
-            </div>
-        </div>
-
-        <div class="card m-0">
-            <div class="p-5 m-0">
-                <div class="row m-0 valign-wrapper">
-                    <div class="col s4">
-                        <img src="@Model.CreatedByUser.ProfilePictureUrl" alt="" class="details-createdby-img circle">
-                    </div>
-                    <div class="details-card-info col s8">
-                        <p class="right-align">
-                            <a asp-controller="Account" asp-action="UserProfile" asp-route-id="@Model.CreatedByUser.UserName">
-                                @Model.CreatedByUser.UserName
-                                <i class="material-icons align-middle">account_circle</i>
-                            </a>
-                        </p>
-                        <p class="right-align">
-                            @if (@Model.CreatedByUser.PhoneNumber != null)
-                            {
-                                if (@Model.CreatedByUser.PhoneNumberConfirmed == true)
-                                {
-                                    @Html.DisplayFor(model => model.CreatedByUser.PhoneNumber)
-                                    <i class="material-icons cyan-text  align-middle tooltipped" data-tooltip="Phone verified" data-position="left">verified_user</i>
-                                }
-                                else
-                                {
-                                    @Html.DisplayFor(model => model.CreatedByUser.PhoneNumber)
-                                    <i class="material-icons red-text align-middle tooltipped" data-tooltip="Phone not verified" data-position="left">phonelink_erase</i>
-                                }
-                            }
-                        </p>
-
-                        <p class="right-align">
-                            @Html.DisplayFor(model => model.CreatedByUser.JoinDate)
-                            <i class="material-icons align-middle ">date_range</i>
-
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card m-0">
-            <div class="col s12 fields-list">
-                <ul class="row m-0">
-                    <li>
-                        <label asp-for="@Model.Condition"></label>
-                        <p> @Html.DisplayFor(m => m.Condition)</p>
-                    </li>
-
-                </ul>
-            </div>
-            @if (!String.IsNullOrWhiteSpace(@Model.UsedFor))
-            {
-                <div class="col s12 fields-list">
-                    <ul class="row m-0">
-                        <li>
-                            <label asp-for="@Model.UsedFor"></label>
-                            <p> @Html.DisplayFor(m => m.UsedFor) </p>
-                        </li>
-                    </ul>
-                </div>
-            }
-
-            <div class="col s12 fields-list">
-                <ul class="row m-0">
-                    <li>
-                        <label>Negotiable Price</label>
-                        <p>
-                            @Html.Raw(@Model.PriceNegotiable ? "Yes" : "No")
-                        </p>
-                    </li>
-                </ul>
             </div>
         </div>
     </section>
@@ -209,7 +213,7 @@
 
             @if (!String.IsNullOrWhiteSpace(@Model.Features))
             {
-                <div class="col s12 m12">
+                <div class="col s12 m12 fields-list">
                     <ul class="row m-0">
                         <li>
                             <label asp-for="@Model.Features"></label>
@@ -220,7 +224,7 @@
             }
             @if (!String.IsNullOrWhiteSpace(@Model.WarrantyType))
             {
-                <div class="col s12 m6">
+                <div class="col s12 m6 fields-list">
                     <ul class="row m-0">
                         <li>
                             <label asp-for="@Model.WarrantyType"></label>
@@ -228,11 +232,10 @@
                         </li>
                     </ul>
                 </div>
-
             }
             @if (!String.IsNullOrWhiteSpace(@Model.WarrantyPeriod))
             {
-                <div class="col s12 m6">
+                <div class="col s12 m6 fields-list">
                     <ul class="row m-0">
                         <li>
                             <label asp-for="@Model.WarrantyPeriod"></label>
@@ -244,11 +247,11 @@
             }
             @if (!String.IsNullOrWhiteSpace(@Model.WarrantyIncludes))
             {
-                <div class="col s12 m12">
+                <div class="col s12 m6 fields-list">
                     <ul class="row m-0">
                         <li>
                             <label asp-for="@Model.WarrantyIncludes"></label>
-                            <p class="escape-float"> @Html.DisplayFor(m => m.WarrantyIncludes)</p>
+                            <p> @Html.DisplayFor(m => m.WarrantyIncludes)</p>
                         </li>
                     </ul>
                 </div>
