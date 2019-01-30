@@ -1036,6 +1036,16 @@ nav .sidenav-trigger {
         grid-column-end: 3;
     }
 
+@media (max-width: 768px) {
+    .details_top1-grid > div:nth-child(1) > div {
+        height: 300px !important;
+    }
+
+    .details-map-div {
+        height: 300px !important;
+    }
+}
+
     @media (max-width: 520px){
         .details_top1-grid {
             grid-template-columns: 1fr;
@@ -1045,6 +1055,12 @@ nav .sidenav-trigger {
                 grid-column-start: 1;
                 grid-column-end: 2;
             }
+            .details_top1-grid > div:nth-child(1) > div {
+                height: 200px !important;
+            }
+        .details-map-div {
+            height: 200px !important;
+        }
     }
 
 .details-title {
@@ -1114,7 +1130,7 @@ nav .sidenav-trigger {
 
 
 #details-carousel-item {
-    min-height: 275px !important;
+    min-height: 200px !important;
     background-color: #b0bec5;
 }
 
